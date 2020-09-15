@@ -8,7 +8,7 @@ namespace TZ1
 	{
 		string Name { get; set; }
 		double Value { get; set; }
-		Complex CalculateZ(double value);
+		Complex CalculateZ(double frequency);
 		delegate void ValueChanged(object obj, object arg);
 		event ValueChanged Changed;
 	}
