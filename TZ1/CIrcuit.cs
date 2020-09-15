@@ -6,7 +6,7 @@ using System.Text;
 namespace TZ1
 {
 
-	delegate void CircuitChanged(object obg, object arg);
+	delegate void Changed(object obg, object arg);
 	class Circuit
 	{ 
 		public List<IElement> Elements;
@@ -24,6 +24,6 @@ namespace TZ1
 			return results;
 		}
 
-		public event CircuitChanged Changed;
+		public event Changed CircuitChanged;
 	}
 }
