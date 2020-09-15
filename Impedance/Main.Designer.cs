@@ -1,0 +1,325 @@
+﻿namespace ImpedanceForms
+{
+	partial class Main
+	{
+		/// <summary>
+		///  Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
+
+		/// <summary>
+		///  Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+
+		#region Windows Form Designer generated code
+
+		/// <summary>
+		///  Required method for Designer support - do not modify
+		///  the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			this.FrequenciesListBox = new System.Windows.Forms.ListBox();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.AddButton = new System.Windows.Forms.Button();
+			this.EditButton = new System.Windows.Forms.Button();
+			this.RemoveButton = new System.Windows.Forms.Button();
+			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.radioButton1 = new System.Windows.Forms.RadioButton();
+			this.radioButton2 = new System.Windows.Forms.RadioButton();
+			this.radioButton3 = new System.Windows.Forms.RadioButton();
+			this.radioButton4 = new System.Windows.Forms.RadioButton();
+			this.radioButton5 = new System.Windows.Forms.RadioButton();
+			this.radioButton6 = new System.Windows.Forms.RadioButton();
+			this.ImpedanceListBox = new System.Windows.Forms.ListBox();
+			this.FrequenciesLabel = new System.Windows.Forms.Label();
+			this.ImpedanceLabel = new System.Windows.Forms.Label();
+			this.ElementsListBox = new System.Windows.Forms.ListBox();
+			this.ElementsLabel = new System.Windows.Forms.Label();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.CircuitLabel = new System.Windows.Forms.Label();
+			this.tableLayoutPanel1.SuspendLayout();
+			this.tableLayoutPanel2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// FrequenciesListBox
+			// 
+			this.FrequenciesListBox.FormattingEnabled = true;
+			this.FrequenciesListBox.ItemHeight = 20;
+			this.FrequenciesListBox.Location = new System.Drawing.Point(12, 52);
+			this.FrequenciesListBox.Name = "FrequenciesListBox";
+			this.FrequenciesListBox.Size = new System.Drawing.Size(237, 404);
+			this.FrequenciesListBox.TabIndex = 0;
+			// 
+			// tableLayoutPanel1
+			// 
+			this.tableLayoutPanel1.ColumnCount = 3;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel1.Controls.Add(this.AddButton, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.EditButton, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.RemoveButton, 2, 0);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 471);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 1;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(237, 59);
+			this.tableLayoutPanel1.TabIndex = 1;
+			this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+			// 
+			// AddButton
+			// 
+			this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.AddButton.Location = new System.Drawing.Point(3, 3);
+			this.AddButton.Name = "AddButton";
+			this.AddButton.Size = new System.Drawing.Size(72, 53);
+			this.AddButton.TabIndex = 0;
+			this.AddButton.Text = "Add";
+			this.AddButton.UseVisualStyleBackColor = true;
+			// 
+			// EditButton
+			// 
+			this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.EditButton.Location = new System.Drawing.Point(81, 3);
+			this.EditButton.Name = "EditButton";
+			this.EditButton.Size = new System.Drawing.Size(72, 53);
+			this.EditButton.TabIndex = 1;
+			this.EditButton.Text = "Edit";
+			this.EditButton.UseVisualStyleBackColor = true;
+			this.EditButton.Click += new System.EventHandler(this.button2_Click);
+			// 
+			// RemoveButton
+			// 
+			this.RemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.RemoveButton.Location = new System.Drawing.Point(159, 3);
+			this.RemoveButton.Name = "RemoveButton";
+			this.RemoveButton.Size = new System.Drawing.Size(75, 53);
+			this.RemoveButton.TabIndex = 2;
+			this.RemoveButton.Text = "Remove";
+			this.RemoveButton.UseVisualStyleBackColor = true;
+			// 
+			// tableLayoutPanel2
+			// 
+			this.tableLayoutPanel2.ColumnCount = 1;
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel2.Controls.Add(this.radioButton1, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.radioButton2, 0, 1);
+			this.tableLayoutPanel2.Controls.Add(this.radioButton3, 0, 2);
+			this.tableLayoutPanel2.Controls.Add(this.radioButton4, 0, 3);
+			this.tableLayoutPanel2.Controls.Add(this.radioButton5, 0, 4);
+			this.tableLayoutPanel2.Controls.Add(this.radioButton6, 0, 5);
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(508, 52);
+			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			this.tableLayoutPanel2.RowCount = 6;
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(144, 217);
+			this.tableLayoutPanel2.TabIndex = 2;
+			// 
+			// radioButton1
+			// 
+			this.radioButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.radioButton1.AutoSize = true;
+			this.radioButton1.Location = new System.Drawing.Point(3, 6);
+			this.radioButton1.Name = "radioButton1";
+			this.radioButton1.Size = new System.Drawing.Size(110, 24);
+			this.radioButton1.TabIndex = 3;
+			this.radioButton1.TabStop = true;
+			this.radioButton1.Text = "1st example";
+			this.radioButton1.UseVisualStyleBackColor = true;
+			this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+			// 
+			// radioButton2
+			// 
+			this.radioButton2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.radioButton2.AutoSize = true;
+			this.radioButton2.Location = new System.Drawing.Point(3, 42);
+			this.radioButton2.Name = "radioButton2";
+			this.radioButton2.Size = new System.Drawing.Size(116, 24);
+			this.radioButton2.TabIndex = 4;
+			this.radioButton2.TabStop = true;
+			this.radioButton2.Text = "2nd example";
+			this.radioButton2.UseVisualStyleBackColor = true;
+			// 
+			// radioButton3
+			// 
+			this.radioButton3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.radioButton3.AutoSize = true;
+			this.radioButton3.Location = new System.Drawing.Point(3, 78);
+			this.radioButton3.Name = "radioButton3";
+			this.radioButton3.Size = new System.Drawing.Size(113, 24);
+			this.radioButton3.TabIndex = 5;
+			this.radioButton3.TabStop = true;
+			this.radioButton3.Text = "3rd example";
+			this.radioButton3.UseVisualStyleBackColor = true;
+			// 
+			// radioButton4
+			// 
+			this.radioButton4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.radioButton4.AutoSize = true;
+			this.radioButton4.Location = new System.Drawing.Point(3, 114);
+			this.radioButton4.Name = "radioButton4";
+			this.radioButton4.Size = new System.Drawing.Size(112, 24);
+			this.radioButton4.TabIndex = 6;
+			this.radioButton4.TabStop = true;
+			this.radioButton4.Text = "4th example";
+			this.radioButton4.UseVisualStyleBackColor = true;
+			// 
+			// radioButton5
+			// 
+			this.radioButton5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.radioButton5.AutoSize = true;
+			this.radioButton5.Location = new System.Drawing.Point(3, 150);
+			this.radioButton5.Name = "radioButton5";
+			this.radioButton5.Size = new System.Drawing.Size(112, 24);
+			this.radioButton5.TabIndex = 7;
+			this.radioButton5.TabStop = true;
+			this.radioButton5.Text = "5th example";
+			this.radioButton5.UseVisualStyleBackColor = true;
+			// 
+			// radioButton6
+			// 
+			this.radioButton6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.radioButton6.AutoSize = true;
+			this.radioButton6.Location = new System.Drawing.Point(3, 186);
+			this.radioButton6.Name = "radioButton6";
+			this.radioButton6.Size = new System.Drawing.Size(111, 24);
+			this.radioButton6.TabIndex = 8;
+			this.radioButton6.TabStop = true;
+			this.radioButton6.Text = "My example";
+			this.radioButton6.UseVisualStyleBackColor = true;
+			// 
+			// ImpedanceListBox
+			// 
+			this.ImpedanceListBox.FormattingEnabled = true;
+			this.ImpedanceListBox.ItemHeight = 20;
+			this.ImpedanceListBox.Location = new System.Drawing.Point(255, 52);
+			this.ImpedanceListBox.Name = "ImpedanceListBox";
+			this.ImpedanceListBox.Size = new System.Drawing.Size(237, 404);
+			this.ImpedanceListBox.TabIndex = 0;
+			// 
+			// FrequenciesLabel
+			// 
+			this.FrequenciesLabel.AutoSize = true;
+			this.FrequenciesLabel.Location = new System.Drawing.Point(12, 29);
+			this.FrequenciesLabel.Name = "FrequenciesLabel";
+			this.FrequenciesLabel.Size = new System.Drawing.Size(90, 20);
+			this.FrequenciesLabel.TabIndex = 3;
+			this.FrequenciesLabel.Text = "Frequencies:";
+			// 
+			// ImpedanceLabel
+			// 
+			this.ImpedanceLabel.AutoSize = true;
+			this.ImpedanceLabel.Location = new System.Drawing.Point(255, 29);
+			this.ImpedanceLabel.Name = "ImpedanceLabel";
+			this.ImpedanceLabel.Size = new System.Drawing.Size(86, 20);
+			this.ImpedanceLabel.TabIndex = 4;
+			this.ImpedanceLabel.Text = "Impedance:";
+			// 
+			// ElementsListBox
+			// 
+			this.ElementsListBox.FormattingEnabled = true;
+			this.ElementsListBox.ItemHeight = 20;
+			this.ElementsListBox.Location = new System.Drawing.Point(658, 52);
+			this.ElementsListBox.Name = "ElementsListBox";
+			this.ElementsListBox.Size = new System.Drawing.Size(237, 224);
+			this.ElementsListBox.TabIndex = 0;
+			// 
+			// ElementsLabel
+			// 
+			this.ElementsLabel.AutoSize = true;
+			this.ElementsLabel.Location = new System.Drawing.Point(658, 29);
+			this.ElementsLabel.Name = "ElementsLabel";
+			this.ElementsLabel.Size = new System.Drawing.Size(72, 20);
+			this.ElementsLabel.TabIndex = 5;
+			this.ElementsLabel.Text = "Elements:";
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Location = new System.Drawing.Point(509, 299);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(485, 228);
+			this.pictureBox1.TabIndex = 6;
+			this.pictureBox1.TabStop = false;
+			// 
+			// CircuitLabel
+			// 
+			this.CircuitLabel.AutoSize = true;
+			this.CircuitLabel.Location = new System.Drawing.Point(509, 276);
+			this.CircuitLabel.Name = "CircuitLabel";
+			this.CircuitLabel.Size = new System.Drawing.Size(54, 20);
+			this.CircuitLabel.TabIndex = 7;
+			this.CircuitLabel.Text = "Circuit:";
+			// 
+			// Main
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(1006, 542);
+			this.Controls.Add(this.CircuitLabel);
+			this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.ElementsLabel);
+			this.Controls.Add(this.ElementsListBox);
+			this.Controls.Add(this.ImpedanceLabel);
+			this.Controls.Add(this.FrequenciesLabel);
+			this.Controls.Add(this.ImpedanceListBox);
+			this.Controls.Add(this.tableLayoutPanel2);
+			this.Controls.Add(this.tableLayoutPanel1);
+			this.Controls.Add(this.FrequenciesListBox);
+			this.Name = "Main";
+			this.Text = "ImpedanceApp";
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel2.ResumeLayout(false);
+			this.tableLayoutPanel2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			this.ResumeLayout(false);
+			this.PerformLayout();
+
+		}
+
+		#endregion
+
+		private System.Windows.Forms.ListBox FrequenciesListBox;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.Button AddButton;
+		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Button RemoveButton;
+		private System.Windows.Forms.Button EditButton;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+		private System.Windows.Forms.RadioButton radioButton1;
+		private System.Windows.Forms.RadioButton radioButton2;
+		private System.Windows.Forms.RadioButton radioButton3;
+		private System.Windows.Forms.RadioButton radioButton4;
+		private System.Windows.Forms.RadioButton radioButton5;
+		private System.Windows.Forms.RadioButton radioButton6;
+		private System.Windows.Forms.ListBox ImpedanceListBox;
+		private System.Windows.Forms.Label FrequenciesLabel;
+		private System.Windows.Forms.Label ImpedanceLabel;
+		private System.Windows.Forms.ListBox ElementsListBox;
+		private System.Windows.Forms.Label ElementsLabel;
+		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.Label CircuitLabel;
+	}
+}
+
