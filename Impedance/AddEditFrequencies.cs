@@ -3,23 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ImpedanceForms
+namespace Impedance
 {
-	public partial class Main : Form
+	public partial class AddEditFrequencies : Form
 	{
-		public Main()
+		public AddEditFrequencies()
 		{
 			InitializeComponent();
-		}
-
-		private void Main_Load(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

@@ -47,9 +47,14 @@
 			this.ElementsLabel = new System.Windows.Forms.Label();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.CircuitLabel = new System.Windows.Forms.Label();
+			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.AddElementsButton = new System.Windows.Forms.Button();
+			this.EditElementsButton = new System.Windows.Forms.Button();
+			this.RemoveElementsButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.tableLayoutPanel3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// FrequenciesListBox
@@ -76,7 +81,6 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(237, 59);
 			this.tableLayoutPanel1.TabIndex = 1;
-			this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
 			// 
 			// AddFrequenciesButton
 			// 
@@ -101,7 +105,6 @@
 			this.EditFrequenciesButton.TabIndex = 1;
 			this.EditFrequenciesButton.Text = "Edit";
 			this.EditFrequenciesButton.UseVisualStyleBackColor = true;
-			this.EditFrequenciesButton.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// RemoveFrequenciesButton
 			// 
@@ -148,7 +151,6 @@
 			this.radioButton1.TabStop = true;
 			this.radioButton1.Text = "1st example";
 			this.radioButton1.UseVisualStyleBackColor = true;
-			this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
 			// 
 			// radioButton2
 			// 
@@ -241,7 +243,7 @@
 			// 
 			this.ElementsListBox.FormattingEnabled = true;
 			this.ElementsListBox.ItemHeight = 20;
-			this.ElementsListBox.Location = new System.Drawing.Point(658, 52);
+			this.ElementsListBox.Location = new System.Drawing.Point(678, 45);
 			this.ElementsListBox.Name = "ElementsListBox";
 			this.ElementsListBox.Size = new System.Drawing.Size(237, 224);
 			this.ElementsListBox.TabIndex = 0;
@@ -249,7 +251,7 @@
 			// ElementsLabel
 			// 
 			this.ElementsLabel.AutoSize = true;
-			this.ElementsLabel.Location = new System.Drawing.Point(658, 29);
+			this.ElementsLabel.Location = new System.Drawing.Point(678, 22);
 			this.ElementsLabel.Name = "ElementsLabel";
 			this.ElementsLabel.Size = new System.Drawing.Size(72, 20);
 			this.ElementsLabel.TabIndex = 5;
@@ -259,7 +261,7 @@
 			// 
 			this.pictureBox1.Location = new System.Drawing.Point(509, 299);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(485, 228);
+			this.pictureBox1.Size = new System.Drawing.Size(511, 232);
 			this.pictureBox1.TabIndex = 6;
 			this.pictureBox1.TabStop = false;
 			// 
@@ -272,11 +274,67 @@
 			this.CircuitLabel.TabIndex = 7;
 			this.CircuitLabel.Text = "Circuit:";
 			// 
+			// tableLayoutPanel3
+			// 
+			this.tableLayoutPanel3.ColumnCount = 1;
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel3.Controls.Add(this.AddElementsButton, 0, 0);
+			this.tableLayoutPanel3.Controls.Add(this.EditElementsButton, 0, 1);
+			this.tableLayoutPanel3.Controls.Add(this.RemoveElementsButton, 0, 2);
+			this.tableLayoutPanel3.Location = new System.Drawing.Point(938, 52);
+			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+			this.tableLayoutPanel3.RowCount = 3;
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(82, 210);
+			this.tableLayoutPanel3.TabIndex = 8;
+			// 
+			// AddElementsButton
+			// 
+			this.AddElementsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.AddElementsButton.Enabled = false;
+			this.AddElementsButton.Location = new System.Drawing.Point(3, 3);
+			this.AddElementsButton.Name = "AddElementsButton";
+			this.AddElementsButton.Size = new System.Drawing.Size(76, 64);
+			this.AddElementsButton.TabIndex = 0;
+			this.AddElementsButton.Text = "Add";
+			this.AddElementsButton.UseVisualStyleBackColor = true;
+			// 
+			// EditElementsButton
+			// 
+			this.EditElementsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.EditElementsButton.Location = new System.Drawing.Point(3, 73);
+			this.EditElementsButton.Name = "EditElementsButton";
+			this.EditElementsButton.Size = new System.Drawing.Size(76, 64);
+			this.EditElementsButton.TabIndex = 1;
+			this.EditElementsButton.Text = "Edit";
+			this.EditElementsButton.UseVisualStyleBackColor = true;
+			// 
+			// RemoveElementsButton
+			// 
+			this.RemoveElementsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.RemoveElementsButton.Enabled = false;
+			this.RemoveElementsButton.Location = new System.Drawing.Point(3, 143);
+			this.RemoveElementsButton.Name = "RemoveElementsButton";
+			this.RemoveElementsButton.Size = new System.Drawing.Size(76, 64);
+			this.RemoveElementsButton.TabIndex = 2;
+			this.RemoveElementsButton.Text = "Remove";
+			this.RemoveElementsButton.UseVisualStyleBackColor = true;
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1006, 542);
+			this.ClientSize = new System.Drawing.Size(1032, 543);
+			this.Controls.Add(this.tableLayoutPanel3);
 			this.Controls.Add(this.CircuitLabel);
 			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.ElementsLabel);
@@ -287,12 +345,16 @@
 			this.Controls.Add(this.tableLayoutPanel2);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.FrequenciesListBox);
+			this.MaximumSize = new System.Drawing.Size(1050, 590);
+			this.MinimumSize = new System.Drawing.Size(1050, 590);
 			this.Name = "Main";
 			this.Text = "ImpedanceApp";
+			this.Load += new System.EventHandler(this.Main_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.tableLayoutPanel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			this.tableLayoutPanel3.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -303,7 +365,6 @@
 		private System.Windows.Forms.ListBox FrequenciesListBox;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Button AddFrequenciesButton;
-		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button RemoveFrequenciesButton;
 		private System.Windows.Forms.Button EditFrequenciesButton;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -320,6 +381,11 @@
 		private System.Windows.Forms.Label ElementsLabel;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Label CircuitLabel;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+		private System.Windows.Forms.Button AddElementsButton;
+		private System.Windows.Forms.Button EditElementsButton;
+		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button RemoveElementsButton;
 	}
 }
 
