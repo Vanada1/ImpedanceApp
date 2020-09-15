@@ -30,9 +30,9 @@
 		{
 			this.FrequenciesListBox = new System.Windows.Forms.ListBox();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.AddButton = new System.Windows.Forms.Button();
-			this.EditButton = new System.Windows.Forms.Button();
-			this.RemoveButton = new System.Windows.Forms.Button();
+			this.AddFrequenciesButton = new System.Windows.Forms.Button();
+			this.EditFrequenciesButton = new System.Windows.Forms.Button();
+			this.RemoveFrequenciesButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.radioButton1 = new System.Windows.Forms.RadioButton();
 			this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -67,9 +67,9 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel1.Controls.Add(this.AddButton, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.EditButton, 1, 0);
-			this.tableLayoutPanel1.Controls.Add(this.RemoveButton, 2, 0);
+			this.tableLayoutPanel1.Controls.Add(this.AddFrequenciesButton, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.EditFrequenciesButton, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.RemoveFrequenciesButton, 2, 0);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 471);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
@@ -78,42 +78,42 @@
 			this.tableLayoutPanel1.TabIndex = 1;
 			this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
 			// 
-			// AddButton
+			// AddFrequenciesButton
 			// 
-			this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.AddFrequenciesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.AddButton.Location = new System.Drawing.Point(3, 3);
-			this.AddButton.Name = "AddButton";
-			this.AddButton.Size = new System.Drawing.Size(72, 53);
-			this.AddButton.TabIndex = 0;
-			this.AddButton.Text = "Add";
-			this.AddButton.UseVisualStyleBackColor = true;
+			this.AddFrequenciesButton.Location = new System.Drawing.Point(3, 3);
+			this.AddFrequenciesButton.Name = "AddFrequenciesButton";
+			this.AddFrequenciesButton.Size = new System.Drawing.Size(73, 53);
+			this.AddFrequenciesButton.TabIndex = 0;
+			this.AddFrequenciesButton.Text = "Add";
+			this.AddFrequenciesButton.UseVisualStyleBackColor = true;
 			// 
-			// EditButton
+			// EditFrequenciesButton
 			// 
-			this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.EditFrequenciesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.EditButton.Location = new System.Drawing.Point(81, 3);
-			this.EditButton.Name = "EditButton";
-			this.EditButton.Size = new System.Drawing.Size(72, 53);
-			this.EditButton.TabIndex = 1;
-			this.EditButton.Text = "Edit";
-			this.EditButton.UseVisualStyleBackColor = true;
-			this.EditButton.Click += new System.EventHandler(this.button2_Click);
+			this.EditFrequenciesButton.Location = new System.Drawing.Point(82, 3);
+			this.EditFrequenciesButton.Name = "EditFrequenciesButton";
+			this.EditFrequenciesButton.Size = new System.Drawing.Size(73, 53);
+			this.EditFrequenciesButton.TabIndex = 1;
+			this.EditFrequenciesButton.Text = "Edit";
+			this.EditFrequenciesButton.UseVisualStyleBackColor = true;
+			this.EditFrequenciesButton.Click += new System.EventHandler(this.button2_Click);
 			// 
-			// RemoveButton
+			// RemoveFrequenciesButton
 			// 
-			this.RemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.RemoveFrequenciesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.RemoveButton.Location = new System.Drawing.Point(159, 3);
-			this.RemoveButton.Name = "RemoveButton";
-			this.RemoveButton.Size = new System.Drawing.Size(75, 53);
-			this.RemoveButton.TabIndex = 2;
-			this.RemoveButton.Text = "Remove";
-			this.RemoveButton.UseVisualStyleBackColor = true;
+			this.RemoveFrequenciesButton.Location = new System.Drawing.Point(161, 3);
+			this.RemoveFrequenciesButton.Name = "RemoveFrequenciesButton";
+			this.RemoveFrequenciesButton.Size = new System.Drawing.Size(73, 53);
+			this.RemoveFrequenciesButton.TabIndex = 2;
+			this.RemoveFrequenciesButton.Text = "Remove";
+			this.RemoveFrequenciesButton.UseVisualStyleBackColor = true;
 			// 
 			// tableLayoutPanel2
 			// 
@@ -302,10 +302,10 @@
 
 		private System.Windows.Forms.ListBox FrequenciesListBox;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.Button AddButton;
+		private System.Windows.Forms.Button AddFrequenciesButton;
 		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button RemoveButton;
-		private System.Windows.Forms.Button EditButton;
+		private System.Windows.Forms.Button RemoveFrequenciesButton;
+		private System.Windows.Forms.Button EditFrequenciesButton;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.RadioButton radioButton1;
 		private System.Windows.Forms.RadioButton radioButton2;

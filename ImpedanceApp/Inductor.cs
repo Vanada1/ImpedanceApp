@@ -50,5 +50,11 @@ namespace TZ1
 			double result = 2 * Math.PI * frequency * Value;
 			return new Complex(0, result);
 		}
+
+		public Inductor(string name, double value)
+		{
+			Name = name;
+			Value = value;
+		}
 	}
 }

@@ -41,16 +41,6 @@ namespace TZ1
 		/// </summary>
 		public event IElement.Changed ValueChanged;
 
-		// maybe to chenge location of metod? 
-		public void OutputMessage(object obj, object arg)
-		{
-			IElement element = obj as IElement;
-			if (element != null)
-			{
-				// print message
-			}
-		}
-
 		/// <summary>
 		/// Calculate impedance one element of <see cref="Resistor"/>
 		/// </summary>
@@ -59,6 +49,12 @@ namespace TZ1
 		public Complex CalculateZ(double frequency)
 		{
 			return new Complex(Value, 0);
+		}
+
+		public Resistor(string name, double value)
+		{
+			Name = name;
+			Value = value;
 		}
 	}
 }

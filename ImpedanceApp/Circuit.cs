@@ -13,10 +13,20 @@ namespace TZ1
 	delegate void Changed(object obg, object arg);
 	class Circuit
 	{
+		List<IElement> _elements;
 		/// <summary>
 		/// All elements list in the circuit
 		/// </summary>
-		public List<IElement> Elements;
+		public List<IElement> Elements
+		{
+			get => _elements;
+			set
+			{
+				_elements = value;
+				CircuitChanged.Invoke(this,
+					nameof(Elements) + " values has been changet");
+			}
+		}
 
 		/// <summary>
 		/// Calculate full impedance in the circuit
@@ -34,6 +44,16 @@ namespace TZ1
 				}
 			}
 			return results;
+		}
+
+		public Circuit()
+		{
+			Elements = new List<IElement>();
+		}
+
+		public Circuit(List<IElement> elements)
+		{
+			Elements = elements;
 		}
 
 		/// <summary>
