@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 
-namespace TZ1
+namespace ImpedanceApp
 {
 	/// <summary>
 	/// The <see cref="Inductor"/> class contains information 
 	/// about the <see cref="Inductor"/>:
 	/// <see cref="Name"/>, <see cref="Value"/>
 	/// </summary>
-	class Inductor : IElement
+	public class Inductor : IElement
 	{
 		/// <summary>
 		/// Value <see cref="Inductor"/> element
@@ -30,8 +30,8 @@ namespace TZ1
 			set
 			{ 
 				_value = value;
-				ValueChanged.Invoke(this,
-					nameof(Inductor) + " value has been change");
+				//ValueChanged.Invoke(this,
+				//	nameof(Inductor) + " value has been change");
 			} 
 		}
 
@@ -55,6 +55,11 @@ namespace TZ1
 		{
 			Name = name;
 			Value = value;
+		}
+
+		public override string ToString()
+		{
+			return $"{this.Name} = {this.Value}";
 		}
 	}
 }

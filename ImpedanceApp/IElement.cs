@@ -2,7 +2,7 @@
 using System.Numerics;
 using System.Threading;
 
-namespace TZ1
+namespace ImpedanceApp
 {
 	/// <summary>
 	/// Interface all elements

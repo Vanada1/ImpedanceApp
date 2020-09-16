@@ -42,6 +42,7 @@
 			this.OKButton.TabIndex = 0;
 			this.OKButton.Text = "OK";
 			this.OKButton.UseVisualStyleBackColor = true;
+			this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
 			// 
 			// CanselButton
 			// 
@@ -82,6 +83,7 @@
 			this.MinimumSize = new System.Drawing.Size(320, 175);
 			this.Name = "AddEditFrequencies";
 			this.Text = "AddEditFrequencies";
+			this.Load += new System.EventHandler(this.AddEditFrequencies_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

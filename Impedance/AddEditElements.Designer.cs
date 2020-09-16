@@ -66,6 +66,7 @@
 			this.OKButton.TabIndex = 2;
 			this.OKButton.Text = "OK";
 			this.OKButton.UseVisualStyleBackColor = true;
+			this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
 			// 
 			// CancelButton
 			// 
@@ -120,6 +121,7 @@
 			this.Controls.Add(this.OKButton);
 			this.Name = "AddEditElements";
 			this.Text = "AddEditElements";
+			this.Load += new System.EventHandler(this.AddEditElements_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
