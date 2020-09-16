@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Numerics;
 using ImpedanceApp;
 using Impedance;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace ImpedanceForms
 {
@@ -143,6 +144,7 @@ namespace ImpedanceForms
 			_elements = _allExample[0];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
+			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
 			UpdateListBoxes();
 		}
 
@@ -151,6 +153,7 @@ namespace ImpedanceForms
 			_elements = _allExample[1];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
+			CircuitPictureBox.Image = Impedance.Properties.Resources.SecondExample;
 			UpdateListBoxes();
 		}
 
@@ -159,6 +162,7 @@ namespace ImpedanceForms
 			_elements = _allExample[2];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
+			CircuitPictureBox.Image = Impedance.Properties.Resources.ThirdExample;
 			UpdateListBoxes();
 		}
 
@@ -167,6 +171,7 @@ namespace ImpedanceForms
 			_elements = _allExample[3];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
+			CircuitPictureBox.Image = Impedance.Properties.Resources.FourthExample;
 			UpdateListBoxes();
 		}
 
@@ -175,6 +180,7 @@ namespace ImpedanceForms
 			_elements = _allExample[4];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
+			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
 			UpdateListBoxes();
 		}
 
@@ -183,6 +189,7 @@ namespace ImpedanceForms
 			_elements = _allExample[5];
 			AddElementButton.Enabled = true;
 			RemoveElementButton.Enabled = true;
+			CircuitPictureBox.Image = null;
 			UpdateListBoxes();
 		}
 

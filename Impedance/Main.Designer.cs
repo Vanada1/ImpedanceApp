@@ -272,6 +272,7 @@
 			this.CircuitPictureBox.Location = new System.Drawing.Point(509, 299);
 			this.CircuitPictureBox.Name = "CircuitPictureBox";
 			this.CircuitPictureBox.Size = new System.Drawing.Size(510, 230);
+			this.CircuitPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.CircuitPictureBox.TabIndex = 6;
 			this.CircuitPictureBox.TabStop = false;
 			// 
