@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImpedanceApp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,8 +11,7 @@ namespace Impedance
 {
 	public partial class AddEditElements : Form
 	{
-		public string Name = null;
-		public double? ElementValue = null;
+		public IElement Element = null;
 		public AddEditElements()
 		{
 			InitializeComponent();
@@ -22,11 +22,30 @@ namespace Impedance
 			if (NameTextBox.Text.Length != 0 &&
 				ValueTextBox.Text.Length != 0)
 			{
-				Name = NameTextBox.Text;
+				string name = NameTextBox.Text;
+				double value;
 				try
 				{
-					ElementValue = double.Parse(ValueTextBox.Text);
+					value = double.Parse(ValueTextBox.Text);
 					DialogResult = DialogResult.OK;
+					if (ResistorRadioButton.Checked)
+					{
+						Element = new Resistor(name, value);
+					}
+					else if (InductorRadioButton.Checked)
+					{
+						Element = new Inductor(name, value);
+					}
+					else if (CapacitorRadioButton.Checked)
+					{
+						Element = new Capacitor(name, value);
+					}
+					else
+					{
+						MessageBox.Show("Choose element", "Error",
+						MessageBoxButtons.OK, MessageBoxIcon.Error);
+						DialogResult = DialogResult.None;
+					}
 				}
 				catch (FormatException exception)
 				{
@@ -48,10 +67,27 @@ namespace Impedance
 
 		private void AddEditElements_Load(object sender, EventArgs e)
 		{
-			if(Name != null && ElementValue != null)
+			if(Element != null)
 			{
-				NameTextBox.Text = Name;
-				ValueTextBox.Text = ElementValue.ToString();
+				NameTextBox.Text = Element.Name;
+				ValueTextBox.Text = Element.Value.ToString();
+
+				if(Element is Resistor)
+				{
+					ResistorRadioButton.Checked = true;
+				}
+				else if(Element is Inductor)
+				{
+					InductorRadioButton.Checked = true;
+				}
+				else if(Element is Capacitor)
+				{
+					CapacitorRadioButton.Checked = true;
+				}
+			}
+			else
+			{
+				RadioButtonsTableLayoutPanel.Enabled = true;
 			}
 		}
 	}

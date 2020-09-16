@@ -45,7 +45,7 @@
 			this.ImpedanceLabel = new System.Windows.Forms.Label();
 			this.ElementsListBox = new System.Windows.Forms.ListBox();
 			this.ElementsLabel = new System.Windows.Forms.Label();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.CircuitPictureBox = new System.Windows.Forms.PictureBox();
 			this.CircuitLabel = new System.Windows.Forms.Label();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.AddElementButton = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@
 			this.RemoveElementButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).BeginInit();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -267,13 +267,13 @@
 			this.ElementsLabel.TabIndex = 5;
 			this.ElementsLabel.Text = "Elements:";
 			// 
-			// pictureBox1
+			// CircuitPictureBox
 			// 
-			this.pictureBox1.Location = new System.Drawing.Point(509, 299);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(511, 232);
-			this.pictureBox1.TabIndex = 6;
-			this.pictureBox1.TabStop = false;
+			this.CircuitPictureBox.Location = new System.Drawing.Point(509, 299);
+			this.CircuitPictureBox.Name = "CircuitPictureBox";
+			this.CircuitPictureBox.Size = new System.Drawing.Size(510, 230);
+			this.CircuitPictureBox.TabIndex = 6;
+			this.CircuitPictureBox.TabStop = false;
 			// 
 			// CircuitLabel
 			// 
@@ -313,6 +313,7 @@
 			this.AddElementButton.TabIndex = 0;
 			this.AddElementButton.Text = "Add";
 			this.AddElementButton.UseVisualStyleBackColor = true;
+			this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
 			// 
 			// EditElementButton
 			// 
@@ -339,6 +340,7 @@
 			this.RemoveElementButton.TabIndex = 2;
 			this.RemoveElementButton.Text = "Remove";
 			this.RemoveElementButton.UseVisualStyleBackColor = true;
+			this.RemoveElementButton.Click += new System.EventHandler(this.RemoveElementButton_Click);
 			// 
 			// Main
 			// 
@@ -347,7 +349,7 @@
 			this.ClientSize = new System.Drawing.Size(1032, 543);
 			this.Controls.Add(this.tableLayoutPanel3);
 			this.Controls.Add(this.CircuitLabel);
-			this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.CircuitPictureBox);
 			this.Controls.Add(this.ElementsLabel);
 			this.Controls.Add(this.ElementsListBox);
 			this.Controls.Add(this.ImpedanceLabel);
@@ -364,7 +366,7 @@
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.tableLayoutPanel2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).EndInit();
 			this.tableLayoutPanel3.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -390,7 +392,7 @@
 		private System.Windows.Forms.Label ImpedanceLabel;
 		private System.Windows.Forms.ListBox ElementsListBox;
 		private System.Windows.Forms.Label ElementsLabel;
-		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.PictureBox CircuitPictureBox;
 		private System.Windows.Forms.Label CircuitLabel;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.Button AddElementButton;

@@ -192,14 +192,42 @@ namespace ImpedanceForms
 			if (index >= 0)
 			{
 				var editFrorm = new AddEditElements();
-				editFrorm.Name = _elements.Elements[index].Name;
-				editFrorm.ElementValue = _elements.Elements[index].Value;
+				editFrorm.Element = _elements.Elements[index];
 				editFrorm.ShowDialog();
 				if (editFrorm.DialogResult == DialogResult.OK)
 				{
-					_elements.Elements[index].Name = editFrorm.Name;
-					_elements.Elements[index].Value = 
-						(double)editFrorm.ElementValue;
+					_elements.Elements[index] = editFrorm.Element;
+				}
+				UpdateListBoxes();
+			}
+			else
+			{
+				MessageBox.Show("Not selected", "Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void AddElementButton_Click(object sender, EventArgs e)
+		{
+			var addFrorm = new AddEditElements();
+			addFrorm.ShowDialog();
+			if (addFrorm.DialogResult == DialogResult.OK)
+			{
+				_elements.Elements.Add(addFrorm.Element);
+			}
+			UpdateListBoxes();
+		}
+
+		private void RemoveElementButton_Click(object sender, EventArgs e)
+		{
+			var index = ElementsListBox.SelectedIndex;
+			if (index >= 0)
+			{
+				var remove = MessageBox.Show("Remove?", "Remove?",
+					MessageBoxButtons.YesNo);
+				if (remove == DialogResult.Yes)
+				{
+					_elements.Elements.RemoveAt(index);
 				}
 				UpdateListBoxes();
 			}
