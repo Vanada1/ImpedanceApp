@@ -63,6 +63,7 @@
 			this.FrequenciesListBox.ItemHeight = 20;
 			this.FrequenciesListBox.Location = new System.Drawing.Point(12, 52);
 			this.FrequenciesListBox.Name = "FrequenciesListBox";
+			this.FrequenciesListBox.ScrollAlwaysVisible = true;
 			this.FrequenciesListBox.Size = new System.Drawing.Size(237, 404);
 			this.FrequenciesListBox.TabIndex = 0;
 			// 
@@ -228,6 +229,7 @@
 			this.ImpedanceListBox.ItemHeight = 20;
 			this.ImpedanceListBox.Location = new System.Drawing.Point(255, 52);
 			this.ImpedanceListBox.Name = "ImpedanceListBox";
+			this.ImpedanceListBox.ScrollAlwaysVisible = true;
 			this.ImpedanceListBox.Size = new System.Drawing.Size(237, 404);
 			this.ImpedanceListBox.TabIndex = 0;
 			// 
@@ -255,6 +257,7 @@
 			this.ElementsListBox.ItemHeight = 20;
 			this.ElementsListBox.Location = new System.Drawing.Point(678, 45);
 			this.ElementsListBox.Name = "ElementsListBox";
+			this.ElementsListBox.ScrollAlwaysVisible = true;
 			this.ElementsListBox.Size = new System.Drawing.Size(237, 224);
 			this.ElementsListBox.TabIndex = 0;
 			// 
