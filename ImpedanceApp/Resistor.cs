@@ -31,8 +31,11 @@ namespace ImpedanceApp
 			set
 			{
 				_value = value;
-				//ValueChanged.Invoke(this, 
-				//	nameof(Resistor) + " value has been change");
+				if(ValueChanged != null)
+				{
+					ValueChanged.Invoke(this,
+						nameof(Resistor) + " value has been change");
+				}
 			}
 		}
 

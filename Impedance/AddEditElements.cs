@@ -28,23 +28,38 @@ namespace Impedance
 				{
 					value = double.Parse(ValueTextBox.Text);
 					DialogResult = DialogResult.OK;
-					if (ResistorRadioButton.Checked)
+
+					if(Element == null)
 					{
-						Element = new Resistor(name, value);
-					}
-					else if (InductorRadioButton.Checked)
-					{
-						Element = new Inductor(name, value);
-					}
-					else if (CapacitorRadioButton.Checked)
-					{
-						Element = new Capacitor(name, value);
+						if (ResistorRadioButton.Checked)
+						{
+							Element = new Resistor(name, value);
+						}
+						else if (InductorRadioButton.Checked)
+						{
+							Element = new Inductor(name, value);
+						}
+						else if (CapacitorRadioButton.Checked)
+						{
+							Element = new Capacitor(name, value);
+						}
+						else
+						{
+							MessageBox.Show("Choose element", "Error",
+							MessageBoxButtons.OK, MessageBoxIcon.Error);
+							DialogResult = DialogResult.None;
+						}
 					}
 					else
 					{
-						MessageBox.Show("Choose element", "Error",
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-						DialogResult = DialogResult.None;
+						string oldName = Element.Name;
+						double oldValue = Element.Value;
+
+						if(oldName != name || oldValue!=value)
+						{
+							Element.Name = name;
+							Element.Value = value;
+						}
 					}
 				}
 				catch (FormatException exception)

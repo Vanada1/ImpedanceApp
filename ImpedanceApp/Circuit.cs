@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Numerics;
 using System.Text;
 
@@ -15,20 +16,17 @@ namespace ImpedanceApp
 		/// <param name="arg">the argument for output </param>
 		public delegate void Changed(object obg, object arg);
 
-		List<IElement> _elements;
+
+
+		/// <summary>
+		/// The event <see cref="CircuitChanged"/> warns of a circuit change
+		/// </summary>
+		public event Changed CircuitChanged;
+
 		/// <summary>
 		/// All elements list in the circuit
 		/// </summary>
-		public List<IElement> Elements
-		{
-			get => _elements;
-			set
-			{
-				_elements = value;
-				//CircuitChanged.Invoke(this,
-				//	nameof(Elements) + " values has been changet");
-			}
-		}
+		public ElementObservableCollection<IElement> Elements { get; set; }
 
 		/// <summary>
 		/// Calculate full impedance in the circuit
@@ -52,17 +50,26 @@ namespace ImpedanceApp
 
 		public Circuit()
 		{
-			Elements = new List<IElement>();
+			Elements = new ElementObservableCollection<IElement>();
 		}
 
-		public Circuit(List<IElement> elements)
+		public Circuit(ElementObservableCollection<IElement> elements)
 		{
 			Elements = elements;
+			foreach(var element in Elements)
+			{
+				element.ValueChanged += (obj, arg) =>
+				  {
+					  IElement elem = obj as IElement;
+					  if (elem != null)
+					  {
+						  Console.WriteLine(
+							  $"Element {elem.Name} has changed");
+					  }
+				  };
+			}
 		}
 
-		/// <summary>
-		/// The event <see cref="CircuitChanged"/> warns of a circuit change
-		/// </summary>
-		public event Changed CircuitChanged;
+
 	}
 }

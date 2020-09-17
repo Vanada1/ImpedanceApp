@@ -30,8 +30,11 @@ namespace ImpedanceApp
 			set
 			{ 
 				_value = value;
-				//ValueChanged.Invoke(this,
-				//	nameof(Inductor) + " value has been change");
+				if(ValueChanged != null)
+				{
+					ValueChanged.Invoke(this,
+						nameof(Inductor) + " value has been change");
+				}
 			} 
 		}
 

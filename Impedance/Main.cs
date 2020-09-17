@@ -7,10 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Numerics;
 using ImpedanceApp;
 using Impedance;
 using Microsoft.VisualBasic.CompilerServices;
+using System.Reflection;
 
 namespace ImpedanceForms
 {
@@ -22,6 +25,14 @@ namespace ImpedanceForms
 
 		private Circuit _elements = new Circuit();
 		List<string> resultString = new List<string>();
+
+
+		private static void CircuitCollectionChanged(
+			object sender, object e)
+		{
+			MessageBox.Show("Circuit was changed", "Alert",
+				MessageBoxButtons.OK, MessageBoxIcon.Warning);
+		}
 
 		private void UpdateListBoxes()
 		{
@@ -52,31 +63,32 @@ namespace ImpedanceForms
 		{
 			UpdateListBoxes();
 
-			List<IElement> elements = new List<IElement>();
+			ElementObservableCollection<IElement> elements = 
+				new ElementObservableCollection<IElement>();
 			elements.Add(new Resistor("R", 40.0));
 			elements.Add(new Inductor("L", 10));
 			elements.Add(new Capacitor("C", 0.002));
 			_allExample.Add(new Circuit(elements));
 
-			elements = new List<IElement>();
+			elements = new ElementObservableCollection<IElement>();
 			elements.Add(new Resistor("R1", 40.0));
 			elements.Add(new Resistor("R2", 40.0));
 			elements.Add(new Inductor("L", 10));
 			_allExample.Add(new Circuit(elements));
 
-			elements = new List<IElement>();
+			elements = new ElementObservableCollection<IElement>();
 			elements.Add(new Resistor("R", 40.0));
 			elements.Add(new Capacitor("C1", 0.002));
 			elements.Add(new Capacitor("C2", 0.002));
 			_allExample.Add(new Circuit(elements));
 
-			elements = new List<IElement>();
+			elements = new ElementObservableCollection<IElement>();
 			elements.Add(new Resistor("R1", 40.0));
 			elements.Add(new Resistor("R2", 40.0));
 			elements.Add(new Capacitor("C", 0.002));
 			_allExample.Add(new Circuit(elements));
 
-			elements = new List<IElement>();
+			elements = new ElementObservableCollection<IElement>();
 			elements.Add(new Resistor("R", 40.0));
 			elements.Add(new Inductor("L1", 10));
 			elements.Add(new Inductor("L2", 10));
@@ -84,6 +96,11 @@ namespace ImpedanceForms
 
 
 			_allExample.Add(new Circuit());
+
+			foreach(var example in _allExample)
+			{
+				example.Elements.CircuitChanged += CircuitCollectionChanged;
+			}
 		}
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)

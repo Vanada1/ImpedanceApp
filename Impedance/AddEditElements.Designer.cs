@@ -198,7 +198,6 @@
 		private System.Windows.Forms.TableLayoutPanel RadioButtonsTableLayoutPanel;
 		private System.Windows.Forms.RadioButton ResistorRadioButton;
 		private System.Windows.Forms.RadioButton InductorRadioButton;
-		private System.Windows.Forms.RadioButton radioButton3;
 		private System.Windows.Forms.RadioButton CapacitorRadioButton;
 	}
 }
