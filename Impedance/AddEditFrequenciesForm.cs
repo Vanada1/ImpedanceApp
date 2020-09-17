@@ -8,10 +8,10 @@ using System.Windows.Forms;
 
 namespace Impedance
 {
-	public partial class AddEditFrequencies : Form
+	public partial class AddEditFrequenciesForm : Form
 	{
 		public double? Frequencie = null;
-		public AddEditFrequencies()
+		public AddEditFrequenciesForm()
 		{
 			InitializeComponent();
 		}

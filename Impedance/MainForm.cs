@@ -17,13 +17,13 @@ using System.Reflection;
 
 namespace ImpedanceForms
 {
-	public partial class Main : Form
+	public partial class MainForm : Form
 	{
 		private List<double> _frequencies = new List<double>();
 		private List<Complex> _results = new List<Complex>();
 		private List<Circuit> _allExample = new List<Circuit>();
 
-		private Circuit _elements = new Circuit();
+		private Circuit _circuit = new Circuit();
 		List<string> resultString = new List<string>();
 
 
@@ -39,7 +39,7 @@ namespace ImpedanceForms
 			FrequenciesListBox.DataSource = null;
 			FrequenciesListBox.DataSource = _frequencies;
 
-			_results = _elements.CalculateZ(_frequencies);
+			_results = _circuit.CalculateZ(_frequencies);
 			ImpedanceListBox.DataSource = null;
 			resultString = new List<string>();
 			foreach (var result in _results)
@@ -50,11 +50,11 @@ namespace ImpedanceForms
 			ImpedanceListBox.ClearSelected();
 
 			ElementsListBox.DataSource = null;
-			ElementsListBox.DataSource = _elements.Elements;
+			ElementsListBox.DataSource = _circuit.Elements;
 		}
 
 
-		public Main()
+		public MainForm()
 		{
 			InitializeComponent();
 		}
@@ -105,7 +105,7 @@ namespace ImpedanceForms
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
 		{
-			var addFrorm = new AddEditFrequencies();
+			var addFrorm = new AddEditFrequenciesForm();
 			addFrorm.ShowDialog();
 			if(addFrorm.DialogResult == DialogResult.OK)
 			{
@@ -117,7 +117,7 @@ namespace ImpedanceForms
 		private void EditFrequenciesButton_Click(object sender, EventArgs e)
 		{
 			var index = FrequenciesListBox.SelectedIndex;
-			var editFrorm = new AddEditFrequencies();
+			var editFrorm = new AddEditFrequenciesForm();
 			if(index >=0)
 			{
 				editFrorm.Frequencie = _frequencies[index];
@@ -158,7 +158,7 @@ namespace ImpedanceForms
 
 		private void radioButton1_CheckedChanged(object sender, EventArgs e)
 		{
-			_elements = _allExample[0];
+			_circuit = _allExample[0];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
@@ -167,7 +167,7 @@ namespace ImpedanceForms
 
 		private void radioButton2_CheckedChanged(object sender, EventArgs e)
 		{
-			_elements = _allExample[1];
+			_circuit = _allExample[1];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.SecondExample;
@@ -176,7 +176,7 @@ namespace ImpedanceForms
 
 		private void radioButton3_CheckedChanged(object sender, EventArgs e)
 		{
-			_elements = _allExample[2];
+			_circuit = _allExample[2];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.ThirdExample;
@@ -185,7 +185,7 @@ namespace ImpedanceForms
 
 		private void radioButton4_CheckedChanged(object sender, EventArgs e)
 		{
-			_elements = _allExample[3];
+			_circuit = _allExample[3];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.FourthExample;
@@ -194,7 +194,7 @@ namespace ImpedanceForms
 
 		private void radioButton5_CheckedChanged(object sender, EventArgs e)
 		{
-			_elements = _allExample[4];
+			_circuit = _allExample[4];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
@@ -203,7 +203,7 @@ namespace ImpedanceForms
 
 		private void radioButton6_CheckedChanged(object sender, EventArgs e)
 		{
-			_elements = _allExample[5];
+			_circuit = _allExample[5];
 			AddElementButton.Enabled = true;
 			RemoveElementButton.Enabled = true;
 			CircuitPictureBox.Image = null;
@@ -215,12 +215,12 @@ namespace ImpedanceForms
 			var index = ElementsListBox.SelectedIndex;
 			if (index >= 0)
 			{
-				var editFrorm = new AddEditElements();
-				editFrorm.Element = _elements.Elements[index];
+				var editFrorm = new AddEditElementsForm();
+				editFrorm.Element = _circuit.Elements[index];
 				editFrorm.ShowDialog();
 				if (editFrorm.DialogResult == DialogResult.OK)
 				{
-					_elements.Elements[index] = editFrorm.Element;
+					_circuit.Elements[index] = editFrorm.Element;
 				}
 				UpdateListBoxes();
 			}
@@ -233,11 +233,11 @@ namespace ImpedanceForms
 
 		private void AddElementButton_Click(object sender, EventArgs e)
 		{
-			var addFrorm = new AddEditElements();
+			var addFrorm = new AddEditElementsForm();
 			addFrorm.ShowDialog();
 			if (addFrorm.DialogResult == DialogResult.OK)
 			{
-				_elements.Elements.Add(addFrorm.Element);
+				_circuit.Elements.Add(addFrorm.Element);
 			}
 			UpdateListBoxes();
 		}
@@ -251,7 +251,7 @@ namespace ImpedanceForms
 					MessageBoxButtons.YesNo);
 				if (remove == DialogResult.Yes)
 				{
-					_elements.Elements.RemoveAt(index);
+					_circuit.Elements.RemoveAt(index);
 				}
 				UpdateListBoxes();
 			}

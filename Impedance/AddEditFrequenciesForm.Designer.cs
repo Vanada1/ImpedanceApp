@@ -1,6 +1,6 @@
 ﻿namespace Impedance
 {
-	partial class AddEditFrequencies
+	partial class AddEditFrequenciesForm
 	{
 		/// <summary>
 		/// Required designer variable.
