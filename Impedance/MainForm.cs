@@ -63,35 +63,45 @@ namespace ImpedanceForms
 		{
 			UpdateListBoxes();
 
-			ElementObservableCollection<IElement> elements = 
-				new ElementObservableCollection<IElement>();
-			elements.Add(new Resistor("R", 40.0));
-			elements.Add(new Inductor("L", 10));
-			elements.Add(new Capacitor("C", 0.002));
+			ElementObservableCollection<IElement> elements =
+				new ElementObservableCollection<IElement>
+				{
+					new Resistor("R", 100),
+					new Inductor("L", 10),
+					new Capacitor("C", 0.002)
+				};
 			_allExample.Add(new Circuit(elements));
 
-			elements = new ElementObservableCollection<IElement>();
-			elements.Add(new Resistor("R1", 40.0));
-			elements.Add(new Resistor("R2", 40.0));
-			elements.Add(new Inductor("L", 10));
+			elements = new ElementObservableCollection<IElement>
+			{
+				new Resistor("R1", 40.0),
+				new Resistor("R2", 40.0),
+				new Inductor("L", 10)
+			};
 			_allExample.Add(new Circuit(elements));
 
-			elements = new ElementObservableCollection<IElement>();
-			elements.Add(new Resistor("R", 40.0));
-			elements.Add(new Capacitor("C1", 0.002));
-			elements.Add(new Capacitor("C2", 0.002));
+			elements = new ElementObservableCollection<IElement>
+			{
+				new Resistor("R", 40.0),
+				new Capacitor("C1", 0.002),
+				new Capacitor("C2", 0.002)
+			};
 			_allExample.Add(new Circuit(elements));
 
-			elements = new ElementObservableCollection<IElement>();
-			elements.Add(new Resistor("R1", 40.0));
-			elements.Add(new Resistor("R2", 40.0));
-			elements.Add(new Capacitor("C", 0.002));
+			elements = new ElementObservableCollection<IElement> 
+			{
+				new Resistor("R1", 40.0),
+				new Resistor("R2", 40.0),
+				new Capacitor("C", 0.002)
+			};
 			_allExample.Add(new Circuit(elements));
 
-			elements = new ElementObservableCollection<IElement>();
-			elements.Add(new Resistor("R", 40.0));
-			elements.Add(new Inductor("L1", 10));
-			elements.Add(new Inductor("L2", 10));
+			elements = new ElementObservableCollection<IElement>
+			{
+				new Resistor("R", 40.0),
+				new Inductor("L1", 10),
+				new Inductor("L2", 10)
+			};
 			_allExample.Add(new Circuit(elements));
 
 
