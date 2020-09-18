@@ -111,6 +111,7 @@ namespace ImpedanceForms
 			{
 				example.Elements.CircuitChanged += CircuitCollectionChanged;
 			}
+			
 		}
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)

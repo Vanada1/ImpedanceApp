@@ -30,12 +30,12 @@ namespace ImpedanceApp
 			get => _value; 
 			set
 			{
-				_value = value;
-				if(ValueChanged != null)
+				if(_value != value)
 				{
-					ValueChanged.Invoke(this,
+					ValueChanged?.Invoke(this,
 						nameof(Capacitor) + " value has been change");
 				}
+				_value = value;
 			}
 		}
 

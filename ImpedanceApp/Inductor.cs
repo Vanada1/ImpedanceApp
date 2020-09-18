@@ -28,13 +28,13 @@ namespace ImpedanceApp
 		public double Value {
 			get => _value;
 			set
-			{ 
-				_value = value;
-				if(ValueChanged != null)
+			{
+				if (_value != value)
 				{
-					ValueChanged.Invoke(this,
-						nameof(Inductor) + " value has been change");
+					ValueChanged?.Invoke(this,
+						nameof(Capacitor) + " value has been change");
 				}
+				_value = value;
 			} 
 		}
 
