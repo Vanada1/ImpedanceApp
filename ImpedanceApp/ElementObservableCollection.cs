@@ -10,16 +10,12 @@ namespace ImpedanceApp
 	public sealed class ElementObservableCollection<T> : Collection<T>
 	where T : IElement
 	{
-		public event Changed CircuitChanged;
+		public event Changed ElementObservableCollectionChanged;
 
 		protected override void InsertItem(int index, T item)
 		{
 			base.InsertItem(index, item);
 			item.ValueChanged += item_PropertyChanged;
-			if(CircuitChanged != null)
-			{
-				CircuitChanged(item, "Added element");
-			}
 		}
 
 		protected override void RemoveItem(int index)
@@ -48,7 +44,7 @@ namespace ImpedanceApp
 
 		private void item_PropertyChanged(object sender, object e)
 		{
-			CircuitChanged?.Invoke(sender, e);
+			ElementObservableCollectionChanged?.Invoke(sender, e);
 		}
 	
 	}

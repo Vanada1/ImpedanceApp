@@ -51,25 +51,18 @@ namespace ImpedanceApp
 		public Circuit()
 		{
 			Elements = new ElementObservableCollection<IElement>();
+			Elements.ElementObservableCollectionChanged += EventCircuitChanged;
 		}
 
 		public Circuit(ElementObservableCollection<IElement> elements)
 		{
 			Elements = elements;
-			foreach(var element in Elements)
-			{
-				element.ValueChanged += (obj, arg) =>
-				  {
-					  IElement elem = obj as IElement;
-					  if (elem != null)
-					  {
-						  Console.WriteLine(
-							  $"Element {elem.Name} has changed");
-					  }
-				  };
-			}
+			Elements.ElementObservableCollectionChanged += EventCircuitChanged;
 		}
 
-
+		private void EventCircuitChanged(object sender, object e)
+		{
+			CircuitChanged?.Invoke(sender, e);
+		}
 	}
 }

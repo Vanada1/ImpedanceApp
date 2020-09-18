@@ -109,7 +109,7 @@ namespace ImpedanceForms
 
 			foreach(var example in _allExample)
 			{
-				example.Elements.CircuitChanged += CircuitCollectionChanged;
+				example.CircuitChanged += CircuitCollectionChanged;
 			}
 			
 		}
