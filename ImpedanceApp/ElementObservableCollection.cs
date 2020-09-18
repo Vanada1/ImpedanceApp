@@ -48,10 +48,7 @@ namespace ImpedanceApp
 
 		private void item_PropertyChanged(object sender, object e)
 		{
-			if(CircuitChanged != null)
-			{
-				CircuitChanged(sender, e);
-			}
+			CircuitChanged?.Invoke(sender, e);
 		}
 	
 	}
