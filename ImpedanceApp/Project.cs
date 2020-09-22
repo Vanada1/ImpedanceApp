@@ -8,27 +8,32 @@ namespace ImpedanceApp
 		/// <summary>
 		/// List of the frequencies
 		/// </summary>
-		public List<double> Frequencies = new List<double>();
+		public List<double> Frequencies { get; set; } =
+			new List<double>();
 
 		/// <summary>
 		/// List of the results
 		/// </summary>
-		public List<Complex> Results = new List<Complex>();
+		public List<Complex> Results { get; set; }
+			= new List<Complex>();
 
 		/// <summary>
 		/// List of the all example with circuit
 		/// </summary>
-		public List<Circuit> AllExample = new List<Circuit>();
+		public List<Circuit> AllExample { get; set; }
+			= new List<Circuit>();
 
 		/// <summary>
 		/// Current circuit
 		/// </summary>
-		public Circuit Circuit = new Circuit();
+		public Circuit Circuit { get; set; } 
+			= new Circuit();
 
 		/// <summary>
 		/// Result string
 		/// </summary>
-		public List<string> ResultString = new List<string>();
+		public List<string> ResultString { get; set; } 
+			= new List<string>();
 
 		/// <summary>
 		/// Constructor project
