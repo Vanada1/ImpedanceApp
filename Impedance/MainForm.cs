@@ -10,6 +10,12 @@ namespace ImpedanceForms
 	public partial class MainForm : Form
 	{
 		private Project project = new Project();
+
+		/// <summary>
+		/// Event for collection
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private static void CircuitCollectionChanged(
 			object sender, object e)
 		{
@@ -17,6 +23,9 @@ namespace ImpedanceForms
 				MessageBoxButtons.OK, MessageBoxIcon.Warning);
 		}
 
+		/// <summary>
+		/// Update all list boxes
+		/// </summary>
 		private void UpdateListBoxes()
 		{
 			FrequenciesListBox.DataSource = null;
