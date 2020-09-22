@@ -1,10 +1,5 @@
 ﻿using ImpedanceApp;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Impedance
@@ -57,8 +52,18 @@ namespace Impedance
 
 						if(oldName != name || oldValue!=value)
 						{
-							Element.Name = name;
-							Element.Value = value;
+							try
+							{
+								Element.Name = name;
+								Element.Value = value;
+							}
+							catch(ArgumentOutOfRangeException exception)
+                            {
+								MessageBox.Show(exception.Message,
+									"Error", MessageBoxButtons.OK,
+									MessageBoxIcon.Error);
+								DialogResult = DialogResult.None;
+							}
 						}
 					}
 				}

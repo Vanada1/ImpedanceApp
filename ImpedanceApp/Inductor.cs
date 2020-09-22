@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace ImpedanceApp
 {
@@ -29,10 +27,16 @@ namespace ImpedanceApp
 			get => _value;
 			set
 			{
+				if (value < 0)
+				{
+					throw new ArgumentOutOfRangeException(
+						"Less than zero");
+				}
 				if (_value != value)
 				{
 					ValueChanged?.Invoke(this,
-						nameof(Capacitor) + " value has been change");
+						new ElementEventArgs(nameof(Capacitor) +
+						" value has been change"));
 				}
 				_value = value;
 			} 
@@ -41,7 +45,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// The event <see cref="ValueChanged"/> warns of a value change
 		/// </summary>
-		public event IElement.Changed ValueChanged;
+		public event EventHandler ValueChanged;
 
 		/// <summary>
 		/// Calculate impedance one element of <see cref="Inductor"/>
@@ -54,12 +58,23 @@ namespace ImpedanceApp
 			return new Complex(0, result);
 		}
 
+		/// <summary>
+		/// Constructor for <see cref="Inductor"/>
+		/// </summary>
+		/// <param name="name"> name of the element</param>
+		/// <param name="value"> value of the element</param>
 		public Inductor(string name, double value)
 		{
 			Name = name;
 			Value = value;
 		}
 
+
+		/// <summary>
+		/// override metod ToString()
+		/// </summary>
+		/// <returns><see cref="Name"/> and <see cref="Value"/> string
+		/// </returns>
 		public override string ToString()
 		{
 			return $"{this.Name} = {this.Value}";

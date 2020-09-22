@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Numerics;
-using System.Threading;
 
 namespace ImpedanceApp
 {
@@ -26,15 +25,8 @@ namespace ImpedanceApp
 		Complex CalculateZ(double frequency);
 
 		/// <summary>
-		/// The delegate <see cref=" Changed"/> warns of a value change
-		/// </summary>
-		/// <param name="obj"> the object, wich has been change</param>
-		/// <param name="arg">the argument for output </param>
-		delegate void Changed(object obj, object arg);
-
-		/// <summary>
 		/// The event <see cref=" ValueChanged"/> warns of a value change
 		/// </summary>
-		event Changed ValueChanged;
+		event EventHandler ValueChanged;
 	}
 }

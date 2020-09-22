@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Impedance
 {
 	public partial class AddEditFrequenciesForm : Form
 	{
-		public double? Frequencie = null;
+		public double? Frequencie { get; set; } = null;
 		public AddEditFrequenciesForm()
 		{
 			InitializeComponent();

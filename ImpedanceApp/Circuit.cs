@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Numerics;
-using System.Text;
 
 namespace ImpedanceApp
 {
@@ -10,18 +8,9 @@ namespace ImpedanceApp
 	{
 
 		/// <summary>
-		/// The delegate <see cref=" Changed"/> warns of a value change
-		/// </summary>
-		/// <param name="obj"> the object, wich has been change</param>
-		/// <param name="arg">the argument for output </param>
-		public delegate void Changed(object obg, object arg);
-
-
-
-		/// <summary>
 		/// The event <see cref="CircuitChanged"/> warns of a circuit change
 		/// </summary>
-		public event Changed CircuitChanged;
+		public event EventHandler CircuitChanged;
 
 		/// <summary>
 		/// All elements list in the circuit
@@ -48,19 +37,32 @@ namespace ImpedanceApp
 			return results;
 		}
 
+		/// <summary>
+		/// Constructor default <see cref="Capacitor"/>
+		/// </summary>
 		public Circuit()
 		{
 			Elements = new ElementObservableCollection<IElement>();
 			Elements.ElementObservableCollectionChanged += EventCircuitChanged;
 		}
 
+		/// <summary>
+		/// Constructor <see cref="Capacitor"/>
+		/// </summary>
+		/// <param name="elements"> is collection <see cref="IElement"/>
+		/// </param>
 		public Circuit(ElementObservableCollection<IElement> elements)
 		{
 			Elements = elements;
 			Elements.ElementObservableCollectionChanged += EventCircuitChanged;
 		}
 
-		private void EventCircuitChanged(object sender, object e)
+		/// <summary>
+		/// Circuit changed event
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void EventCircuitChanged(object sender, EventArgs e)
 		{
 			CircuitChanged?.Invoke(sender, e);
 		}
