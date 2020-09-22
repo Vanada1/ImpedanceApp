@@ -37,7 +37,13 @@ namespace ImpedanceForms
 			project.ResultString = new List<string>();
 			foreach (var result in project.Results)
 			{
-				project.ResultString.Add($"{result.Real} + {result.Imaginary}i");
+				string sign = "+";
+				if (result.Imaginary < 0)
+				{
+					sign = "";
+				}
+				project.ResultString.Add($"{result.Real} {sign} " +
+					$"{result.Imaginary}i");
 			}
 			ImpedanceListBox.DataSource = project.ResultString;
 			ImpedanceListBox.ClearSelected();
