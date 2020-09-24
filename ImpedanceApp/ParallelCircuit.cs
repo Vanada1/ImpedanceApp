@@ -7,37 +7,31 @@ namespace ImpedanceApp
     /// <summary>
     /// <see cref="ParallelCircuit"/> is inheritor of an abstract class <see cref="Circuit"/>
     /// </summary>
-    public class ParallelCircuit : Circuit
+    public class ParallelCircuit : ISegment
     {
+        public string Name { get; set; }
+
+        public SegmentObservableCollection<ISegment> SubSegment { get; set; }
+
+        public event EventHandler SegmentChanged;
+
         /// <summary>
         /// Calculate impedance in the serial circuit
         /// </summary>
-        /// <param name="frequencies"> for calculate</param>
+        /// <param name="frequency"> for calculate</param>
         /// <returns><see cref="List<Complex>"/> values for result</returns>
-        public override List<Complex> CalculateZ(List<double> frequencies)
+        public Complex CalculateZ(double frequency)
         {
-            List<Complex> results = new List<Complex>();
-
-            for (int i = 0; i < frequencies.Count; i++)
-            {
-                results.Add(new Complex(0.0, 0.0));
-            }
+            Complex result = new Complex(0.0, 0.0);
 
             foreach(var segment in SubSegment)
             {
-                List<Complex> resultsElement = segment.CalculateZ(frequencies);
-                for (int i = 0; i < resultsElement.Count; i++)
-                {
-                    results[i] += 1.0 / resultsElement[i];
-                }
+                result += 1.0 / segment.CalculateZ(frequency);
             }
 
-            for (int i = 0; i < results.Count; i++)
-            {
-                results[i] = Complex.Pow(results[i], -1);
-            }
+            result = Complex.Pow(result, -1);
 
-            return results;
+            return result;
         }
 
 
@@ -47,9 +41,9 @@ namespace ImpedanceApp
         /// <param name="name"> of the <see cref="Circuit"/></param>
         /// <param name="subSegment"> of the <see cref="Circuit"/></param>
         public ParallelCircuit(string name, SegmentObservableCollection<ISegment> subSegment)
-            : base(name, subSegment)
         {
-
+            Name = name;
+            SubSegment = subSegment;
         }
     }
 }

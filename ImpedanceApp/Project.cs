@@ -34,8 +34,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Current circuit property
 		/// </summary>
-		public Circuit CurrentCircuit { get; set; } 
-			= new SerialCircuit(_name, new SegmentObservableCollection<ISegment>());
+		public Circuit CurrentCircuit { get; set; } = new Circuit();
 
 		/// <summary>
 		/// Result string property 
@@ -64,7 +63,7 @@ namespace ImpedanceApp
 						new Inductor("L", 10)
 					})
 			};
-			AllExample.Add(new SerialCircuit(_name, segment));
+			AllExample.Add(new Circuit(_name, segment));
 
 			segment = new SegmentObservableCollection<ISegment>
 			{
@@ -82,7 +81,7 @@ namespace ImpedanceApp
 					}),
 				new Inductor("L", 10)
 			};
-			AllExample.Add(new SerialCircuit(_name, segment));
+			AllExample.Add(new Circuit(_name, segment));
 
 			segment = new SegmentObservableCollection<ISegment>
 			{
@@ -90,7 +89,7 @@ namespace ImpedanceApp
 				new Capacitor("C1", 0.002),
 				new Capacitor("C2", 0.002)
 			};
-			AllExample.Add(new SerialCircuit(_name, segment));
+			AllExample.Add(new Circuit(_name, segment));
 
 			segment = new SegmentObservableCollection<ISegment>
 			{
@@ -102,7 +101,7 @@ namespace ImpedanceApp
 						new Capacitor("C", 0.002) 
 					})
 			};
-			AllExample.Add(new SerialCircuit(_name, segment));
+			AllExample.Add(new Circuit(_name, segment));
 
 			segment = new SegmentObservableCollection<ISegment>
 			{
@@ -110,10 +109,10 @@ namespace ImpedanceApp
 				new Inductor("L1", 10),
 				new Inductor("L2", 10)
 			};
-			AllExample.Add(new SerialCircuit(_name, segment));
+			AllExample.Add(new Circuit(_name, segment));
 
 
-			AllExample.Add(new SerialCircuit(_name, 
+			AllExample.Add(new Circuit(_name, 
 				new SegmentObservableCollection<ISegment>()));
 		}
 

@@ -47,9 +47,8 @@ namespace ImpedanceForms
 			}
 			ImpedanceListBox.DataSource = project.ResultString;
 			ImpedanceListBox.ClearSelected();
-
-			ElementsListBox.DataSource = null;
 			project.FindAllElements(project.CurrentCircuit);
+			ElementsListBox.DataSource = null;
 			ElementsListBox.DataSource = project.CircuitElements;
 		}
 

@@ -59,14 +59,9 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="frequencies"> is frequency for element</param>
 		/// <returns> <see cref="List{Complex}<"/> values this <see cref="Resistor"/></returns>
-		public List<Complex> CalculateZ(List<double> frequencies)
+		public Complex CalculateZ(double frequencies)
 		{
-			List<Complex> results = new List<Complex>();
-			for(int i=0;i<frequencies.Count;i++)
-            {
-				results.Add(new Complex(Value, 0));
-            }
-			return results;
+			return new Complex(Value, 0);
 		}
 
 		/// <summary>

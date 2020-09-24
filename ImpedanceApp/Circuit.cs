@@ -7,8 +7,8 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Abstract class Circuit 
 	/// </summary>
-	abstract public class Circuit : ISegment
-	{
+	public class Circuit : ISegment
+	{ 
 
 		/// <summary>
 		/// The event <see cref="SegmentChanged"/> warns of a circuit change
@@ -22,24 +22,41 @@ namespace ImpedanceApp
 		/// </summary>
 		public SegmentObservableCollection<ISegment> SubSegment { get; set; }
 
-		/// <summary>
-		/// Calculate full impedance in the circuit
-		/// </summary>
-		/// <param name="frequencies"></param>
-		/// <returns>All complex for <see name="frequencies"/></returns>
-		public abstract List<Complex> CalculateZ(List<double> frequencies);
+        /// <summary>
+        /// Calculate full impedance in the circuit
+        /// </summary>
+        /// <param name="frequencies"></param>
+        /// <returns>All complex for <see name="frequencies"/></returns>
+        public List<Complex> CalculateZ(List<double> frequencies)
+        {
+			List<Complex> results = new List<Complex>();
+			for (int i = 0; i < frequencies.Count; i++)
+			{
+				Complex result = new Complex(0.0, 0.0);
+				foreach(var element in SubSegment)
+                {
+					result += element.CalculateZ(frequencies[i]);
+                }
+				results.Add(result);
+			}
+			return results;
+        }
 
 		/// <summary>
 		/// Circuit constructor
 		/// </summary>
 		/// <param name="name"> of <see cref="Circuit"/></param>
 		/// <param name="subSegment"> of <see cref="Circuit"/></param>
-		public Circuit(string name, SegmentObservableCollection<ISegment> subSegment)
+		public Circuit()
+        {
+			Name = "Main";
+			SubSegment = new SegmentObservableCollection<ISegment>();
+		}
+
+		public Circuit(string name, SegmentObservableCollection<ISegment> segments)
         {
 			Name = name;
-			SubSegment = subSegment;
-			SubSegment.ElementObservableCollectionChanged += EventCircuitChanged;
-			SubSegment.CollectionChanged += EventCircuitChanged;
+			SubSegment = segments;
 		}
 
 		/// <summary>
@@ -51,5 +68,10 @@ namespace ImpedanceApp
 		{
 			SegmentChanged?.Invoke(sender, e);
 		}
-	}
+
+        Complex ISegment.CalculateZ(double frequency)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -21,7 +21,7 @@ namespace ImpedanceApp
         /// </summary>
         /// <param name="frequency"></param>
         /// <returns></returns>
-        List<Complex> CalculateZ(List<double> frequency);
+        Complex CalculateZ(double frequency);
 
         /// <summary>
         /// SubSegment property
