@@ -46,7 +46,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Property all <see cref="IElement"/> of the <see cref="Circuit"/>
 		/// </summary>
-		public List<IElement> CircuitElements { get; set; } = null;
+		public SegmentObservableCollection<IElement> CircuitElements { get; set; } = null;
 
 		/// <summary>
 		/// Constructor <see cref="Project"/>
@@ -71,8 +71,14 @@ namespace ImpedanceApp
 				new ParallelCircuit("Parallel Circuit",
 					new SegmentObservableCollection<ISegment>
 					{
-						new Resistor("R1", 40.0),
-						new Resistor("R2", 40.0)
+						new SerialCircuit("Test",
+						new SegmentObservableCollection<ISegment>
+						{
+							new Resistor("R1", 20.0),
+							new Resistor("R2", 20.0)
+						}
+						),
+						new Resistor("R3", 40.0)
 					}),
 				new Inductor("L", 10)
 			};
@@ -119,7 +125,7 @@ namespace ImpedanceApp
 		{
 			if (segment == CurrentCircuit)
 			{
-				CircuitElements = new List<IElement>();
+				CircuitElements = new SegmentObservableCollection<IElement>();
 			}
 
 			foreach(var element in segment.SubSegment)

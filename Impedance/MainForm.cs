@@ -63,7 +63,7 @@ namespace ImpedanceForms
 		{
 			UpdateListBoxes();
 
-			foreach (var example in project.AllExample)
+			foreach (Circuit example in project.AllExample)
 			{
 				example.SegmentChanged += CircuitCollectionChanged;
 			}
@@ -188,7 +188,7 @@ namespace ImpedanceForms
                 editFrorm.ShowDialog();
 				if (editFrorm.DialogResult == DialogResult.OK)
 				{
-					project.CurrentCircuit.SubSegment[index] = editFrorm.Element;
+					project.CircuitElements[index] = editFrorm.Element;
 				}
 				UpdateListBoxes();
 			}

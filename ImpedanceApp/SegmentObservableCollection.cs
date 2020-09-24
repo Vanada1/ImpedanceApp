@@ -23,11 +23,8 @@ namespace ImpedanceApp
 		/// <param name="item">element to insert</param>
 		protected override void InsertItem(int index, T item)
 		{
-            base.InsertItem(index, item);
-            if (item is IElement element)
-            {
-				element.SegmentChanged += ItemPropertyChanged;
-            }
+			base.InsertItem(index, item);
+			item.SegmentChanged += ItemPropertyChanged;
 		}
 
 		/// <summary>
@@ -37,7 +34,7 @@ namespace ImpedanceApp
 		/// will be deleted</param>
 		protected override void RemoveItem(int index)
 		{
-			var item = this[index] as IElement;
+			var item = this[index];
 			base.RemoveItem(index);
 			item.SegmentChanged -= ItemPropertyChanged;
 		}
@@ -50,14 +47,11 @@ namespace ImpedanceApp
 		/// <param name="item">element to set</param>
 		protected override void SetItem(int index, T item)
 		{
-			IElement oldItem = this[index] as IElement;
+			var oldItem = this[index];
 			base.SetItem(index, item);
 			oldItem.SegmentChanged -= ItemPropertyChanged;
-            if (item is IElement element)
-            {
-                element.SegmentChanged += ItemPropertyChanged;
-            }
-        }
+			item.SegmentChanged += ItemPropertyChanged;
+		}
 
 		/// <summary>
 		/// Override metod
@@ -66,10 +60,7 @@ namespace ImpedanceApp
 		{
 			foreach (var item in Items)
 			{
-				if (item is IElement element)
-				{
-					element.SegmentChanged -= ItemPropertyChanged;
-				}
+				item.SegmentChanged -= ItemPropertyChanged;
 			}
 			base.ClearItems();
 		}

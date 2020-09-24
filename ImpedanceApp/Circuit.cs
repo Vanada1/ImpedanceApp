@@ -38,15 +38,15 @@ namespace ImpedanceApp
         {
 			Name = name;
 			SubSegment = subSegment;
-
-        }
+			SubSegment.ElementObservableCollectionChanged += EventCircuitChanged;
+		}
 
 		/// <summary>
 		/// Circuit changed event
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void EventCircuitChanged(object sender, EventArgs e)
+		protected void EventCircuitChanged(object sender, EventArgs e)
 		{
 			SegmentChanged?.Invoke(sender, e);
 		}
