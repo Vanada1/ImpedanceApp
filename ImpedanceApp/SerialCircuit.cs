@@ -15,7 +15,7 @@ namespace ImpedanceApp
         /// <returns><see cref="List<Complex>"/> values for result</returns>
         public override List<Complex> CalculateZ(List<double> frequencies)
         {
-            List<Complex> results = new List<Complex>(frequencies.Count);
+            List<Complex> results = new List<Complex>();
 
             for (int i = 0; i < frequencies.Count; i++)
             {
