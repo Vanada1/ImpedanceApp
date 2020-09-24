@@ -68,7 +68,7 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected void EventCircuitChanged(object sender, EventArgs e)
+		private void EventCircuitChanged(object sender, EventArgs e)
 		{
 			SegmentChanged?.Invoke(sender, e);
 		}
