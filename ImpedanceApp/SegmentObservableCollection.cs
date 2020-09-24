@@ -7,7 +7,7 @@ namespace ImpedanceApp
 	/// Collection for add metod in <see cref="ValueChanged"/> event
 	/// </summary>
 	/// <typeparam name="T"> is <see cref="ISegment"/></typeparam>
-	public sealed class SegmentObservableCollection<T> : Collection<T>
+	public sealed class SegmentObservableCollection<T> : ObservableCollection<T>
 	where T : ISegment
 	{
 		/// <summary>
