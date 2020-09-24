@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using System.Collections.Generic;
 
 namespace ImpedanceApp
 {
@@ -21,6 +22,11 @@ namespace ImpedanceApp
 		public string Name { get; set; }
 
 		/// <summary>
+		/// Property <see cref="Capacitor"/> <see cref="SubSegment"/>
+		/// </summary>
+		public SegmentObservableCollection<ISegment> SubSegment { get; }
+
+		/// <summary>
 		/// Property <see cref="Capacitor"/> value
 		/// </summary>
 		public double Value 
@@ -35,7 +41,7 @@ namespace ImpedanceApp
 				}
 				if (_value != value)
 				{
-					ValueChanged?.Invoke(this,
+					SegmentChanged?.Invoke(this,
 						new ElementEventArgs(nameof(Capacitor) + 
 						" value has been change"));
 				}
@@ -44,19 +50,25 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		/// The event <see cref="ValueChanged"/> warns of a value change
+		/// The event <see cref="SegmentChanged"/> warns of a value change
 		/// </summary>
-		public event EventHandler ValueChanged;
+		public event EventHandler SegmentChanged;
 
 		/// <summary>
 		/// Calculate impedance one element of <see cref="Capacitor"/>
 		/// </summary>
-		/// <param name="frequency"> is frequency for element</param>
-		/// <returns>complex value this <see cref="Capacitor"/></returns>
-		public Complex CalculateZ(double frequency)
+		/// <param name="frequencies"> is frequency for element</param>
+		/// <returns> <see cref="List{Complex}<"/> values this <see cref="Capacitor"/></returns>
+		public List<Complex> CalculateZ(List<double> frequencies)
 		{
-			double result = -1 / (2 * Math.PI * frequency * Value);
-			return new Complex(0, result);
+			List<Complex> results = new List<Complex>();
+			for (int i=0;i<frequencies.Count;i++)
+            {
+				double result = -1 / (2 * Math.PI * frequencies[i] * Value);
+				results.Add(new Complex(0, result));
+			}
+			
+			return results;
 		}
 
 		/// <summary>
@@ -68,6 +80,7 @@ namespace ImpedanceApp
 		{
 			Name = name;
 			Value = value;
+			SubSegment = null;
 		}
 
 		/// <summary>
@@ -77,7 +90,7 @@ namespace ImpedanceApp
 		/// </returns>
 		public override string ToString()
 		{
-			return $"{this.Name} = {this.Value}";
+			return $"{this.Name} = {this.Value} F";
 		}
 	}
 }

@@ -4,58 +4,34 @@ using System.Numerics;
 
 namespace ImpedanceApp
 {
-	public class Circuit
+	abstract public class Circuit : ISegment
 	{
 
 		/// <summary>
-		/// The event <see cref="CircuitChanged"/> warns of a circuit change
+		/// The event <see cref="SegmentChanged"/> warns of a circuit change
 		/// </summary>
-		public event EventHandler CircuitChanged;
+		public event EventHandler SegmentChanged;
+
+		public string Name { get; set; }
 
 		/// <summary>
 		/// All elements list in the circuit
 		/// </summary>
-		public ElementObservableCollection<IElement> Elements { get; set; }
+		public SegmentObservableCollection<ISegment> SubSegment { get; set; }
 
 		/// <summary>
 		/// Calculate full impedance in the circuit
 		/// </summary>
 		/// <param name="frequencies"></param>
 		/// <returns>All complex for <see name="frequencies"/></returns>
-		public List<Complex> CalculateZ(List<double> frequencies)
-		{
-			List<Complex> results = new List<Complex>();
-			for (int i = 0; i < frequencies.Count; i++)
-			{
-				Complex resultTemp = new Complex(0, 0);
-				foreach (IElement element in Elements)
-				{
-					resultTemp += element.CalculateZ(frequencies[i]);
-				}
-				results.Add(resultTemp);
-			}
-			return results;
-		}
+		public abstract List<Complex> CalculateZ(List<double> frequencies);
 
-		/// <summary>
-		/// Constructor default <see cref="Capacitor"/>
-		/// </summary>
-		public Circuit()
-		{
-			Elements = new ElementObservableCollection<IElement>();
-			Elements.ElementObservableCollectionChanged += EventCircuitChanged;
-		}
+		public Circuit(string name, SegmentObservableCollection<ISegment> subSegment)
+        {
+			Name = name;
+			SubSegment = subSegment;
 
-		/// <summary>
-		/// Constructor <see cref="Capacitor"/>
-		/// </summary>
-		/// <param name="elements"> is collection <see cref="IElement"/>
-		/// </param>
-		public Circuit(ElementObservableCollection<IElement> elements)
-		{
-			Elements = elements;
-			Elements.ElementObservableCollectionChanged += EventCircuitChanged;
-		}
+        }
 
 		/// <summary>
 		/// Circuit changed event
@@ -64,7 +40,7 @@ namespace ImpedanceApp
 		/// <param name="e"></param>
 		private void EventCircuitChanged(object sender, EventArgs e)
 		{
-			CircuitChanged?.Invoke(sender, e);
+			SegmentChanged?.Invoke(sender, e);
 		}
 	}
 }

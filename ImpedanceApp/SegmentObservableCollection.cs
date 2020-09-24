@@ -6,9 +6,9 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Collection for add metod in <see cref="ValueChanged"/> event
 	/// </summary>
-	/// <typeparam name="T"> is <see cref="IElement"/></typeparam>
-	public sealed class ElementObservableCollection<T> : Collection<T>
-	where T : IElement
+	/// <typeparam name="T"> is <see cref="ISegment"/></typeparam>
+	public sealed class SegmentObservableCollection<T> : Collection<T>
+	where T : ISegment
 	{
 		/// <summary>
 		/// Collection event
@@ -23,8 +23,12 @@ namespace ImpedanceApp
 		/// <param name="item">element to insert</param>
 		protected override void InsertItem(int index, T item)
 		{
+			IElement element = item as IElement;
 			base.InsertItem(index, item);
-			item.ValueChanged += item_PropertyChanged;
+			if(element != null)
+            {
+				element.SegmentChanged += item_PropertyChanged;
+            }
 		}
 
 		/// <summary>
@@ -34,9 +38,9 @@ namespace ImpedanceApp
 		/// will be deleted</param>
 		protected override void RemoveItem(int index)
 		{
-			var item = this[index];
+			var item = this[index] as IElement;
 			base.RemoveItem(index);
-			item.ValueChanged -= item_PropertyChanged;
+			item.SegmentChanged -= item_PropertyChanged;
 		}
 
 		/// <summary>
@@ -47,10 +51,14 @@ namespace ImpedanceApp
 		/// <param name="item">element to set</param>
 		protected override void SetItem(int index, T item)
 		{
-			var oldItem = this[index];
+			IElement oldItem = this[index] as IElement;
 			base.SetItem(index, item);
-			oldItem.ValueChanged -= item_PropertyChanged;
-			item.ValueChanged += item_PropertyChanged;
+			oldItem.SegmentChanged -= item_PropertyChanged;
+			IElement element = item as IElement;
+			if(element != null)
+            {
+				element.SegmentChanged += item_PropertyChanged;
+            }
 		}
 
 		/// <summary>
@@ -60,7 +68,10 @@ namespace ImpedanceApp
 		{
 			foreach (var item in Items)
 			{
-				item.ValueChanged -= item_PropertyChanged;
+				if (item is IElement element)
+				{
+					element.SegmentChanged -= item_PropertyChanged;
+				}
 			}
 			base.ClearItems();
 		}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using System.Collections.Generic;
 
 namespace ImpedanceApp
 {
@@ -16,12 +17,17 @@ namespace ImpedanceApp
 		private double _value;
 
 		/// <summary>
-		/// Property <see cref="Resistor"/> name
+		/// Property <see cref="Resistor"/> <see cref="Name"/>
 		/// </summary>
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Property <see cref="Resistor"/> value
+		/// Property <see cref="Resistor"/> <see cref="SubSegment"/>
+		/// </summary>
+		public SegmentObservableCollection<ISegment> SubSegment { get; }
+
+		/// <summary>
+		/// Property <see cref="Resistor"/> <see cref="Value"/>
 		/// </summary>
 		public double Value 
 		{ 
@@ -35,7 +41,7 @@ namespace ImpedanceApp
                 }
 				if (_value != value)
 				{
-					ValueChanged?.Invoke(this,
+					SegmentChanged?.Invoke(this,
 						new ElementEventArgs(nameof(Capacitor) + 
 						" value has been change"));
 				}
@@ -44,18 +50,23 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		/// The event <see cref="ValueChanged"/> warns of a value change
+		/// The event <see cref="SegmentChanged"/> warns of a value change
 		/// </summary>
-		public event EventHandler ValueChanged;
+		public event EventHandler SegmentChanged;
 
 		/// <summary>
 		/// Calculate impedance one element of <see cref="Resistor"/>
 		/// </summary>
-		/// <param name="frequency"> is frequency for element</param>
-		/// <returns>complex value this <see cref="Resistor"/></returns>
-		public Complex CalculateZ(double frequency)
+		/// <param name="frequencies"> is frequency for element</param>
+		/// <returns> <see cref="List{Complex}<"/> values this <see cref="Resistor"/></returns>
+		public List<Complex> CalculateZ(List<double> frequencies)
 		{
-			return new Complex(Value, 0);
+			List<Complex> results = new List<Complex>();
+			for(int i=0;i<frequencies.Count;i++)
+            {
+				results.Add(new Complex(Value, 0));
+            }
+			return results;
 		}
 
 		/// <summary>
@@ -67,6 +78,7 @@ namespace ImpedanceApp
 		{
 			Name = name;
 			Value = value;
+			SubSegment = null;
 		}
 
 
@@ -77,7 +89,7 @@ namespace ImpedanceApp
 		/// </returns>
 		public override string ToString()
 		{
-			return $"{this.Name} = {this.Value}";
+			return $"{this.Name} = {this.Value} Om";
 		}
 	}
 }

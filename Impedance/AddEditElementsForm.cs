@@ -110,5 +110,10 @@ namespace Impedance
 				RadioButtonsTableLayoutPanel.Enabled = true;
 			}
 		}
-	}
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+			DialogResult = DialogResult.Cancel;
+        }
+    }
 }

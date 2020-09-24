@@ -5,6 +5,8 @@ namespace ImpedanceApp
 {
    public class Project
     {
+		private static readonly string _name = "Main Circuit";
+
 		/// <summary>
 		/// List of the frequencies
 		/// </summary>
@@ -26,8 +28,8 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Current circuit
 		/// </summary>
-		public Circuit Circuit { get; set; } 
-			= new Circuit();
+		public Circuit CurrentCircuit { get; set; } 
+			= new SerialCircuit(_name, new SegmentObservableCollection<ISegment>());
 
 		/// <summary>
 		/// Result string
@@ -35,54 +37,89 @@ namespace ImpedanceApp
 		public List<string> ResultString { get; set; } 
 			= new List<string>();
 
+		public List<IElement> CircuitElements = null;
+
 		/// <summary>
 		/// Constructor project
 		/// </summary>
 		public Project()
         {
-			ElementObservableCollection<IElement> elements =
-	new ElementObservableCollection<IElement>
+			SegmentObservableCollection<ISegment> segment =
+	new SegmentObservableCollection<ISegment>
 	{
-					new Resistor("R", 100),
-					new Inductor("L", 10),
-					new Capacitor("C", 0.002)
-	};
-			AllExample.Add(new Circuit(elements));
-
-			elements = new ElementObservableCollection<IElement>
+		new Resistor("R", 100),
+		new ParallelCircuit("Parallel Circuit",
+			new SegmentObservableCollection<ISegment>
 			{
-				new Resistor("R1", 40.0),
-				new Resistor("R2", 40.0),
+				new Capacitor("C", 0.002),
+				new Inductor("L", 10)
+			})
+	};
+			AllExample.Add(new SerialCircuit(_name, segment));
+
+			segment = new SegmentObservableCollection<ISegment>
+			{
+				new ParallelCircuit("Parallel Circuit",
+					new SegmentObservableCollection<ISegment>
+					{
+						new Resistor("R1", 40.0),
+						new Resistor("R2", 40.0)
+					}),
 				new Inductor("L", 10)
 			};
-			AllExample.Add(new Circuit(elements));
+			AllExample.Add(new SerialCircuit(_name, segment));
 
-			elements = new ElementObservableCollection<IElement>
+			segment = new SegmentObservableCollection<ISegment>
 			{
 				new Resistor("R", 40.0),
 				new Capacitor("C1", 0.002),
 				new Capacitor("C2", 0.002)
 			};
-			AllExample.Add(new Circuit(elements));
+			AllExample.Add(new SerialCircuit(_name, segment));
 
-			elements = new ElementObservableCollection<IElement>
+			segment = new SegmentObservableCollection<ISegment>
 			{
 				new Resistor("R1", 40.0),
-				new Resistor("R2", 40.0),
-				new Capacitor("C", 0.002)
+				new ParallelCircuit("Parallel Circuit",
+					new SegmentObservableCollection<ISegment>
+					{
+						new Resistor("R2", 40.0),
+					new Capacitor("C", 0.002) 
+					})
 			};
-			AllExample.Add(new Circuit(elements));
+			AllExample.Add(new SerialCircuit(_name, segment));
 
-			elements = new ElementObservableCollection<IElement>
+			segment = new SegmentObservableCollection<ISegment>
 			{
 				new Resistor("R", 40.0),
 				new Inductor("L1", 10),
 				new Inductor("L2", 10)
 			};
-			AllExample.Add(new Circuit(elements));
+			AllExample.Add(new SerialCircuit(_name, segment));
 
 
-			AllExample.Add(new Circuit());
+			AllExample.Add(new SerialCircuit(_name, 
+				new SegmentObservableCollection<ISegment>()));
 		}
+
+		public void FindAllElements(ISegment segment)
+		{
+			if (segment == CurrentCircuit)
+			{
+				CircuitElements = new List<IElement>();
+			}
+
+			foreach(var element in segment.SubSegment)
+            {
+				if(element is IElement tempElement)
+                {
+					CircuitElements.Add(tempElement);
+                }
+				else
+                {
+					FindAllElements(element);
+                }
+            }
+        }
 	}
 }
