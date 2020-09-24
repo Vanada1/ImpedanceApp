@@ -84,11 +84,11 @@ namespace ImpedanceForms
 		{
 			var index = FrequenciesListBox.SelectedIndex;
 			var editFrorm = new AddEditFrequenciesForm();
-			if(index >=0)
+			if (index >= 0)
 			{
 				editFrorm.Frequencie = project.Frequencies[index];
 				editFrorm.ShowDialog();
-				if(editFrorm.DialogResult == DialogResult.OK)
+				if (editFrorm.DialogResult == DialogResult.OK)
 				{
 					project.Frequencies[index] = (double)editFrorm.Frequencie;
 				}
@@ -99,7 +99,7 @@ namespace ImpedanceForms
 				MessageBox.Show("Not selected", "Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-			
+
 		}
 
 		private void RemoveFrequenciesButton_Click(object sender, EventArgs e)

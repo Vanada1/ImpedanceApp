@@ -39,6 +39,7 @@ namespace ImpedanceApp
 			Name = name;
 			SubSegment = subSegment;
 			SubSegment.ElementObservableCollectionChanged += EventCircuitChanged;
+			SubSegment.CollectionChanged += EventCircuitChanged;
 		}
 
 		/// <summary>
