@@ -51,12 +51,16 @@ namespace ImpedanceApp
         {
 			Name = "Main";
 			SubSegment = new SegmentObservableCollection<ISegment>();
+			SubSegment.ElementObservableCollectionChanged += EventCircuitChanged;
+			SubSegment.CollectionChanged += EventCircuitChanged;
 		}
 
 		public Circuit(string name, SegmentObservableCollection<ISegment> segments)
         {
 			Name = name;
 			SubSegment = segments;
+			SubSegment.ElementObservableCollectionChanged += EventCircuitChanged;
+			SubSegment.CollectionChanged += EventCircuitChanged;
 		}
 
 		/// <summary>
