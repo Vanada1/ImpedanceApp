@@ -20,6 +20,9 @@ namespace ImpedanceApp
         /// <returns></returns>
         List<Complex> CalculateZ(List<double> frequency);
 
+        /// <summary>
+        /// SubSegment property
+        /// </summary>
         SegmentObservableCollection<ISegment> SubSegment { get; }
 
         /// <summary>

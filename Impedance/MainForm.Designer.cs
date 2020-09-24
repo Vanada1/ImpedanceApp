@@ -155,7 +155,7 @@
 			this.radioButton1.TabStop = true;
 			this.radioButton1.Text = "1st example";
 			this.radioButton1.UseVisualStyleBackColor = true;
-			this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+			this.radioButton1.CheckedChanged += new System.EventHandler(this.RadioButton1CheckedChanged);
 			// 
 			// radioButton2
 			// 
@@ -168,7 +168,7 @@
 			this.radioButton2.TabStop = true;
 			this.radioButton2.Text = "2nd example";
 			this.radioButton2.UseVisualStyleBackColor = true;
-			this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+			this.radioButton2.CheckedChanged += new System.EventHandler(this.RadioButton2CheckedChanged);
 			// 
 			// radioButton3
 			// 
@@ -181,7 +181,7 @@
 			this.radioButton3.TabStop = true;
 			this.radioButton3.Text = "3rd example";
 			this.radioButton3.UseVisualStyleBackColor = true;
-			this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+			this.radioButton3.CheckedChanged += new System.EventHandler(this.RadioButton3CheckedChanged);
 			// 
 			// radioButton4
 			// 
@@ -194,7 +194,7 @@
 			this.radioButton4.TabStop = true;
 			this.radioButton4.Text = "4th example";
 			this.radioButton4.UseVisualStyleBackColor = true;
-			this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+			this.radioButton4.CheckedChanged += new System.EventHandler(this.RadioButton4CheckedChanged);
 			// 
 			// radioButton5
 			// 
@@ -207,7 +207,7 @@
 			this.radioButton5.TabStop = true;
 			this.radioButton5.Text = "5th example";
 			this.radioButton5.UseVisualStyleBackColor = true;
-			this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+			this.radioButton5.CheckedChanged += new System.EventHandler(this.RadioButton5CheckedChanged);
 			// 
 			// radioButton6
 			// 
@@ -220,7 +220,7 @@
 			this.radioButton6.TabStop = true;
 			this.radioButton6.Text = "My example";
 			this.radioButton6.UseVisualStyleBackColor = true;
-			this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+			this.radioButton6.CheckedChanged += new System.EventHandler(this.RadioButton6CheckedChanged);
 			// 
 			// ImpedanceListBox
 			// 
@@ -401,7 +401,6 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.Button AddElementButton;
 		private System.Windows.Forms.Button EditElementButton;
-		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button RemoveElementButton;
 	}
 }

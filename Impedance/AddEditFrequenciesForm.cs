@@ -40,5 +40,10 @@ namespace Impedance
 				FrequenciesTextBox.Text = Frequencie.ToString();
 			}
 		}
-	}
+
+        private void CanselButton_Click(object sender, EventArgs e)
+        {
+			DialogResult = DialogResult.Cancel;
+        }
+    }
 }

@@ -122,7 +122,7 @@ namespace ImpedanceForms
 			}
 		}
 
-		private void radioButton1_CheckedChanged(object sender, EventArgs e)
+		private void RadioButton1CheckedChanged(object sender, EventArgs e)
 		{
 			project.CurrentCircuit = project.AllExample[0];
 			AddElementButton.Enabled = false;
@@ -131,7 +131,7 @@ namespace ImpedanceForms
 			UpdateListBoxes();
 		}
 
-		private void radioButton2_CheckedChanged(object sender, EventArgs e)
+		private void RadioButton2CheckedChanged(object sender, EventArgs e)
 		{
 			project.CurrentCircuit = project.AllExample[1];
 			AddElementButton.Enabled = false;
@@ -140,7 +140,7 @@ namespace ImpedanceForms
 			UpdateListBoxes();
 		}
 
-		private void radioButton3_CheckedChanged(object sender, EventArgs e)
+		private void RadioButton3CheckedChanged(object sender, EventArgs e)
 		{
 			project.CurrentCircuit = project.AllExample[2];
 			AddElementButton.Enabled = false;
@@ -149,7 +149,7 @@ namespace ImpedanceForms
 			UpdateListBoxes();
 		}
 
-		private void radioButton4_CheckedChanged(object sender, EventArgs e)
+		private void RadioButton4CheckedChanged(object sender, EventArgs e)
 		{
 			project.CurrentCircuit = project.AllExample[3];
 			AddElementButton.Enabled = false;
@@ -158,7 +158,7 @@ namespace ImpedanceForms
 			UpdateListBoxes();
 		}
 
-		private void radioButton5_CheckedChanged(object sender, EventArgs e)
+		private void RadioButton5CheckedChanged(object sender, EventArgs e)
 		{
 			project.CurrentCircuit = project.AllExample[4];
 			AddElementButton.Enabled = false;
@@ -167,7 +167,7 @@ namespace ImpedanceForms
 			UpdateListBoxes();
 		}
 
-		private void radioButton6_CheckedChanged(object sender, EventArgs e)
+		private void RadioButton6CheckedChanged(object sender, EventArgs e)
 		{
 			project.CurrentCircuit = project.AllExample[5];
 			AddElementButton.Enabled = true;
@@ -181,9 +181,11 @@ namespace ImpedanceForms
 			var index = ElementsListBox.SelectedIndex;
 			if (index >= 0)
 			{
-				var editFrorm = new AddEditElementsForm();
-				editFrorm.Element = project.CircuitElements[index];
-				editFrorm.ShowDialog();
+                AddEditElementsForm editFrorm = new AddEditElementsForm
+                {
+                    Element = project.CircuitElements[index]
+                };
+                editFrorm.ShowDialog();
 				if (editFrorm.DialogResult == DialogResult.OK)
 				{
 					project.CurrentCircuit.SubSegment[index] = editFrorm.Element;

@@ -23,11 +23,10 @@ namespace ImpedanceApp
 		/// <param name="item">element to insert</param>
 		protected override void InsertItem(int index, T item)
 		{
-			IElement element = item as IElement;
-			base.InsertItem(index, item);
-			if(element != null)
+            base.InsertItem(index, item);
+            if (item is IElement element)
             {
-				element.SegmentChanged += item_PropertyChanged;
+				element.SegmentChanged += ItemPropertyChanged;
             }
 		}
 
@@ -40,7 +39,7 @@ namespace ImpedanceApp
 		{
 			var item = this[index] as IElement;
 			base.RemoveItem(index);
-			item.SegmentChanged -= item_PropertyChanged;
+			item.SegmentChanged -= ItemPropertyChanged;
 		}
 
 		/// <summary>
@@ -53,13 +52,12 @@ namespace ImpedanceApp
 		{
 			IElement oldItem = this[index] as IElement;
 			base.SetItem(index, item);
-			oldItem.SegmentChanged -= item_PropertyChanged;
-			IElement element = item as IElement;
-			if(element != null)
+			oldItem.SegmentChanged -= ItemPropertyChanged;
+            if (item is IElement element)
             {
-				element.SegmentChanged += item_PropertyChanged;
+                element.SegmentChanged += ItemPropertyChanged;
             }
-		}
+        }
 
 		/// <summary>
 		/// Override metod
@@ -70,7 +68,7 @@ namespace ImpedanceApp
 			{
 				if (item is IElement element)
 				{
-					element.SegmentChanged -= item_PropertyChanged;
+					element.SegmentChanged -= ItemPropertyChanged;
 				}
 			}
 			base.ClearItems();
@@ -81,7 +79,7 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void item_PropertyChanged(object sender, EventArgs e)
+		private void ItemPropertyChanged(object sender, EventArgs e)
 		{
 			ElementObservableCollectionChanged?.Invoke(sender, e);
 		}
