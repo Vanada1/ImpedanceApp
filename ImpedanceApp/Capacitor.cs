@@ -17,17 +17,17 @@ namespace ImpedanceApp
 		private double _value;
 
 		/// <summary>
-		/// Property <see cref="Capacitor"/> name
+		/// <see cref="Capacitor"/> name property
 		/// </summary>
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Property <see cref="Capacitor"/> <see cref="SubSegment"/>
+		/// <see cref="Capacitor"/> <see cref="SubSegment"/> property
 		/// </summary>
 		public SegmentObservableCollection<ISegment> SubSegment { get; }
 
 		/// <summary>
-		/// Property <see cref="Capacitor"/> value
+		/// <see cref="Capacitor"/> value property
 		/// </summary>
 		public double Value 
 		{ 
@@ -50,7 +50,7 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		/// The event <see cref="SegmentChanged"/> warns of a value change
+		/// The <see cref="event"/> <see cref="SegmentChanged"/> warns of a value change
 		/// </summary>
 		public event EventHandler SegmentChanged;
 

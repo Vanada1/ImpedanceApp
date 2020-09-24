@@ -5,6 +5,9 @@ using System.Numerics;
 
 namespace ImpedanceApp
 {
+    /// <summary>
+    /// Interface all segments
+    /// </summary>
     public interface ISegment
     {
 

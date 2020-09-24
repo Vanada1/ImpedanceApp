@@ -4,8 +4,16 @@ using System.Numerics;
 
 namespace ImpedanceApp
 {
+    /// <summary>
+    /// <see cref="ParallelCircuit"/> is inheritor of an abstract class <see cref="Circuit"/>
+    /// </summary>
     public class ParallelCircuit : Circuit
     {
+        /// <summary>
+        /// Calculate impedance in the serial circuit
+        /// </summary>
+        /// <param name="frequencies"> for calculate</param>
+        /// <returns><see cref="List<Complex>"/> values for result</returns>
         public override List<Complex> CalculateZ(List<double> frequencies)
         {
             List<Complex> results = new List<Complex>();
@@ -32,6 +40,12 @@ namespace ImpedanceApp
             return results;
         }
 
+
+        /// <summary>
+        /// <see cref="SerialCircuit"/> constructor
+        /// </summary>
+        /// <param name="name"> of the <see cref="Circuit"/></param>
+        /// <param name="subSegment"> of the <see cref="Circuit"/></param>
         public ParallelCircuit(string name, SegmentObservableCollection<ISegment> subSegment)
             : base(name, subSegment)
         {

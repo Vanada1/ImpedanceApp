@@ -4,6 +4,9 @@ using System.Numerics;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Abstract class Circuit 
+	/// </summary>
 	abstract public class Circuit : ISegment
 	{
 
@@ -26,6 +29,11 @@ namespace ImpedanceApp
 		/// <returns>All complex for <see name="frequencies"/></returns>
 		public abstract List<Complex> CalculateZ(List<double> frequencies);
 
+		/// <summary>
+		/// Circuit constructor
+		/// </summary>
+		/// <param name="name"> of <see cref="Circuit"/></param>
+		/// <param name="subSegment"> of <see cref="Circuit"/></param>
 		public Circuit(string name, SegmentObservableCollection<ISegment> subSegment)
         {
 			Name = name;

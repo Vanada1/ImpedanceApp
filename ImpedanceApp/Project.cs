@@ -3,18 +3,24 @@ using System.Numerics;
 
 namespace ImpedanceApp
 {
-   public class Project
+	/// <summary>
+	/// Class <see cref="Project"/> contain all data of program
+	/// </summary>
+	public class Project
     {
+		/// <summary>
+		/// <see cref="_name"/> for all <see cref="Circuit"/>
+		/// </summary>
 		private static readonly string _name = "Main Circuit";
 
 		/// <summary>
-		/// List of the frequencies
+		/// List of the <see cref="Frequencies"/> property
 		/// </summary>
 		public List<double> Frequencies { get; set; } =
 			new List<double>();
 
 		/// <summary>
-		/// List of the results
+		/// List of the <see cref="Results"/> property
 		/// </summary>
 		public List<Complex> Results { get; set; }
 			= new List<Complex>();
@@ -26,21 +32,24 @@ namespace ImpedanceApp
 			= new List<Circuit>();
 
 		/// <summary>
-		/// Current circuit
+		/// Current circuit property
 		/// </summary>
 		public Circuit CurrentCircuit { get; set; } 
 			= new SerialCircuit(_name, new SegmentObservableCollection<ISegment>());
 
 		/// <summary>
-		/// Result string
+		/// Result string property 
 		/// </summary>
 		public List<string> ResultString { get; set; } 
 			= new List<string>();
 
-		public List<IElement> CircuitElements = null;
+		/// <summary>
+		/// Property all <see cref="IElement"/> of the <see cref="Circuit"/>
+		/// </summary>
+		public List<IElement> CircuitElements { get; set; } = null;
 
 		/// <summary>
-		/// Constructor project
+		/// Constructor <see cref="Project"/>
 		/// </summary>
 		public Project()
         {
@@ -102,6 +111,10 @@ namespace ImpedanceApp
 				new SegmentObservableCollection<ISegment>()));
 		}
 
+		/// <summary>
+		/// Find all <see cref="IElement"/> in the <see cref="ISegment.SubSegment"/>
+		/// </summary>
+		/// <param name="segment"> of the <see cref="Circuit"/></param>
 		public void FindAllElements(ISegment segment)
 		{
 			if (segment == CurrentCircuit)
