@@ -54,16 +54,16 @@ namespace ImpedanceApp
 		public Project()
         {
 			SegmentObservableCollection<ISegment> segment =
-	new SegmentObservableCollection<ISegment>
-	{
-		new Resistor("R", 100),
-		new ParallelCircuit("Parallel Circuit",
 			new SegmentObservableCollection<ISegment>
 			{
-				new Capacitor("C", 0.002),
-				new Inductor("L", 10)
-			})
-	};
+				new Resistor("R", 100),
+				new ParallelCircuit("Parallel Circuit",
+					new SegmentObservableCollection<ISegment>
+					{
+						new Capacitor("C", 0.002),
+						new Inductor("L", 10)
+					})
+			};
 			AllExample.Add(new SerialCircuit(_name, segment));
 
 			segment = new SegmentObservableCollection<ISegment>
@@ -99,7 +99,7 @@ namespace ImpedanceApp
 					new SegmentObservableCollection<ISegment>
 					{
 						new Resistor("R2", 40.0),
-					new Capacitor("C", 0.002) 
+						new Capacitor("C", 0.002) 
 					})
 			};
 			AllExample.Add(new SerialCircuit(_name, segment));
