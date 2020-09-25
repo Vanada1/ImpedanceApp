@@ -13,7 +13,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Collection event
 		/// </summary>
-		public event EventHandler ElementObservableCollectionChanged;
+		public event EventHandler SegmentObservableCollectionChanged;
 
 		/// <summary>
 		/// Override metod
@@ -72,7 +72,7 @@ namespace ImpedanceApp
 		/// <param name="e"></param>
 		private void ItemPropertyChanged(object sender, EventArgs e)
 		{
-			ElementObservableCollectionChanged?.Invoke(sender, e);
+			SegmentObservableCollectionChanged?.Invoke(sender, e);
 		}
 	
 	}

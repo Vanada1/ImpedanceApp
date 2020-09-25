@@ -7,7 +7,7 @@ namespace ImpedanceApp
 	/// Class <see cref="Project"/> contain all data of program
 	/// </summary>
 	public class Project
-    {
+	{
 		/// <summary>
 		/// <see cref="_name"/> for all <see cref="Circuit"/>
 		/// </summary>
@@ -51,7 +51,7 @@ namespace ImpedanceApp
 		/// Constructor <see cref="Project"/>
 		/// </summary>
 		public Project()
-        {
+		{
 			SegmentObservableCollection<ISegment> segment =
 			new SegmentObservableCollection<ISegment>
 			{
@@ -128,16 +128,16 @@ namespace ImpedanceApp
 			}
 
 			foreach(var element in segment.SubSegment)
-            {
+			{
 				if(element is IElement tempElement)
-                {
+				{
 					CircuitElements.Add(tempElement);
-                }
+				}
 				else
-                {
+				{
 					FindAllElements(element);
-                }
-            }
-        }
+				}
+			}
+		}
 	}
 }

@@ -51,7 +51,7 @@ namespace ImpedanceApp
         {
 			Name = "Main";
 			SubSegment = new SegmentObservableCollection<ISegment>();
-			SubSegment.ElementObservableCollectionChanged += EventCircuitChanged;
+			SubSegment.SegmentObservableCollectionChanged += EventCircuitChanged;
 			SubSegment.CollectionChanged += EventCircuitChanged;
 		}
 
@@ -59,7 +59,7 @@ namespace ImpedanceApp
         {
 			Name = name;
 			SubSegment = segments;
-			SubSegment.ElementObservableCollectionChanged += EventCircuitChanged;
+			SubSegment.SegmentObservableCollectionChanged += EventCircuitChanged;
 			SubSegment.CollectionChanged += EventCircuitChanged;
 		}
 

@@ -17,7 +17,7 @@ namespace ImpedanceForms
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private static void CircuitCollectionChanged(
-			object sender, object e)
+			object sender, EventArgs e)
 		{
 			MessageBox.Show("Circuit was changed", "Alert",
 				MessageBoxButtons.OK, MessageBoxIcon.Warning);

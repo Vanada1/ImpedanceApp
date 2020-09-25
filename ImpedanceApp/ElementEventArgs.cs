@@ -5,7 +5,7 @@ namespace ImpedanceApp
     /// <summary>
     /// Event args for elements
     /// </summary>
-    class ElementEventArgs : EventArgs
+    public class ElementEventArgs : EventArgs
     {
         /// <summary>
         /// Message property
