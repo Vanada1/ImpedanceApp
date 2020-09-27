@@ -45,7 +45,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Set and return all <see cref="CircuitElements"/> selected <see cref="Circuit"/>
 		/// </summary>
-		public SegmentObservableCollection CircuitElements { get; set; } = null;
+		public List<ISegment> CircuitElements { get; set; } = null;
 
 		/// <summary>
 		/// <see cref="Project"/> constructor 
@@ -63,7 +63,7 @@ namespace ImpedanceApp
 						new Inductor("L", 10)
 					})
 			};
-			AllExamples.Add(new Circuit(_name, segment));
+			AllExamples.Add(new Circuit("First example", segment));
 
 			segment = new SegmentObservableCollection
 			{
@@ -81,7 +81,7 @@ namespace ImpedanceApp
 					}),
 				new Inductor("L", 10)
 			};
-			AllExamples.Add(new Circuit(_name, segment));
+			AllExamples.Add(new Circuit("Second example", segment));
 
 			segment = new SegmentObservableCollection
 			{
@@ -89,7 +89,7 @@ namespace ImpedanceApp
 				new Capacitor("C1", 0.002),
 				new Capacitor("C2", 0.002)
 			};
-			AllExamples.Add(new Circuit(_name, segment));
+			AllExamples.Add(new Circuit("Third example", segment));
 
 			segment = new SegmentObservableCollection
 			{
@@ -101,7 +101,7 @@ namespace ImpedanceApp
 						new Capacitor("C", 0.002) 
 					})
 			};
-			AllExamples.Add(new Circuit(_name, segment));
+			AllExamples.Add(new Circuit("Fourth example", segment));
 
 			segment = new SegmentObservableCollection
 			{
@@ -109,10 +109,10 @@ namespace ImpedanceApp
 				new Inductor("L1", 10),
 				new Inductor("L2", 10)
 			};
-			AllExamples.Add(new Circuit(_name, segment));
+			AllExamples.Add(new Circuit("Fifth example", segment));
 
 
-			AllExamples.Add(new Circuit(_name, 
+			AllExamples.Add(new Circuit("My example", 
 				new SegmentObservableCollection()));
 		}
 
@@ -124,7 +124,7 @@ namespace ImpedanceApp
 		{
 			if (segment == CurrentCircuit)
 			{
-				CircuitElements = new SegmentObservableCollection();
+				CircuitElements = new List<ISegment>();
 			}
 
 			foreach(var element in segment.SubSegments)

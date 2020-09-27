@@ -75,6 +75,7 @@ namespace ImpedanceApp
 			{
 				item.SegmentChanged -= OnSegmentChanged;
 			}
+
 			base.ClearItems();
 		}
 	}

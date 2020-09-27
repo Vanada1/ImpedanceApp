@@ -81,6 +81,26 @@ namespace ImpedanceApp
 			return results;
         }
 
+		public void RemoveElement(ISegment removedElement, ISegment segments = null)
+		{
+			var foundRoot = segments;
+			if (foundRoot == null)
+			{
+				foundRoot = this;
+			}
+
+			if (!foundRoot.SubSegments.Remove(removedElement))
+			{
+				foreach (var segment in foundRoot.SubSegments)
+				{
+					if (!(segment is IElement))
+					{
+						RemoveElement(removedElement, segment);
+					}
+				}
+			}
+		}
+
 		/// <summary>
 		/// Calculate impedance in the <see cref="Circuit"/>
 		/// </summary>
