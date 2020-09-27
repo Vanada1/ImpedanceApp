@@ -20,7 +20,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// All elements list in the circuit
 		/// </summary>
-		public SegmentObservableCollection<ISegment> SubSegment { get; set; }
+		public SegmentObservableCollection<ISegment> SubSegments { get; set; }
 
         /// <summary>
         /// Calculate full impedance in the circuit
@@ -33,7 +33,7 @@ namespace ImpedanceApp
 			for (int i = 0; i < frequencies.Count; i++)
 			{
 				Complex result = new Complex(0.0, 0.0);
-				foreach(var element in SubSegment)
+				foreach(var element in SubSegments)
                 {
 					result += element.CalculateZ(frequencies[i]);
                 }
@@ -50,17 +50,17 @@ namespace ImpedanceApp
 		public Circuit()
         {
 			Name = "Main";
-			SubSegment = new SegmentObservableCollection<ISegment>();
-			SubSegment.SegmentObservableCollectionChanged += EventCircuitChanged;
-			SubSegment.CollectionChanged += EventCircuitChanged;
+			SubSegments = new SegmentObservableCollection<ISegment>();
+			SubSegments.SegmentObservableCollectionChanged += OnCircuitChanged;
+			SubSegments.CollectionChanged += OnCircuitChanged;
 		}
 
 		public Circuit(string name, SegmentObservableCollection<ISegment> segments)
         {
 			Name = name;
-			SubSegment = segments;
-			SubSegment.SegmentObservableCollectionChanged += EventCircuitChanged;
-			SubSegment.CollectionChanged += EventCircuitChanged;
+			SubSegments = segments;
+			SubSegments.SegmentObservableCollectionChanged += OnCircuitChanged;
+			SubSegments.CollectionChanged += OnCircuitChanged;
 		}
 
 		/// <summary>
@@ -68,7 +68,7 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void EventCircuitChanged(object sender, EventArgs e)
+		private void OnCircuitChanged(object sender, EventArgs e)
 		{
 			SegmentChanged?.Invoke(sender, e);
 		}

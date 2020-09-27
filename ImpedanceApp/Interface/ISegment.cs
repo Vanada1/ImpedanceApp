@@ -24,9 +24,9 @@ namespace ImpedanceApp
         Complex CalculateZ(double frequency);
 
         /// <summary>
-        /// SubSegment property
+        /// SubSegments property
         /// </summary>
-        SegmentObservableCollection<ISegment> SubSegment { get; }
+        SegmentObservableCollection<ISegment> SubSegments { get; }
 
         /// <summary>
         /// Event for Segments

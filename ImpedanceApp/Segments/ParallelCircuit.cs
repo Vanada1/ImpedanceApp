@@ -5,13 +5,13 @@ using System.Numerics;
 namespace ImpedanceApp
 {
     /// <summary>
-    /// <see cref="SerialCircuit"/> is inheritor of an abstract class <see cref="Circuit"/>
+    /// <see cref="ParallelCircuit"/> is inheritor of an abstract class <see cref="Circuit"/>
     /// </summary>
-    public class SerialCircuit : ISegment
+    public class ParallelCircuit : ISegment
     {
         public string Name { get; set; }
 
-        public SegmentObservableCollection<ISegment> SubSegment { get; set; }
+        public SegmentObservableCollection<ISegment> SubSegments { get; set; }
 
         public event EventHandler SegmentChanged;
 
@@ -20,32 +20,32 @@ namespace ImpedanceApp
         /// </summary>
         /// <param name="frequency"> for calculate</param>
         /// <returns><see cref="List<Complex>"/> values for result</returns>
-        public  Complex CalculateZ(double frequency)
+        public Complex CalculateZ(double frequency)
         {
-            Complex results = new Complex(0.0, 0.0);  
+            Complex result = new Complex(0.0, 0.0);
 
-            foreach (var segment in SubSegment)
+            foreach(var segment in SubSegments)
             {
-                results += segment.CalculateZ(frequency);
+                result += 1.0 / segment.CalculateZ(frequency);
             }
 
-            return results;
+            return 1 / result;
         }
+
 
         /// <summary>
         /// <see cref="SerialCircuit"/> constructor
         /// </summary>
         /// <param name="name"> of the <see cref="Circuit"/></param>
         /// <param name="subSegment"> of the <see cref="Circuit"/></param>
-        public SerialCircuit(string name, SegmentObservableCollection<ISegment> subSegment)
+        public ParallelCircuit(string name, SegmentObservableCollection<ISegment> subSegment)
         {
             Name = name;
-            SubSegment = subSegment;
-            SubSegment.SegmentObservableCollectionChanged += EventCircuitChanged;
-            SubSegment.CollectionChanged += EventCircuitChanged;
+            SubSegments = subSegment;
+            SubSegments.SegmentObservableCollectionChanged += OnCircuitChanged;
+            SubSegments.CollectionChanged += OnCircuitChanged;
         }
-
-        private void EventCircuitChanged(object sender, EventArgs e)
+        private void OnCircuitChanged(object sender, EventArgs e)
         {
             SegmentChanged?.Invoke(sender, e);
         }

@@ -117,7 +117,7 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		/// Find all <see cref="IElement"/> in the <see cref="ISegment.SubSegment"/>
+		/// Find all <see cref="IElement"/> in the <see cref="ISegment.SubSegments"/>
 		/// </summary>
 		/// <param name="segment"> of the <see cref="Circuit"/></param>
 		public void FindAllElements(ISegment segment)
@@ -127,7 +127,7 @@ namespace ImpedanceApp
 				CircuitElements = new SegmentObservableCollection<IElement>();
 			}
 
-			foreach(var element in segment.SubSegment)
+			foreach(var element in segment.SubSegments)
 			{
 				if(element is IElement tempElement)
 				{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Numerics;
 using ImpedanceApp;
@@ -11,19 +12,22 @@ namespace ImpedanceForms
 	{
 		private readonly Project project = new Project();
 
-		/// <summary>
-		/// Event for collection
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private static void CircuitCollectionChanged(
-			object sender, EventArgs e)
-		{
-			MessageBox.Show("Circuit was changed", "Alert",
-				MessageBoxButtons.OK, MessageBoxIcon.Warning);
-		}
+        /// <summary>
+        /// Event for collection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnCircuitCollectionChanged(
+            object sender, EventArgs e)
+        {
+            if (e is ElementEventArgs elem)
+            {
+                EventLabel.Text = elem.Message;
+				EventLabel.ForeColor = Color.Brown;
+            }
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Update all list boxes
 		/// </summary>
 		private void UpdateListBoxes()
@@ -61,10 +65,11 @@ namespace ImpedanceForms
 		private void Main_Load(object sender, EventArgs e)
 		{
 			UpdateListBoxes();
+            EventLabel.Text = "";
 
 			foreach (Circuit example in project.AllExample)
 			{
-				example.SegmentChanged += CircuitCollectionChanged;
+				example.SegmentChanged += OnCircuitCollectionChanged;
 			}
 		}
 
@@ -204,7 +209,7 @@ namespace ImpedanceForms
 			addFrorm.ShowDialog();
 			if (addFrorm.DialogResult == DialogResult.OK)
 			{
-				project.CurrentCircuit.SubSegment.Add(addFrorm.Element);
+				project.CurrentCircuit.SubSegments.Add(addFrorm.Element);
 			}
 			UpdateListBoxes();
 		}
@@ -218,7 +223,7 @@ namespace ImpedanceForms
 					MessageBoxButtons.YesNo);
 				if (remove == DialogResult.Yes)
 				{
-					project.CurrentCircuit.SubSegment.RemoveAt(index);
+					project.CurrentCircuit.SubSegments.RemoveAt(index);
 				}
 				UpdateListBoxes();
 			}
@@ -228,5 +233,10 @@ namespace ImpedanceForms
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
-	}
+
+        private void EventLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

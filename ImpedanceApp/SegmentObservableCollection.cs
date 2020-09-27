@@ -24,7 +24,7 @@ namespace ImpedanceApp
 		protected override void InsertItem(int index, T item)
 		{
 			base.InsertItem(index, item);
-			item.SegmentChanged += ItemPropertyChanged;
+			item.SegmentChanged += OnSegmentChanged;
 		}
 
 		/// <summary>
@@ -36,7 +36,7 @@ namespace ImpedanceApp
 		{
 			var item = this[index];
 			base.RemoveItem(index);
-			item.SegmentChanged -= ItemPropertyChanged;
+			item.SegmentChanged -= OnSegmentChanged;
 		}
 
 		/// <summary>
@@ -49,8 +49,8 @@ namespace ImpedanceApp
 		{
 			var oldItem = this[index];
 			base.SetItem(index, item);
-			oldItem.SegmentChanged -= ItemPropertyChanged;
-			item.SegmentChanged += ItemPropertyChanged;
+			oldItem.SegmentChanged -= OnSegmentChanged;
+			item.SegmentChanged += OnSegmentChanged;
 		}
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace ImpedanceApp
 		{
 			foreach (var item in Items)
 			{
-				item.SegmentChanged -= ItemPropertyChanged;
+				item.SegmentChanged -= OnSegmentChanged;
 			}
 			base.ClearItems();
 		}
@@ -70,7 +70,7 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ItemPropertyChanged(object sender, EventArgs e)
+		private void OnSegmentChanged(object sender, EventArgs e)
 		{
 			SegmentObservableCollectionChanged?.Invoke(sender, e);
 		}
