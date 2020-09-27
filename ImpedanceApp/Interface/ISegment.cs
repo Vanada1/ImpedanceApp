@@ -12,26 +12,25 @@ namespace ImpedanceApp
     {
 
         /// <summary>
-        /// Element name property
+        /// Set and return <see cref="Name"/> of the <see cref="ISegment"/>
         /// </summary>
         string Name { get; set; }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="frequency"></param>
-        /// <returns></returns>
-        Complex CalculateZ(double frequency);
-
-        /// <summary>
-        /// SubSegments property
+        /// Return <see cref="SubSegments"/> of <see cref="ISegment"/>
         /// </summary>
         SegmentObservableCollection<ISegment> SubSegments { get; }
 
         /// <summary>
-        /// Event for Segments
+        /// Event fires when segment changes
         /// </summary>
         event EventHandler SegmentChanged;
 
+        /// <summary>
+        /// Calculate impedance one segment
+        /// </summary>
+        /// <param name="frequency"> is frequency for segment</param>
+        /// <returns> <see cref="List{Complex}"/> impedance this <see cref="ISegment"/></returns>
+        Complex CalculateZ(double frequency);
     }
 }

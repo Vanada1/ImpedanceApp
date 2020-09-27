@@ -4,50 +4,65 @@ using System.Numerics;
 
 namespace ImpedanceApp
 {
-    /// <summary>
-    /// <see cref="ParallelCircuit"/> is inheritor of an abstract class <see cref="Circuit"/>
-    /// </summary>
-    public class ParallelCircuit : ISegment
-    {
-        public string Name { get; set; }
+	/// <summary>
+	/// <see cref="ParallelCircuit"/> is inheritor of an abstract class <see cref="Circuit"/>
+	/// </summary>
+	public class ParallelCircuit : ISegment
+	{
+		/// <summary>
+		/// Set and return <see cref="Name"/> of the <see cref="ParallelCircuit"/>
+		/// </summary>
+		public string Name { get; set; }
 
-        public SegmentObservableCollection<ISegment> SubSegments { get; set; }
+		/// <summary>
+		/// Set and return <see cref="SubSegments"/> of the <see cref="SerialCircuit"/>
+		/// </summary>
+		public SegmentObservableCollection<ISegment> SubSegments { get; set; }
 
-        public event EventHandler SegmentChanged;
+		/// <summary>
+		/// <see cref="SerialCircuit"/> constructor
+		/// </summary>
+		/// <param name="name"> name of the <see cref="Circuit"/></param>
+		/// <param name="subSegments"> subSegments of the <see cref="Circuit"/></param>
+		public ParallelCircuit(string name, SegmentObservableCollection<ISegment> subSegments)
+		{
+			Name = name;
+			SubSegments = subSegments;
+			SubSegments.SegmentObservableCollectionChanged += OnCircuitChanged;
+			SubSegments.CollectionChanged += OnCircuitChanged;
+		}
 
-        /// <summary>
-        /// Calculate impedance in the serial circuit
-        /// </summary>
-        /// <param name="frequency"> for calculate</param>
-        /// <returns><see cref="List<Complex>"/> values for result</returns>
-        public Complex CalculateZ(double frequency)
-        {
-            Complex result = new Complex(0.0, 0.0);
+		/// <summary>
+		///  Event fires when segment changes
+		/// </summary>
+		public event EventHandler SegmentChanged;
+		
+		/// <summary>
+		/// Glows when both the structure of the chain is changed,
+		/// and when an individual element of the chain is changed
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnCircuitChanged(object sender, EventArgs e)
+		{
+			SegmentChanged?.Invoke(sender, e);
+		}
 
-            foreach(var segment in SubSegments)
-            {
-                result += 1.0 / segment.CalculateZ(frequency);
-            }
+		/// <summary>
+		/// Calculate impedance in the <see cref="ParallelCircuit"/>
+		/// </summary>
+		/// <param name="frequency"> for calculate</param>
+		/// <returns> <see cref="Complex"/> impedance this <see cref="ParallelCircuit"/></returns>
+		public Complex CalculateZ(double frequency)
+		{
+			Complex result = new Complex(0.0, 0.0);
 
-            return 1 / result;
-        }
+			foreach(var segment in SubSegments)
+			{
+				result += 1.0 / segment.CalculateZ(frequency);
+			}
 
-
-        /// <summary>
-        /// <see cref="SerialCircuit"/> constructor
-        /// </summary>
-        /// <param name="name"> of the <see cref="Circuit"/></param>
-        /// <param name="subSegment"> of the <see cref="Circuit"/></param>
-        public ParallelCircuit(string name, SegmentObservableCollection<ISegment> subSegment)
-        {
-            Name = name;
-            SubSegments = subSegment;
-            SubSegments.SegmentObservableCollectionChanged += OnCircuitChanged;
-            SubSegments.CollectionChanged += OnCircuitChanged;
-        }
-        private void OnCircuitChanged(object sender, EventArgs e)
-        {
-            SegmentChanged?.Invoke(sender, e);
-        }
-    }
+			return 1 / result;
+		}
+	}
 }

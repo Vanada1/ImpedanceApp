@@ -9,7 +9,7 @@ namespace ImpedanceApp
 	public interface IElement : ISegment
 	{
 		/// <summary>
-		/// Element value property
+		/// Set and return <see cref="Value"/> of the <see cref="IElement"/>
 		/// </summary>
 		double Value { get; set; }
 	}
