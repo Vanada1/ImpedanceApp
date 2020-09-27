@@ -105,9 +105,12 @@ namespace ImpedanceApp
 
 			segment = new SegmentObservableCollection
 			{
-				new Resistor("R", 40.0),
-				new Inductor("L1", 10),
-				new Inductor("L2", 10)
+				new ParallelCircuit(_name, new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
 			};
 			AllExamples.Add(new Circuit("Fifth example", segment));
 
