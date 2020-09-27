@@ -90,20 +90,20 @@ namespace ImpedanceForms
 		private void EditFrequenciesButton_Click(object sender, EventArgs e)
 		{
 			var index = FrequenciesListBox.SelectedIndex;
-			var editFrorm = new AddEditFrequenciesForm();
+			var editForm = new AddEditFrequenciesForm();
 			if (index >= 0)
 			{
-				editFrorm.Frequencie = _project.Frequencies[index];
-				editFrorm.ShowDialog();
-				if (editFrorm.DialogResult == DialogResult.OK)
+				editForm.Frequencie = _project.Frequencies[index];
+				editForm.ShowDialog();
+				if (editForm.DialogResult == DialogResult.OK)
 				{
-					_project.Frequencies[index] = (double)editFrorm.Frequencie;
+					_project.Frequencies[index] = (double)editForm.Frequencie;
 				}
 				UpdateListBoxes();
 			}
 			else
 			{
-				MessageBox.Show("Not selected", "Error",
+				MessageBox.Show("Frequency was not selected", "Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
@@ -124,7 +124,7 @@ namespace ImpedanceForms
 			}
 			else
 			{
-				MessageBox.Show("Not selected", "Error",
+				MessageBox.Show("Frequency was not selected", "Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -147,7 +147,7 @@ namespace ImpedanceForms
 			}
 			else
 			{
-				MessageBox.Show("Not selected", "Error",
+				MessageBox.Show(nameof(Element) + "was not selected", "Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
