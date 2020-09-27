@@ -27,7 +27,7 @@ namespace ImpedanceApp
         /// <summary>
         /// Return <see cref="SubSegments"/> of <see cref="Element"/>
         /// </summary>
-        public SegmentObservableCollection<ISegment> SubSegments { get; }
+        public SegmentObservableCollection SubSegments { get; }
 
         /// <summary>
         /// Set and return <see cref="Value"/> of <see cref="Element"/>

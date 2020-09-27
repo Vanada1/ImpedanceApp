@@ -38,7 +38,7 @@ namespace ImpedanceForms
 			project.Results = project.CurrentCircuit.CalculateZ(
 				project.Frequencies);
 			ImpedanceListBox.DataSource = null;
-			project.ResultString = new List<string>();
+			project.ResultsString = new List<string>();
 			foreach (var result in project.Results)
 			{
 				string sign = "+";
@@ -46,10 +46,10 @@ namespace ImpedanceForms
 				{
 					sign = "";
 				}
-				project.ResultString.Add($"{result.Real} {sign} " +
+				project.ResultsString.Add($"{result.Real} {sign} " +
 					$"{result.Imaginary}i");
 			}
-			ImpedanceListBox.DataSource = project.ResultString;
+			ImpedanceListBox.DataSource = project.ResultsString;
 			ImpedanceListBox.ClearSelected();
 			project.FindAllElements(project.CurrentCircuit);
 			ElementsListBox.DataSource = null;
@@ -67,7 +67,7 @@ namespace ImpedanceForms
 			UpdateListBoxes();
             EventLabel.Text = "";
 
-			foreach (Circuit example in project.AllExample)
+			foreach (Circuit example in project.AllExamples)
 			{
 				example.SegmentChanged += OnCircuitCollectionChanged;
 			}
@@ -128,7 +128,7 @@ namespace ImpedanceForms
 
 		private void RadioButton1CheckedChanged(object sender, EventArgs e)
 		{
-			project.CurrentCircuit = project.AllExample[0];
+			project.CurrentCircuit = project.AllExamples[0];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
@@ -137,7 +137,7 @@ namespace ImpedanceForms
 
 		private void RadioButton2CheckedChanged(object sender, EventArgs e)
 		{
-			project.CurrentCircuit = project.AllExample[1];
+			project.CurrentCircuit = project.AllExamples[1];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.SecondExample;
@@ -146,7 +146,7 @@ namespace ImpedanceForms
 
 		private void RadioButton3CheckedChanged(object sender, EventArgs e)
 		{
-			project.CurrentCircuit = project.AllExample[2];
+			project.CurrentCircuit = project.AllExamples[2];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.ThirdExample;
@@ -155,7 +155,7 @@ namespace ImpedanceForms
 
 		private void RadioButton4CheckedChanged(object sender, EventArgs e)
 		{
-			project.CurrentCircuit = project.AllExample[3];
+			project.CurrentCircuit = project.AllExamples[3];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.FourthExample;
@@ -164,7 +164,7 @@ namespace ImpedanceForms
 
 		private void RadioButton5CheckedChanged(object sender, EventArgs e)
 		{
-			project.CurrentCircuit = project.AllExample[4];
+			project.CurrentCircuit = project.AllExamples[4];
 			AddElementButton.Enabled = false;
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
@@ -173,7 +173,7 @@ namespace ImpedanceForms
 
 		private void RadioButton6CheckedChanged(object sender, EventArgs e)
 		{
-			project.CurrentCircuit = project.AllExample[5];
+			project.CurrentCircuit = project.AllExamples[5];
 			AddElementButton.Enabled = true;
 			RemoveElementButton.Enabled = true;
 			CircuitPictureBox.Image = null;

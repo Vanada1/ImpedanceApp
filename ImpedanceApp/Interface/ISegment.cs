@@ -19,7 +19,7 @@ namespace ImpedanceApp
         /// <summary>
         /// Return <see cref="SubSegments"/> of <see cref="ISegment"/>
         /// </summary>
-        SegmentObservableCollection<ISegment> SubSegments { get; }
+        SegmentObservableCollection SubSegments { get; }
 
         /// <summary>
         /// Event fires when segment changes

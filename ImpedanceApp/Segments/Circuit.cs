@@ -17,7 +17,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Set and return <see cref="SubSegments"/> of the <see cref="Circuit"/>
 		/// </summary>
-		public SegmentObservableCollection<ISegment> SubSegments { get; set; }
+		public SegmentObservableCollection SubSegments { get; set; }
 
 		/// <summary>
 		/// Default <see cref="Circuit"/> constructor
@@ -27,7 +27,7 @@ namespace ImpedanceApp
 		public Circuit()
 		{
 			Name = "Main";
-			SubSegments = new SegmentObservableCollection<ISegment>();
+			SubSegments = new SegmentObservableCollection();
 			SubSegments.SegmentObservableCollectionChanged += OnCircuitChanged;
 			SubSegments.CollectionChanged += OnCircuitChanged;
 		}
@@ -37,7 +37,7 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="name"> of <see cref="Circuit"/></param>
 		/// <param name="subSegment"> of <see cref="Circuit"/></param>
-		public Circuit(string name, SegmentObservableCollection<ISegment> segments)
+		public Circuit(string name, SegmentObservableCollection segments)
 		{
 			Name = name;
 			SubSegments = segments;

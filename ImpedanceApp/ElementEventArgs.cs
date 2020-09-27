@@ -8,12 +8,12 @@ namespace ImpedanceApp
     public class ElementEventArgs : EventArgs
     {
         /// <summary>
-        /// Message property
+        /// Return message from event
         /// </summary>
         public string Message { get; }
 
         /// <summary>
-        /// Constructor
+        /// <see cref="ElementEventArgs"/> constructor
         /// </summary>
         /// <param name="message"> is the message</param>
         public ElementEventArgs(string message)

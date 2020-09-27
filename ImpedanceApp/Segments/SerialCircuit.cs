@@ -17,14 +17,14 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Set and return <see cref="SubSegments"/> of the <see cref="SerialCircuit"/>
 		/// </summary>
-		public SegmentObservableCollection<ISegment> SubSegments { get; set; }
+		public SegmentObservableCollection SubSegments { get; set; }
 
 		/// <summary>
 		/// <see cref="SerialCircuit"/> constructor
 		/// </summary>
 		/// <param name="name"> name of the <see cref="Circuit"/></param>
 		/// <param name="subSegments"> sub-segments of the <see cref="Circuit"/></param>
-		public SerialCircuit(string name, SegmentObservableCollection<ISegment> subSegments)
+		public SerialCircuit(string name, SegmentObservableCollection subSegments)
 		{
 			Name = name;
 			SubSegments = subSegments;
