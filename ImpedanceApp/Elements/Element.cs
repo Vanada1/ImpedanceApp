@@ -10,24 +10,32 @@ namespace ImpedanceApp
     public abstract class Element:IElement
     {
         /// <summary>
-        /// Value <see cref="Element"/>
+        /// Value of <see cref="Element"/>
         /// </summary>
         private double _value;
 
         /// <summary>
-        /// Name <see cref="Element"/>
+        /// Name of <see cref="Element"/>
         /// </summary>
         private string _name;
 
         /// <summary>
         /// Set and return <see cref="Name"/> of <see cref="Element"/>
         /// </summary>
-        public string Name { get; set; }
+        public string Name
+        {
+	        get =>_name;
+	        set
+	        {
+		        if (value.Length == 0)
+		        {
+                    throw new ArgumentException(nameof(Name) + 
+                                                " cannot have string length 0");
+		        }
 
-        /// <summary>
-        /// Return <see cref="SubSegments"/> of <see cref="Element"/>
-        /// </summary>
-        public SegmentObservableCollection SubSegments { get; }
+		        _name = value;
+	        }
+        }
 
         /// <summary>
         /// Set and return <see cref="Value"/> of <see cref="Element"/>
@@ -39,18 +47,25 @@ namespace ImpedanceApp
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(
-                        "Less than zero");
+                    throw new ArgumentException(nameof(Value) + 
+                                                "cannot have negative value");
                 }
                 if (_value != value)
                 {
+	                double oldValue = _value;
                     _value = value;
                     SegmentChanged?.Invoke(this,
-                        new ElementEventArgs(nameof(Capacitor) +
-                                             " value has been change"));
+	                    new ElementEventArgs(Name +
+	                                         " value has been changed from" +
+	                                         $" {oldValue} to {value}"));
                 }
             }
         }
+
+        /// <summary>
+        /// Return <see cref="SubSegments"/> of <see cref="Element"/>
+        /// </summary>
+        public SegmentObservableCollection SubSegments { get; }
 
         /// <summary>
         /// Constructor <see cref="Capacitor"/>
