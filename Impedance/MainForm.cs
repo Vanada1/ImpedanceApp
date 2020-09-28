@@ -78,7 +78,7 @@ namespace ImpedanceForms
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
 		{
-			var addFrorm = new AddEditFrequenciesForm();
+			var addFrorm = new AddEditFrequencyForm();
 			addFrorm.ShowDialog();
 			if(addFrorm.DialogResult == DialogResult.OK)
 			{
@@ -90,7 +90,7 @@ namespace ImpedanceForms
 		private void EditFrequenciesButton_Click(object sender, EventArgs e)
 		{
 			var index = FrequenciesListBox.SelectedIndex;
-			var editForm = new AddEditFrequenciesForm();
+			var editForm = new AddEditFrequencyForm();
 			if (index >= 0)
 			{
 				editForm.Frequencie = _project.Frequencies[index];
@@ -134,7 +134,7 @@ namespace ImpedanceForms
 			var index = ElementsListBox.SelectedIndex;
 			if (index >= 0)
 			{
-                AddEditElementsForm editForm = new AddEditElementsForm
+                AddEditElementForm editForm = new AddEditElementForm
                 {
                     Element = _project.CircuitElements[index] as IElement
                 };
@@ -154,7 +154,7 @@ namespace ImpedanceForms
 
 		private void AddElementButton_Click(object sender, EventArgs e)
 		{
-			var addFrorm = new AddEditElementsForm();
+			var addFrorm = new AddEditElementForm();
 			addFrorm.ShowDialog();
 			if (addFrorm.DialogResult == DialogResult.OK)
 			{

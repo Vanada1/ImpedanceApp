@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 namespace Impedance
 {
-	public partial class AddEditElementsForm : Form
+	public partial class AddEditElementForm : Form
 	{
 		public IElement Element = null;
-		public AddEditElementsForm()
+		public AddEditElementForm()
 		{
 			InitializeComponent();
 		}
