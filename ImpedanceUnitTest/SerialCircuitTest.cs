@@ -3,11 +3,10 @@ using NUnit.Framework;
 using ImpedanceApp;
 using System.Numerics;
 
-
 namespace ImpedanceUnitTest
 {
 	[TestFixture]
-	class ParallelCircuitTest
+	class SerialCircuitTest
 	{
 		private SegmentObservableCollection CreateCircuit()
 		{
@@ -18,13 +17,15 @@ namespace ImpedanceUnitTest
 			};
 		}
 
-		[Test(Description = "Test ParallelCircuit constructor")]
-		public void CreateParallelCircuit()
+		[Test(Description = "Test SerialCircuit constructor")]
+		public void CreateSerialCircuit()
 		{
 			string name = "Test";
 			Assert.DoesNotThrow(
-				() => { ParallelCircuit inductor = new ParallelCircuit(
-					name, CreateCircuit()); },
+				() => {
+					SerialCircuit inductor = new SerialCircuit(
+						name, CreateCircuit());
+				},
 				"Constructor test not passed");
 		}
 
@@ -33,7 +34,7 @@ namespace ImpedanceUnitTest
 		{
 			string expected = "C";
 
-			ParallelCircuit circuit = new ParallelCircuit(
+			SerialCircuit circuit = new SerialCircuit(
 				"Test", CreateCircuit());
 			circuit.Name = expected;
 
@@ -48,7 +49,7 @@ namespace ImpedanceUnitTest
 		{
 			string wrongName = "";
 			string message = "If the name is empty, an exception should be thrown.";
-			ParallelCircuit circuit = new ParallelCircuit(
+			SerialCircuit circuit = new SerialCircuit(
 				"Test", CreateCircuit());
 			Assert.Throws<ArgumentException>(
 				() => { circuit.Name = wrongName; },
@@ -60,19 +61,19 @@ namespace ImpedanceUnitTest
 		{
 			string name = "Test";
 			string message = "Positive test of the Name setter not passed";
-			ParallelCircuit element = new ParallelCircuit(
+			SerialCircuit element = new SerialCircuit(
 				"Test", CreateCircuit());
 			Assert.DoesNotThrow(
 				() => { element.Name = name; },
 				message);
 		}
-		
+
 		[Test(Description = "Positive test of the SubSegments getter")]
 		public void TestSubSegmentsGet_CorrectValue()
 		{
 			var expected = CreateCircuit();
 
-			ParallelCircuit element = new ParallelCircuit(
+			SerialCircuit element = new SerialCircuit(
 				"Test", CreateCircuit());
 			element.SubSegments = expected;
 
@@ -87,7 +88,7 @@ namespace ImpedanceUnitTest
 		{
 			var subSegments = CreateCircuit();
 			string message = "Positive test of the SubSegments setter not passed";
-			var circuit = new ParallelCircuit(
+			var circuit = new SerialCircuit(
 				"Test", CreateCircuit());
 			Assert.DoesNotThrow(
 				() => { circuit.SubSegments = subSegments; },
@@ -98,24 +99,24 @@ namespace ImpedanceUnitTest
 		public void TestOnCircuitChanged()
 		{
 			bool wasCalled = false;
-			var circuit = new ParallelCircuit(
+			var circuit = new SerialCircuit(
 				"Test", CreateCircuit());
 			circuit.SegmentChanged += (o, e) => wasCalled = true;
 			circuit.SubSegments.Add(new Resistor("Test", 1.0));
 			Assert.IsTrue(wasCalled);
 		}
 
-		[Test(Description = "Positive test of the ParallelCircuit CalculateZ")]
+		[Test(Description = "Positive test of the SerialCircuit CalculateZ")]
 		public void TestCalculateZ()
 		{
 			double frequency = 1.0;
 			var r = new Resistor("R", 5.0);
 			var l = new Inductor("L1", 0.05);
-			Complex result = 1 / r.CalculateZ(frequency) + 1 / l.CalculateZ(frequency);
-			result = 1 / result;
+			Complex result = r.CalculateZ(frequency) +  l.CalculateZ(frequency);
+			result = result;
 			Complex expected = result;
 
-			ParallelCircuit inductor = new ParallelCircuit(
+			SerialCircuit inductor = new SerialCircuit(
 				"Test", CreateCircuit());
 
 			Complex actual = inductor.CalculateZ(frequency);

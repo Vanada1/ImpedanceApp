@@ -8,6 +8,16 @@ namespace ImpedanceUnitTest
 	[TestFixture]
 	public class ResistorTest
 	{
+		[Test(Description = "Test Resistor constructor")]
+		public void TestInductorConstructor_CorrectValue()
+		{
+			string name = "Test";
+			double value = 1.0;
+			Assert.DoesNotThrow(
+				() => { Resistor inductor = new Resistor(name, value); },
+				"Constructor test not passed");
+		}
+
 		[Test(Description = "Positive test of the Resistor CalculateZ")]
 		public void TestResistor_CalculateZ()
 		{

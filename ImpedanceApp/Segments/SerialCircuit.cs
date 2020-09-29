@@ -10,9 +10,27 @@ namespace ImpedanceApp
 	public class SerialCircuit : ISegment
 	{
 		/// <summary>
+		/// Name of <see cref="SerialCircuit"/>
+		/// </summary>
+		private string _name;
+
+		/// <summary>
 		/// Set and return <see cref="Name"/> of the <see cref="SerialCircuit"/>
 		/// </summary>
-		public string Name { get; set; }
+		public string Name
+		{
+			get => _name;
+			set
+			{
+				if (value.Length == 0)
+				{
+					throw new ArgumentException(nameof(Name) +
+					                            " cannot have string length 0");
+				}
+
+				_name = value;
+			}
+		}
 
 		/// <summary>
 		/// Set and return <see cref="SubSegments"/> of the <see cref="SerialCircuit"/>

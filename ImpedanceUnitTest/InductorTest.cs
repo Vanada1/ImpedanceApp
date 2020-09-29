@@ -9,7 +9,7 @@ namespace ImpedanceUnitTest
 	public class InductorTest
 	{
 		[Test(Description = "Test Inductor constructor")]
-		public void TestCapacitorConstructor_CorrectValue()
+		public void TestInductorConstructor_CorrectValue()
 		{
 			string name = "Test";
 			double value = 1.0;
@@ -19,7 +19,7 @@ namespace ImpedanceUnitTest
 		}
 
 		[Test(Description = "Positive test of the Inductor CalculateZ")]
-		public void TestCapacitor_CalculateZ()
+		public void TestInductor_CalculateZ()
 		{
 			string name = "Test";
 			double value = 1.0;
@@ -36,7 +36,7 @@ namespace ImpedanceUnitTest
 		}
 
 		[Test(Description = "Positive test of the Inductor CalculateZ")]
-		public void TestCapacitor_ToString()
+		public void TestInductor_ToString()
 		{
 			string name = "Test";
 			double value = 1.0;
