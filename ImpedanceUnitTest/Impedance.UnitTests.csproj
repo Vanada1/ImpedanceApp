@@ -50,7 +50,9 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CapacitorTest.cs" />
     <Compile Include="ElementEventArgsTest.cs" />
+    <Compile Include="InductorTest.cs" />
     <Compile Include="ResistorTest.cs" />
     <Compile Include="ElementTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -25,7 +25,7 @@ namespace ImpedanceApp
 		/// <returns> <see cref="List{Complex}"/> impedance this <see cref="Capacitor"/></returns>
 		public override Complex CalculateZ(double frequency)
 		{
-			double result = -1 / (2 * Math.PI * frequency * Value);
+			double result = -1.0 / (2 * Math.PI * frequency * Value);
 			return new Complex(0, result);
 		}
 
