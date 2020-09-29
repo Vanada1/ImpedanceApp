@@ -68,7 +68,7 @@ namespace ImpedanceApp
         public SegmentObservableCollection SubSegments { get; }
 
         /// <summary>
-        /// Constructor <see cref="Capacitor"/>
+        /// <see cref="Element"/> constructor 
         /// </summary>
         /// <param name="name"> name of the element</param>
         /// <param name="value"> value of the element</param>

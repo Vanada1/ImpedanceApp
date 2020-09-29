@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImpedanceApp", "ImpedanceAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impedance", "Impedance\Impedance.csproj", "{C48F6BF1-DE3A-4C79-9F1B-29AAF49633C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impedance.UnitTests", "ImpedanceUnitTest\Impedance.UnitTests.csproj", "{2DD394EF-EFD7-4683-8AA3-87494922AF0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C48F6BF1-DE3A-4C79-9F1B-29AAF49633C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C48F6BF1-DE3A-4C79-9F1B-29AAF49633C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C48F6BF1-DE3A-4C79-9F1B-29AAF49633C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DD394EF-EFD7-4683-8AA3-87494922AF0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD394EF-EFD7-4683-8AA3-87494922AF0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD394EF-EFD7-4683-8AA3-87494922AF0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD394EF-EFD7-4683-8AA3-87494922AF0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
