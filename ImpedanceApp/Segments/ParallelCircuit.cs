@@ -9,10 +9,29 @@ namespace ImpedanceApp
 	/// </summary>
 	public class ParallelCircuit : ISegment
 	{
+
+		/// <summary>
+		/// Name of <see cref="ParallelCircuit"/>
+		/// </summary>
+		private string _name;
+		
 		/// <summary>
 		/// Set and return <see cref="Name"/> of the <see cref="ParallelCircuit"/>
 		/// </summary>
-		public string Name { get; set; }
+		public string Name
+		{
+			get => _name;
+			set
+			{
+				if (value.Length == 0)
+				{
+					throw new ArgumentException(nameof(Name) +
+					                            " cannot have string length 0");
+				}
+
+				_name = value;
+			}
+		}
 
 		/// <summary>
 		/// Set and return <see cref="SubSegments"/> of the <see cref="SerialCircuit"/>
@@ -43,7 +62,7 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void OnCircuitChanged(object sender, EventArgs e)
+		protected void OnCircuitChanged(object sender, EventArgs e)
 		{
 			SegmentChanged?.Invoke(sender, e);
 		}
