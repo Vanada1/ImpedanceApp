@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapacitorTest.cs" />
+    <Compile Include="CircuitTest.cs" />
     <Compile Include="ElementEventArgsTest.cs" />
     <Compile Include="InductorTest.cs" />
     <Compile Include="ParallelCircuitTest.cs" />

@@ -19,7 +19,7 @@ namespace ImpedanceUnitTest
 		}
 
 		[Test(Description = "Test ParallelCircuit constructor")]
-		public void CreateParallelCircuit()
+		public void TestParallelCircuitConstructor()
 		{
 			string name = "Test";
 			Assert.DoesNotThrow(
@@ -115,10 +115,10 @@ namespace ImpedanceUnitTest
 			result = 1 / result;
 			Complex expected = result;
 
-			ParallelCircuit inductor = new ParallelCircuit(
+			ParallelCircuit parallelCircuit = new ParallelCircuit(
 				"Test", CreateCircuit());
 
-			Complex actual = inductor.CalculateZ(frequency);
+			Complex actual = parallelCircuit.CalculateZ(frequency);
 
 			Assert.AreEqual(expected, actual,
 				"Incorrect calculations for the CalculateZ method");

@@ -18,7 +18,7 @@ namespace ImpedanceUnitTest
 		}
 
 		[Test(Description = "Test SerialCircuit constructor")]
-		public void CreateSerialCircuit()
+		public void TestSerialCircuitConstructor()
 		{
 			string name = "Test";
 			Assert.DoesNotThrow(
@@ -116,10 +116,10 @@ namespace ImpedanceUnitTest
 			result = result;
 			Complex expected = result;
 
-			SerialCircuit inductor = new SerialCircuit(
+			SerialCircuit circuit = new SerialCircuit(
 				"Test", CreateCircuit());
 
-			Complex actual = inductor.CalculateZ(frequency);
+			Complex actual = circuit.CalculateZ(frequency);
 
 			Assert.AreEqual(expected, actual,
 				"Incorrect calculations for the CalculateZ method");

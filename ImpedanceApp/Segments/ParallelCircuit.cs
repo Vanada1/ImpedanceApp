@@ -81,7 +81,7 @@ namespace ImpedanceApp
 				result += 1.0 / segment.CalculateZ(frequency);
 			}
 
-			return 1 / result;
+			return 1.0 / result;
 		}
 	}
 }

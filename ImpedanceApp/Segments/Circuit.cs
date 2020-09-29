@@ -10,9 +10,27 @@ namespace ImpedanceApp
 	public class Circuit : ISegment
 	{
 		/// <summary>
+		/// Name of <see cref="Circuit"/>
+		/// </summary>
+		private string _name;
+
+		/// <summary>
 		/// Set and return <see cref="Name"/> of the <see cref="ParallelCircuit"/>
 		/// </summary>
-		public string Name { get; set; }
+		public string Name
+		{
+			get => _name;
+			set
+			{
+				if (value.Length == 0)
+				{
+					throw new ArgumentException(nameof(Name) +
+					                            " cannot have string length 0");
+				}
+
+				_name = value;
+			}
+		}
 
 		/// <summary>
 		/// Set and return <see cref="SubSegments"/> of the <see cref="Circuit"/>
@@ -83,20 +101,14 @@ namespace ImpedanceApp
 
 		public void RemoveElement(ISegment removedElement, ISegment segments = null)
 		{
-			var foundRoot = segments;
-			if (foundRoot == null)
-			{
-				foundRoot = this;
-			}
+			var foundRoot = segments ?? this;
 
-			if (!foundRoot.SubSegments.Remove(removedElement))
+			if (foundRoot.SubSegments.Remove(removedElement)) return;
+			foreach (var segment in foundRoot.SubSegments)
 			{
-				foreach (var segment in foundRoot.SubSegments)
+				if (!(segment is IElement))
 				{
-					if (!(segment is IElement))
-					{
-						RemoveElement(removedElement, segment);
-					}
+					RemoveElement(removedElement, segment);
 				}
 			}
 		}
