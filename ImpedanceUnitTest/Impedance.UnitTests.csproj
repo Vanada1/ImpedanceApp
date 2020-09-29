@@ -55,6 +55,7 @@
     <Compile Include="ElementEventArgsTest.cs" />
     <Compile Include="InductorTest.cs" />
     <Compile Include="ParallelCircuitTest.cs" />
+    <Compile Include="ProjectTest.cs" />
     <Compile Include="ResistorTest.cs" />
     <Compile Include="ElementTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

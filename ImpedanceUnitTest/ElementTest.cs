@@ -37,7 +37,7 @@ namespace ImpedanceUnitTest
 				message);
 		}
 
-		[Test(Description = "Positive test of the Name getter")]
+		[Test(Description = "Positive test of the Name setter")]
 		public void TestNameSet_CorrectValue()
 		{
 			string name = "Test";

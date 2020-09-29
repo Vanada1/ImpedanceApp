@@ -45,7 +45,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Set and return all <see cref="CircuitElements"/> selected <see cref="Circuit"/>
 		/// </summary>
-		public List<ISegment> CircuitElements { get; set; } = null;
+		public List<IElement> CircuitElements { get; set; } = new List<IElement>();
 
 		/// <summary>
 		/// <see cref="Project"/> constructor 
@@ -127,7 +127,7 @@ namespace ImpedanceApp
 		{
 			if (segment == CurrentCircuit)
 			{
-				CircuitElements = new List<ISegment>();
+				CircuitElements = new List<IElement>();
 			}
 
 			foreach(var element in segment.SubSegments)

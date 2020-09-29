@@ -73,7 +73,7 @@ namespace ImpedanceUnitTest
 				message);
 		}
 
-		[Test(Description = "Positive test of the Name getter")]
+		[Test(Description = "Positive test of the Name setter")]
 		public void TestNameSet_CorrectValue()
 		{
 			string name = "Test";
@@ -206,8 +206,11 @@ namespace ImpedanceUnitTest
 
 			var actual = circuit.SubSegments;
 
-			Assert.AreEqual(expected[0].SubSegments[0].Name, actual[0].SubSegments[0].Name,
-				"Incorrect delete for the RemoveElement method");
+			for (int i = 0; i < expected.Count; i++)
+			{
+				Assert.AreEqual(expected[i].Name, actual[i].Name,
+					"Incorrect delete for the RemoveElement method");
+			}
 		}
 
 		[Test(Description = "Positive test of the Circuit RemoveElement" +
@@ -230,8 +233,11 @@ namespace ImpedanceUnitTest
 
 			var actual = circuit.SubSegments;
 
-			Assert.AreEqual(expected[0].SubSegments[0].Name, actual[0].SubSegments[0].Name,
-				"Incorrect delete for the RemoveElement method");
+			for (int i = 0; i < expected.Count; i++)
+			{
+				Assert.AreEqual(expected[i].Name, actual[i].Name,
+					"Incorrect delete for the RemoveElement method");
+			}
 		}
 
 		[Test(Description = "Positive test of the Circuit RemoveElement" +
@@ -255,8 +261,11 @@ namespace ImpedanceUnitTest
 
 			var actual = circuit.SubSegments;
 
-			Assert.AreEqual(expected[0].SubSegments[0].Name, actual[0].SubSegments[0].Name,
-				"Incorrect delete for the RemoveElement method");
+			for (int i = 0; i < expected.Count; i++)
+			{
+				Assert.AreEqual(expected[i].Name, actual[i].Name,
+					"Incorrect delete for the RemoveElement method");
+			}
 		}
 	}
 }
