@@ -337,10 +337,5 @@ namespace ImpedanceForms
 			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
 			UpdateListBoxes();
 		}
-
-		private void ElementsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
-		{
-			_selectedNode = ElementsTreeView.SelectedNode;
-		}
 	}
 }
