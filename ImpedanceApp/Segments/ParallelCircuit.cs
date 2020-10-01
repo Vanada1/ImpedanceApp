@@ -39,6 +39,11 @@ namespace ImpedanceApp
 		public SegmentObservableCollection SubSegments { get; set; }
 
 		/// <summary>
+		/// Return segment the object is
+		/// </summary>
+		public Segment Segment { get; } = Segment.ParallelCircuit;
+
+		/// <summary>
 		/// <see cref="SerialCircuit"/> constructor
 		/// </summary>
 		/// <param name="name"> name of the <see cref="ParallelCircuit"/></param>

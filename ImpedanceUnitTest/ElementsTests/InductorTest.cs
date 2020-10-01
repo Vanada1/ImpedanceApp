@@ -18,6 +18,19 @@ namespace ImpedanceUnitTest
 				"Constructor test not passed");
 		}
 
+		[Test(Description = "Positive test of the Segment getter")]
+		public void TestSegmentGet_CorrectValue()
+		{
+			Segment expected = Segment.Inductor;
+
+			var element = new Inductor("Test", 1.0);
+
+			Segment actual = element.Segment;
+
+			Assert.AreEqual(expected, actual,
+				"Getter Name returns incorrect value");
+		}
+
 		[Test(Description = "Positive test of the Inductor CalculateZ")]
 		public void TestInductor_CalculateZ()
 		{

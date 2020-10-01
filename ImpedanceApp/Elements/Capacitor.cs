@@ -16,7 +16,10 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="name"> name of the element</param>
 		/// <param name="value"> value of the element</param>
-		public Capacitor(string name, double value) : base(name, value) { }
+		public Capacitor(string name, double value) : base(name, value)
+		{
+			Segment = ImpedanceApp.Segment.Capacitor;
+		}
 
 		/// <summary>
 		/// Calculate impedance one element of <see cref="Capacitor"/>

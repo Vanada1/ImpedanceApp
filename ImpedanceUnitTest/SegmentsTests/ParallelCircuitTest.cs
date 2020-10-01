@@ -94,6 +94,20 @@ namespace ImpedanceUnitTest
 				message);
 		}
 
+		[Test(Description = "Positive test of the Segment getter")]
+		public void TestSegmentGet_CorrectValue()
+		{
+			Segment expected = Segment.ParallelCircuit;
+
+			var circuit = new ParallelCircuit("Test", 
+				new SegmentObservableCollection());
+
+			Segment actual = circuit.Segment;
+
+			Assert.AreEqual(expected, actual,
+				"Getter Name returns incorrect value");
+		}
+
 		[Test(Description = "Positive test of the OnCircuitChanged method")]
 		public void TestOnCircuitChanged()
 		{

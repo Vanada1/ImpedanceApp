@@ -33,7 +33,8 @@ namespace ImpedanceForms
 		/// Update all list boxes
 		/// </summary>
 		private void UpdateListBoxes()
-		{
+        {
+	        FrequenciesListBox.DataSource = null;
 			FrequenciesListBox.DataSource = _project.Frequencies;
 
 			_project.Results = _project.CurrentCircuit.CalculateZ(
@@ -185,7 +186,6 @@ namespace ImpedanceForms
 		private void EditElementsButton_Click(object sender, EventArgs e)
 		{
 			var node = ElementsTreeView.SelectedNode;
-			var indexNode = ElementsTreeView.SelectedNode.Index;
 			if (node != null)
 			{
 				ISegment foundSegment = _project.FindSegment(node.Name);

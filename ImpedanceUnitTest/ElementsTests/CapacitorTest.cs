@@ -18,6 +18,19 @@ namespace ImpedanceUnitTest
 				"Constructor test not passed");
 		}
 
+		[Test(Description = "Positive test of the Segment getter")]
+		public void TestSegmentGet_CorrectValue()
+		{
+			Segment expected = Segment.Capacitor;
+
+			var element = new Capacitor("Test", 1.0);
+
+			Segment actual = element.Segment;
+
+			Assert.AreEqual(expected, actual,
+				"Getter Name returns incorrect value");
+		}
+
 		[Test(Description = "Positive test of the Capacitor CalculateZ")]
 		public void TestCapacitor_CalculateZ()
 		{
@@ -66,5 +79,7 @@ namespace ImpedanceUnitTest
 			Assert.IsTrue(result,
 				"Incorrect copy");
 		}
+
+
 	}
 }

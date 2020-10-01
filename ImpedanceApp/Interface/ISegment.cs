@@ -22,6 +22,11 @@ namespace ImpedanceApp
         SegmentObservableCollection SubSegments { get; }
 
         /// <summary>
+        /// Return segment the object is
+        /// </summary>
+        Segment Segment { get;}
+
+        /// <summary>
         /// Event fires when segment changes
         /// </summary>
         event EventHandler SegmentChanged;

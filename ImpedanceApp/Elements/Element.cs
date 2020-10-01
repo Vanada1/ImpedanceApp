@@ -63,6 +63,11 @@ namespace ImpedanceApp
         }
 
         /// <summary>
+        /// Return segment the object is
+        /// </summary>
+        public Segment Segment { get; protected set; }
+
+        /// <summary>
         /// Return <see cref="SubSegments"/> of <see cref="Element"/>
         /// </summary>
         public SegmentObservableCollection SubSegments { get; }

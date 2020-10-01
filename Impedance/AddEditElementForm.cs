@@ -50,25 +50,9 @@ namespace Impedance
 				{
 					ValueTextBox.Text = _element.Value.ToString();
 
-					if (Segment is Resistor)
-					{
-						ResistorRadioButton.Checked = true;
-					}
-					else if (Segment is Inductor)
-					{
-						InductorRadioButton.Checked = true;
-					}
-					else if (Segment is Capacitor)
-					{
-						CapacitorRadioButton.Checked = true;
-					}
-
+					
 					ValueTextBox.Enabled = true;
 				}
-			}
-			else
-			{
-				RadioButtonsTableLayoutPanel.Enabled = true;
 			}
 		}
 
@@ -84,43 +68,20 @@ namespace Impedance
 					var value = double.Parse(ValueTextBox.Text);
 					DialogResult = DialogResult.OK;
 
-					if(Segment == null)
+					try
 					{
-						if (ResistorRadioButton.Checked)
-						{
-							Segment = new Resistor(name, value);
-						}
-						else if (InductorRadioButton.Checked)
-						{
-							Segment = new Inductor(name, value);
-						}
-						else if (CapacitorRadioButton.Checked)
-						{
-							Segment = new Capacitor(name, value);
-						}
-						else
-						{
-							MessageBox.Show("Choose element", "Error",
-							MessageBoxButtons.OK, MessageBoxIcon.Error);
-							DialogResult = DialogResult.None;
-						}
+						_element.Name = name;
+						_element.Value = value;
 					}
-					else
+					catch (ArgumentOutOfRangeException exception)
 					{
-						try
-						{
-							_element.Name = name;
-							_element.Value = value;
-						}
-						catch (ArgumentOutOfRangeException exception)
-						{
-							MessageBox.Show(exception.Message,
-								"Error", MessageBoxButtons.OK,
-								MessageBoxIcon.Error);
-							DialogResult = DialogResult.None;
-						}
+						MessageBox.Show(exception.Message,
+							"Error", MessageBoxButtons.OK,
+							MessageBoxIcon.Error);
+						DialogResult = DialogResult.None;
+					}
 
-					}
+
 				}
 				catch (FormatException exception)
 				{
@@ -152,5 +113,10 @@ namespace Impedance
         {
 			DialogResult = DialogResult.Cancel;
         }
-    }
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+	}
 }
