@@ -267,5 +267,31 @@ namespace ImpedanceUnitTest
 					"Incorrect delete for the RemoveElement method");
 			}
 		}
+
+		[Test(Description = "Test of the Circuit Clone")]
+		public void TestClone()
+		{
+			var expected = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			Circuit circuit = new Circuit("Test",
+				CreateCircuit());
+			ISegment deletedElement = circuit.SubSegments[0].SubSegments[0];
+			circuit.RemoveElement(deletedElement);
+
+			var actual = circuit.SubSegments;
+
+			for (int i = 0; i < expected.Count; i++)
+			{
+				Assert.AreEqual(expected[i].Name, actual[i].Name,
+					"Incorrect delete for the RemoveElement method");
+			}
+		}
 	}
 }

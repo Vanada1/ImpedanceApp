@@ -1,15 +1,52 @@
 ﻿using ImpedanceApp;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Impedance
 {
 	public partial class AddEditElementForm : Form
 	{
-		public IElement Element = null;
+		private IElement _element = null;
+
+		public IElement Segment = null;
+
+		public List<string> NameSegments = null;
+
 		public AddEditElementForm()
 		{
 			InitializeComponent();
+		}
+		private void AddEditElements_Load(object sender, EventArgs e)
+		{
+			if (Segment != null)
+			{
+				ValueTextBox.Enabled = false;
+				NameTextBox.Text = Segment.Name;
+				if (Segment is IElement _element)
+				{
+					ValueTextBox.Text = _element.Value.ToString();
+
+					if (Segment is Resistor)
+					{
+						ResistorRadioButton.Checked = true;
+					}
+					else if (Segment is Inductor)
+					{
+						InductorRadioButton.Checked = true;
+					}
+					else if (Segment is Capacitor)
+					{
+						CapacitorRadioButton.Checked = true;
+					}
+
+					ValueTextBox.Enabled = true;
+				}
+			}
+			else
+			{
+				RadioButtonsTableLayoutPanel.Enabled = true;
+			}
 		}
 
 		private void OKButton_Click(object sender, EventArgs e)
@@ -24,19 +61,19 @@ namespace Impedance
 					value = double.Parse(ValueTextBox.Text);
 					DialogResult = DialogResult.OK;
 
-					if(Element == null)
+					if(Segment == null)
 					{
 						if (ResistorRadioButton.Checked)
 						{
-							Element = new Resistor(name, value);
+							Segment = new Resistor(name, value);
 						}
 						else if (InductorRadioButton.Checked)
 						{
-							Element = new Inductor(name, value);
+							Segment = new Inductor(name, value);
 						}
 						else if (CapacitorRadioButton.Checked)
 						{
-							Element = new Capacitor(name, value);
+							Segment = new Capacitor(name, value);
 						}
 						else
 						{
@@ -47,15 +84,15 @@ namespace Impedance
 					}
 					else
 					{
-						string oldName = Element.Name;
-						double oldValue = Element.Value;
+						string oldName = Segment.Name;
+						double oldValue = Segment.Value;
 
 						if(oldName != name || oldValue!=value)
 						{
 							try
 							{
-								Element.Name = name;
-								Element.Value = value;
+								Segment.Name = name;
+								Segment.Value = value;
 							}
 							catch(ArgumentOutOfRangeException exception)
                             {
@@ -82,32 +119,6 @@ namespace Impedance
 			{
 				MessageBox.Show("Enter Value", "Error",
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-
-		private void AddEditElements_Load(object sender, EventArgs e)
-		{
-			if(Element != null)
-			{
-				NameTextBox.Text = Element.Name;
-				ValueTextBox.Text = Element.Value.ToString();
-
-				if(Element is Resistor)
-				{
-					ResistorRadioButton.Checked = true;
-				}
-				else if(Element is Inductor)
-				{
-					InductorRadioButton.Checked = true;
-				}
-				else if(Element is Capacitor)
-				{
-					CapacitorRadioButton.Checked = true;
-				}
-			}
-			else
-			{
-				RadioButtonsTableLayoutPanel.Enabled = true;
 			}
 		}
 

@@ -8,7 +8,7 @@ namespace ImpedanceApp
     /// <summary>
     /// Interface all segments
     /// </summary>
-    public interface ISegment
+    public interface ISegment : ICloneable, IEquatable<ISegment>
     {
 
         /// <summary>

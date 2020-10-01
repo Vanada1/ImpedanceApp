@@ -7,7 +7,7 @@ namespace ImpedanceApp
     /// <summary>
     /// The base class for all elements
     /// </summary>
-    public abstract class Element:IElement
+    public abstract class Element : IElement, IEquatable<Element>
     {
         /// <summary>
         /// Value of <see cref="Element"/>
@@ -90,6 +90,103 @@ namespace ImpedanceApp
         /// <param name="frequency"> is frequency for element</param>
         /// <returns> <see cref="List{Complex}"/> impedance this <see cref="Element"/></returns>
         public abstract Complex CalculateZ(double frequency);
+
+        /// <summary>
+        /// Object copy method
+        /// </summary>
+        /// <returns>Returns a new object with the same values</returns>
+        public abstract object Clone();
+
+        /// <summary>
+        /// Comparing Two <see cref="Element"/> Objects
+        /// </summary>
+        /// <param name="other">This <see cref="Element"/> compares with the current</param>
+        /// <returns>Comparison result.True - equal. 
+        ///False - not equal</returns>
+        public bool Equals(Element other)
+        {
+	        if (ReferenceEquals(null, other)) return false;
+	        if (ReferenceEquals(this, other)) return true;
+	        return _value.Equals(other._value) && _name == other._name && 
+	               Equals(SubSegments, other.SubSegments);
+        }
+
+        /// <summary>
+        /// Comparing object and <see cref="Element"/> Objects
+        /// </summary>
+        /// <param name="obj">This object compares with the current</param>
+        /// <returns>Comparison result.True - equal. 
+        ///False - not equal</returns>
+        public override bool Equals(object obj)
+        {
+	        if (ReferenceEquals(null, obj)) return false;
+	        if (ReferenceEquals(this, obj)) return true;
+	        if (obj.GetType() != this.GetType()) return false;
+	        return Equals((Element) obj);
+        }
+
+        /// <summary>
+        /// Getting the hash of an object
+        /// </summary>
+        /// <returns>object hash</returns>
+        public override int GetHashCode()
+        {
+	        unchecked
+	        {
+		        var hashCode = _value.GetHashCode();
+		        hashCode = (hashCode * 397) ^ (_name != null ? _name.GetHashCode() : 0);
+		        hashCode = (hashCode * 397) ^ (SubSegments != null ? SubSegments.GetHashCode() : 0);
+		        return hashCode;
+	        }
+        }
+
+        /// <summary>
+        /// Comparing <see cref="ISegment"/> and <see cref="Element"/> Objects
+        /// </summary>
+        /// <param name="other">This <see cref="ISegment"/> compares with the current</param>
+        /// <returns>Comparison result.True - equal. 
+        ///False - not equal</returns>
+		public bool Equals(ISegment other)
+		{
+			if(ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+			return  Name == other.Name && Equals(SubSegments, other.SubSegments);
+        }
+
+        /// <summary>
+        /// Overriding the == comparison operator. Comparing two <see cref="Element"/>
+        /// </summary>
+        /// <param name="element1">First <see cref="Element"/> for comparison</param>
+        /// <param name="element2">Second <see cref="Element"/> for comparison</param>
+        /// <returns>Comparison result.True - equal. 
+        ///False - not equal</returns>
+		public static bool operator == (Element element1, Element element2)
+        {
+	        if (((object) element1 == null) || ((object) element2 == null))
+	        {
+		        return Object.Equals(element1, element2);
+	        }
+
+	        return element1.Equals(element2);
+        }
+
+        /// <summary>
+        /// Overriding the == comparison operator. Comparing two <see cref="Element"/>
+        /// </summary>
+        /// <param name="element1">First <see cref="Element"/> for comparison</param>
+        /// <param name="element2">Second <see cref="Element"/> for comparison</param>
+        /// <returns>Comparison result.True - not equal. 
+        ///False - equal</returns>
+        public static bool operator !=(Element element1, Element element2)
+        {
+
+	        if (((object)element1 == null) || ((object)element2 == null))
+	        {
+		        return Object.Equals(element1, element2);
+	        }
+
+	        return !(element1.Equals(element2));
+        }
     }
 }
 

@@ -29,7 +29,12 @@ namespace ImpedanceApp
 			return new Complex(0, result);
 		}
 
-        /// <summary>
+		public override object Clone()
+		{
+			return new Capacitor(Name, Value);
+		}
+
+		/// <summary>
         /// Converts an element to a string
         /// </summary>
         /// <returns><see cref="Name"/> and <see cref="Value"/> string

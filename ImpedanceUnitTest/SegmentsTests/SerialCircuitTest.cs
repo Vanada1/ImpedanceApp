@@ -113,7 +113,6 @@ namespace ImpedanceUnitTest
 			var r = new Resistor("R", 5.0);
 			var l = new Inductor("L1", 0.05);
 			Complex result = r.CalculateZ(frequency) +  l.CalculateZ(frequency);
-			result = result;
 			Complex expected = result;
 
 			SerialCircuit circuit = new SerialCircuit(

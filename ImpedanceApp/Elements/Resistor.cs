@@ -28,6 +28,11 @@ namespace ImpedanceApp
 			return new Complex(Value, 0);
 		}
 
+		public override object Clone()
+		{
+			return new Resistor(Name, Value);
+		}
+
 		/// <summary>
         /// Converts an element to a string
         /// </summary>

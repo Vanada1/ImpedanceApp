@@ -48,5 +48,22 @@ namespace ImpedanceUnitTest
 			Assert.AreEqual(expected, actual,
 				"Incorrect conversion to string in ToString method");
 		}
+
+		[Test(Description = "Test of the Clone method")]
+		public void TestClone()
+		{
+			string name = "Test";
+			double value = 1.0;
+			Resistor expected = new Resistor(name, value);
+
+			Resistor capacitor = new Resistor(name, value);
+
+			Resistor actual = capacitor.Clone() as Resistor;
+
+			bool result = expected.Name == actual.Name && expected.Value == actual.Value;
+
+			Assert.IsTrue(result,
+				"Incorrect copy");
+		}
 	}
 }

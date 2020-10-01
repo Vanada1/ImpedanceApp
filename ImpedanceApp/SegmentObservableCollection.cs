@@ -7,7 +7,8 @@ namespace ImpedanceApp
 	/// Collection for add method in <see cref="ValueChanged"/> event
 	/// </summary>
 	/// <typeparam name="T"> is <see cref="ISegment"/></typeparam>
-	public sealed class SegmentObservableCollection : ObservableCollection<ISegment>
+	public sealed class SegmentObservableCollection : ObservableCollection<ISegment>, ICloneable, 
+		IEquatable<SegmentObservableCollection>
 	{
 		/// <summary>
 		/// Collection event
@@ -77,6 +78,89 @@ namespace ImpedanceApp
 			}
 
 			base.ClearItems();
+		}
+
+		public object Clone()
+		{
+			var newCollection = new SegmentObservableCollection();
+			foreach (var segment in this)
+			{
+				newCollection.Add(segment.Clone() as ISegment);
+			}
+
+			return newCollection;
+		}
+
+		public bool Equals(SegmentObservableCollection other)
+		{
+			if (this.Count != other.Count)
+			{
+				return false;
+			}
+
+			for (int i = 0; i < this.Count; i++)
+			{
+				if (this[i] != other[i])
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public override bool Equals(object obj)
+		{
+			return ReferenceEquals(this, obj) || obj is SegmentObservableCollection other &&
+				Equals(other);
+		}
+
+		public override int GetHashCode()
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Overriding the == comparison operator. Comparing
+		/// two <see cref="SegmentObservableCollection"/>
+		/// </summary>
+		/// <param name="element1">First <see cref="SegmentObservableCollection"/>
+		/// for comparison</param>
+		/// <param name="element2">Second <see cref="SegmentObservableCollection"/>
+		/// for comparison</param>
+		/// <returns>Comparison result.True - equal. 
+		///False - not equal</returns>
+		public static bool operator ==(SegmentObservableCollection element1,
+			SegmentObservableCollection element2)
+		{
+			if (((object)element1 == null) || ((object)element2 == null))
+			{
+				return Object.Equals(element1, element2);
+			}
+
+			return element1.Equals(element2);
+		}
+
+		/// <summary>
+		/// Overriding the == comparison operator. Comparing two
+		/// <see cref="SegmentObservableCollection"/>
+		/// </summary>
+		/// <param name="element1">First <see cref="SegmentObservableCollection"/> for
+		/// comparison</param>
+		/// <param name="element2">Second <see cref="SegmentObservableCollection"/> for
+		/// comparison</param>
+		/// <returns>Comparison result.True - not equal. 
+		///False - equal</returns>
+		public static bool operator !=(SegmentObservableCollection element1,
+			SegmentObservableCollection element2)
+		{
+
+			if (((object)element1 == null) || ((object)element2 == null))
+			{
+				return Object.Equals(element1, element2);
+			}
+
+			return !(element1.Equals(element2));
 		}
 	}
 }

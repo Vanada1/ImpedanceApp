@@ -3,6 +3,7 @@ using NUnit.Framework;
 using ImpedanceApp;
 using System.Numerics;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 
 namespace ImpedanceUnitTest
 {
@@ -221,6 +222,131 @@ namespace ImpedanceUnitTest
 				Assert.AreEqual(expected[i].Name, actual[i].Name,
 					"FindAllElements method found wrong elements");
 			}
+		}
+
+		[Test(Description = "Positive test of the NameSegments getter")]
+		public void TestNameSegmentsGet_CorrectValue()
+		{
+			List<string> expected = new List<string>();
+
+			Project project = new Project();
+			project.NameSegments = expected;
+
+			List<string> actual = project.NameSegments;
+
+			Assert.AreEqual(expected, actual,
+				"Getter Name returns incorrect value");
+		}
+
+		[Test(Description = "Positive test of the NameSegments setter")]
+		public void TestNameSegmentsSet_CorrectValue()
+		{
+			List<string> nameSegments = new List<string>();
+			string message = "Positive test of the Name setter not passed";
+			Project element = new Project();
+			Assert.DoesNotThrow(
+				() => { element.NameSegments = nameSegments; },
+				message);
+		}
+
+		[Test(Description = "Test of the FindSegment method without inital segment")]
+		public void TestFindSegment_WithoutInitalSegment()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			Project project = new Project();
+			project.CurrentCircuit = new Circuit("Test", segment);
+
+			ISegment expected = project.CurrentCircuit.SubSegments[0].SubSegments[1];
+
+			ISegment actual = project.FindSegment("L1");
+
+			Assert.AreEqual(expected, actual,
+				"Finds the item incorrectly");
+		}
+
+		[Test(Description = "Test of the FindSegment method with inital segment")]
+		public void TestFindSegment_WithInitalSegment()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			Project project = new Project();
+			project.CurrentCircuit = new Circuit("Test", segment);
+
+			ISegment expected = project.CurrentCircuit.SubSegments[0].SubSegments[1];
+
+			ISegment actual = project.FindSegment("L1", project.CurrentCircuit.SubSegments[0]);
+
+			Assert.AreEqual(expected, actual,
+				"Finds the item incorrectly");
+		}
+
+		[Test(Description = "Test of the CreateNameSegments method without inital segment")]
+		public void TestCreateNameSegments_WithoutInitalSegment()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			Project project = new Project();
+			project.CurrentCircuit = new Circuit("Test", segment);
+
+			List<string> expected = new List<string>
+			{
+				"Test", "Test","R", "L1", "C1"
+			};
+
+			project.CreateNameSegments(project.CurrentCircuit);
+			List<string> actual = project.NameSegments;
+
+			Assert.AreEqual(expected, actual,
+				"Finds the item incorrectly");
+		}
+
+		[Test(Description = "Test of the CreateNameSegments method with inital segment")]
+		public void TestCreateNameSegments_WithInitalSegment()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			Project project = new Project();
+			project.CurrentCircuit = new Circuit("Test", segment);
+
+			List<string> expected = new List<string>
+			{
+				"Test", "R", "L1"
+			};
+
+			project.CreateNameSegments(project.CurrentCircuit.SubSegments[0]);
+			List<string> actual = project.NameSegments;
+
+			Assert.AreEqual(expected, actual,
+				"Finds the item incorrectly");
 		}
 	}
 }

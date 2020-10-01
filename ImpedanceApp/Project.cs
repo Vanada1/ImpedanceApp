@@ -48,6 +48,11 @@ namespace ImpedanceApp
 		public List<IElement> CircuitElements { get; set; } = new List<IElement>();
 
 		/// <summary>
+		/// Set and return all segments name
+		/// </summary>
+		public List<string> NameSegments { get; set; } = new List<string>();
+
+		/// <summary>
 		/// <see cref="Project"/> constructor 
 		/// </summary>
 		public Project()
@@ -138,7 +143,7 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		/// Find all <see cref="IElement"/> in the <see cref="ISegment.SubSegments"/>
+		/// Recursively Find all <see cref="IElement"/> in the <see cref="ISegment.SubSegments"/>
 		/// </summary>
 		/// <param name="segment"> of the <see cref="Circuit"/></param>
 		public void FindAllElements(ISegment segment)
@@ -159,6 +164,71 @@ namespace ImpedanceApp
 					FindAllElements(element);
 				}
 			}
+		}
+
+		/// <summary>
+		/// Recursively find a segment by name
+		/// </summary>
+		/// <param name="name"> is segment name</param>
+		/// <param name="segment">  segment in which the search takes place.
+		/// If <see cref="segment"/> is null, then <see cref="CurrentCircuit"/> is taken</param>
+		/// <returns>The <see cref="ISegment"/> element .Null if no element is found by name</returns>
+		public ISegment FindSegment(string name, ISegment segment = null)
+		{
+			ISegment result = null;
+			if (segment == null)
+			{
+				segment = CurrentCircuit;
+			}
+
+			if (segment.Name == name)
+			{
+				return segment;
+			}
+
+			foreach (var subSegment in segment.SubSegments)
+			{
+				if(result != null) break;
+
+				if (subSegment.Name == name)
+				{
+					return subSegment;
+				}
+
+				if (!(subSegment is IElement))
+				{
+					result = FindSegment(name, subSegment);
+				}
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// Recursively creates a list of the names of all the <see cref="ISegment"/> in the circuit
+		/// </summary>
+		/// <param name="segment">the <see cref="ISegment"/> in which the items are written to the list</param>
+		public void CreateNameSegments(ISegment segment)
+		{
+			if (segment == CurrentCircuit)
+			{
+				NameSegments = new List<string>();
+			}
+
+			NameSegments.Add(segment.Name);
+
+			foreach (var subSegment in segment.SubSegments)
+			{
+				if (subSegment is IElement)
+				{
+					NameSegments.Add(subSegment.Name);
+				}
+				else
+				{
+					CreateNameSegments(subSegment);
+				}
+			}
+
 		}
 	}
 }

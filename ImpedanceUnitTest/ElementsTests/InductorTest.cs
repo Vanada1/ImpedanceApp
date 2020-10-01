@@ -50,5 +50,22 @@ namespace ImpedanceUnitTest
 				"Incorrect conversion to string in ToString method");
 		}
 
+		[Test(Description = "Test of the Clone method")]
+		public void TestClone()
+		{
+			string name = "Test";
+			double value = 1.0;
+			Inductor expected = new Inductor(name, value);
+
+			Inductor capacitor = new Inductor(name, value);
+
+			Inductor actual = capacitor.Clone() as Inductor;
+
+			bool result = expected.Name == actual.Name && expected.Value == actual.Value;
+
+			Assert.IsTrue(result,
+				"Incorrect copy");
+		}
+
 	}
 }
