@@ -295,6 +295,31 @@ namespace ImpedanceUnitTest
 				"Finds the item incorrectly");
 		}
 
+		[Test(Description = "Test of the FindSegment method with inital segment")]
+		public void TestFindSegment_WithInitalSegmentAndThisElement()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			Project project = new Project();
+			project.CurrentCircuit = new Circuit("Test1", segment);
+
+			ISegment expected =
+				project.CurrentCircuit.SubSegments[0];
+
+			ISegment actual = project.FindSegment("Test",
+				project.CurrentCircuit.SubSegments[0]);
+
+			Assert.AreEqual(expected, actual,
+				"Finds the item incorrectly");
+		}
+
 		[Test(Description = "Test of the CreateNameSegments method without inital segment")]
 		public void TestCreateNameSegments_WithoutInitalSegment()
 		{
@@ -348,5 +373,7 @@ namespace ImpedanceUnitTest
 			Assert.AreEqual(expected, actual,
 				"Finds the item incorrectly");
 		}
+
+
 	}
 }

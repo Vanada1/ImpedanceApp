@@ -30,7 +30,7 @@ namespace ImpedanceApp
 
 		public override object Clone()
 		{
-			return new Resistor(Name, Value);
+			return new Resistor(Name.Clone() as string, Value);
 		}
 
 		/// <summary>

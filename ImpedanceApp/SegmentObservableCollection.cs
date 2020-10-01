@@ -93,14 +93,12 @@ namespace ImpedanceApp
 
 		public bool Equals(SegmentObservableCollection other)
 		{
-			if (this.Count != other.Count)
-			{
-				return false;
-			}
+			if (other == null) return false;
+			if (this.Count != other.Count) return false;
 
 			for (int i = 0; i < this.Count; i++)
 			{
-				if (this[i] != other[i])
+				if (!this[i].Equals(other[i]))
 				{
 					return false;
 				}
@@ -117,7 +115,7 @@ namespace ImpedanceApp
 
 		public override int GetHashCode()
 		{
-			throw new NotImplementedException();
+			return base.GetHashCode();
 		}
 
 		/// <summary>
@@ -157,7 +155,7 @@ namespace ImpedanceApp
 
 			if (((object)element1 == null) || ((object)element2 == null))
 			{
-				return Object.Equals(element1, element2);
+				return !Object.Equals(element1, element2);
 			}
 
 			return !(element1.Equals(element2));

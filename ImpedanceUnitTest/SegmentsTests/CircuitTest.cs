@@ -271,7 +271,7 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test of the Circuit Clone")]
 		public void TestClone()
 		{
-			var expected = new SegmentObservableCollection
+			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit("Test", new SegmentObservableCollection
 				{
@@ -280,18 +280,406 @@ namespace ImpedanceUnitTest
 				new Capacitor("C1", 0.01)
 			};
 
-			Circuit circuit = new Circuit("Test",
-				CreateCircuit());
-			ISegment deletedElement = circuit.SubSegments[0].SubSegments[0];
-			circuit.RemoveElement(deletedElement);
+			var expected = new Circuit("Test", segments);
 
-			var actual = circuit.SubSegments;
+			var actual = expected.Clone() as Circuit;
 
-			for (int i = 0; i < expected.Count; i++)
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment equals")]
+		public void TestEquals_IsEquals()
+		{
+			var segments = new SegmentObservableCollection
 			{
-				Assert.AreEqual(expected[i].Name, actual[i].Name,
-					"Incorrect delete for the RemoveElement method");
-			}
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = true;
+
+			var circuit2 = new Circuit("Test", segments);
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment not equals")]
+		public void TestEquals_IsNotEquals()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = false;
+
+			var circuit2 = new Circuit("Test1", 
+				new SegmentObservableCollection());
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment other name")]
+		public void TestEquals_OtherName()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = false;
+
+			var circuit2 = new Circuit("Test1", segments);
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment other collection")]
+		public void TestEquals_OtherCollection()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = false;
+
+			var circuit2 = new Circuit("Test",
+				new SegmentObservableCollection());
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment one is null")]
+		public void TestEquals_Null()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = false;
+
+			Circuit circuit2 = null;
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment the same object")]
+		public void TestEquals_SameObject()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = true;
+
+			Circuit circuit2 = circuit1;
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment equals " +
+		                    "operation ==")]
+		public void TestEquals_IsEqualsOperationTrue()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = true;
+
+			var circuit2 = new Circuit("Test", segments);
+
+			var actual = circuit1 == circuit2;
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment is not equals " +
+		                    "operation ==")]
+		public void TestEquals_IsEqualsOperationFalse()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = false;
+
+			var circuit2 = new Circuit("Test1", segments);
+
+			var actual = circuit1 == circuit2;
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment not equals" +
+		                    "operation !=")]
+		public void TestEquals_IsNotEqualsOperationTrue()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = true;
+
+			var circuit2 = new Circuit("Test1",
+				new SegmentObservableCollection());
+
+			var actual = circuit1 != circuit2;
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment equals" +
+		                    "operation !=")]
+		public void TestEquals_IsNotEqualsOperationFalse()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = false;
+
+			var circuit2 = new Circuit("Test", segments);
+
+			var actual = circuit1 != circuit2;
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment equals " +
+		                    "operation ==. Null")]
+		public void TestEquals_IsEqualsOperationNullTrue()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			Circuit circuit1 = null;
+
+			var expected = true;
+
+			Circuit circuit2 =null;
+
+			var actual = circuit1 == circuit2;
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment equals" +
+		                    "operation !=. Null")]
+		public void TestEquals_IsNotEqualsOperationNullFalse()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			Circuit circuit1 = null;
+
+			var expected = false;
+
+			Circuit circuit2 = null;
+
+			var actual = circuit1 != circuit2;
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the Circuit Equals ISegment equals" +
+		                    " with object")]
+		public void TestEquals_IsEqualsObject()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = true;
+
+			object circuit2 = new Circuit("Test", segments);
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+
+		[Test(Description = "Test of the Circuit Equals ISegment equals" +
+		                    " with object = null")]
+		public void TestEquals_IsEqualsObjectNull()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = false;
+
+			object circuit2 = null;
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+
+		[Test(Description = "Test of the Circuit Equals ISegment equals" +
+		                    " with object different type")]
+		public void TestEquals_IsEqualsObjectOtherType()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = false;
+
+			int circuit2 = 12;
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
+		}
+
+
+		[Test(Description = "Test of the Circuit Equals ISegment equals" +
+		                    " with object the same object")]
+		public void TestEquals_IsEqualsObjectSame()
+		{
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+
+			var circuit1 = new Circuit("Test", segments);
+
+			var expected = true;
+
+			object circuit2 = circuit1;
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Invalid copying of elements");
 		}
 	}
 }

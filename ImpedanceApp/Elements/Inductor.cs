@@ -31,7 +31,7 @@ namespace ImpedanceApp
 
 		public override object Clone()
 		{
-			return new Inductor(Name, Value);
+			return new Inductor(Name.Clone() as string, Value);
 		}
 
 		/// <summary>

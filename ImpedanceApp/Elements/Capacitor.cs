@@ -31,7 +31,7 @@ namespace ImpedanceApp
 
 		public override object Clone()
 		{
-			return new Capacitor(Name, Value);
+			return new Capacitor(Name.Clone() as string, Value);
 		}
 
 		/// <summary>

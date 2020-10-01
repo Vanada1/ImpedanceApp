@@ -101,7 +101,7 @@ namespace ImpedanceApp
 		///False - not equal</returns>
 		protected bool Equals(ParallelCircuit other)
 		{
-			return Name == other.Name && Equals(SubSegments, other.SubSegments);
+			return Name == other.Name && SubSegments.Equals(other.SubSegments);
 		}
 
 		/// <summary>
@@ -128,7 +128,7 @@ namespace ImpedanceApp
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
-			return Name == other.Name && Equals(SubSegments, other.SubSegments);
+			return Name == other.Name && SubSegments.Equals(other.SubSegments);
 		}
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace ImpedanceApp
 		{
 			unchecked
 			{
-				return ((_name != null ? _name.GetHashCode() : 0) * 397) ^ (SubSegments != null ? SubSegments.GetHashCode() : 0);
+				return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ (SubSegments != null ? SubSegments.GetHashCode() : 0);
 			}
 		}
 
@@ -172,7 +172,7 @@ namespace ImpedanceApp
 
 			if (((object)circuit1 == null) || ((object)circuit2 == null))
 			{
-				return Object.Equals(circuit1, circuit2);
+				return !Object.Equals(circuit1, circuit2);
 			}
 
 			return !(circuit1.Equals(circuit2));

@@ -182,7 +182,7 @@ namespace ImpedanceApp
 
 	        if (((object)element1 == null) || ((object)element2 == null))
 	        {
-		        return Object.Equals(element1, element2);
+		        return !Object.Equals(element1, element2);
 	        }
 
 	        return !(element1.Equals(element2));
