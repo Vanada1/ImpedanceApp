@@ -34,7 +34,6 @@ namespace ImpedanceForms
 		/// </summary>
 		private void UpdateListBoxes()
 		{
-			FrequenciesListBox.DataSource = null;
 			FrequenciesListBox.DataSource = _project.Frequencies;
 
 			_project.Results = _project.CurrentCircuit.CalculateZ(
@@ -55,7 +54,6 @@ namespace ImpedanceForms
 			ImpedanceListBox.ClearSelected();
 			_project.FindAllElements(_project.CurrentCircuit);
 			_project.CreateNameSegments(_project.CurrentCircuit);
-			//FillElementsTreeView();
 		}
 
         private void FillElementsTreeView()
@@ -70,10 +68,6 @@ namespace ImpedanceForms
 		        };
 		        FillTreeNode(segmentTreeNode, _project.CurrentCircuit);
 		        ElementsTreeView.Nodes.Add(segmentTreeNode);
-		        if (_selectedNode != null)
-		        {
-			        ElementsTreeView.SelectedNode = _selectedNode;
-		        }
 	        }
 	        catch (Exception e)
 	        {
@@ -242,15 +236,17 @@ namespace ImpedanceForms
 
 		private void RemoveElementButton_Click(object sender, EventArgs e)
 		{
-			var index = 1;//ElementsListBox.SelectedIndex;
-			if (index >= 0)
+			var node = ElementsTreeView.SelectedNode;
+			if (node != null)
 			{
 				var remove = MessageBox.Show("Remove?", "Remove?",
 					MessageBoxButtons.YesNo);
 				if (remove == DialogResult.Yes)
 				{
-					ISegment foundElement = _project.CircuitElements[index];
+					ISegment foundElement = _project.FindSegment(node.Name);
 					_project.CurrentCircuit.RemoveElement(foundElement);
+					var parentNode = node.Parent;
+					parentNode.Nodes.Remove(node);
 					UpdateListBoxes();
 				}
 			}
