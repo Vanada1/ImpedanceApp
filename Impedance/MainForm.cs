@@ -10,6 +10,8 @@ namespace ImpedanceForms
 {
 	public partial class MainForm : Form
 	{
+		private TreeNode _selectedNode = null;
+
 		private readonly Project _project = new Project();
 
         /// <summary>
@@ -53,6 +55,7 @@ namespace ImpedanceForms
 			ImpedanceListBox.ClearSelected();
 			_project.FindAllElements(_project.CurrentCircuit);
 			_project.CreateNameSegments(_project.CurrentCircuit);
+			//FillElementsTreeView();
 		}
 
         private void FillElementsTreeView()
@@ -67,6 +70,10 @@ namespace ImpedanceForms
 		        };
 		        FillTreeNode(segmentTreeNode, _project.CurrentCircuit);
 		        ElementsTreeView.Nodes.Add(segmentTreeNode);
+		        if (_selectedNode != null)
+		        {
+			        ElementsTreeView.SelectedNode = _selectedNode;
+		        }
 	        }
 	        catch (Exception e)
 	        {
@@ -117,7 +124,7 @@ namespace ImpedanceForms
 		private void Main_Load(object sender, EventArgs e)
 		{
 			UpdateListBoxes();
-            EventLabel.Text = "";
+			EventLabel.Text = "";
 
 			foreach (Circuit example in _project.AllExamples)
 			{
@@ -130,11 +137,11 @@ namespace ImpedanceForms
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
 		{
-			var addFrorm = new AddEditFrequencyForm();
-			addFrorm.ShowDialog();
-			if(addFrorm.DialogResult == DialogResult.OK)
+			var addForm = new AddEditFrequencyForm();
+			addForm.ShowDialog();
+			if(addForm.DialogResult == DialogResult.OK)
 			{
-				_project.Frequencies.Add((double)addFrorm.Frequencie);
+				_project.Frequencies.Add((double)addForm.Frequencie);
 			}
 			UpdateListBoxes();
 		}
@@ -184,19 +191,35 @@ namespace ImpedanceForms
 		private void EditElementsButton_Click(object sender, EventArgs e)
 		{
 			var node = ElementsTreeView.SelectedNode;
+			var indexNode = ElementsTreeView.SelectedNode.Index;
 			if (node != null)
 			{
 				ISegment foundSegment = _project.FindSegment(node.Name);
+				ISegment oldSegment = foundSegment.Clone() as ISegment;
                 AddEditElementForm editForm = new AddEditElementForm
                 {
-                    Segment = null,
+                    Segment = foundSegment,
                     NameSegments = _project.NameSegments
                 };
                 editForm.ShowDialog();
-				if (editForm.DialogResult == DialogResult.OK)
+				if (editForm.DialogResult != DialogResult.OK)
 				{
-					
+					foundSegment = oldSegment;
 				}
+
+				ElementsTreeView.SelectedNode.Name =
+					foundSegment.Name;
+				if (foundSegment is IElement foundElement)
+				{
+					ElementsTreeView.SelectedNode.Text =
+						foundSegment.ToString();
+				}
+				else
+				{
+					ElementsTreeView.SelectedNode.Text =
+						foundSegment.Name;
+				}
+
 				UpdateListBoxes();
 			}
 			else
@@ -208,11 +231,11 @@ namespace ImpedanceForms
 
 		private void AddElementButton_Click(object sender, EventArgs e)
 		{
-			var addFrorm = new AddEditElementForm();
-			addFrorm.ShowDialog();
-			if (addFrorm.DialogResult == DialogResult.OK)
+			var addForm = new AddEditElementForm();
+			addForm.ShowDialog();
+			if (addForm.DialogResult == DialogResult.OK)
 			{
-				_project.CurrentCircuit.SubSegments.Add(addFrorm.Segment);
+				_project.CurrentCircuit.SubSegments.Add(addForm.Segment);
 			}
 			UpdateListBoxes();
 		}
@@ -246,6 +269,7 @@ namespace ImpedanceForms
 				_project.CurrentCircuit = _project.AllExamples[index];
 				FillElementsTreeView();
 				UpdateListBoxes();
+				FillElementsTreeView();
 			}
 			else
 			{
@@ -262,6 +286,11 @@ namespace ImpedanceForms
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
 			UpdateListBoxes();
+		}
+
+		private void ElementsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+			_selectedNode = ElementsTreeView.SelectedNode;
 		}
 	}
 }

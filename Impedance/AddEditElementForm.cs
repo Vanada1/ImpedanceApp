@@ -9,9 +9,30 @@ namespace Impedance
 	{
 		private IElement _element = null;
 
-		public IElement Segment = null;
+		public ISegment Segment = null;
 
 		public List<string> NameSegments = null;
+
+		private bool SearchName(string nameSegment)
+		{
+			NameSegments.Remove(Segment.Name);
+			if (NameSegments == null)
+			{
+				throw new ArgumentException(
+					"There should be a list of names, " +
+					"but it isn't");
+			}
+
+			foreach (var name in NameSegments)
+			{
+				if (name == nameSegment)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
 
 		public AddEditElementForm()
 		{
@@ -22,8 +43,10 @@ namespace Impedance
 			if (Segment != null)
 			{
 				ValueTextBox.Enabled = false;
+				ValueTextBox.Text = null;
 				NameTextBox.Text = Segment.Name;
-				if (Segment is IElement _element)
+				_element = Segment as IElement;
+				if (_element != null)
 				{
 					ValueTextBox.Text = _element.Value.ToString();
 
@@ -52,13 +75,13 @@ namespace Impedance
 		private void OKButton_Click(object sender, EventArgs e)
 		{
 			if (NameTextBox.Text.Length != 0 &&
-			    ValueTextBox.Text.Length != 0)
+			    ValueTextBox.Text.Length != 0 &&
+			   !SearchName(NameTextBox.Text))
 			{
 				string name = NameTextBox.Text;
-				double value;
 				try
 				{
-					value = double.Parse(ValueTextBox.Text);
+					var value = double.Parse(ValueTextBox.Text);
 					DialogResult = DialogResult.OK;
 
 					if(Segment == null)
@@ -84,24 +107,19 @@ namespace Impedance
 					}
 					else
 					{
-						string oldName = Segment.Name;
-						double oldValue = Segment.Value;
-
-						if(oldName != name || oldValue!=value)
+						try
 						{
-							try
-							{
-								Segment.Name = name;
-								Segment.Value = value;
-							}
-							catch(ArgumentOutOfRangeException exception)
-                            {
-								MessageBox.Show(exception.Message,
-									"Error", MessageBoxButtons.OK,
-									MessageBoxIcon.Error);
-								DialogResult = DialogResult.None;
-							}
+							_element.Name = name;
+							_element.Value = value;
 						}
+						catch (ArgumentOutOfRangeException exception)
+						{
+							MessageBox.Show(exception.Message,
+								"Error", MessageBoxButtons.OK,
+								MessageBoxIcon.Error);
+							DialogResult = DialogResult.None;
+						}
+
 					}
 				}
 				catch (FormatException exception)
@@ -114,6 +132,14 @@ namespace Impedance
 			{
 				MessageBox.Show("Enter Name", "Error",
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			else if (NameTextBox.Text.Length != 0  &&
+			         !(Segment is IElement) && 
+			         !SearchName(NameTextBox.Text))
+			{
+				string name = NameTextBox.Text;
+				Segment.Name = name;
+				DialogResult = DialogResult.OK;
 			}
 			else
 			{
