@@ -77,7 +77,25 @@ namespace ImpedanceApp
 							new Resistor("R2", 20.0)
 						}
 						),
-						new Resistor("R3", 40.0)
+						new Resistor("R7", 40.0),
+
+						new SerialCircuit("Test",
+							new SegmentObservableCollection
+							{
+								new ParallelCircuit("Parallel Circuit",
+									new SegmentObservableCollection
+									{
+										new Resistor("R3", 20.0), 
+										new Resistor("R4", 20.0)
+									}),
+
+								new ParallelCircuit("Parallel Circuit", 
+									new SegmentObservableCollection
+									{
+										new Resistor("R5", 20.0), 
+										new Resistor("R6", 20.0)
+									})
+							})
 					}),
 				new Inductor("L", 10)
 			};

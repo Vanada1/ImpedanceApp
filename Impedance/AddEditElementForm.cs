@@ -15,7 +15,7 @@ namespace Impedance
 		private void OKButton_Click(object sender, EventArgs e)
 		{
 			if (NameTextBox.Text.Length != 0 &&
-				ValueTextBox.Text.Length != 0)
+			    ValueTextBox.Text.Length != 0)
 			{
 				string name = NameTextBox.Text;
 				double value;

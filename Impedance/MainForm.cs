@@ -52,10 +52,49 @@ namespace ImpedanceForms
 			ImpedanceListBox.DataSource = _project.ResultsString;
 			ImpedanceListBox.ClearSelected();
 			_project.FindAllElements(_project.CurrentCircuit);
-			ElementsListBox.DataSource = null;
-			ElementsListBox.DataSource = _project.CircuitElements;
 		}
 
+        private void FillElementsTreeView()
+        {
+	        ElementsTreeView.Nodes.Clear();
+	        try
+	        {
+		        TreeNode segmentTreeNode = new TreeNode {Text = _project.CurrentCircuit.Name};
+		        FillTreeNode(segmentTreeNode, _project.CurrentCircuit);
+		        ElementsTreeView.Nodes.Add(segmentTreeNode);
+	        }
+	        catch (Exception e)
+	        {
+		        MessageBox.Show(e.Message, "Error",
+			        MessageBoxButtons.OK, MessageBoxIcon.Error);
+	        }
+        }
+
+        private void FillTreeNode(TreeNode treeNode, ISegment segment)
+        {
+	        try
+	        {
+		        foreach (var subSegment in segment.SubSegments)
+		        {
+			        if (subSegment is IElement element)
+			        {
+				        TreeNode segmentTreeNode = new TreeNode { Text = element.Name };
+				        treeNode.Nodes.Add(segmentTreeNode);
+			        }
+			        else
+			        {
+				        TreeNode segmentTreeNode = new TreeNode {Text = subSegment.Name};
+				        treeNode.Nodes.Add(segmentTreeNode);
+				        FillTreeNode(segmentTreeNode, subSegment);
+			        }
+		        }
+	        }
+			catch (Exception e)
+			{
+				MessageBox.Show(e.Message, "Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
 		public MainForm()
 		{
@@ -131,7 +170,7 @@ namespace ImpedanceForms
 
 		private void EditElementsButton_Click(object sender, EventArgs e)
 		{
-			var index = ElementsListBox.SelectedIndex;
+			var index = 1;//ElementsListBox.SelectedIndex;
 			if (index >= 0)
 			{
                 AddEditElementForm editForm = new AddEditElementForm
@@ -165,7 +204,7 @@ namespace ImpedanceForms
 
 		private void RemoveElementButton_Click(object sender, EventArgs e)
 		{
-			var index = ElementsListBox.SelectedIndex;
+			var index = 1;//ElementsListBox.SelectedIndex;
 			if (index >= 0)
 			{
 				var remove = MessageBox.Show("Remove?", "Remove?",
@@ -190,6 +229,7 @@ namespace ImpedanceForms
 			if (index >= 0)
 			{
 				_project.CurrentCircuit = _project.AllExamples[index];
+				FillElementsTreeView();
 				UpdateListBoxes();
 			}
 			else
@@ -207,6 +247,11 @@ namespace ImpedanceForms
 			RemoveElementButton.Enabled = false;
 			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
 			UpdateListBoxes();
+		}
+
+		private void ElementsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+
 		}
 	}
 }

@@ -36,7 +36,6 @@
 			this.ImpedanceListBox = new System.Windows.Forms.ListBox();
 			this.FrequenciesLabel = new System.Windows.Forms.Label();
 			this.ImpedanceLabel = new System.Windows.Forms.Label();
-			this.ElementsListBox = new System.Windows.Forms.ListBox();
 			this.ElementsLabel = new System.Windows.Forms.Label();
 			this.CircuitPictureBox = new System.Windows.Forms.PictureBox();
 			this.CircuitLabel = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
 			this.RemoveElementButton = new System.Windows.Forms.Button();
 			this.EventLabel = new System.Windows.Forms.Label();
 			this.CircuitsListBox = new System.Windows.Forms.ListBox();
+			this.ElementsTreeView = new System.Windows.Forms.TreeView();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).BeginInit();
 			this.tableLayoutPanel3.SuspendLayout();
@@ -148,16 +148,6 @@
 			this.ImpedanceLabel.Size = new System.Drawing.Size(63, 13);
 			this.ImpedanceLabel.TabIndex = 4;
 			this.ImpedanceLabel.Text = "Impedance:";
-			// 
-			// ElementsListBox
-			// 
-			this.ElementsListBox.FormattingEnabled = true;
-			this.ElementsListBox.Location = new System.Drawing.Point(549, 34);
-			this.ElementsListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.ElementsListBox.Name = "ElementsListBox";
-			this.ElementsListBox.ScrollAlwaysVisible = true;
-			this.ElementsListBox.Size = new System.Drawing.Size(147, 134);
-			this.ElementsListBox.TabIndex = 0;
 			// 
 			// ElementsLabel
 			// 
@@ -267,18 +257,26 @@
 			this.CircuitsListBox.TabIndex = 10;
 			this.CircuitsListBox.SelectedIndexChanged += new System.EventHandler(this.CircuitsListBox_SelectedIndexChanged);
 			// 
+			// ElementsTreeView
+			// 
+			this.ElementsTreeView.Location = new System.Drawing.Point(549, 34);
+			this.ElementsTreeView.Name = "ElementsTreeView";
+			this.ElementsTreeView.Size = new System.Drawing.Size(150, 134);
+			this.ElementsTreeView.TabIndex = 11;
+			this.ElementsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ElementsTreeView_AfterSelect);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(776, 358);
+			this.Controls.Add(this.ElementsTreeView);
 			this.Controls.Add(this.CircuitsListBox);
 			this.Controls.Add(this.EventLabel);
 			this.Controls.Add(this.tableLayoutPanel3);
 			this.Controls.Add(this.CircuitLabel);
 			this.Controls.Add(this.CircuitPictureBox);
 			this.Controls.Add(this.ElementsLabel);
-			this.Controls.Add(this.ElementsListBox);
 			this.Controls.Add(this.ImpedanceLabel);
 			this.Controls.Add(this.FrequenciesLabel);
 			this.Controls.Add(this.ImpedanceListBox);
@@ -308,7 +306,6 @@
 		private System.Windows.Forms.ListBox ImpedanceListBox;
 		private System.Windows.Forms.Label FrequenciesLabel;
 		private System.Windows.Forms.Label ImpedanceLabel;
-		private System.Windows.Forms.ListBox ElementsListBox;
 		private System.Windows.Forms.Label ElementsLabel;
 		private System.Windows.Forms.PictureBox CircuitPictureBox;
 		private System.Windows.Forms.Label CircuitLabel;
@@ -318,6 +315,7 @@
 		private System.Windows.Forms.Button RemoveElementButton;
 		private System.Windows.Forms.ListBox CircuitsListBox;
 		private System.Windows.Forms.Label EventLabel;
+		private System.Windows.Forms.TreeView ElementsTreeView;
 	}
 }
 
