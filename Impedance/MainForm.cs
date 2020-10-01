@@ -57,6 +57,9 @@ namespace ImpedanceForms
 			_project.CreateNameSegments(_project.CurrentCircuit);
 		}
 
+		/// <summary>
+		/// Create segments tree
+		/// </summary>
         private void FillElementsTreeView()
         {
 	        ElementsTreeView.Nodes.Clear();
@@ -77,6 +80,11 @@ namespace ImpedanceForms
 	        }
         }
 
+		/// <summary>
+		/// Add sub-segments in the tree
+		/// </summary>
+		/// <param name="treeNode">node where will add</param>
+		/// <param name="segment">segment where will add</param>
         private void FillTreeNode(TreeNode treeNode, ISegment segment)
         {
 	        try
@@ -195,7 +203,8 @@ namespace ImpedanceForms
                     Segment = foundSegment,
                     NameSegments = _project.NameSegments
                 };
-                editForm.ShowDialog();
+                editForm.NameSegments.Remove(foundSegment.Name);
+				editForm.ShowDialog();
 				if (editForm.DialogResult != DialogResult.OK)
 				{
 					foundSegment = oldSegment;
@@ -225,13 +234,46 @@ namespace ImpedanceForms
 
 		private void AddElementButton_Click(object sender, EventArgs e)
 		{
-			var addForm = new AddEditElementForm();
-			addForm.ShowDialog();
-			if (addForm.DialogResult == DialogResult.OK)
+			var selectedNode = ElementsTreeView.SelectedNode;
+			if (selectedNode != null)
 			{
-				_project.CurrentCircuit.SubSegments.Add(addForm.Segment);
+				var addForm = new AddEditElementForm
+				{
+					NameSegments = _project.NameSegments
+				};
+				addForm.ShowDialog();
+				if (addForm.DialogResult == DialogResult.OK)
+				{
+					var segment = _project.FindSegment(
+						selectedNode.Name);
+					string text = addForm.Segment.Name;
+					if (segment is IElement)
+					{
+						selectedNode = selectedNode.Parent;
+						segment = _project.FindSegment(
+							selectedNode.Name);
+					}
+
+					if (addForm.Segment is IElement)
+					{
+						text = addForm.Segment.ToString();
+					}
+
+					segment.SubSegments.Add(addForm.Segment);
+					selectedNode.Nodes.Add(new TreeNode
+					{
+						Name = addForm.Segment.Name,
+						Text = text
+					});
+				}
+
+				UpdateListBoxes();
 			}
-			UpdateListBoxes();
+			else
+			{
+				MessageBox.Show(nameof(Element) + "was not selected", "Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void RemoveElementButton_Click(object sender, EventArgs e)
@@ -243,10 +285,21 @@ namespace ImpedanceForms
 					MessageBoxButtons.YesNo);
 				if (remove == DialogResult.Yes)
 				{
-					ISegment foundElement = _project.FindSegment(node.Name);
-					_project.CurrentCircuit.RemoveElement(foundElement);
+					ISegment foundElement = _project.FindSegment(
+						node.Name);
 					var parentNode = node.Parent;
-					parentNode.Nodes.Remove(node);
+					if (parentNode != null)
+					{
+						parentNode.Nodes.Remove(node);
+						_project.CurrentCircuit.RemoveElement(
+							foundElement);
+					}
+					else
+					{
+						MessageBox.Show("Cannot remove main root",
+							"Error", MessageBoxButtons.OK,
+							MessageBoxIcon.Error);
+					}
 					UpdateListBoxes();
 				}
 			}

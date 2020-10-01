@@ -15,7 +15,6 @@ namespace Impedance
 
 		private bool SearchName(string nameSegment)
 		{
-			NameSegments.Remove(Segment.Name);
 			if (NameSegments == null)
 			{
 				throw new ArgumentException(
@@ -34,12 +33,56 @@ namespace Impedance
 			return false;
 		}
 
+		private void CreateNewSegment(string name, double value)
+		{
+			if (ImpedanceApp.Segment.TryParse(SegmentsComboBox.Text,
+				out ImpedanceApp.Segment segment))
+			{
+				switch (segment)
+				{
+					case ImpedanceApp.Segment.Capacitor:
+						Segment = new Capacitor(name, value);
+						break;
+					case ImpedanceApp.Segment.Inductor:
+						Segment = new Inductor(name, value);
+						break;
+					case ImpedanceApp.Segment.Resistor:
+						Segment = new Resistor(name, value);
+						break;
+					case ImpedanceApp.Segment.SerialCircuit:
+						Segment = new SerialCircuit(name, 
+							new SegmentObservableCollection());
+						break;
+					case ImpedanceApp.Segment.ParallelCircuit:
+						Segment = new ParallelCircuit(name, 
+							new SegmentObservableCollection());
+						break;
+				}
+			}
+			else
+			{
+				MessageBox.Show("Select the segment", "Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
 		public AddEditElementForm()
 		{
 			InitializeComponent();
 		}
 		private void AddEditElements_Load(object sender, EventArgs e)
 		{
+			List<string> typeSegments = new List<string>
+			{
+				"",
+				nameof(ImpedanceApp.Segment.Resistor),
+				nameof(ImpedanceApp.Segment.Capacitor),
+				nameof(ImpedanceApp.Segment.Inductor),
+				nameof(ImpedanceApp.Segment.SerialCircuit),
+				nameof(ImpedanceApp.Segment.ParallelCircuit),
+			};
+			SegmentsComboBox.DataSource = typeSegments;
+
 			if (Segment != null)
 			{
 				ValueTextBox.Enabled = false;
@@ -58,16 +101,24 @@ namespace Impedance
 
 		private void OKButton_Click(object sender, EventArgs e)
 		{
-			if (NameTextBox.Text.Length != 0 &&
+			if (SearchName(NameTextBox.Text))
+			{
+				MessageBox.Show("An object already exists with" +
+				                " the same name",
+					"Error", MessageBoxButtons.OK, 
+					MessageBoxIcon.Error);
+			}
+			else if (NameTextBox.Text.Length != 0 &&
 			    ValueTextBox.Text.Length != 0 &&
-			   !SearchName(NameTextBox.Text))
+			    ValueTextBox.Enabled)
 			{
 				string name = NameTextBox.Text;
 				try
 				{
 					var value = double.Parse(ValueTextBox.Text);
 					DialogResult = DialogResult.OK;
-
+					CreateNewSegment(name, value);
+					_element = Segment as IElement;
 					try
 					{
 						_element.Name = name;
@@ -89,18 +140,17 @@ namespace Impedance
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
-			else if(NameTextBox.Text.Length == 0)
-			{
-				MessageBox.Show("Enter Name", "Error",
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
 			else if (NameTextBox.Text.Length != 0  &&
-			         !(Segment is IElement) && 
-			         !SearchName(NameTextBox.Text))
+			         !(Segment is IElement))
 			{
 				string name = NameTextBox.Text;
-				Segment.Name = name;
+				CreateNewSegment(name, -1);
 				DialogResult = DialogResult.OK;
+			}
+			else if (NameTextBox.Text.Length == 0)
+			{
+				MessageBox.Show("Enter Name", "Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			else
 			{
@@ -114,8 +164,30 @@ namespace Impedance
 			DialogResult = DialogResult.Cancel;
         }
 
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		private void SegmentComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			if (ImpedanceApp.Segment.TryParse(SegmentsComboBox.Text,
+				out ImpedanceApp.Segment segment))
+			{
+				switch (segment)
+				{
+					case ImpedanceApp.Segment.Capacitor:
+						ValueTextBox.Enabled = true;
+						break;
+					case ImpedanceApp.Segment.Inductor:
+						ValueTextBox.Enabled = true;
+						break;
+					case ImpedanceApp.Segment.Resistor:
+						ValueTextBox.Enabled = true;
+						break;
+					case ImpedanceApp.Segment.SerialCircuit:
+						ValueTextBox.Enabled = false;
+						break;
+					case ImpedanceApp.Segment.ParallelCircuit:
+						ValueTextBox.Enabled = false;
+						break;
+				}
+			}
 
 		}
 	}

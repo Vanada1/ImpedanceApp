@@ -125,7 +125,7 @@
 			this.SegmentsComboBox.Name = "SegmentsComboBox";
 			this.SegmentsComboBox.Size = new System.Drawing.Size(173, 24);
 			this.SegmentsComboBox.TabIndex = 7;
-			this.SegmentsComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+			this.SegmentsComboBox.SelectedIndexChanged += new System.EventHandler(this.SegmentComboBox_SelectedIndexChanged);
 			// 
 			// AddEditElementForm
 			// 
