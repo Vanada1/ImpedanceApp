@@ -7,12 +7,27 @@ namespace Impedance
 {
 	public partial class AddEditElementForm : Form
 	{
+		/// <summary>
+		/// Field for working with element
+		/// </summary>
 		private IElement _element = null;
 
-		public ISegment Segment = null;
+		/// <summary>
+		/// Set and return current segment for chenged
+		/// </summary>
+		public ISegment Segment { get; set; } = null;
 
-		public List<string> NameSegments = null;
+		/// <summary>
+		/// Set and return that stores all used net names
+		/// </summary>
+		public List<string> NameSegments { get; set; } = null;
 
+		/// <summary>
+		/// Searches the list with the same name
+		/// </summary>
+		/// <param name="nameSegment">Name to search in the list</param>
+		/// <returns>True - if found
+		/// False - if not found</returns>
 		private bool SearchName(string nameSegment)
 		{
 			if (NameSegments == null)
@@ -33,6 +48,12 @@ namespace Impedance
 			return false;
 		}
 
+		/// <summary>
+		/// Create a new segment for the circuit
+		/// </summary>
+		/// <param name="name">Name of segment</param>
+		/// <param name="value">Value of segment if it is
+		/// <see cref="Element"/></param>
 		private void CreateNewSegment(string name, double value)
 		{
 			if (ImpedanceApp.Segment.TryParse(SegmentsComboBox.Text,

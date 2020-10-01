@@ -55,7 +55,7 @@
             this.CanselButton.TabIndex = 1;
             this.CanselButton.Text = "Cansel";
             this.CanselButton.UseVisualStyleBackColor = true;
-            this.CanselButton.Click += new System.EventHandler(this.CanselButton_Click);
+            this.CanselButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // FrequenciesLabel
             // 

@@ -5,7 +5,10 @@ namespace Impedance
 {
 	public partial class AddEditFrequencyForm : Form
 	{
-		public double? Frequencie { get; set; } = null;
+		/// <summary>
+		/// Set and return <see cref="Frequency"/>
+		/// </summary>
+		public double? Frequency { get; set; } = null;
 		public AddEditFrequencyForm()
 		{
 			InitializeComponent();
@@ -17,7 +20,7 @@ namespace Impedance
 			{
 				try
 				{
-					Frequencie = double.Parse(FrequenciesTextBox.Text);
+					Frequency = double.Parse(FrequenciesTextBox.Text);
 					this.DialogResult = DialogResult.OK;
 				}
 				catch(FormatException exception)
@@ -35,13 +38,13 @@ namespace Impedance
 
 		private void AddEditFrequencies_Load(object sender, EventArgs e)
 		{
-			if (Frequencie != null)
+			if (Frequency != null)
 			{
-				FrequenciesTextBox.Text = Frequencie.ToString();
+				FrequenciesTextBox.Text = Frequency.ToString();
 			}
 		}
 
-        private void CanselButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
 			DialogResult = DialogResult.Cancel;
         }

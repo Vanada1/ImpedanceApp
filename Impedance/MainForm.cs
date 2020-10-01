@@ -10,8 +10,9 @@ namespace ImpedanceForms
 {
 	public partial class MainForm : Form
 	{
-		private TreeNode _selectedNode = null;
-
+		/// <summary>
+		/// Contains all data in this field
+		/// </summary>
 		private readonly Project _project = new Project();
 
         /// <summary>
@@ -144,7 +145,7 @@ namespace ImpedanceForms
 			addForm.ShowDialog();
 			if(addForm.DialogResult == DialogResult.OK)
 			{
-				_project.Frequencies.Add((double)addForm.Frequencie);
+				_project.Frequencies.Add((double)addForm.Frequency);
 			}
 			UpdateListBoxes();
 		}
@@ -155,11 +156,11 @@ namespace ImpedanceForms
 			var editForm = new AddEditFrequencyForm();
 			if (index >= 0)
 			{
-				editForm.Frequencie = _project.Frequencies[index];
+				editForm.Frequency = _project.Frequencies[index];
 				editForm.ShowDialog();
 				if (editForm.DialogResult == DialogResult.OK)
 				{
-					_project.Frequencies[index] = (double)editForm.Frequencie;
+					_project.Frequencies[index] = (double)editForm.Frequency;
 				}
 				UpdateListBoxes();
 			}
