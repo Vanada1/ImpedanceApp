@@ -56,6 +56,9 @@ namespace ImpedanceForms
 			ImpedanceListBox.ClearSelected();
 			_project.FindAllElements(_project.CurrentCircuit);
 			_project.CreateNameSegments(_project.CurrentCircuit);
+			CircuitsListBox.DataSource = null;
+			CircuitsListBox.DataSource = _project.AllExamples;
+			CircuitsListBox.DisplayMember = "Name";
 		}
 
 		/// <summary>
@@ -134,9 +137,6 @@ namespace ImpedanceForms
 			{
 				example.SegmentChanged += OnCircuitCollectionChanged;
 			}
-			CircuitsListBox.DataSource = null;
-			CircuitsListBox.DataSource = _project.AllExamples;
-			CircuitsListBox.DisplayMember = "Name";
 		}
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
@@ -334,19 +334,63 @@ namespace ImpedanceForms
 			}
 			else
 			{
-				MessageBox.Show(nameof(Circuit) + " was not selected", "Error",
+				//MessageBox.Show(nameof(Circuit) + " was not selected", "Error",
+				//	MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void AddCircuit_Click(object sender, EventArgs e)
+		{
+			var addForm = new AddEditCircuitForm();
+			addForm.ShowDialog();
+			if (addForm.DialogResult == DialogResult.OK)
+			{
+				_project.AllExamples.Add(addForm.Circuit);
+			}
+			UpdateListBoxes();
+		}
+
+		private void EditCircuit_Click(object sender, EventArgs e)
+		{
+			var index = CircuitsListBox.SelectedIndex;
+			var editForm = new AddEditCircuitForm();
+			if (index >= 0)
+			{
+				editForm.Circuit = _project.AllExamples[index].Clone() 
+					as Circuit;
+				editForm.ShowDialog();
+				if (editForm.DialogResult == DialogResult.OK)
+				{
+					_project.AllExamples[index].Name = editForm.Circuit.Name;
+				}
+				UpdateListBoxes();
+			}
+			else
+			{
+				MessageBox.Show("Circuit was not selected", "Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
-
-		private void RadioButton1CheckedChanged(object sender, EventArgs e)
+		private void RemoveCircuit_Click(object sender, EventArgs e)
 		{
-			_project.CurrentCircuit = _project.AllExamples[0];
-			AddElementButton.Enabled = false;
-			RemoveElementButton.Enabled = false;
-			CircuitPictureBox.Image = Impedance.Properties.Resources.FirstExample;
-			UpdateListBoxes();
+			var index = CircuitsListBox.SelectedIndex;
+			if (index >= 0)
+			{
+				var remove = MessageBox.Show("Remove?",
+					"Remove?", MessageBoxButtons.YesNo);
+				if (remove == DialogResult.Yes)
+				{
+					_project.AllExamples.RemoveAt(index);
+				}
+				UpdateListBoxes();
+			}
+			else
+			{
+				MessageBox.Show("Cercuit was not selected",
+					"Error", MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+			}
 		}
 	}
 }
