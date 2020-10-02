@@ -84,6 +84,7 @@ namespace Impedance
 			{
 				MessageBox.Show("Select the segment", "Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				DialogResult = DialogResult.None;
 			}
 		}
 
@@ -109,14 +110,15 @@ namespace Impedance
 				ValueTextBox.Enabled = false;
 				ValueTextBox.Text = null;
 				NameTextBox.Text = Segment.Name;
+				SegmentsComboBox.Text = Segment.Segment.ToString();
 				_element = Segment as IElement;
 				if (_element != null)
 				{
 					ValueTextBox.Text = _element.Value.ToString();
-
-					
 					ValueTextBox.Enabled = true;
 				}
+
+				SegmentsComboBox.Enabled = false;
 			}
 		}
 
@@ -144,6 +146,7 @@ namespace Impedance
 					{
 						_element.Name = name;
 						_element.Value = value;
+						Segment = _element;
 					}
 					catch (ArgumentOutOfRangeException exception)
 					{
