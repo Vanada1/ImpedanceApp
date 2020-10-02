@@ -11,6 +11,11 @@ namespace ImpedanceForms
 	public partial class MainForm : Form
 	{
 		/// <summary>
+		/// Old <see cref="CircuitsListBox"/> index
+		/// </summary>
+		private int _oldCircuitListBoxIndex = -1;
+
+		/// <summary>
 		/// Contains all data in this field
 		/// </summary>
 		private readonly Project _project = new Project();
@@ -328,9 +333,13 @@ namespace ImpedanceForms
 			if (index >= 0)
 			{
 				_project.CurrentCircuit = _project.AllExamples[index];
-				FillElementsTreeView();
 				UpdateListBoxes();
-				FillElementsTreeView();
+				if (CircuitsListBox.SelectedIndex != _oldCircuitListBoxIndex)
+				{
+					FillElementsTreeView();
+				}
+
+				_oldCircuitListBoxIndex = CircuitsListBox.SelectedIndex;
 			}
 			else
 			{
