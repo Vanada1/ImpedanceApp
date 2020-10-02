@@ -83,10 +83,14 @@ namespace ImpedanceApp
 
 			foreach(var segment in SubSegments)
 			{
+				if (segment == null)
+				{
+					continue;
+				}
 				result += 1.0 / segment.CalculateZ(frequency);
 			}
 
-			return 1.0 / result;
+			return SubSegments.Count == 0 ? 0 : 1.0 / result;
 		}
 
 		/// <summary>

@@ -95,9 +95,14 @@ namespace ImpedanceApp
 			for (int i = 0; i < frequencies.Count; i++)
 			{
 				Complex result = new Complex(0.0, 0.0);
-				foreach(var element in SubSegments)
-                {
-					result += element.CalculateZ(frequencies[i]);
+				foreach(var segment in SubSegments)
+				{
+					if (segment == null)
+					{
+						continue;
+					}
+						
+					result += segment.CalculateZ(frequencies[i]);
                 }
 				results.Add(result);
 			}
