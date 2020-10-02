@@ -245,13 +245,13 @@ namespace ImpedanceForms
 				addForm.ShowDialog();
 				if (addForm.DialogResult == DialogResult.OK)
 				{
-					var segment = _project.FindSegment(
+					var foundSegment = _project.FindSegment(
 						selectedNode.Name);
 					string text = addForm.Segment.Name;
-					if (segment is IElement)
+					if (foundSegment is IElement)
 					{
 						selectedNode = selectedNode.Parent;
-						segment = _project.FindSegment(
+						foundSegment = _project.FindSegment(
 							selectedNode.Name);
 					}
 
@@ -260,7 +260,7 @@ namespace ImpedanceForms
 						text = addForm.Segment.ToString();
 					}
 
-					segment.SubSegments.Add(addForm.Segment);
+					foundSegment.SubSegments.Add(addForm.Segment);
 					selectedNode.Nodes.Add(new TreeNode
 					{
 						Name = addForm.Segment.Name,

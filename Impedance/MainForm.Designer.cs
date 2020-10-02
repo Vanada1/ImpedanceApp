@@ -272,7 +272,6 @@
 			this.ElementsTreeView.Name = "ElementsTreeView";
 			this.ElementsTreeView.Size = new System.Drawing.Size(199, 164);
 			this.ElementsTreeView.TabIndex = 11;
-			this.ElementsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ElementsTreeView_AfterSelect);
 			// 
 			// MainForm
 			// 
