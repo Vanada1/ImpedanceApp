@@ -18,7 +18,7 @@ namespace ImpedanceApp
 		/// <param name="value"> value of the element</param>
 		public Capacitor(string name, double value) : base(name, value)
 		{
-			Segment = Segment.Capacitor;
+			SegmentType = SegmentType.Capacitor;
 		}
 
 		/// <summary>

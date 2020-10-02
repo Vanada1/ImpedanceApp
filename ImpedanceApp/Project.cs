@@ -163,34 +163,6 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Recursively find a segment by name
-		/// </summary>
-		/// <param name="name"> is segment name</param>
-		/// <param name="segment">
-		///     segment in which the search takes place.
-		///     If <see cref="segment" /> is null, then <see cref="CurrentCircuit" /> is taken
-		/// </param>
-		/// <returns>The <see cref="ISegment" /> element .Null if no element is found by name</returns>
-		public ISegment FindSegment(string name, ISegment segment = null)
-		{
-			ISegment result = null;
-			if (segment == null) segment = CurrentCircuit;
-
-			if (segment.Name == name) return segment;
-
-			foreach (var subSegment in segment.SubSegments)
-			{
-				if (result != null) break;
-
-				if (subSegment.Name == name) return subSegment;
-
-				if (!(subSegment is Element)) result = FindSegment(name, subSegment);
-			}
-
-			return result;
-		}
-
-		/// <summary>
 		///     Recursively creates a list of the names of all the <see cref="ISegment" /> in the circuit
 		/// </summary>
 		/// <param name="segment">the <see cref="ISegment" /> in which the items are written to the list</param>

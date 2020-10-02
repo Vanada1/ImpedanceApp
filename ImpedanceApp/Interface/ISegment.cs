@@ -24,7 +24,7 @@ namespace ImpedanceApp
         /// <summary>
         /// Return segment the object is
         /// </summary>
-        Segment Segment { get;}
+        SegmentType SegmentType { get;}
 
         /// <summary>
         /// Event fires when segment changes

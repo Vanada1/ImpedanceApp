@@ -1,6 +1,6 @@
 ﻿namespace ImpedanceApp
 {
-	public enum Segment
+	public enum SegmentType
 	{
 		Resistor,
 		Inductor,

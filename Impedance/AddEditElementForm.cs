@@ -56,28 +56,59 @@ namespace Impedance
 		/// <see cref="ImpedanceApp.Element"/></param>
 		private void CreateNewSegment(string name, double value)
 		{
-			if (ImpedanceApp.Segment.TryParse(SegmentsComboBox.Text,
-				out ImpedanceApp.Segment segment))
+			if (SegmentType.TryParse(SegmentsComboBox.Text,
+				out ImpedanceApp.SegmentType segment))
 			{
 				switch (segment)
 				{
-					case ImpedanceApp.Segment.Capacitor:
+					case ImpedanceApp.SegmentType.Capacitor:
+					{
 						Segment = new Capacitor(name, value);
 						break;
-					case ImpedanceApp.Segment.Inductor:
+					}
+
+					case ImpedanceApp.SegmentType.Inductor:
+					{
 						Segment = new Inductor(name, value);
+					
 						break;
-					case ImpedanceApp.Segment.Resistor:
+					}
+
+					case ImpedanceApp.SegmentType.Resistor:
+					{
 						Segment = new Resistor(name, value);
 						break;
-					case ImpedanceApp.Segment.SerialCircuit:
-						Segment = new SerialCircuit(name, 
-							new SegmentObservableCollection());
+					}
+
+					case ImpedanceApp.SegmentType.SerialCircuit:
+					{
+						SegmentObservableCollection subSegments;
+						if (Segment == null &&!(Segment is Element))
+						{
+							subSegments = new SegmentObservableCollection();
+						}
+						else
+						{
+							subSegments = Segment.SubSegments;
+						}
+						Segment = new SerialCircuit(name, subSegments);
 						break;
-					case ImpedanceApp.Segment.ParallelCircuit:
-						Segment = new ParallelCircuit(name, 
-							new SegmentObservableCollection());
-						break;
+					}
+
+					case ImpedanceApp.SegmentType.ParallelCircuit:
+					{
+						SegmentObservableCollection subSegments;
+						if (Segment == null && !(Segment is Element))
+						{
+							subSegments = new SegmentObservableCollection();
+						}
+						else
+						{
+							subSegments = Segment.SubSegments;
+						}
+						Segment = new ParallelCircuit(name, subSegments);
+							break;
+					}
 				}
 			}
 			else
@@ -92,25 +123,25 @@ namespace Impedance
 		{
 			InitializeComponent();
 		}
+
 		private void AddEditElements_Load(object sender, EventArgs e)
 		{
 			List<string> typeSegments = new List<string>
 			{
 				"",
-				nameof(ImpedanceApp.Segment.Resistor),
-				nameof(ImpedanceApp.Segment.Capacitor),
-				nameof(ImpedanceApp.Segment.Inductor),
-				nameof(ImpedanceApp.Segment.SerialCircuit),
-				nameof(ImpedanceApp.Segment.ParallelCircuit),
+				nameof(ImpedanceApp.SegmentType.Resistor),
+				nameof(ImpedanceApp.SegmentType.Capacitor),
+				nameof(ImpedanceApp.SegmentType.Inductor),
+				nameof(ImpedanceApp.SegmentType.SerialCircuit),
+				nameof(ImpedanceApp.SegmentType.ParallelCircuit),
 			};
-			SegmentsComboBox.DataSource = typeSegments;
 
 			if (Segment != null)
 			{
 				ValueTextBox.Enabled = false;
 				ValueTextBox.Text = null;
 				NameTextBox.Text = Segment.Name;
-				SegmentsComboBox.Text = Segment.Segment.ToString();
+				SegmentsComboBox.Text = Segment.SegmentType.ToString();
 				_element = Segment as Element;
 				if (_element != null)
 				{
@@ -118,8 +149,20 @@ namespace Impedance
 					ValueTextBox.Enabled = true;
 				}
 
-				SegmentsComboBox.Enabled = false;
+				if (Segment.SegmentType == SegmentType.ParallelCircuit ||
+				    Segment.SegmentType == SegmentType.SerialCircuit)
+				{
+					typeSegments.RemoveRange(1,3);
+				}
+				else
+				{
+					typeSegments = typeSegments.GetRange(0, 4);
+				}
+
 			}
+			SegmentsComboBox.DataSource = typeSegments;
+			SegmentsComboBox.Text = Segment != null ?
+				Segment.SegmentType.ToString() : "";
 		}
 
 		private void OKButton_Click(object sender, EventArgs e)
@@ -190,24 +233,24 @@ namespace Impedance
 
 		private void SegmentComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (ImpedanceApp.Segment.TryParse(SegmentsComboBox.Text,
-				out ImpedanceApp.Segment segment))
+			if (ImpedanceApp.SegmentType.TryParse(SegmentsComboBox.Text,
+				out ImpedanceApp.SegmentType segment))
 			{
 				switch (segment)
 				{
-					case ImpedanceApp.Segment.Capacitor:
+					case ImpedanceApp.SegmentType.Capacitor:
 						ValueTextBox.Enabled = true;
 						break;
-					case ImpedanceApp.Segment.Inductor:
+					case ImpedanceApp.SegmentType.Inductor:
 						ValueTextBox.Enabled = true;
 						break;
-					case ImpedanceApp.Segment.Resistor:
+					case ImpedanceApp.SegmentType.Resistor:
 						ValueTextBox.Enabled = true;
 						break;
-					case ImpedanceApp.Segment.SerialCircuit:
+					case ImpedanceApp.SegmentType.SerialCircuit:
 						ValueTextBox.Enabled = false;
 						break;
-					case ImpedanceApp.Segment.ParallelCircuit:
+					case ImpedanceApp.SegmentType.ParallelCircuit:
 						ValueTextBox.Enabled = false;
 						break;
 				}

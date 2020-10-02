@@ -18,7 +18,7 @@ namespace ImpedanceApp
 		/// <param name="value"> value of the element</param>
 		public Inductor(string name, double value) : base(name, value)
 		{
-			Segment = Segment.Inductor;
+			SegmentType = SegmentType.Inductor;
 		}
 
 		/// <summary>

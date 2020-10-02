@@ -112,15 +112,15 @@ namespace ImpedanceUnitTest
 				message);
 		}
 
-		[Test(Description = "Positive test of the Segment getter")]
+		[Test(Description = "Positive test of the SegmentType getter")]
 		public void TestSegmentGet_CorrectValue()
 		{
-			Segment expected = Segment.SerialCircuit;
+			SegmentType expected = SegmentType.SerialCircuit;
 
 			var circuit = new Circuit("Test", 
 				new SegmentObservableCollection());
 
-			Segment actual = circuit.Segment;
+			SegmentType actual = circuit.SegmentType;
 
 			Assert.AreEqual(expected, actual,
 				"Getter Name returns incorrect value");
@@ -694,6 +694,197 @@ namespace ImpedanceUnitTest
 
 			Assert.AreEqual(expected, actual,
 				"Invalid copying of elements");
+		}
+
+		[Test(Description = "Test of the FindSegment method without inital segment")]
+		public void TestFindSegment_WithoutInitalSegment()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			var circuit = new Circuit("Test", segment);
+
+			ISegment expected = circuit.SubSegments[0].SubSegments[1];
+
+			ISegment actual = circuit.FindSegment("L1");
+
+			Assert.AreEqual(expected, actual,
+				"Finds the item incorrectly");
+		}
+
+		[Test(Description = "Test of the FindSegment method with inital segment")]
+		public void TestFindSegment_WithInitalSegment()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			var circuit = new Circuit("Test", segment);
+
+			ISegment expected = circuit.SubSegments[0].SubSegments[1];
+
+			ISegment actual = circuit.FindSegment("L1", 
+				circuit.SubSegments[0]);
+
+			Assert.AreEqual(expected, actual,
+				"Finds the item incorrectly");
+		}
+
+		[Test(Description = "Test of the FindSegment method with inital segment")]
+		public void TestFindSegment_WithInitalSegmentAndThisElement()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			var circuit = new Circuit("Test", segment);
+
+
+			ISegment expected =
+				circuit.SubSegments[0];
+
+			ISegment actual = circuit.FindSegment("Test",
+				circuit.SubSegments[0]);
+
+			Assert.AreEqual(expected, actual,
+				"Finds the item incorrectly");
+		}
+
+		[Test(Description = "Test of the ReplaceSegment method without inital segment")]
+		public void TestReplaceSegment_WithoutInitalSegment()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			var circuit = new Circuit("Test", segment);
+
+			ISegment expected = new Inductor("L1", 0.05);
+
+			ISegment actual = circuit.ReplaceSegment(circuit.SubSegments[0].SubSegments[1],
+				circuit.SubSegments[0].SubSegments[0]);
+
+			Assert.AreEqual(expected, actual,
+				"Replace the item incorrectly");
+		}
+
+		[Test(Description = "Test of the ReplaceSegment method with inital segment")]
+		public void TestReplaceSegment_WithInitalSegment()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			var circuit = new Circuit("Test", segment);
+
+			ISegment expected = circuit.SubSegments[0].SubSegments[0];
+
+			ISegment actual = circuit.ReplaceSegment(circuit.SubSegments[0].SubSegments[1],
+				circuit.SubSegments[0].SubSegments[0],
+				circuit.SubSegments[0]);
+
+			Assert.AreEqual(expected, actual,
+				"Replace the item incorrectly");
+		}
+
+		[Test(Description = "Test of the FindSegment method root segment")]
+		public void TestReplaceSegment_WithInitalSegmentAndRootElement()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			var circuit = new Circuit("Test", segment);
+
+
+			ISegment expected = new Circuit("Test1", segment);
+
+			ISegment actual = circuit.ReplaceSegment(circuit,
+				new Circuit("Test1", segment));
+
+			Assert.AreEqual(expected, actual,
+				"Replace the item incorrectly");
+		}
+
+		[Test(Description = "Test of the FindSegment method segment")]
+		public void TestReplaceSegment_WithInitalSegmentAndElement()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			var circuit = new Circuit("Test", segment);
+
+
+			ISegment expected = null;
+
+			ISegment actual = circuit.ReplaceSegment(circuit,
+				new Circuit("Test1", segment),
+				circuit.SubSegments[0].SubSegments[0]);
+
+			Assert.AreEqual(expected, actual,
+				"Replace the item incorrectly");
+		}
+
+		[Test(Description = "Test of the FindSegment method non-existent segment")]
+		public void TestReplaceSegment_WithInitalSegmentAndNonExistentElement()
+		{
+			var segment = new SegmentObservableCollection
+			{
+				new ParallelCircuit("Test", new SegmentObservableCollection
+				{
+					new Resistor("R", 5.0),
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			var circuit = new Circuit("Test", segment);
+
+
+			ISegment expected = null;
+
+			ISegment actual = circuit.ReplaceSegment(
+				new Capacitor("C2", 0.001),
+				new Circuit("Test1", segment));
+
+			Assert.AreEqual(expected, actual,
+				"Replace the item incorrectly");
 		}
 	}
 }

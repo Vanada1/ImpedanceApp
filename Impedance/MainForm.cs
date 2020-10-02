@@ -202,44 +202,37 @@ namespace ImpedanceForms
 			var node = ElementsTreeView.SelectedNode;
 			if (node != null)
 			{
-				ISegment foundSegment = _project.FindSegment(node.Name);
-				ISegment oldSegment = foundSegment.Clone() as ISegment;
+				ISegment newSegment = null;
+				ISegment foundSegment = _project.CurrentCircuit.FindSegment(node.Name);
+				ISegment oldSegment = foundSegment;
                 AddEditElementForm editForm = new AddEditElementForm
                 {
-                    Segment = foundSegment.Clone() as ISegment,
+                    Segment = foundSegment,
                     NameSegments = _project.NameSegments
                 };
                 editForm.NameSegments.Remove(foundSegment.Name);
 				editForm.ShowDialog();
 				if (editForm.DialogResult == DialogResult.OK)
 				{
-					foundSegment.Name = editForm.Segment.Name;
-					if (editForm.Segment is Element element)
-					{
-						if (foundSegment is Element elementFound)
-						{
-							elementFound.Value = element.Value;
-						}
-					}
+					newSegment = _project.CurrentCircuit.ReplaceSegment(foundSegment,
+						editForm.Segment);
 				}
 				else
 				{
-					foundSegment = oldSegment;
+					newSegment = oldSegment;
+				}
+
+				if (newSegment == null)
+				{
+					throw new ArgumentNullException(
+						"Segment not found");
 				}
 
 				ElementsTreeView.SelectedNode.Name =
-					foundSegment.Name;
-				if (foundSegment is Element foundElement)
-				{
-					ElementsTreeView.SelectedNode.Text =
-						foundSegment.ToString();
-				}
-				else
-				{
-					ElementsTreeView.SelectedNode.Text =
-						foundSegment.Name;
-				}
+					newSegment.Name;
 
+				ElementsTreeView.SelectedNode.Text = newSegment is Element ?
+					newSegment.ToString() : newSegment.Name;
 				UpdateListBoxes();
 			}
 			else
@@ -261,13 +254,13 @@ namespace ImpedanceForms
 				addForm.ShowDialog();
 				if (addForm.DialogResult == DialogResult.OK)
 				{
-					var foundSegment = _project.FindSegment(
+					var foundSegment = _project.CurrentCircuit.FindSegment(
 						selectedNode.Name);
 					string text = addForm.Segment.Name;
 					if (foundSegment is Element)
 					{
 						selectedNode = selectedNode.Parent;
-						foundSegment = _project.FindSegment(
+						foundSegment = _project.CurrentCircuit.FindSegment(
 							selectedNode.Name);
 					}
 
@@ -302,7 +295,7 @@ namespace ImpedanceForms
 					MessageBoxButtons.YesNo);
 				if (remove == DialogResult.Yes)
 				{
-					ISegment foundElement = _project.FindSegment(
+					ISegment foundElement = _project.CurrentCircuit.FindSegment(
 						node.Name);
 					var parentNode = node.Parent;
 					if (parentNode != null)

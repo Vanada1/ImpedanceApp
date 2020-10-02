@@ -64,7 +64,7 @@ namespace ImpedanceApp
 		/// <summary>
 		///     Return segment the object is
 		/// </summary>
-		public Segment Segment { get; } = Segment.SerialCircuit;
+		public SegmentType SegmentType { get; } = SegmentType.SerialCircuit;
 
 		/// <summary>
 		///     Event fires when segment changes
@@ -130,8 +130,6 @@ namespace ImpedanceApp
 				var result = new Complex(0.0, 0.0);
 				foreach (var segment in SubSegments)
 				{
-					if (segment == null) continue;
-
 					result += segment.CalculateZ(frequencies[i]);
 				}
 
@@ -141,6 +139,39 @@ namespace ImpedanceApp
 			return results;
 		}
 
+		/// <summary>
+		///     Recursively find a segment by name
+		/// </summary>
+		/// <param name="name"> is segment name</param>
+		/// <param name="segment">
+		///     segment in which the search takes place.
+		///     If <see cref="segment" /> is null, then <see cref="this" /> is taken
+		/// </param>
+		/// <returns>The <see cref="ISegment" /> element .Null if no element is found by name</returns>
+		public ISegment FindSegment(string name, ISegment segment = null)
+		{
+			ISegment result = null;
+			segment ??= this;
+
+			if (segment.Name == name) return segment;
+
+			foreach (var subSegment in segment.SubSegments)
+			{
+				if (result != null) break;
+
+				if (subSegment.Name == name) return subSegment;
+
+				if (!(subSegment is Element)) result = FindSegment(name, subSegment);
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// Remove <see cref="ISegment"/> in the circuit
+		/// </summary>
+		/// <param name="removedElement"> <see cref="ISegment"/> for remove</param>
+		/// <param name="segments">currently segment</param>
 		public void RemoveElement(ISegment removedElement, ISegment segments = null)
 		{
 			var foundRoot = segments ?? this;
@@ -149,6 +180,52 @@ namespace ImpedanceApp
 			foreach (var segment in foundRoot.SubSegments)
 				if (!(segment is Element))
 					RemoveElement(removedElement, segment);
+		}
+
+		/// <summary>
+		/// Recursively find and replace segment
+		/// </summary>
+		/// <param name="insteadSegment">segment that change</param>
+		/// <param name="replacingSegment"> segment to which will change</param>
+		/// <param name="currentSegment">segment in which the search takes place.
+		///     If <see cref="currentSegment" /> is null, then <see cref="this" /></param>
+		/// <returns>changed item</returns>
+		public ISegment ReplaceSegment(ISegment insteadSegment,
+			ISegment replacingSegment, ISegment currentSegment = null)
+		{
+			if (currentSegment == null)
+			{
+				if (insteadSegment == this)
+				{
+					this.Name = replacingSegment.Name;
+					return this;
+				}
+				currentSegment = this;
+			}
+
+			if (currentSegment is Element)
+			{
+				return null;
+			}
+
+			for (int i = 0; i < currentSegment.SubSegments.Count; i++)
+			{
+				if (currentSegment.SubSegments[i] == insteadSegment)
+				{
+					currentSegment.SubSegments[i] = replacingSegment;
+					return currentSegment.SubSegments[i];
+				}
+				else
+				{
+					if (!(currentSegment.SubSegments[i] is Element))
+					{
+						return ReplaceSegment(replacingSegment, insteadSegment,
+							currentSegment.SubSegments[i]);
+					}
+				}
+			}
+
+			return null;
 		}
 
 		/// <summary>

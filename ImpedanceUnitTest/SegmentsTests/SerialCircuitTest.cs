@@ -95,15 +95,15 @@ namespace ImpedanceUnitTest
 				message);
 		}
 
-		[Test(Description = "Positive test of the Segment getter")]
+		[Test(Description = "Positive test of the SegmentType getter")]
 		public void TestSegmentGet_CorrectValue()
 		{
-			Segment expected = Segment.SerialCircuit;
+			SegmentType expected = SegmentType.SerialCircuit;
 
 			var circuit = new SerialCircuit("Test", 
 				new SegmentObservableCollection());
 
-			Segment actual = circuit.Segment;
+			SegmentType actual = circuit.SegmentType;
 
 			Assert.AreEqual(expected, actual,
 				"Getter Name returns incorrect value");

@@ -16,7 +16,7 @@ namespace ImpedanceApp
 		/// <param name="value">value of the element</param>
 		public Resistor(string name, double value) : base(name, value)
 		{
-			Segment = Segment.Resistor;
+			SegmentType = ImpedanceApp.SegmentType.Resistor;
 		}
 
 		/// <summary>

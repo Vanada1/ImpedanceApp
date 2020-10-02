@@ -50,7 +50,7 @@ namespace ImpedanceApp
 		/// <summary>
 		///     Return segment the object is
 		/// </summary>
-		public Segment Segment { get; } = Segment.ParallelCircuit;
+		public SegmentType SegmentType { get; } = SegmentType.ParallelCircuit;
 
 		/// <summary>
 		///     Event fires when segment changes
@@ -68,7 +68,6 @@ namespace ImpedanceApp
 
 			foreach (var segment in SubSegments)
 			{
-				if (segment == null) continue;
 				result += 1.0 / segment.CalculateZ(frequency);
 			}
 
