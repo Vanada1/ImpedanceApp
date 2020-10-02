@@ -140,6 +140,11 @@ namespace ImpedanceApp
 
 			AllExamples.Add(new Circuit("My example", 
 				new SegmentObservableCollection()));
+
+			Frequencies = new List<double>
+			{
+				1000.0, 500.0, 300.0
+			};
 		}
 
 		/// <summary>
@@ -228,7 +233,6 @@ namespace ImpedanceApp
 					CreateNameSegments(subSegment);
 				}
 			}
-
 		}
 	}
 }

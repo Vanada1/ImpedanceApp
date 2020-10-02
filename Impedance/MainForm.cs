@@ -201,12 +201,23 @@ namespace ImpedanceForms
 				ISegment oldSegment = foundSegment.Clone() as ISegment;
                 AddEditElementForm editForm = new AddEditElementForm
                 {
-                    Segment = foundSegment,
+                    Segment = foundSegment.Clone() as ISegment,
                     NameSegments = _project.NameSegments
                 };
                 editForm.NameSegments.Remove(foundSegment.Name);
 				editForm.ShowDialog();
-				if (editForm.DialogResult != DialogResult.OK)
+				if (editForm.DialogResult == DialogResult.OK)
+				{
+					foundSegment.Name = editForm.Segment.Name;
+					if (editForm.Segment is IElement element)
+					{
+						if (foundSegment is IElement elementFound)
+						{
+							elementFound.Value = element.Value;
+						}
+					}
+				}
+				else
 				{
 					foundSegment = oldSegment;
 				}
