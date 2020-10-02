@@ -140,7 +140,7 @@ namespace ImpedanceApp
 		/// <summary>
 		///     Set and return all <see cref="CircuitElements" /> selected <see cref="Circuit" />
 		/// </summary>
-		public List<IElement> CircuitElements { get; set; } = new List<IElement>();
+		public List<Element> CircuitElements { get; set; } = new List<Element>();
 
 		/// <summary>
 		///     Set and return all segments name
@@ -148,15 +148,15 @@ namespace ImpedanceApp
 		public List<string> NameSegments { get; set; } = new List<string>();
 
 		/// <summary>
-		///     Recursively Find all <see cref="IElement" /> in the <see cref="ISegment.SubSegments" />
+		///     Recursively Find all <see cref="ImpedanceApp.Element" /> in the <see cref="ISegment.SubSegments" />
 		/// </summary>
 		/// <param name="segment"> of the <see cref="Circuit" /></param>
 		public void FindAllElements(ISegment segment)
 		{
-			if (segment != null && segment == CurrentCircuit) CircuitElements = new List<IElement>();
+			if (segment != null && segment == CurrentCircuit) CircuitElements = new List<Element>();
 
 			foreach (var element in segment.SubSegments)
-				if (element is IElement tempElement)
+				if (element is Element tempElement)
 					CircuitElements.Add(tempElement);
 				else
 					FindAllElements(element);
@@ -184,7 +184,7 @@ namespace ImpedanceApp
 
 				if (subSegment.Name == name) return subSegment;
 
-				if (!(subSegment is IElement)) result = FindSegment(name, subSegment);
+				if (!(subSegment is Element)) result = FindSegment(name, subSegment);
 			}
 
 			return result;
@@ -201,7 +201,7 @@ namespace ImpedanceApp
 			NameSegments.Add(segment.Name);
 
 			foreach (var subSegment in segment.SubSegments)
-				if (subSegment is IElement)
+				if (subSegment is Element)
 					NameSegments.Add(subSegment.Name);
 				else
 					CreateNameSegments(subSegment);

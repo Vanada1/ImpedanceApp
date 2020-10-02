@@ -147,7 +147,7 @@ namespace ImpedanceApp
 
 			if (foundRoot.SubSegments.Remove(removedElement)) return;
 			foreach (var segment in foundRoot.SubSegments)
-				if (!(segment is IElement))
+				if (!(segment is Element))
 					RemoveElement(removedElement, segment);
 		}
 
@@ -165,7 +165,7 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Comparing object and <see cref="Element" /> Objects
+		///     Comparing object and <see cref="ImpedanceApp.Element" /> Objects
 		/// </summary>
 		/// <param name="obj">This object compares with the current</param>
 		/// <returns>

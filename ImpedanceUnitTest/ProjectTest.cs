@@ -135,12 +135,12 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Positive test of the CircuitElements getter")]
 		public void TestCircuitElementsGet_CorrectValue()
 		{
-			List<IElement> expected = new List<IElement>();
+			List<Element> expected = new List<Element>();
 
 			Project project = new Project();
 			project.CircuitElements = expected;
 
-			List<IElement> actual = project.CircuitElements;
+			List<Element> actual = project.CircuitElements;
 
 			Assert.AreEqual(expected, actual,
 				"Getter Name returns incorrect value");
@@ -149,7 +149,7 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Positive test of the CircuitElements setter")]
 		public void TestCircuitElementsSet_CorrectValue()
 		{
-			List<IElement> segments = new List<IElement>();
+			List<Element> segments = new List<Element>();
 			string message = "Positive test of the Name setter not passed";
 			Project element = new Project();
 			Assert.DoesNotThrow(
@@ -184,7 +184,7 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test FindAllElements")]
 		public void TestFindAllElements()
 		{
-			List<IElement> expected = new List<IElement>()
+			List<Element> expected = new List<Element>()
 			{
 				new Resistor("R", 5.0),
 				new Inductor("L1", 0.05),
@@ -194,7 +194,7 @@ namespace ImpedanceUnitTest
 			Project project = new Project();
 			project.CurrentCircuit = new Circuit("Test", CreateCircuit());
 			project.FindAllElements(project.CurrentCircuit);
-			List<IElement> actual = project.CircuitElements;
+			List<Element> actual = project.CircuitElements;
 
 			for (int i = 0; i < project.CircuitElements.Count; i++)
 			{
@@ -206,7 +206,7 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test FindAllElements start not from the beginning")]
 		public void TestFindAllElements_NotBeginning()
 		{
-			List<IElement> expected = new List<IElement>()
+			List<Element> expected = new List<Element>()
 			{
 				new Resistor("R", 5.0),
 				new Inductor("L1", 0.05)
@@ -215,7 +215,7 @@ namespace ImpedanceUnitTest
 			Project project = new Project();
 			project.CurrentCircuit = new Circuit("Test", CreateCircuit());
 			project.FindAllElements(project.CurrentCircuit.SubSegments[0]);
-			List<IElement> actual = project.CircuitElements;
+			List<Element> actual = project.CircuitElements;
 
 			for (int i = 0; i < project.CircuitElements.Count; i++)
 			{

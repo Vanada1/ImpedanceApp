@@ -10,7 +10,7 @@ namespace Impedance
 		/// <summary>
 		/// Field for working with element
 		/// </summary>
-		private IElement _element = null;
+		private Element _element = null;
 
 		/// <summary>
 		/// Set and return current segment for chenged
@@ -53,7 +53,7 @@ namespace Impedance
 		/// </summary>
 		/// <param name="name">Name of segment</param>
 		/// <param name="value">Value of segment if it is
-		/// <see cref="Element"/></param>
+		/// <see cref="ImpedanceApp.Element"/></param>
 		private void CreateNewSegment(string name, double value)
 		{
 			if (ImpedanceApp.Segment.TryParse(SegmentsComboBox.Text,
@@ -111,7 +111,7 @@ namespace Impedance
 				ValueTextBox.Text = null;
 				NameTextBox.Text = Segment.Name;
 				SegmentsComboBox.Text = Segment.Segment.ToString();
-				_element = Segment as IElement;
+				_element = Segment as Element;
 				if (_element != null)
 				{
 					ValueTextBox.Text = _element.Value.ToString();
@@ -141,7 +141,7 @@ namespace Impedance
 					var value = double.Parse(ValueTextBox.Text);
 					DialogResult = DialogResult.OK;
 					CreateNewSegment(name, value);
-					_element = Segment as IElement;
+					_element = Segment as Element;
 					try
 					{
 						_element.Name = name;
@@ -165,7 +165,7 @@ namespace Impedance
 				}
 			}
 			else if (NameTextBox.Text.Length != 0  &&
-			         !(Segment is IElement))
+			         !(Segment is Element))
 			{
 				string name = NameTextBox.Text;
 				CreateNewSegment(name, -1);

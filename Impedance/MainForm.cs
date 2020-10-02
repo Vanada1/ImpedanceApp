@@ -95,7 +95,7 @@ namespace ImpedanceForms
 	        {
 		        foreach (var subSegment in segment.SubSegments)
 		        {
-			        if (subSegment is IElement element)
+			        if (subSegment is Element element)
 			        {
 				        TreeNode segmentTreeNode = new TreeNode
 				        {
@@ -209,9 +209,9 @@ namespace ImpedanceForms
 				if (editForm.DialogResult == DialogResult.OK)
 				{
 					foundSegment.Name = editForm.Segment.Name;
-					if (editForm.Segment is IElement element)
+					if (editForm.Segment is Element element)
 					{
-						if (foundSegment is IElement elementFound)
+						if (foundSegment is Element elementFound)
 						{
 							elementFound.Value = element.Value;
 						}
@@ -224,7 +224,7 @@ namespace ImpedanceForms
 
 				ElementsTreeView.SelectedNode.Name =
 					foundSegment.Name;
-				if (foundSegment is IElement foundElement)
+				if (foundSegment is Element foundElement)
 				{
 					ElementsTreeView.SelectedNode.Text =
 						foundSegment.ToString();
@@ -259,14 +259,14 @@ namespace ImpedanceForms
 					var foundSegment = _project.FindSegment(
 						selectedNode.Name);
 					string text = addForm.Segment.Name;
-					if (foundSegment is IElement)
+					if (foundSegment is Element)
 					{
 						selectedNode = selectedNode.Parent;
 						foundSegment = _project.FindSegment(
 							selectedNode.Name);
 					}
 
-					if (addForm.Segment is IElement)
+					if (addForm.Segment is Element)
 					{
 						text = addForm.Segment.ToString();
 					}
