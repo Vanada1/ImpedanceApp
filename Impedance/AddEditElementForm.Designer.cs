@@ -43,9 +43,10 @@
 			// 
 			this.NameLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.NameLabel.AutoSize = true;
-			this.NameLabel.Location = new System.Drawing.Point(21, 16);
+			this.NameLabel.Location = new System.Drawing.Point(15, 13);
+			this.NameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.NameLabel.Name = "NameLabel";
-			this.NameLabel.Size = new System.Drawing.Size(49, 17);
+			this.NameLabel.Size = new System.Drawing.Size(38, 13);
 			this.NameLabel.TabIndex = 0;
 			this.NameLabel.Text = "Name:";
 			// 
@@ -53,18 +54,19 @@
 			// 
 			this.ValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.ValueLabel.AutoSize = true;
-			this.ValueLabel.Location = new System.Drawing.Point(22, 66);
+			this.ValueLabel.Location = new System.Drawing.Point(16, 54);
+			this.ValueLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.ValueLabel.Name = "ValueLabel";
-			this.ValueLabel.Size = new System.Drawing.Size(48, 17);
+			this.ValueLabel.Size = new System.Drawing.Size(37, 13);
 			this.ValueLabel.TabIndex = 1;
 			this.ValueLabel.Text = "Value:";
 			// 
 			// OKButton
 			// 
-			this.OKButton.Location = new System.Drawing.Point(190, 117);
-			this.OKButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.OKButton.Location = new System.Drawing.Point(142, 95);
+			this.OKButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.OKButton.Name = "OKButton";
-			this.OKButton.Size = new System.Drawing.Size(94, 23);
+			this.OKButton.Size = new System.Drawing.Size(70, 19);
 			this.OKButton.TabIndex = 2;
 			this.OKButton.Text = "OK";
 			this.OKButton.UseVisualStyleBackColor = true;
@@ -73,10 +75,10 @@
 			// CancelButton
 			// 
 			this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.CancelButton.Location = new System.Drawing.Point(290, 117);
-			this.CancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.CancelButton.Location = new System.Drawing.Point(218, 95);
+			this.CancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.CancelButton.Name = "CancelButton";
-			this.CancelButton.Size = new System.Drawing.Size(94, 23);
+			this.CancelButton.Size = new System.Drawing.Size(70, 19);
 			this.CancelButton.TabIndex = 3;
 			this.CancelButton.Text = "Cansel";
 			this.CancelButton.UseVisualStyleBackColor = true;
@@ -85,19 +87,19 @@
 			// NameTextBox
 			// 
 			this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.NameTextBox.Location = new System.Drawing.Point(76, 14);
-			this.NameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.NameTextBox.Location = new System.Drawing.Point(57, 10);
+			this.NameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.NameTextBox.Name = "NameTextBox";
-			this.NameTextBox.Size = new System.Drawing.Size(290, 22);
+			this.NameTextBox.Size = new System.Drawing.Size(218, 20);
 			this.NameTextBox.TabIndex = 4;
 			// 
 			// ValueTextBox
 			// 
 			this.ValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.ValueTextBox.Location = new System.Drawing.Point(76, 64);
-			this.ValueTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.ValueTextBox.Location = new System.Drawing.Point(57, 50);
+			this.ValueTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.ValueTextBox.Name = "ValueTextBox";
-			this.ValueTextBox.Size = new System.Drawing.Size(290, 22);
+			this.ValueTextBox.Size = new System.Drawing.Size(218, 20);
 			this.ValueTextBox.TabIndex = 5;
 			// 
 			// tableLayoutPanel1
@@ -109,41 +111,45 @@
 			this.tableLayoutPanel1.Controls.Add(this.ValueTextBox, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.ValueLabel, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.NameLabel, 0, 0);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(11, 10);
-			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 8);
+			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(369, 100);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(277, 81);
 			this.tableLayoutPanel1.TabIndex = 6;
 			// 
 			// SegmentsComboBox
 			// 
 			this.SegmentsComboBox.FormattingEnabled = true;
-			this.SegmentsComboBox.Location = new System.Drawing.Point(11, 118);
+			this.SegmentsComboBox.Location = new System.Drawing.Point(8, 96);
+			this.SegmentsComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.SegmentsComboBox.Name = "SegmentsComboBox";
-			this.SegmentsComboBox.Size = new System.Drawing.Size(173, 24);
+			this.SegmentsComboBox.Size = new System.Drawing.Size(131, 21);
 			this.SegmentsComboBox.TabIndex = 7;
 			this.SegmentsComboBox.SelectedIndexChanged += new System.EventHandler(this.SegmentComboBox_SelectedIndexChanged);
 			// 
 			// AddEditElementForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(395, 149);
+			this.ClientSize = new System.Drawing.Size(310, 160);
 			this.Controls.Add(this.SegmentsComboBox);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.CancelButton);
 			this.Controls.Add(this.OKButton);
-			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.MaximizeBox = false;
+			this.MaximumSize = new System.Drawing.Size(310, 160);
+			this.MinimizeBox = false;
+			this.MinimumSize = new System.Drawing.Size(310, 160);
 			this.Name = "AddEditElementForm";
 			this.Text = "AddEditElements";
 			this.Load += new System.EventHandler(this.AddEditElements_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
-
 		}
 
 		#endregion

@@ -74,11 +74,15 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(340, 104);
+			this.ClientSize = new System.Drawing.Size(360, 150);
 			this.Controls.Add(this.CancelButton);
 			this.Controls.Add(this.OKButton);
 			this.Controls.Add(this.CircuitTextBox);
 			this.Controls.Add(this.CircuitNameLabel);
+			this.MaximizeBox = false;
+			this.MaximumSize = new System.Drawing.Size(360, 150);
+			this.MinimizeBox = false;
+			this.MinimumSize = new System.Drawing.Size(360, 150);
 			this.Name = "AddEditCircuit";
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.AddEditCircuit_Load);
