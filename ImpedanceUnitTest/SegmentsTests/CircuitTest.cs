@@ -13,7 +13,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -206,7 +206,7 @@ namespace ImpedanceUnitTest
 		{
 			var expected = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -222,7 +222,7 @@ namespace ImpedanceUnitTest
 
 			for (int i = 0; i < expected.Count; i++)
 			{
-				Assert.AreEqual(expected[i].Name, actual[i].Name,
+				Assert.AreEqual(expected, actual,
 					"Incorrect delete for the RemoveElement method");
 			}
 		}
@@ -233,7 +233,7 @@ namespace ImpedanceUnitTest
 		{
 			var expected = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -249,7 +249,7 @@ namespace ImpedanceUnitTest
 
 			for (int i = 0; i < expected.Count; i++)
 			{
-				Assert.AreEqual(expected[i].Name, actual[i].Name,
+				Assert.AreEqual(expected, actual,
 					"Incorrect delete for the RemoveElement method");
 			}
 		}
@@ -261,7 +261,7 @@ namespace ImpedanceUnitTest
 		{
 			var expected = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -277,7 +277,7 @@ namespace ImpedanceUnitTest
 
 			for (int i = 0; i < expected.Count; i++)
 			{
-				Assert.AreEqual(expected[i].Name, actual[i].Name,
+				Assert.AreEqual(expected, actual,
 					"Incorrect delete for the RemoveElement method");
 			}
 		}
@@ -287,7 +287,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -307,7 +307,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -331,7 +331,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -356,7 +356,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -380,7 +380,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -405,7 +405,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -429,7 +429,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -454,7 +454,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -478,7 +478,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -502,7 +502,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -527,7 +527,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -551,7 +551,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -575,7 +575,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -599,7 +599,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -625,7 +625,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -651,7 +651,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -677,7 +677,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -701,7 +701,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -723,7 +723,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -746,7 +746,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -757,9 +757,9 @@ namespace ImpedanceUnitTest
 
 
 			ISegment expected =
-				circuit.SubSegments[0];
+				circuit.SubSegments[0].SubSegments[0];
 
-			ISegment actual = circuit.FindSegment("Test",
+			ISegment actual = circuit.FindSegment("R",
 				circuit.SubSegments[0]);
 
 			Assert.AreEqual(expected, actual,
@@ -771,7 +771,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -794,7 +794,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -818,7 +818,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -842,7 +842,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -867,7 +867,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)

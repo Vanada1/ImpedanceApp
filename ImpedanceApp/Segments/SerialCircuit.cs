@@ -9,38 +9,26 @@ namespace ImpedanceApp
 	public class SerialCircuit : ISegment
 	{
 		/// <summary>
-		///     Name of <see cref="SerialCircuit" />
+		/// ID Serial segment
 		/// </summary>
-		private string _name;
+		private static uint _id = 0;
 
 		/// <summary>
 		///     <see cref="SerialCircuit" /> constructor
 		/// </summary>
-		/// <param name="name"> name of the <see cref="SerialCircuit" /></param>
 		/// <param name="subSegments"> sub-segments of the <see cref="SerialCircuit" /></param>
-		public SerialCircuit(string name, SegmentObservableCollection subSegments)
+		public SerialCircuit(SegmentObservableCollection subSegments)
 		{
-			Name = name;
+			Name = SetIDSegment();
 			SubSegments = subSegments;
 			SubSegments.SegmentObservableCollectionChanged += OnCircuitChanged;
 			SubSegments.CollectionChanged += OnCircuitChanged;
 		}
 
 		/// <summary>
-		///     Set and return <see cref="Name" /> of the <see cref="SerialCircuit" />
+		///     Return <see cref="Name" /> of the <see cref="SerialCircuit" />
 		/// </summary>
-		public string Name
-		{
-			get => _name;
-			set
-			{
-				if (value.Length == 0)
-					throw new ArgumentException(nameof(Name) +
-					                            " cannot have string length 0");
-
-				_name = value;
-			}
-		}
+		public string Name { get; }
 
 		/// <summary>
 		///     Set and return <see cref="SubSegments" /> of the <see cref="SerialCircuit" />
@@ -56,6 +44,17 @@ namespace ImpedanceApp
 		///     Event fires when segment changes
 		/// </summary>
 		public event EventHandler SegmentChanged;
+
+		/// <summary>
+		/// Sets the id for the segment
+		/// </summary>
+		/// <returns>The segment name string</returns>
+		private static string SetIDSegment()
+		{
+			string id = "Serial" + _id.ToString();
+			_id++;
+			return id;
+		}
 
 		/// <summary>
 		///     Calculate impedance in the <see cref="SerialCircuit" />
@@ -80,7 +79,7 @@ namespace ImpedanceApp
 		/// <returns>Returns a new object with the same values</returns>
 		public object Clone()
 		{
-			return new SerialCircuit(Name, SubSegments.Clone() as SegmentObservableCollection);
+			return new SerialCircuit(SubSegments.Clone() as SegmentObservableCollection);
 		}
 
 		/// <summary>
@@ -95,7 +94,7 @@ namespace ImpedanceApp
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
-			return Name == other.Name && SubSegments.Equals(other.SubSegments);
+			return  Equals(SubSegments, other.SubSegments);
 		}
 
 		/// <summary>
@@ -119,7 +118,7 @@ namespace ImpedanceApp
 		/// </returns>
 		protected bool Equals(SerialCircuit other)
 		{
-			return Name == other.Name && SubSegments.Equals(other.SubSegments);
+			return SubSegments.Equals(other.SubSegments);
 		}
 
 		/// <summary>
