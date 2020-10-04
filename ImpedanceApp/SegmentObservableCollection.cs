@@ -10,6 +10,10 @@ namespace ImpedanceApp
 	public sealed class SegmentObservableCollection : ObservableCollection<ISegment>, ICloneable,
 		IEquatable<SegmentObservableCollection>
 	{
+		/// <summary>
+		/// Creates a copy of the element with a different address
+		/// </summary>
+		/// <returns>A copy of the element</returns>
 		public object Clone()
 		{
 			var newCollection = new SegmentObservableCollection();
@@ -18,6 +22,12 @@ namespace ImpedanceApp
 			return newCollection;
 		}
 
+		/// <summary>
+		/// Compares two collections
+		/// </summary>
+		/// <param name="other">The collection to be compared to</param>
+		/// <returns>True if equals.
+		/// False if not</returns>
 		public bool Equals(SegmentObservableCollection other)
 		{
 			if (other == null) return false;
@@ -103,15 +113,16 @@ namespace ImpedanceApp
 			base.ClearItems();
 		}
 
+		/// <summary>
+		/// The collection is compared to the object
+		/// </summary>
+		/// <param name="obj">Comparison object</param>
+		/// <returns>True if equals.
+		/// False if not</returns>
 		public override bool Equals(object obj)
 		{
 			return ReferenceEquals(this, obj) || obj is SegmentObservableCollection other &&
 				Equals(other);
-		}
-
-		public override int GetHashCode()
-		{
-			return base.GetHashCode();
 		}
 
 		/// <summary>

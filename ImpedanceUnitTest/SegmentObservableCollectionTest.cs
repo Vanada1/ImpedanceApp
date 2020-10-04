@@ -9,6 +9,61 @@ namespace ImpedanceUnitTest
 	[TestFixture]
 	public class SegmentObservableCollectionTest
 	{
+		[Test(Description = "Positive test InsertItem method by adding element")]
+		public void TestInsertItem()
+		{
+			var collection = new SegmentObservableCollection();
+
+			Assert.DoesNotThrow(
+				()=>collection.Add(new Capacitor("Test", 10)),
+				"Add error");
+		}
+
+		[Test(Description = "Positive test RemoveItem method by removing element")]
+		public void TestRemoveItem()
+		{
+			var capasitor = new Capacitor("Test", 10.0);
+			var resistor1 = new Resistor("R1", 3.0);
+			var resistor2 = new Resistor("R2", 3.0);
+			var collection = new SegmentObservableCollection 
+			{
+				resistor1, capasitor, resistor2
+			};
+
+			Assert.DoesNotThrow(()=> collection.Remove(capasitor),
+				"Remove error");
+		}
+
+		[Test(Description = "Positive test SetItem method by replacement element")]
+		public void TestSetItem()
+		{
+			var capasitor = new Capacitor("Test", 10.0);
+			var resistor1 = new Resistor("R1", 3.0);
+			var resistor2 = new Resistor("R2", 3.0);
+			var collection = new SegmentObservableCollection
+			{
+				resistor1, capasitor, resistor2
+			};
+
+			Assert.DoesNotThrow(() => collection[0] = capasitor,
+				"Replacement error");
+		}
+
+		[Test(Description = "Positive test ClearItems method by remove all elements")]
+		public void TestClearItems()
+		{
+			var capasitor = new Capacitor("Test", 10.0);
+			var resistor1 = new Resistor("R1", 3.0);
+			var resistor2 = new Resistor("R2", 3.0);
+			var collection = new SegmentObservableCollection
+			{
+				resistor1, capasitor, resistor2
+			};
+
+			Assert.DoesNotThrow(() => collection.Clear(),
+				"Clear items error");
+		}
+
 		[Test(Description = "Test of the SegmentObservableCollection Clone")]
 		public void TestClone()
 		{
