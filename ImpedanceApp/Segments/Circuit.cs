@@ -258,19 +258,6 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Getting the hash of an object
-		/// </summary>
-		/// <returns>object hash</returns>
-		public override int GetHashCode()
-		{
-			unchecked
-			{
-				return ((Name != null ? Name.GetHashCode() : 0) * 397) ^
-				       (SubSegments != null ? SubSegments.GetHashCode() : 0);
-			}
-		}
-
-		/// <summary>
 		///     Overriding the == comparison operator. Comparing two <see cref="Circuit" />
 		/// </summary>
 		/// <param name="circuit1">First <see cref="Circuit" /> for comparison</param>
