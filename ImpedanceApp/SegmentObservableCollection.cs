@@ -109,11 +109,6 @@ namespace ImpedanceApp
 				Equals(other);
 		}
 
-		public override int GetHashCode()
-		{
-			return base.GetHashCode();
-		}
-
 		/// <summary>
 		///     Overriding the == comparison operator. Comparing
 		///     two <see cref="SegmentObservableCollection" />
