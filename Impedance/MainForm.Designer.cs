@@ -40,7 +40,7 @@
 			this.TypeComboBox = new System.Windows.Forms.ComboBox();
 			this.TypeLabel = new System.Windows.Forms.Label();
 			this.NameTextBox = new System.Windows.Forms.TextBox();
-			this.AddParalelSegmentButton = new System.Windows.Forms.Button();
+			this.AddParallelSegmentButton = new System.Windows.Forms.Button();
 			this.ValueTextBox = new System.Windows.Forms.TextBox();
 			this.EventLabel = new System.Windows.Forms.Label();
 			this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
@@ -148,10 +148,10 @@
 			this.tableLayoutPanel5.Controls.Add(this.TypeComboBox, 1, 2);
 			this.tableLayoutPanel5.Controls.Add(this.TypeLabel, 0, 2);
 			this.tableLayoutPanel5.Controls.Add(this.NameTextBox, 1, 0);
-			this.tableLayoutPanel5.Controls.Add(this.AddParalelSegmentButton, 2, 0);
 			this.tableLayoutPanel5.Controls.Add(this.ValueTextBox, 1, 1);
 			this.tableLayoutPanel5.Controls.Add(this.EventLabel, 1, 3);
 			this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel7, 2, 3);
+			this.tableLayoutPanel5.Controls.Add(this.AddParallelSegmentButton, 2, 0);
 			this.tableLayoutPanel5.Location = new System.Drawing.Point(6, 19);
 			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
 			this.tableLayoutPanel5.RowCount = 4;
@@ -185,6 +185,7 @@
 			this.AddSerialSegmentButton.TabIndex = 11;
 			this.AddSerialSegmentButton.Text = "Add serial segment";
 			this.AddSerialSegmentButton.UseVisualStyleBackColor = true;
+			this.AddSerialSegmentButton.Click += new System.EventHandler(this.AddSerialSegmentButton_Click);
 			// 
 			// ValueLabel
 			// 
@@ -240,17 +241,18 @@
 			this.NameTextBox.Size = new System.Drawing.Size(154, 20);
 			this.NameTextBox.TabIndex = 3;
 			// 
-			// AddParalelSegmentButton
+			// AddParallelSegmentButton
 			// 
-			this.AddParalelSegmentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.AddParallelSegmentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.AddParalelSegmentButton.Location = new System.Drawing.Point(208, 3);
-			this.AddParalelSegmentButton.Name = "AddParalelSegmentButton";
-			this.AddParalelSegmentButton.Size = new System.Drawing.Size(174, 30);
-			this.AddParalelSegmentButton.TabIndex = 6;
-			this.AddParalelSegmentButton.Text = "Add parallel segment";
-			this.AddParalelSegmentButton.UseVisualStyleBackColor = true;
+			this.AddParallelSegmentButton.Location = new System.Drawing.Point(208, 3);
+			this.AddParallelSegmentButton.Name = "AddParallelSegmentButton";
+			this.AddParallelSegmentButton.Size = new System.Drawing.Size(174, 30);
+			this.AddParallelSegmentButton.TabIndex = 6;
+			this.AddParallelSegmentButton.Text = "Add parallel segment";
+			this.AddParallelSegmentButton.UseVisualStyleBackColor = true;
+			this.AddParallelSegmentButton.Click += new System.EventHandler(this.AddParallelSegmentButton_Click);
 			// 
 			// ValueTextBox
 			// 
@@ -558,7 +560,7 @@
 		private System.Windows.Forms.Button AddSerialSegmentButton;
 		private System.Windows.Forms.Button RemoveElementButton;
 		private System.Windows.Forms.Button EditElementButton;
-		private System.Windows.Forms.Button AddParalelSegmentButton;
+		private System.Windows.Forms.Button AddParallelSegmentButton;
 		private System.Windows.Forms.TextBox ValueTextBox;
 		private System.Windows.Forms.TextBox NameTextBox;
 		private System.Windows.Forms.Label ValueLabel;

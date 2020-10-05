@@ -1,6 +1,6 @@
 ﻿namespace Impedance
 {
-	partial class AddEditElementForm
+	partial class AddElementForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -146,7 +146,7 @@
 			this.MinimumSize = new System.Drawing.Size(310, 160);
 			this.Name = "AddEditElementForm";
 			this.Text = "AddEditElements";
-			this.Load += new System.EventHandler(this.AddEditElements_Load);
+			this.Load += new System.EventHandler(this.AddElement_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);

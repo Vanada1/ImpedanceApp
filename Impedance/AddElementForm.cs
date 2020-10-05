@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Impedance
 {
-	public partial class AddEditElementForm : Form
+	public partial class AddElementForm : Form
 	{
 		/// <summary>
 		/// Field for working with element
@@ -80,34 +80,12 @@ namespace Impedance
 						break;
 					}
 
-					case ImpedanceApp.SegmentType.SerialCircuit:
+					default:
 					{
-						SegmentObservableCollection subSegments;
-						if (Segment == null &&!(Segment is Element))
-						{
-							subSegments = new SegmentObservableCollection();
-						}
-						else
-						{
-							subSegments = Segment.SubSegments;
-						}
-						Segment = new SerialCircuit(subSegments);
+						DialogResult = DialogResult.None;
+						MessageBox.Show("Strange type", "Error",
+							MessageBoxButtons.OK, MessageBoxIcon.Error);
 						break;
-					}
-
-					case ImpedanceApp.SegmentType.ParallelCircuit:
-					{
-						SegmentObservableCollection subSegments;
-						if (Segment == null && !(Segment is Element))
-						{
-							subSegments = new SegmentObservableCollection();
-						}
-						else
-						{
-							subSegments = Segment.SubSegments;
-						}
-						Segment = new ParallelCircuit(subSegments);
-							break;
 					}
 				}
 			}
@@ -119,50 +97,22 @@ namespace Impedance
 			}
 		}
 
-		public AddEditElementForm()
+		public AddElementForm()
 		{
 			InitializeComponent();
 		}
 
-		private void AddEditElements_Load(object sender, EventArgs e)
+		private void AddElement_Load(object sender, EventArgs e)
 		{
 			List<string> typeSegments = new List<string>
 			{
 				"",
 				nameof(ImpedanceApp.SegmentType.Resistor),
 				nameof(ImpedanceApp.SegmentType.Capacitor),
-				nameof(ImpedanceApp.SegmentType.Inductor),
-				nameof(ImpedanceApp.SegmentType.SerialCircuit),
-				nameof(ImpedanceApp.SegmentType.ParallelCircuit),
+				nameof(ImpedanceApp.SegmentType.Inductor)
 			};
 
-			if (Segment != null)
-			{
-				ValueTextBox.Enabled = false;
-				ValueTextBox.Text = null;
-				NameTextBox.Text = Segment.Name;
-				SegmentsComboBox.Text = Segment.SegmentType.ToString();
-				_element = Segment as Element;
-				if (_element != null)
-				{
-					ValueTextBox.Text = _element.Value.ToString();
-					ValueTextBox.Enabled = true;
-				}
-
-				if (Segment.SegmentType == SegmentType.ParallelCircuit ||
-				    Segment.SegmentType == SegmentType.SerialCircuit)
-				{
-					typeSegments.RemoveRange(1,3);
-				}
-				else
-				{
-					typeSegments = typeSegments.GetRange(0, 4);
-				}
-
-			}
 			SegmentsComboBox.DataSource = typeSegments;
-			SegmentsComboBox.Text = Segment != null ?
-				Segment.SegmentType.ToString() : "";
 		}
 
 		private void OKButton_Click(object sender, EventArgs e)
@@ -181,8 +131,8 @@ namespace Impedance
 					MessageBoxIcon.Error);
 			}
 			else if (NameTextBox.Text.Length != 0 &&
-			    ValueTextBox.Text.Length != 0 &&
-			    ValueTextBox.Enabled)
+			         ValueTextBox.Text.Length != 0 &&
+			         ValueTextBox.Enabled)
 			{
 				string name = NameTextBox.Text;
 				try
@@ -204,8 +154,6 @@ namespace Impedance
 							MessageBoxIcon.Error);
 						DialogResult = DialogResult.None;
 					}
-
-
 				}
 				catch (FormatException exception)
 				{
@@ -217,8 +165,8 @@ namespace Impedance
 			         !(Segment is Element))
 			{
 				string name = NameTextBox.Text;
-				CreateNewSegment(name, -1);
 				DialogResult = DialogResult.OK;
+				CreateNewSegment(name, -1);
 			}
 			else if (NameTextBox.Text.Length == 0)
 			{
@@ -245,20 +193,27 @@ namespace Impedance
 				switch (segment)
 				{
 					case ImpedanceApp.SegmentType.Capacitor:
+					{
 						ValueTextBox.Enabled = true;
 						break;
+					}
 					case ImpedanceApp.SegmentType.Inductor:
+					{
 						ValueTextBox.Enabled = true;
 						break;
+					}
 					case ImpedanceApp.SegmentType.Resistor:
+					{
 						ValueTextBox.Enabled = true;
 						break;
-					case ImpedanceApp.SegmentType.SerialCircuit:
-						ValueTextBox.Enabled = false;
+					}
+					default:
+					{
+						DialogResult = DialogResult.None;
+							MessageBox.Show("Strange type", "Error",
+							MessageBoxButtons.OK, MessageBoxIcon.Error);
 						break;
-					case ImpedanceApp.SegmentType.ParallelCircuit:
-						ValueTextBox.Enabled = false;
-						break;
+					}
 				}
 			}
 

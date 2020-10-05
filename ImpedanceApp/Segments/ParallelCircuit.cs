@@ -68,7 +68,10 @@ namespace ImpedanceApp
 
 			foreach (var segment in SubSegments)
 			{
-				result += 1.0 / segment.CalculateZ(frequency);
+				if (!(segment is ParallelCircuit && segment.SubSegments.Count == 0))
+				{
+					result += 1.0 / segment.CalculateZ(frequency);
+				}
 			}
 
 			return SubSegments.Count == 0 ? 0 : 1.0 / result;

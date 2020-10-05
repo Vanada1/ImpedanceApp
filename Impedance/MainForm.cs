@@ -342,6 +342,7 @@ namespace ImpedanceForms
 						node.Segment = newSegment;
 						ElementsTreeView.SelectedNode = null;
 						ElementsTreeView.SelectedNode = node;
+						UpdateListBoxes();
 					}
 					catch (FormatException exception)
 					{
@@ -350,8 +351,6 @@ namespace ImpedanceForms
 					}
 
 				}
-
-				UpdateListBoxes();
 			}
 			else
 			{
@@ -364,7 +363,7 @@ namespace ImpedanceForms
 		{
 			if (ElementsTreeView.SelectedNode is ISegmentTreeNode selectedNode)
 			{
-				var addForm = new AddEditElementForm
+				var addForm = new AddElementForm
 				{
 					NameSegments = _project.NameSegments
 				};
@@ -522,7 +521,7 @@ namespace ImpedanceForms
 				if (node.Segment is Circuit circuit)
 				{
 
-					NameTextBox.Enabled = true;
+					NameTextBox.Enabled = false;
 					ValueTextBox.Enabled = false;
 					List<string> typeSegments = new List<string>
 					{
@@ -557,6 +556,62 @@ namespace ImpedanceForms
 					TypeComboBox.DataSource = typeSegments;
 				}
 				TypeComboBox.Text = node.Segment.SegmentType.ToString();
+			}
+		}
+
+		private void AddParallelSegmentButton_Click(object sender, EventArgs e)
+		{
+			if (ElementsTreeView.SelectedNode is ISegmentTreeNode node)
+			{
+				if (node.Segment is Element element)
+				{
+					SegmentObservableCollection collection = new SegmentObservableCollection
+					{
+						element
+					};
+					_project.CurrentCircuit.ReplaceSegment(node.Segment,
+						new ParallelCircuit(collection));
+				}
+				else
+				{
+					node.Segment.SubSegments.Add(new ParallelCircuit(
+						new SegmentObservableCollection()));
+				}
+
+				UpdateListBoxes();
+			}
+			else
+			{
+				MessageBox.Show(nameof(Element) + "was not selected", "Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void AddSerialSegmentButton_Click(object sender, EventArgs e)
+		{
+			if (ElementsTreeView.SelectedNode is ISegmentTreeNode node)
+			{
+				if (node.Segment is Element element)
+				{
+					SegmentObservableCollection collection = new SegmentObservableCollection
+					{
+						element
+					};
+					_project.CurrentCircuit.ReplaceSegment(node.Segment,
+						new SerialCircuit(collection));
+				}
+				else
+				{
+					node.Segment.SubSegments.Add(new SerialCircuit(
+						new SegmentObservableCollection()));
+				}
+
+				UpdateListBoxes();
+			}
+			else
+			{
+				MessageBox.Show(nameof(Element) + "was not selected", "Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 	}
