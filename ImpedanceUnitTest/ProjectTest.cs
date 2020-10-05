@@ -14,7 +14,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -254,7 +254,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -266,7 +266,7 @@ namespace ImpedanceUnitTest
 
 			List<string> expected = new List<string>
 			{
-				"Test", "Test","R", "L1", "C1"
+				"Test", segment[0].Name,"R", "L1", "C1"
 			};
 
 			project.CreateNameSegments(project.CurrentCircuit);
@@ -281,7 +281,7 @@ namespace ImpedanceUnitTest
 		{
 			var segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
@@ -293,7 +293,7 @@ namespace ImpedanceUnitTest
 
 			List<string> expected = new List<string>
 			{
-				"Test", "R", "L1"
+				segment[0].Name, "R", "L1"
 			};
 
 			project.CreateNameSegments(project.CurrentCircuit.SubSegments[0]);

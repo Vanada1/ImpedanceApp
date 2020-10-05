@@ -12,9 +12,9 @@ namespace ImpedanceApp
     {
 
         /// <summary>
-        /// Set and return <see cref="Name"/> of the <see cref="ISegment"/>
+        /// Return <see cref="Name"/> of the <see cref="ISegment"/>
         /// </summary>
-        string Name { get; set; }
+        string Name { get;  }
 
         /// <summary>
         /// Return <see cref="SubSegments"/> of <see cref="ISegment"/>

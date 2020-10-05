@@ -9,18 +9,18 @@ namespace ImpedanceApp
 	public class ParallelCircuit : ISegment
 	{
 		/// <summary>
-		///     Name of <see cref="ParallelCircuit" />
+		/// ID Parallel segment
 		/// </summary>
-		private string _name;
+		private static uint _id = 0;
 
 		/// <summary>
 		///     <see cref="SerialCircuit" /> constructor
 		/// </summary>
 		/// <param name="name"> name of the <see cref="ParallelCircuit" /></param>
 		/// <param name="subSegments"> subSegments of the <see cref="ParallelCircuit" /></param>
-		public ParallelCircuit(string name, SegmentObservableCollection subSegments)
+		public ParallelCircuit(SegmentObservableCollection subSegments)
 		{
-			Name = name;
+			Name = SetIDSegment();
 			SubSegments = subSegments;
 			SubSegments.SegmentObservableCollectionChanged += OnCircuitChanged;
 			SubSegments.CollectionChanged += OnCircuitChanged;
@@ -29,18 +29,7 @@ namespace ImpedanceApp
 		/// <summary>
 		///     Set and return <see cref="Name" /> of the <see cref="ParallelCircuit" />
 		/// </summary>
-		public string Name
-		{
-			get => _name;
-			set
-			{
-				if (value.Length == 0)
-					throw new ArgumentException(nameof(Name) +
-					                            " cannot have string length 0");
-
-				_name = value;
-			}
-		}
+		public string Name { get; }
 
 		/// <summary>
 		///     Set and return <see cref="SubSegments" /> of the <see cref="SerialCircuit" />
@@ -56,6 +45,17 @@ namespace ImpedanceApp
 		///     Event fires when segment changes
 		/// </summary>
 		public event EventHandler SegmentChanged;
+
+		/// <summary>
+		/// Sets the id for the segment
+		/// </summary>
+		/// <returns>The segment name string</returns>
+		private static string SetIDSegment()
+		{
+			string id = "Parallel" + _id.ToString();
+			_id++;
+			return id;
+		}
 
 		/// <summary>
 		///     Calculate impedance in the <see cref="ParallelCircuit" />
@@ -80,7 +80,7 @@ namespace ImpedanceApp
 		/// <returns>Returns a new object with the same values</returns>
 		public object Clone()
 		{
-			return new ParallelCircuit(Name, SubSegments.Clone() as SegmentObservableCollection);
+			return new ParallelCircuit(SubSegments.Clone() as SegmentObservableCollection);
 		}
 
 		/// <summary>
@@ -95,7 +95,8 @@ namespace ImpedanceApp
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
-			return Name == other.Name && SubSegments.Equals(other.SubSegments);
+			return (Name == other.Name && Equals(SubSegments, other.SubSegments)) ||
+			       (!(this is Element) && !(other is Element) && Equals(SubSegments, other.SubSegments));
 		}
 
 		/// <summary>
@@ -119,7 +120,7 @@ namespace ImpedanceApp
 		/// </returns>
 		protected bool Equals(ParallelCircuit other)
 		{
-			return Name == other.Name && SubSegments.Equals(other.SubSegments);
+			return SubSegments.Equals(other.SubSegments);
 		}
 
 		/// <summary>

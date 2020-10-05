@@ -23,48 +23,21 @@ namespace ImpedanceUnitTest
 		{
 			string name = "Test";
 			Assert.DoesNotThrow(
-				() => { ParallelCircuit inductor = new ParallelCircuit(
-					name, CreateCircuit()); },
+				() => { ParallelCircuit inductor = new ParallelCircuit(CreateCircuit()); },
 				"Constructor test not passed");
 		}
 
 		[Test(Description = "Positive test of the Name getter")]
 		public void TestNameGet_CorrectValue()
 		{
-			string expected = "C";
+			string expected = "Parallel0";
 
-			ParallelCircuit ParallelCircuit = new ParallelCircuit(
-				"Test", CreateCircuit());
-			ParallelCircuit.Name = expected;
+			ParallelCircuit ParallelCircuit = new ParallelCircuit(CreateCircuit());
 
 			string actual = ParallelCircuit.Name;
 
 			Assert.AreEqual(expected, actual,
 				"Getter Name returns incorrect value");
-		}
-
-		[Test(Description = "Assignment of the Name is not empty")]
-		public void TestNameSet_ArgumentException()
-		{
-			string wrongName = "";
-			string message = "If the name is empty, an exception should be thrown.";
-			ParallelCircuit ParallelCircuit = new ParallelCircuit(
-				"Test", CreateCircuit());
-			Assert.Throws<ArgumentException>(
-				() => { ParallelCircuit.Name = wrongName; },
-				message);
-		}
-
-		[Test(Description = "Positive test of the Name getter")]
-		public void TestNameSet_CorrectValue()
-		{
-			string name = "Test";
-			string message = "Positive test of the Name setter not passed";
-			ParallelCircuit element = new ParallelCircuit(
-				"Test", CreateCircuit());
-			Assert.DoesNotThrow(
-				() => { element.Name = name; },
-				message);
 		}
 		
 		[Test(Description = "Positive test of the SubSegments getter")]
@@ -72,8 +45,7 @@ namespace ImpedanceUnitTest
 		{
 			var expected = CreateCircuit();
 
-			ParallelCircuit element = new ParallelCircuit(
-				"Test", CreateCircuit());
+			ParallelCircuit element = new ParallelCircuit(CreateCircuit());
 			element.SubSegments = expected;
 
 			var actual = element.SubSegments;
@@ -87,8 +59,7 @@ namespace ImpedanceUnitTest
 		{
 			var subSegments = CreateCircuit();
 			string message = "Positive test of the SubSegments setter not passed";
-			var ParallelCircuit = new ParallelCircuit(
-				"Test", CreateCircuit());
+			var ParallelCircuit = new ParallelCircuit(CreateCircuit());
 			Assert.DoesNotThrow(
 				() => { ParallelCircuit.SubSegments = subSegments; },
 				message);
@@ -99,8 +70,7 @@ namespace ImpedanceUnitTest
 		{
 			SegmentType expected = SegmentType.ParallelCircuit;
 
-			var circuit = new ParallelCircuit("Test", 
-				new SegmentObservableCollection());
+			var circuit = new ParallelCircuit(new SegmentObservableCollection());
 
 			SegmentType actual = circuit.SegmentType;
 
@@ -112,10 +82,9 @@ namespace ImpedanceUnitTest
 		public void TestOnCircuitChanged()
 		{
 			bool wasCalled = false;
-			var ParallelCircuit = new ParallelCircuit(
-				"Test", CreateCircuit());
+			var ParallelCircuit = new ParallelCircuit(CreateCircuit());
 			ParallelCircuit.SegmentChanged += (o, e) => wasCalled = true;
-			ParallelCircuit.SubSegments.Add(new Resistor("Test", 1.0));
+			ParallelCircuit.SubSegments.Add(new Resistor( "Test", 1.0));
 			Assert.IsTrue(wasCalled);
 		}
 
@@ -129,8 +98,7 @@ namespace ImpedanceUnitTest
 			result = 1 / result;
 			Complex expected = result;
 
-			ParallelCircuit parallelCircuit = new ParallelCircuit(
-				"Test", CreateCircuit());
+			ParallelCircuit parallelCircuit = new ParallelCircuit(CreateCircuit());
 
 			Complex actual = parallelCircuit.CalculateZ(frequency);
 
@@ -143,18 +111,18 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var expected = new ParallelCircuit("Test", segments);
+			var expected = new ParallelCircuit(segments);
 
 			var actual = expected.Clone() as ParallelCircuit;
 
-			Assert.AreEqual(expected, actual,
+			Assert.AreEqual(expected.SubSegments, actual.SubSegments,
 				"Invalid copying of elements");
 		}
 
@@ -163,18 +131,18 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit(new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit( segments);
 
 			var expected = true;
 
-			var circuit2 = new ParallelCircuit("Test", segments);
+			var circuit2 = new ParallelCircuit(segments);
 
 			var actual = circuit1.Equals(circuit2);
 
@@ -187,43 +155,18 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit(new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit(segments);
 
 			var expected = false;
 
-			var circuit2 = new ParallelCircuit("Test1",
-				new SegmentObservableCollection());
-
-			var actual = circuit1.Equals(circuit2);
-
-			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
-		}
-
-		[Test(Description = "Test of the ParallelCircuit Equals ISegment other name")]
-		public void TestEqualsISegment_OtherName()
-		{
-			var segments = new SegmentObservableCollection
-			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
-				{
-					new Inductor("L1", 0.05)
-				}),
-				new Capacitor("C1", 0.01)
-			};
-
-			var circuit1 = new ParallelCircuit("Test", segments);
-
-			var expected = false;
-
-			var circuit2 = new ParallelCircuit("Test1", segments);
+			var circuit2 = new ParallelCircuit(new SegmentObservableCollection());
 
 			var actual = circuit1.Equals(circuit2);
 
@@ -236,19 +179,18 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit(new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit(segments);
 
 			var expected = false;
 
-			var circuit2 = new ParallelCircuit("Test",
-				new SegmentObservableCollection());
+			var circuit2 = new ParallelCircuit(new SegmentObservableCollection());
 
 			var actual = circuit1.Equals(circuit2);
 
@@ -261,14 +203,14 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit(new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit( segments);
 
 			var expected = false;
 
@@ -285,14 +227,14 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit(new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit(segments);
 
 			var expected = true;
 
@@ -310,18 +252,18 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit( segments);
 
 			var expected = true;
 
-			var circuit2 = new ParallelCircuit("Test", segments);
+			var circuit2 = new ParallelCircuit( segments);
 
 			var actual = circuit1 == circuit2;
 			Assert.AreEqual(expected, actual,
@@ -334,18 +276,28 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit(segments);
 
 			var expected = false;
 
-			var circuit2 = new ParallelCircuit("Test1", segments);
+			segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit( new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01),
+				new Inductor("L1", 0.05)
+			};
+
+			var circuit2 = new ParallelCircuit(segments);
 
 			var actual = circuit1 == circuit2;
 			Assert.AreEqual(expected, actual,
@@ -358,19 +310,18 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit( segments);
 
 			var expected = true;
 
-			var circuit2 = new ParallelCircuit("Test1",
-				new SegmentObservableCollection());
+			var circuit2 = new ParallelCircuit(new SegmentObservableCollection());
 
 			var actual = circuit1 != circuit2;
 			Assert.AreEqual(expected, actual,
@@ -383,18 +334,18 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit( segments);
 
 			var expected = false;
 
-			var circuit2 = new ParallelCircuit("Test", segments);
+			var circuit2 = new ParallelCircuit( segments);
 
 			var actual = circuit1 != circuit2;
 			Assert.AreEqual(expected, actual,
@@ -407,7 +358,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -431,7 +382,7 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
@@ -455,18 +406,18 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit( segments);
 
 			var expected = true;
 
-			object circuit2 = new ParallelCircuit("Test", segments);
+			object circuit2 = new ParallelCircuit( segments);
 
 			var actual = circuit1.Equals(circuit2);
 
@@ -481,14 +432,14 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit( segments);
 
 			var expected = false;
 
@@ -507,14 +458,14 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit( segments);
 
 			var expected = false;
 
@@ -533,14 +484,14 @@ namespace ImpedanceUnitTest
 		{
 			var segments = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Inductor("L1", 0.05)
 				}),
 				new Capacitor("C1", 0.01)
 			};
 
-			var circuit1 = new ParallelCircuit("Test", segments);
+			var circuit1 = new ParallelCircuit( segments);
 
 			var expected = true;
 

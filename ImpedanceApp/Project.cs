@@ -22,8 +22,7 @@ namespace ImpedanceApp
 				new SegmentObservableCollection
 				{
 					new Resistor("R", 100),
-					new ParallelCircuit("Parallel Circuit",
-						new SegmentObservableCollection
+					new ParallelCircuit(new SegmentObservableCollection
 						{
 							new Capacitor("C", 0.002),
 							new Inductor("L", 10)
@@ -33,11 +32,9 @@ namespace ImpedanceApp
 
 			segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit("Parallel Circuit",
-					new SegmentObservableCollection
+				new ParallelCircuit(new SegmentObservableCollection
 					{
-						new SerialCircuit("Test",
-							new SegmentObservableCollection
+						new SerialCircuit(new SegmentObservableCollection
 							{
 								new Resistor("R1", 20.0),
 								new Resistor("R2", 20.0)
@@ -45,18 +42,15 @@ namespace ImpedanceApp
 						),
 						new Resistor("R7", 40.0),
 
-						new SerialCircuit("Test",
-							new SegmentObservableCollection
+						new SerialCircuit(new SegmentObservableCollection
 							{
-								new ParallelCircuit("Parallel Circuit",
-									new SegmentObservableCollection
+								new ParallelCircuit(new SegmentObservableCollection
 									{
 										new Resistor("R3", 20.0),
 										new Resistor("R4", 20.0)
 									}),
 
-								new ParallelCircuit("Parallel Circuit",
-									new SegmentObservableCollection
+								new ParallelCircuit(new SegmentObservableCollection
 									{
 										new Resistor("R5", 20.0),
 										new Resistor("R6", 20.0)
@@ -78,8 +72,7 @@ namespace ImpedanceApp
 			segment = new SegmentObservableCollection
 			{
 				new Resistor("R1", 40.0),
-				new ParallelCircuit("Parallel Circuit",
-					new SegmentObservableCollection
+				new ParallelCircuit(new SegmentObservableCollection
 					{
 						new Resistor("R2", 40.0),
 						new Capacitor("C", 0.002)
@@ -89,7 +82,7 @@ namespace ImpedanceApp
 
 			segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit(_name, new SegmentObservableCollection
+				new ParallelCircuit( new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
