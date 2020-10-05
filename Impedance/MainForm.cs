@@ -35,6 +35,13 @@ namespace ImpedanceForms
             }
         }
 
+        private void UpdateComboBox()
+        {
+	        CircuitsComboBox.DataSource = null;
+	        CircuitsComboBox.DataSource = _project.AllExamples;
+	        CircuitsComboBox.DisplayMember = "Name";
+        }
+
         /// <summary>
 		/// Update all list boxes
 		/// </summary>
@@ -61,9 +68,7 @@ namespace ImpedanceForms
 			ImpedanceListBox.ClearSelected();
 			_project.FindAllElements(_project.CurrentCircuit);
 			_project.CreateNameSegments(_project.CurrentCircuit);
-			CircuitsListBox.DataSource = null;
-			CircuitsListBox.DataSource = _project.AllExamples;
-			CircuitsListBox.DisplayMember = "Name";
+			ElementsTreeView.ExpandAll();
 		}
 
 		/// <summary>
@@ -82,6 +87,7 @@ namespace ImpedanceForms
 		        };
 		        FillTreeNode(segmentTreeNode, _project.CurrentCircuit);
 		        ElementsTreeView.Nodes.Add(segmentTreeNode);
+				ElementsTreeView.ExpandAll();
 	        }
 	        catch (Exception e)
 	        {
@@ -117,8 +123,8 @@ namespace ImpedanceForms
 				        string serial = "Serial";
 						ISegmentTreeNode segmentTreeNode = new ISegmentTreeNode
 						{
-							Name = subSegment is ParallelCircuit ? parallel : serial,
-					        Text = subSegment.Name,
+							Name = subSegment.Name,
+							Text = subSegment is ParallelCircuit ? parallel : serial,
 							Segment = subSegment
 						};
 				        treeNode.Nodes.Add(segmentTreeNode);
@@ -141,6 +147,7 @@ namespace ImpedanceForms
 		private void Main_Load(object sender, EventArgs e)
 		{
 			UpdateListBoxes();
+			UpdateComboBox();
 			EventLabel.Text = "";
 
 			foreach (Circuit example in _project.AllExamples)
@@ -217,8 +224,8 @@ namespace ImpedanceForms
 				editForm.ShowDialog();
 				if (editForm.DialogResult == DialogResult.OK)
 				{
-					newSegment = _project.CurrentCircuit.ReplaceSegment(node.Segment,
-						editForm.Segment);
+					newSegment = _project.CurrentCircuit.ReplaceSegment(editForm.Segment, 
+						node.Segment);
 				}
 				else
 				{
@@ -317,19 +324,19 @@ namespace ImpedanceForms
 			}
 		}
 
-		private void CircuitsListBox_SelectedIndexChanged(object sender, EventArgs e)
+		private void CircuitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			var index = CircuitsListBox.SelectedIndex;
+			var index = CircuitsComboBox.SelectedIndex;
 			if (index >= 0)
 			{
 				_project.CurrentCircuit = _project.AllExamples[index];
 				UpdateListBoxes();
-				if (CircuitsListBox.SelectedIndex != _oldCircuitListBoxIndex)
+				if (index != _oldCircuitListBoxIndex)
 				{
 					FillElementsTreeView();
 				}
 
-				_oldCircuitListBoxIndex = CircuitsListBox.SelectedIndex;
+				_oldCircuitListBoxIndex = index;
 			}
 			else
 			{
@@ -344,14 +351,17 @@ namespace ImpedanceForms
 			addForm.ShowDialog();
 			if (addForm.DialogResult == DialogResult.OK)
 			{
+				addForm.Circuit.SegmentChanged += OnCircuitCollectionChanged;
 				_project.AllExamples.Add(addForm.Circuit);
+				UpdateComboBox();
+				CircuitsComboBox.SelectedIndex = _project.AllExamples.Count - 1;
 			}
 			UpdateListBoxes();
 		}
 
 		private void EditCircuit_Click(object sender, EventArgs e)
 		{
-			var index = CircuitsListBox.SelectedIndex;
+			var index = CircuitsComboBox.SelectedIndex;
 			var editForm = new AddEditCircuitForm();
 			if (index >= 0)
 			{
@@ -363,6 +373,7 @@ namespace ImpedanceForms
 					_project.AllExamples[index].Name = editForm.Circuit.Name;
 				}
 				UpdateListBoxes();
+				UpdateComboBox();
 			}
 			else
 			{
@@ -373,14 +384,16 @@ namespace ImpedanceForms
 
 		private void RemoveCircuit_Click(object sender, EventArgs e)
 		{
-			var index = CircuitsListBox.SelectedIndex;
+			var index = CircuitsComboBox.SelectedIndex;
 			if (index >= 0)
 			{
 				var remove = MessageBox.Show("Remove?",
 					"Remove?", MessageBoxButtons.YesNo);
 				if (remove == DialogResult.Yes)
 				{
+					_project.AllExamples[index].SegmentChanged -= OnCircuitCollectionChanged;
 					_project.AllExamples.RemoveAt(index);
+					UpdateComboBox();
 				}
 				UpdateListBoxes();
 			}

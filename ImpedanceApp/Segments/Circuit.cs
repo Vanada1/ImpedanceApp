@@ -215,13 +215,11 @@ namespace ImpedanceApp
 					currentSegment.SubSegments[i] = replacingSegment;
 					return currentSegment.SubSegments[i];
 				}
-				else
+
+				if (!(currentSegment.SubSegments[i] is Element))
 				{
-					if (!(currentSegment.SubSegments[i] is Element))
-					{
-						return ReplaceSegment(replacingSegment, insteadSegment,
-							currentSegment.SubSegments[i]);
-					}
+					return ReplaceSegment(replacingSegment, insteadSegment,
+						currentSegment.SubSegments[i]);
 				}
 			}
 

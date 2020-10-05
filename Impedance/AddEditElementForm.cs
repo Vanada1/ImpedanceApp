@@ -91,7 +91,7 @@ namespace Impedance
 						{
 							subSegments = Segment.SubSegments;
 						}
-						Segment = new SerialCircuit(name, subSegments);
+						Segment = new SerialCircuit(subSegments);
 						break;
 					}
 
@@ -106,7 +106,7 @@ namespace Impedance
 						{
 							subSegments = Segment.SubSegments;
 						}
-						Segment = new ParallelCircuit(name, subSegments);
+						Segment = new ParallelCircuit(subSegments);
 							break;
 					}
 				}
