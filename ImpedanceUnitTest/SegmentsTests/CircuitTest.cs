@@ -699,12 +699,14 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test of the FindSegment method without inital segment")]
 		public void TestFindSegment_WithoutInitalSegment()
 		{
+
+			var inductor = new Inductor("L1", 0.05);
 			var segment = new SegmentObservableCollection
 			{
 				new ParallelCircuit("Test", new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
-					new Inductor("L1", 0.05)
+					inductor
 				}),
 				new Capacitor("C1", 0.01)
 			};
@@ -712,7 +714,7 @@ namespace ImpedanceUnitTest
 
 			ISegment expected = circuit.SubSegments[0].SubSegments[1];
 
-			ISegment actual = circuit.FindSegment("L1");
+			ISegment actual = circuit.FindSegment(inductor);
 
 			Assert.AreEqual(expected, actual,
 				"Finds the item incorrectly");
@@ -721,12 +723,13 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test of the FindSegment method with inital segment")]
 		public void TestFindSegment_WithInitalSegment()
 		{
+			var inductor = new Inductor("L1", 0.05);
 			var segment = new SegmentObservableCollection
 			{
 				new ParallelCircuit("Test", new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
-					new Inductor("L1", 0.05)
+					inductor
 				}),
 				new Capacitor("C1", 0.01)
 			};
@@ -734,7 +737,7 @@ namespace ImpedanceUnitTest
 
 			ISegment expected = circuit.SubSegments[0].SubSegments[1];
 
-			ISegment actual = circuit.FindSegment("L1", 
+			ISegment actual = circuit.FindSegment(inductor, 
 				circuit.SubSegments[0]);
 
 			Assert.AreEqual(expected, actual,
@@ -744,13 +747,15 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test of the FindSegment method with inital segment")]
 		public void TestFindSegment_WithInitalSegmentAndThisElement()
 		{
-			var segment = new SegmentObservableCollection
-			{
-				new ParallelCircuit("Test", new SegmentObservableCollection
+			var parallelCircuit = new ParallelCircuit("Test",
+				new SegmentObservableCollection
 				{
 					new Resistor("R", 5.0),
 					new Inductor("L1", 0.05)
-				}),
+				});
+			var segment = new SegmentObservableCollection
+			{
+				parallelCircuit,
 				new Capacitor("C1", 0.01)
 			};
 			var circuit = new Circuit("Test", segment);
@@ -759,7 +764,7 @@ namespace ImpedanceUnitTest
 			ISegment expected =
 				circuit.SubSegments[0];
 
-			ISegment actual = circuit.FindSegment("Test",
+			ISegment actual = circuit.FindSegment(parallelCircuit,
 				circuit.SubSegments[0]);
 
 			Assert.AreEqual(expected, actual,

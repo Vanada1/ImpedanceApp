@@ -148,18 +148,18 @@ namespace ImpedanceApp
 		///     If <see cref="segment" /> is null, then <see cref="this" /> is taken
 		/// </param>
 		/// <returns>The <see cref="ISegment" /> element .Null if no element is found by name</returns>
-		public ISegment FindSegment(string name, ISegment segment = null)
+		public ISegment FindSegment(ISegment name, ISegment segment = null)
 		{
 			ISegment result = null;
 			segment ??= this;
 
-			if (segment.Name == name) return segment;
+			if (segment == name) return segment;
 
 			foreach (var subSegment in segment.SubSegments)
 			{
 				if (result != null) break;
 
-				if (subSegment.Name == name) return subSegment;
+				if (subSegment == name) return subSegment;
 
 				if (!(subSegment is Element)) result = FindSegment(name, subSegment);
 			}

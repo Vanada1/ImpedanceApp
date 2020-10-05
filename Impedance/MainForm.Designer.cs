@@ -318,7 +318,7 @@
 			this.tableLayoutPanel2.Controls.Add(this.CircuitsLabel, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel6, 0, 2);
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(218, 322);
-			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 3;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
@@ -351,7 +351,7 @@
 			this.tableLayoutPanel6.Controls.Add(this.EditCircuit, 1, 0);
 			this.tableLayoutPanel6.Controls.Add(this.RemoveCircuit, 2, 0);
 			this.tableLayoutPanel6.Location = new System.Drawing.Point(2, 106);
-			this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
 			this.tableLayoutPanel6.RowCount = 1;
 			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -364,7 +364,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.AddCircuit.Location = new System.Drawing.Point(2, 2);
-			this.AddCircuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AddCircuit.Margin = new System.Windows.Forms.Padding(2);
 			this.AddCircuit.Name = "AddCircuit";
 			this.AddCircuit.Size = new System.Drawing.Size(59, 42);
 			this.AddCircuit.TabIndex = 0;
@@ -378,7 +378,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.EditCircuit.Location = new System.Drawing.Point(65, 2);
-			this.EditCircuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.EditCircuit.Margin = new System.Windows.Forms.Padding(2);
 			this.EditCircuit.Name = "EditCircuit";
 			this.EditCircuit.Size = new System.Drawing.Size(59, 42);
 			this.EditCircuit.TabIndex = 1;
@@ -392,7 +392,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.RemoveCircuit.Location = new System.Drawing.Point(128, 2);
-			this.RemoveCircuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.RemoveCircuit.Margin = new System.Windows.Forms.Padding(2);
 			this.RemoveCircuit.Name = "RemoveCircuit";
 			this.RemoveCircuit.Size = new System.Drawing.Size(60, 42);
 			this.RemoveCircuit.TabIndex = 2;
@@ -410,7 +410,7 @@
 			this.tableLayoutPanel4.Controls.Add(this.ElementsLabel, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel3, 0, 2);
 			this.tableLayoutPanel4.Location = new System.Drawing.Point(9, 10);
-			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			this.tableLayoutPanel4.RowCount = 3;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.822335F));
@@ -429,7 +429,7 @@
 			this.tableLayoutPanel5.Controls.Add(this.CircuitPictureBox, 0, 1);
 			this.tableLayoutPanel5.Controls.Add(this.CircuitLabel, 0, 0);
 			this.tableLayoutPanel5.Location = new System.Drawing.Point(220, 10);
-			this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
 			this.tableLayoutPanel5.RowCount = 2;
 			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.344411F));

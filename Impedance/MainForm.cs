@@ -74,10 +74,11 @@ namespace ImpedanceForms
 	        ElementsTreeView.Nodes.Clear();
 	        try
 	        {
-		        TreeNode segmentTreeNode = new TreeNode 
-		        {
+		        ISegmentTreeNode segmentTreeNode = new ISegmentTreeNode
+				{
 			        Name = _project.CurrentCircuit.Name,
-			        Text = _project.CurrentCircuit.Name
+			        Text = _project.CurrentCircuit.Name,
+					Segment = _project.CurrentCircuit
 		        };
 		        FillTreeNode(segmentTreeNode, _project.CurrentCircuit);
 		        ElementsTreeView.Nodes.Add(segmentTreeNode);
@@ -94,7 +95,7 @@ namespace ImpedanceForms
 		/// </summary>
 		/// <param name="treeNode">node where will add</param>
 		/// <param name="segment">segment where will add</param>
-        private void FillTreeNode(TreeNode treeNode, ISegment segment)
+        private void FillTreeNode(ISegmentTreeNode treeNode, ISegment segment)
         {
 	        try
 	        {
@@ -102,20 +103,24 @@ namespace ImpedanceForms
 		        {
 			        if (subSegment is Element element)
 			        {
-				        TreeNode segmentTreeNode = new TreeNode
-				        {
+				        ISegmentTreeNode segmentTreeNode = new ISegmentTreeNode
+						{
 					        Name = element.Name,
-							Text = element.ToString()
+							Text = element.ToString(),
+							Segment =  element
 				        };
 				        treeNode.Nodes.Add(segmentTreeNode);
 			        }
 			        else
 			        {
-				        TreeNode segmentTreeNode = new TreeNode
-				        {
-					        Name = subSegment.Name,
-					        Text = subSegment.Name
-				        };
+				        string parallel = "Parallel";
+				        string serial = "Serial";
+						ISegmentTreeNode segmentTreeNode = new ISegmentTreeNode
+						{
+							Name = subSegment is ParallelCircuit ? parallel : serial,
+					        Text = subSegment.Name,
+							Segment = subSegment
+						};
 				        treeNode.Nodes.Add(segmentTreeNode);
 				        FillTreeNode(segmentTreeNode, subSegment);
 			        }
@@ -199,22 +204,20 @@ namespace ImpedanceForms
 
 		private void EditElementsButton_Click(object sender, EventArgs e)
 		{
-			var node = ElementsTreeView.SelectedNode;
-			if (node != null)
+			if (ElementsTreeView.SelectedNode is ISegmentTreeNode node)
 			{
 				ISegment newSegment = null;
-				ISegment foundSegment = _project.CurrentCircuit.FindSegment(node.Name);
-				ISegment oldSegment = foundSegment;
+				ISegment oldSegment = node.Segment;
                 AddEditElementForm editForm = new AddEditElementForm
                 {
-                    Segment = foundSegment,
+                    Segment = node.Segment,
                     NameSegments = _project.NameSegments
                 };
-                editForm.NameSegments.Remove(foundSegment.Name);
+                editForm.NameSegments.Remove(node.Segment.Name);
 				editForm.ShowDialog();
 				if (editForm.DialogResult == DialogResult.OK)
 				{
-					newSegment = _project.CurrentCircuit.ReplaceSegment(foundSegment,
+					newSegment = _project.CurrentCircuit.ReplaceSegment(node.Segment,
 						editForm.Segment);
 				}
 				else
@@ -228,11 +231,10 @@ namespace ImpedanceForms
 						"Segment not found");
 				}
 
-				ElementsTreeView.SelectedNode.Name =
-					newSegment.Name;
+				node.Name = newSegment.Name;
+				node.Text = newSegment is Element ? newSegment.ToString() : newSegment.Name;
+				node.Segment = newSegment;
 
-				ElementsTreeView.SelectedNode.Text = newSegment is Element ?
-					newSegment.ToString() : newSegment.Name;
 				UpdateListBoxes();
 			}
 			else
@@ -244,8 +246,7 @@ namespace ImpedanceForms
 
 		private void AddElementButton_Click(object sender, EventArgs e)
 		{
-			var selectedNode = ElementsTreeView.SelectedNode;
-			if (selectedNode != null)
+			if (ElementsTreeView.SelectedNode is ISegmentTreeNode selectedNode)
 			{
 				var addForm = new AddEditElementForm
 				{
@@ -254,14 +255,10 @@ namespace ImpedanceForms
 				addForm.ShowDialog();
 				if (addForm.DialogResult == DialogResult.OK)
 				{
-					var foundSegment = _project.CurrentCircuit.FindSegment(
-						selectedNode.Name);
 					string text = addForm.Segment.Name;
-					if (foundSegment is Element)
+					if (selectedNode.Segment is Element)
 					{
-						selectedNode = selectedNode.Parent;
-						foundSegment = _project.CurrentCircuit.FindSegment(
-							selectedNode.Name);
+						selectedNode = selectedNode.Parent as ISegmentTreeNode;
 					}
 
 					if (addForm.Segment is Element)
@@ -269,11 +266,12 @@ namespace ImpedanceForms
 						text = addForm.Segment.ToString();
 					}
 
-					foundSegment.SubSegments.Add(addForm.Segment);
-					selectedNode.Nodes.Add(new TreeNode
+					selectedNode.Segment.SubSegments.Add(addForm.Segment);
+					selectedNode.Nodes.Add(new ISegmentTreeNode
 					{
 						Name = addForm.Segment.Name,
-						Text = text
+						Text = text,
+						Segment = addForm.Segment
 					});
 				}
 
@@ -288,15 +286,14 @@ namespace ImpedanceForms
 
 		private void RemoveElementButton_Click(object sender, EventArgs e)
 		{
-			var node = ElementsTreeView.SelectedNode;
-			if (node != null)
+			if (ElementsTreeView.SelectedNode is ISegmentTreeNode node)
 			{
 				var remove = MessageBox.Show("Remove?", "Remove?",
 					MessageBoxButtons.YesNo);
 				if (remove == DialogResult.Yes)
 				{
 					ISegment foundElement = _project.CurrentCircuit.FindSegment(
-						node.Name);
+						node.Segment);
 					var parentNode = node.Parent;
 					if (parentNode != null)
 					{
