@@ -100,6 +100,8 @@ namespace ImpedanceApp
 			base.SetItem(index, item);
 			oldItem.SegmentChanged -= OnSegmentChanged;
 			item.SegmentChanged += OnSegmentChanged;
+			SegmentObservableCollectionChanged?.Invoke(this,
+				new ElementEventArgs($"{oldItem.ToString()} have became {item.ToString()}"));
 		}
 
 		/// <summary>

@@ -20,12 +20,96 @@ namespace ImpedanceForms
 		/// </summary>
 		private readonly Project _project = new Project();
 
-        /// <summary>
-        /// Event for collection
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnCircuitCollectionChanged(
+		/// <summary>
+		/// Searches the list with the same name
+		/// </summary>
+		/// <param name="nameSegment">Name to search in the list</param>
+		/// <returns>True - if found
+		/// False - if not found</returns>
+		private bool SearchName(string nameSegment)
+		{
+			foreach (var name in _project.NameSegments)
+			{
+				if (name == nameSegment)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Create a new segment for the circuit
+		/// </summary>
+		/// <param name="name">Name of segment</param>
+		/// <param name="value">Value of segment if it is
+		/// <see cref="ImpedanceApp.Element"/></param>
+		private ISegment CreateNewSegment(string name, double value, 
+			SegmentObservableCollection subSegments)
+		{
+			ISegment segment = null;
+			if (SegmentType.TryParse(TypeComboBox.Text,
+				out ImpedanceApp.SegmentType segmentType))
+			{
+				switch (segmentType)
+				{
+					case ImpedanceApp.SegmentType.Capacitor:
+						{
+							segment = new Capacitor(name, value);
+							break;
+						}
+
+					case ImpedanceApp.SegmentType.Inductor:
+						{
+							segment = new Inductor(name, value);
+
+							break;
+						}
+
+					case ImpedanceApp.SegmentType.Resistor:
+						{
+							segment = new Resistor(name, value);
+							break;
+						}
+
+					case ImpedanceApp.SegmentType.SerialCircuit:
+						{
+							if (subSegments == null)
+							{
+								subSegments = new SegmentObservableCollection();
+							}
+							segment = new SerialCircuit(subSegments);
+							break;
+						}
+
+					case ImpedanceApp.SegmentType.ParallelCircuit:
+						{
+							if (subSegments == null)
+							{
+								subSegments = new SegmentObservableCollection();
+							}
+							segment = new ParallelCircuit(subSegments);
+							break;
+						}
+				}
+			}
+			else
+			{
+				MessageBox.Show("Select the segment", "Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				DialogResult = DialogResult.None;
+			}
+
+			return segment;
+		}
+
+		/// <summary>
+		/// Event for collection
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnCircuitCollectionChanged(
             object sender, EventArgs e)
         {
             if (e is ElementEventArgs elem)
@@ -69,7 +153,8 @@ namespace ImpedanceForms
 			_project.FindAllElements(_project.CurrentCircuit);
 			_project.CreateNameSegments(_project.CurrentCircuit);
 			ElementsTreeView.ExpandAll();
-		}
+			FillElementsTreeView();
+        }
 
 		/// <summary>
 		/// Create segments tree
@@ -154,39 +239,33 @@ namespace ImpedanceForms
 			{
 				example.SegmentChanged += OnCircuitCollectionChanged;
 			}
+
+			List<string> typeSegments = new List<string>
+			{
+				"",
+				nameof(ImpedanceApp.SegmentType.Resistor),
+				nameof(ImpedanceApp.SegmentType.Capacitor),
+				nameof(ImpedanceApp.SegmentType.Inductor),
+				nameof(ImpedanceApp.SegmentType.SerialCircuit),
+				nameof(ImpedanceApp.SegmentType.ParallelCircuit),
+			};
+			TypeComboBox.DataSource = typeSegments;
 		}
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
 		{
-			var addForm = new AddEditFrequencyForm();
-			addForm.ShowDialog();
-			if(addForm.DialogResult == DialogResult.OK)
+			try
 			{
-				_project.Frequencies.Add((double)addForm.Frequency);
-			}
-			UpdateListBoxes();
-		}
 
-		private void EditFrequenciesButton_Click(object sender, EventArgs e)
-		{
-			var index = FrequenciesListBox.SelectedIndex;
-			var editForm = new AddEditFrequencyForm();
-			if (index >= 0)
-			{
-				editForm.Frequency = _project.Frequencies[index];
-				editForm.ShowDialog();
-				if (editForm.DialogResult == DialogResult.OK)
-				{
-					_project.Frequencies[index] = (double)editForm.Frequency;
-				}
-				UpdateListBoxes();
+				double frequency = double.Parse(FrequencyTextBox.Text);
+				_project.Frequencies.Add(frequency);
 			}
-			else
+			catch (FormatException exception)
 			{
-				MessageBox.Show("Frequency was not selected", "Error",
+				MessageBox.Show(exception.Message, "Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-
+			UpdateListBoxes();
 		}
 
 		private void RemoveFrequenciesButton_Click(object sender, EventArgs e)
@@ -209,38 +288,68 @@ namespace ImpedanceForms
 			}
 		}
 
-		private void EditElementsButton_Click(object sender, EventArgs e)
+		private void EditElementButton_Click(object sender, EventArgs e)
 		{
 			if (ElementsTreeView.SelectedNode is ISegmentTreeNode node)
 			{
-				ISegment newSegment = null;
-				ISegment oldSegment = node.Segment;
-                AddEditElementForm editForm = new AddEditElementForm
-                {
-                    Segment = node.Segment,
-                    NameSegments = _project.NameSegments
-                };
-                editForm.NameSegments.Remove(node.Segment.Name);
-				editForm.ShowDialog();
-				if (editForm.DialogResult == DialogResult.OK)
+				_project.NameSegments.Remove(node.Segment.Name);
+				if (SearchName(NameTextBox.Text))
 				{
-					newSegment = _project.CurrentCircuit.ReplaceSegment(editForm.Segment, 
-						node.Segment);
+					MessageBox.Show("An object already exists with" +
+					                " the same name",
+						"Error", MessageBoxButtons.OK,
+						MessageBoxIcon.Error);
+				}
+				else if (TypeComboBox.SelectedIndex == 0)
+				{
+					MessageBox.Show("Choose the segment",
+						"Error", MessageBoxButtons.OK,
+						MessageBoxIcon.Error);
+				}
+				else if (NameTextBox.Text.Length == 0 && (node is Element))
+				{
+					MessageBox.Show("Enter Name", "Error",
+						MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				else if (ValueTextBox.Text.Length == 0 && (node is Element))
+				{
+					MessageBox.Show("Enter Value", "Error",
+						MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 				else
 				{
-					newSegment = oldSegment;
-				}
+					ISegment newSegment = null;
+					try
+					{
+						string name;
+						double value;
+						SegmentObservableCollection subSegment = node.Segment.SubSegments;
+						if (node.Segment is Element)
+						{
+							name = NameTextBox.Text;
+							value = double.Parse(ValueTextBox.Text);
+						}
+						else
+						{
+							name = "";
+							value = 0.0;
+						}
+						newSegment = CreateNewSegment(name, value, subSegment);
+						_project.CurrentCircuit.ReplaceSegment(node.Segment,
+							newSegment);
+						node.Name = newSegment.Name;
+						node.Text = newSegment is Element ? newSegment.ToString() : newSegment.Name;
+						node.Segment = newSegment;
+						ElementsTreeView.SelectedNode = null;
+						ElementsTreeView.SelectedNode = node;
+					}
+					catch (FormatException exception)
+					{
+						MessageBox.Show(exception.Message, "Error",
+							MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
 
-				if (newSegment == null)
-				{
-					throw new ArgumentNullException(
-						"Segment not found");
 				}
-
-				node.Name = newSegment.Name;
-				node.Text = newSegment is Element ? newSegment.ToString() : newSegment.Name;
-				node.Segment = newSegment;
 
 				UpdateListBoxes();
 			}
@@ -402,6 +511,52 @@ namespace ImpedanceForms
 				MessageBox.Show("Cercuit was not selected",
 					"Error", MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
+			}
+		}
+
+		private void ElementsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+			if (ElementsTreeView.SelectedNode is ISegmentTreeNode node)
+			{
+				NameTextBox.Text = node.Name;
+				if (node.Segment is Circuit circuit)
+				{
+
+					NameTextBox.Enabled = true;
+					ValueTextBox.Enabled = false;
+					List<string> typeSegments = new List<string>
+					{
+						nameof(ImpedanceApp.SegmentType.SerialCircuit)
+					};
+					TypeComboBox.DataSource = typeSegments;
+				}
+				else if (node.Segment is Element element)
+				{
+					ValueTextBox.Text = element.Value.ToString();
+					NameTextBox.Enabled = true;
+					ValueTextBox.Enabled = true;
+					List<string> typeSegments = new List<string>
+					{
+						"",
+						nameof(ImpedanceApp.SegmentType.Resistor),
+						nameof(ImpedanceApp.SegmentType.Capacitor),
+						nameof(ImpedanceApp.SegmentType.Inductor)
+					};
+					TypeComboBox.DataSource = typeSegments;
+				}
+				else
+				{
+					NameTextBox.Enabled = false;
+					ValueTextBox.Enabled = false;
+					List<string> typeSegments = new List<string>
+					{
+						"",
+						nameof(ImpedanceApp.SegmentType.SerialCircuit),
+						nameof(ImpedanceApp.SegmentType.ParallelCircuit),
+					};
+					TypeComboBox.DataSource = typeSegments;
+				}
+				TypeComboBox.Text = node.Segment.SegmentType.ToString();
 			}
 		}
 	}

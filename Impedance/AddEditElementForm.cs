@@ -174,6 +174,12 @@ namespace Impedance
 					"Error", MessageBoxButtons.OK, 
 					MessageBoxIcon.Error);
 			}
+			else if (SegmentsComboBox.SelectedIndex == 0)
+			{
+				MessageBox.Show("Choose the segment",
+					"Error", MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+			}
 			else if (NameTextBox.Text.Length != 0 &&
 			    ValueTextBox.Text.Length != 0 &&
 			    ValueTextBox.Enabled)

@@ -218,7 +218,7 @@ namespace ImpedanceApp
 
 				if (!(currentSegment.SubSegments[i] is Element))
 				{
-					return ReplaceSegment(replacingSegment, insteadSegment,
+					return ReplaceSegment(insteadSegment, replacingSegment, 
 						currentSegment.SubSegments[i]);
 				}
 			}
