@@ -201,7 +201,7 @@ namespace ImpedanceUnitTest
 				"Incorrect calculations for the CalculateZ method");
 		}
 
-		[Test(Description = "Positive test of the Circuit RemoveElement")]
+		[Test(Description = "Positive test of the Circuit RemoveSegment")]
 		public void TestRemoveElement()
 		{
 			var expected = new SegmentObservableCollection
@@ -216,18 +216,18 @@ namespace ImpedanceUnitTest
 			Circuit circuit = new Circuit("Test",
 				CreateCircuit());
 			ISegment deletedElement = circuit.SubSegments[1];
-			circuit.RemoveElement(deletedElement);
+			circuit.RemoveSegment(deletedElement);
 
 			var actual = circuit.SubSegments;
 
 			for (int i = 0; i < expected.Count; i++)
 			{
 				Assert.AreEqual(expected, actual,
-					"Incorrect delete for the RemoveElement method");
+					"Incorrect delete for the RemoveSegment method");
 			}
 		}
 
-		[Test(Description = "Positive test of the Circuit RemoveElement" +
+		[Test(Description = "Positive test of the Circuit RemoveSegment" +
 		                    "with start segment")]
 		public void TestRemoveElement_WithStartSegment()
 		{
@@ -243,18 +243,18 @@ namespace ImpedanceUnitTest
 			Circuit circuit = new Circuit("Test",
 				CreateCircuit());
 			ISegment deletedElement = circuit.SubSegments[0].SubSegments[0];
-			circuit.RemoveElement(deletedElement, circuit.SubSegments[0]);
+			circuit.RemoveSegment(deletedElement, circuit.SubSegments[0]);
 
 			var actual = circuit.SubSegments;
 
 			for (int i = 0; i < expected.Count; i++)
 			{
 				Assert.AreEqual(expected, actual,
-					"Incorrect delete for the RemoveElement method");
+					"Incorrect delete for the RemoveSegment method");
 			}
 		}
 
-		[Test(Description = "Positive test of the Circuit RemoveElement" +
+		[Test(Description = "Positive test of the Circuit RemoveSegment" +
 		                    "in some segment")]
 
 		public void TestRemoveElement_InSegmentSegment()
@@ -271,14 +271,14 @@ namespace ImpedanceUnitTest
 			Circuit circuit = new Circuit("Test",
 				CreateCircuit());
 			ISegment deletedElement = circuit.SubSegments[0].SubSegments[0];
-			circuit.RemoveElement(deletedElement);
+			circuit.RemoveSegment(deletedElement);
 
 			var actual = circuit.SubSegments;
 
 			for (int i = 0; i < expected.Count; i++)
 			{
 				Assert.AreEqual(expected, actual,
-					"Incorrect delete for the RemoveElement method");
+					"Incorrect delete for the RemoveSegment method");
 			}
 		}
 
@@ -783,7 +783,7 @@ namespace ImpedanceUnitTest
 			};
 			var circuit = new Circuit("Test", segment);
 
-			ISegment expected = new Inductor("L1", 0.05);
+			ISegment expected = circuit.SubSegments[0].SubSegments[0];
 
 			ISegment actual = circuit.ReplaceSegment(circuit.SubSegments[0].SubSegments[1],
 				circuit.SubSegments[0].SubSegments[0]);

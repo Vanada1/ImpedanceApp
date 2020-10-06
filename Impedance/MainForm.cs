@@ -153,8 +153,8 @@ namespace ImpedanceForms
 			_project.FindAllElements(_project.CurrentCircuit);
 			_project.CreateNameSegments(_project.CurrentCircuit);
 			ElementsTreeView.ExpandAll();
-			FillElementsTreeView();
-        }
+			//FillElementsTreeView();
+		}
 
 		/// <summary>
 		/// Create segments tree
@@ -413,7 +413,7 @@ namespace ImpedanceForms
 					if (parentNode != null)
 					{
 						parentNode.Nodes.Remove(node);
-						_project.CurrentCircuit.RemoveElement(
+						_project.CurrentCircuit.RemoveSegment(
 							foundElement);
 					}
 					else
@@ -445,11 +445,6 @@ namespace ImpedanceForms
 				}
 
 				_oldCircuitListBoxIndex = index;
-			}
-			else
-			{
-				//MessageBox.Show(nameof(Circuit) + " was not selected", "Error",
-				//	MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -557,6 +552,12 @@ namespace ImpedanceForms
 				}
 				TypeComboBox.Text = node.Segment.SegmentType.ToString();
 			}
+			else
+			{
+				NameTextBox.Text = "";
+				ValueTextBox.Text = "";
+				TypeComboBox.Text = "";
+			}
 		}
 
 		private void AddParallelSegmentButton_Click(object sender, EventArgs e)
@@ -613,6 +614,73 @@ namespace ImpedanceForms
 				MessageBox.Show(nameof(Element) + "was not selected", "Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+		}
+
+		private void ElementsTreeView_ItemDrag(object sender, ItemDragEventArgs e)
+		{
+			DoDragDrop(e.Item, DragDropEffects.Move);
+		}
+
+		private void ElementsTreeView_DragEnter(object sender, DragEventArgs e)
+		{
+			e.Effect = DragDropEffects.Move;
+		}
+
+		private void ElementsTreeView_DragDrop(object sender, DragEventArgs e)
+		{
+			Point targetPoint = ElementsTreeView.PointToClient(new Point(e.X, e.Y));
+			ISegmentTreeNode targetNode = ElementsTreeView.GetNodeAt(targetPoint) as ISegmentTreeNode;
+			ISegmentTreeNode draggedNode = e.Data.GetData(typeof(ISegmentTreeNode)) as ISegmentTreeNode;
+
+			if (draggedNode == null)
+			{
+				return;
+			}
+
+			if (targetNode == null || targetNode.Segment is Circuit)
+			{
+				_project.CurrentCircuit.RemoveSegment(draggedNode.Segment);
+				draggedNode.Remove();
+				ElementsTreeView.Nodes[0].Nodes.Add(draggedNode);
+				_project.CurrentCircuit.SubSegments.Add(draggedNode.Segment);
+				draggedNode.Expand();
+				UpdateListBoxes();
+			}
+			else if (targetNode.Segment is Element )
+			{
+				_project.CurrentCircuit.ReplaceSegment(targetNode.Segment,
+					draggedNode.Segment.Clone() as ISegment);
+				_project.CurrentCircuit.ReplaceSegment(draggedNode.Segment,
+					targetNode.Segment.Clone() as ISegment);
+				FillElementsTreeView();
+				UpdateListBoxes();
+			}
+			else
+			{
+				ISegmentTreeNode parentNode = targetNode;
+
+				if (!draggedNode.Equals(targetNode) && targetNode != null)
+				{
+					bool canDrop = true;
+
+					while (canDrop && (parentNode != null))
+					{
+						canDrop = !Object.ReferenceEquals(draggedNode, parentNode);
+						parentNode = parentNode.Parent as ISegmentTreeNode;
+					}
+
+					if (canDrop)
+					{
+						_project.CurrentCircuit.RemoveSegment(draggedNode.Segment);
+						draggedNode.Remove();
+						targetNode.Nodes.Add(draggedNode);
+						targetNode.Segment.SubSegments.Add(draggedNode.Segment);
+						draggedNode.Expand();
+						UpdateListBoxes();
+					}
+				}
+			}
+			ElementsTreeView.SelectedNode = draggedNode;
 		}
 	}
 }

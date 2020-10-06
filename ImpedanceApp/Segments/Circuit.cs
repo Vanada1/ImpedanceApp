@@ -172,14 +172,14 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="removedElement"> <see cref="ISegment"/> for remove</param>
 		/// <param name="segments">currently segment</param>
-		public void RemoveElement(ISegment removedElement, ISegment segments = null)
+		public void RemoveSegment(ISegment removedElement, ISegment segments = null)
 		{
 			var foundRoot = segments ?? this;
 
 			if (foundRoot.SubSegments.Remove(removedElement)) return;
 			foreach (var segment in foundRoot.SubSegments)
 				if (!(segment is Element))
-					RemoveElement(removedElement, segment);
+					RemoveSegment(removedElement, segment);
 		}
 
 		/// <summary>
@@ -193,9 +193,10 @@ namespace ImpedanceApp
 		public ISegment ReplaceSegment(ISegment insteadSegment,
 			ISegment replacingSegment, ISegment currentSegment = null)
 		{
-			if (currentSegment == null)
+			ISegment result = null;
+			if (ReferenceEquals(currentSegment, null))
 			{
-				if (insteadSegment == this)
+				if (ReferenceEquals(insteadSegment, this))
 				{
 					this.Name = replacingSegment.Name;
 					return this;
@@ -205,12 +206,12 @@ namespace ImpedanceApp
 
 			if (currentSegment is Element)
 			{
-				return null;
+				return result;
 			}
 
 			for (int i = 0; i < currentSegment.SubSegments.Count; i++)
 			{
-				if (currentSegment.SubSegments[i] == insteadSegment)
+				if (ReferenceEquals(currentSegment.SubSegments[i], insteadSegment))
 				{
 					currentSegment.SubSegments[i] = replacingSegment;
 					return currentSegment.SubSegments[i];
@@ -218,12 +219,12 @@ namespace ImpedanceApp
 
 				if (!(currentSegment.SubSegments[i] is Element))
 				{
-					return ReplaceSegment(insteadSegment, replacingSegment, 
+					result = ReplaceSegment(insteadSegment, replacingSegment, 
 						currentSegment.SubSegments[i]);
 				}
 			}
 
-			return null;
+			return result;
 		}
 
 		/// <summary>

@@ -30,7 +30,7 @@
 		{
 			this.FrequenciesListBox = new System.Windows.Forms.ListBox();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.ImpedanceListBox = new System.Windows.Forms.ListBox();
+			this.FrequenciesGroupBox = new System.Windows.Forms.GroupBox();
 			this.ElementGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.NameLabel = new System.Windows.Forms.Label();
@@ -41,11 +41,11 @@
 			this.TypeLabel = new System.Windows.Forms.Label();
 			this.NameTextBox = new System.Windows.Forms.TextBox();
 			this.ValueTextBox = new System.Windows.Forms.TextBox();
-			this.EventLabel = new System.Windows.Forms.Label();
+			this.AddParallelSegmentButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
 			this.EditElementButton = new System.Windows.Forms.Button();
 			this.RemoveElementButton = new System.Windows.Forms.Button();
-			this.AddParallelSegmentButton = new System.Windows.Forms.Button();
+			this.EventLabel = new System.Windows.Forms.Label();
 			this.FrequencyGgroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
 			this.RemoveFrequencyButton = new System.Windows.Forms.Button();
@@ -53,27 +53,27 @@
 			this.FrequencyLabel = new System.Windows.Forms.Label();
 			this.FrequencyTextBox = new System.Windows.Forms.TextBox();
 			this.AddFrequencyButton = new System.Windows.Forms.Button();
+			this.ImpedancesGroupBox = new System.Windows.Forms.GroupBox();
+			this.ImpedanceListBox = new System.Windows.Forms.ListBox();
 			this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
 			this.AddCircuit = new System.Windows.Forms.Button();
 			this.EditCircuit = new System.Windows.Forms.Button();
 			this.RemoveCircuit = new System.Windows.Forms.Button();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-			this.ElementsTreeView = new System.Windows.Forms.TreeView();
 			this.CircuitsComboBox = new System.Windows.Forms.ComboBox();
-			this.FrequenciesGroupBox = new System.Windows.Forms.GroupBox();
-			this.ImpedancesGroupBox = new System.Windows.Forms.GroupBox();
+			this.ElementsTreeView = new System.Windows.Forms.TreeView();
 			this.CircuitGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel2.SuspendLayout();
+			this.FrequenciesGroupBox.SuspendLayout();
 			this.ElementGroupBox.SuspendLayout();
 			this.tableLayoutPanel5.SuspendLayout();
 			this.tableLayoutPanel7.SuspendLayout();
 			this.FrequencyGgroupBox.SuspendLayout();
 			this.tableLayoutPanel8.SuspendLayout();
 			this.tableLayoutPanel9.SuspendLayout();
+			this.ImpedancesGroupBox.SuspendLayout();
 			this.tableLayoutPanel6.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
-			this.FrequenciesGroupBox.SuspendLayout();
-			this.ImpedancesGroupBox.SuspendLayout();
 			this.CircuitGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -111,19 +111,18 @@
 			this.tableLayoutPanel2.Size = new System.Drawing.Size(1112, 178);
 			this.tableLayoutPanel2.TabIndex = 12;
 			// 
-			// ImpedanceListBox
+			// FrequenciesGroupBox
 			// 
-			this.ImpedanceListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.FrequenciesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.ImpedanceListBox.Enabled = false;
-			this.ImpedanceListBox.FormattingEnabled = true;
-			this.ImpedanceListBox.Location = new System.Drawing.Point(6, 17);
-			this.ImpedanceListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.ImpedanceListBox.Name = "ImpedanceListBox";
-			this.ImpedanceListBox.ScrollAlwaysVisible = true;
-			this.ImpedanceListBox.Size = new System.Drawing.Size(206, 147);
-			this.ImpedanceListBox.TabIndex = 0;
+			this.FrequenciesGroupBox.Controls.Add(this.FrequenciesListBox);
+			this.FrequenciesGroupBox.Location = new System.Drawing.Point(669, 3);
+			this.FrequenciesGroupBox.Name = "FrequenciesGroupBox";
+			this.FrequenciesGroupBox.Size = new System.Drawing.Size(216, 172);
+			this.FrequenciesGroupBox.TabIndex = 14;
+			this.FrequenciesGroupBox.TabStop = false;
+			this.FrequenciesGroupBox.Text = "Frequencies";
 			// 
 			// ElementGroupBox
 			// 
@@ -253,18 +252,18 @@
 			this.ValueTextBox.Size = new System.Drawing.Size(156, 20);
 			this.ValueTextBox.TabIndex = 4;
 			// 
-			// EventLabel
+			// AddParallelSegmentButton
 			// 
-			this.EventLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.AddParallelSegmentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.EventLabel.AutoSize = true;
-			this.EventLabel.Location = new System.Drawing.Point(14, 131);
-			this.EventLabel.Name = "EventLabel";
-			this.EventLabel.Size = new System.Drawing.Size(35, 13);
-			this.EventLabel.TabIndex = 9;
-			this.EventLabel.Text = "label1";
-			this.EventLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.AddParallelSegmentButton.Location = new System.Drawing.Point(211, 3);
+			this.AddParallelSegmentButton.Name = "AddParallelSegmentButton";
+			this.AddParallelSegmentButton.Size = new System.Drawing.Size(177, 28);
+			this.AddParallelSegmentButton.TabIndex = 6;
+			this.AddParallelSegmentButton.Text = "Add parallel segment";
+			this.AddParallelSegmentButton.UseVisualStyleBackColor = true;
+			this.AddParallelSegmentButton.Click += new System.EventHandler(this.AddParallelSegmentButton_Click);
 			// 
 			// tableLayoutPanel7
 			// 
@@ -309,18 +308,18 @@
 			this.RemoveElementButton.UseVisualStyleBackColor = true;
 			this.RemoveElementButton.Click += new System.EventHandler(this.RemoveElementButton_Click);
 			// 
-			// AddParallelSegmentButton
+			// EventLabel
 			// 
-			this.AddParallelSegmentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.EventLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.AddParallelSegmentButton.Location = new System.Drawing.Point(211, 3);
-			this.AddParallelSegmentButton.Name = "AddParallelSegmentButton";
-			this.AddParallelSegmentButton.Size = new System.Drawing.Size(177, 28);
-			this.AddParallelSegmentButton.TabIndex = 6;
-			this.AddParallelSegmentButton.Text = "Add parallel segment";
-			this.AddParallelSegmentButton.UseVisualStyleBackColor = true;
-			this.AddParallelSegmentButton.Click += new System.EventHandler(this.AddParallelSegmentButton_Click);
+			this.EventLabel.AutoSize = true;
+			this.EventLabel.Location = new System.Drawing.Point(14, 131);
+			this.EventLabel.Name = "EventLabel";
+			this.EventLabel.Size = new System.Drawing.Size(35, 13);
+			this.EventLabel.TabIndex = 9;
+			this.EventLabel.Text = "label1";
+			this.EventLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// FrequencyGgroupBox
 			// 
@@ -373,8 +372,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tableLayoutPanel9.ColumnCount = 2;
-			this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.01626F));
-			this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.98374F));
+			this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.75537F));
+			this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.24464F));
 			this.tableLayoutPanel9.Controls.Add(this.FrequencyLabel, 0, 0);
 			this.tableLayoutPanel9.Controls.Add(this.FrequencyTextBox, 1, 0);
 			this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
@@ -389,9 +388,9 @@
 			this.FrequencyLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.FrequencyLabel.AutoSize = true;
-			this.FrequencyLabel.Location = new System.Drawing.Point(5, 0);
+			this.FrequencyLabel.Location = new System.Drawing.Point(7, 0);
 			this.FrequencyLabel.Name = "FrequencyLabel";
-			this.FrequencyLabel.Size = new System.Drawing.Size(52, 27);
+			this.FrequencyLabel.Size = new System.Drawing.Size(57, 27);
 			this.FrequencyLabel.TabIndex = 14;
 			this.FrequencyLabel.Text = "Frequency";
 			this.FrequencyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -401,9 +400,9 @@
 			this.FrequencyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.FrequencyTextBox.Location = new System.Drawing.Point(63, 3);
+			this.FrequencyTextBox.Location = new System.Drawing.Point(70, 3);
 			this.FrequencyTextBox.Name = "FrequencyTextBox";
-			this.FrequencyTextBox.Size = new System.Drawing.Size(167, 20);
+			this.FrequencyTextBox.Size = new System.Drawing.Size(160, 20);
 			this.FrequencyTextBox.TabIndex = 15;
 			// 
 			// AddFrequencyButton
@@ -418,6 +417,33 @@
 			this.AddFrequencyButton.Text = "Add Frequency";
 			this.AddFrequencyButton.UseVisualStyleBackColor = true;
 			this.AddFrequencyButton.Click += new System.EventHandler(this.AddFrequenciesButton_Click);
+			// 
+			// ImpedancesGroupBox
+			// 
+			this.ImpedancesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ImpedancesGroupBox.Controls.Add(this.ImpedanceListBox);
+			this.ImpedancesGroupBox.Location = new System.Drawing.Point(891, 3);
+			this.ImpedancesGroupBox.Name = "ImpedancesGroupBox";
+			this.ImpedancesGroupBox.Size = new System.Drawing.Size(218, 172);
+			this.ImpedancesGroupBox.TabIndex = 15;
+			this.ImpedancesGroupBox.TabStop = false;
+			this.ImpedancesGroupBox.Text = "Impedances";
+			// 
+			// ImpedanceListBox
+			// 
+			this.ImpedanceListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ImpedanceListBox.Enabled = false;
+			this.ImpedanceListBox.FormattingEnabled = true;
+			this.ImpedanceListBox.Location = new System.Drawing.Point(6, 17);
+			this.ImpedanceListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.ImpedanceListBox.Name = "ImpedanceListBox";
+			this.ImpedanceListBox.ScrollAlwaysVisible = true;
+			this.ImpedanceListBox.Size = new System.Drawing.Size(206, 147);
+			this.ImpedanceListBox.TabIndex = 0;
 			// 
 			// tableLayoutPanel6
 			// 
@@ -487,9 +513,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
 			this.tableLayoutPanel4.ColumnCount = 1;
 			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel4.Controls.Add(this.ElementsTreeView, 0, 1);
 			this.tableLayoutPanel4.Controls.Add(this.CircuitsComboBox, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel6, 0, 2);
+			this.tableLayoutPanel4.Controls.Add(this.ElementsTreeView, 0, 1);
 			this.tableLayoutPanel4.Location = new System.Drawing.Point(8, 13);
 			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -500,17 +526,6 @@
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel4.Size = new System.Drawing.Size(279, 399);
 			this.tableLayoutPanel4.TabIndex = 13;
-			// 
-			// ElementsTreeView
-			// 
-			this.ElementsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ElementsTreeView.Location = new System.Drawing.Point(3, 33);
-			this.ElementsTreeView.Name = "ElementsTreeView";
-			this.ElementsTreeView.Size = new System.Drawing.Size(273, 330);
-			this.ElementsTreeView.TabIndex = 11;
-			this.ElementsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ElementsTreeView_AfterSelect);
 			// 
 			// CircuitsComboBox
 			// 
@@ -524,31 +539,20 @@
 			this.CircuitsComboBox.TabIndex = 12;
 			this.CircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.CircuitsComboBox_SelectedIndexChanged);
 			// 
-			// FrequenciesGroupBox
+			// ElementsTreeView
 			// 
-			this.FrequenciesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.ElementsTreeView.AllowDrop = true;
+			this.ElementsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.FrequenciesGroupBox.Controls.Add(this.FrequenciesListBox);
-			this.FrequenciesGroupBox.Location = new System.Drawing.Point(669, 3);
-			this.FrequenciesGroupBox.Name = "FrequenciesGroupBox";
-			this.FrequenciesGroupBox.Size = new System.Drawing.Size(216, 172);
-			this.FrequenciesGroupBox.TabIndex = 14;
-			this.FrequenciesGroupBox.TabStop = false;
-			this.FrequenciesGroupBox.Text = "Frequencies";
-			// 
-			// ImpedancesGroupBox
-			// 
-			this.ImpedancesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ImpedancesGroupBox.Controls.Add(this.ImpedanceListBox);
-			this.ImpedancesGroupBox.Location = new System.Drawing.Point(891, 3);
-			this.ImpedancesGroupBox.Name = "ImpedancesGroupBox";
-			this.ImpedancesGroupBox.Size = new System.Drawing.Size(218, 172);
-			this.ImpedancesGroupBox.TabIndex = 15;
-			this.ImpedancesGroupBox.TabStop = false;
-			this.ImpedancesGroupBox.Text = "Impedances";
+			this.ElementsTreeView.Location = new System.Drawing.Point(3, 33);
+			this.ElementsTreeView.Name = "ElementsTreeView";
+			this.ElementsTreeView.Size = new System.Drawing.Size(273, 330);
+			this.ElementsTreeView.TabIndex = 11;
+			this.ElementsTreeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ElementsTreeView_ItemDrag);
+			this.ElementsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ElementsTreeView_AfterSelect);
+			this.ElementsTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragDrop);
+			this.ElementsTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragEnter);
 			// 
 			// CircuitGroupBox
 			// 
@@ -573,6 +577,7 @@
 			this.Text = "ImpedanceApp";
 			this.Load += new System.EventHandler(this.Main_Load);
 			this.tableLayoutPanel2.ResumeLayout(false);
+			this.FrequenciesGroupBox.ResumeLayout(false);
 			this.ElementGroupBox.ResumeLayout(false);
 			this.ElementGroupBox.PerformLayout();
 			this.tableLayoutPanel5.ResumeLayout(false);
@@ -582,10 +587,9 @@
 			this.tableLayoutPanel8.ResumeLayout(false);
 			this.tableLayoutPanel9.ResumeLayout(false);
 			this.tableLayoutPanel9.PerformLayout();
+			this.ImpedancesGroupBox.ResumeLayout(false);
 			this.tableLayoutPanel6.ResumeLayout(false);
 			this.tableLayoutPanel4.ResumeLayout(false);
-			this.FrequenciesGroupBox.ResumeLayout(false);
-			this.ImpedancesGroupBox.ResumeLayout(false);
 			this.CircuitGroupBox.ResumeLayout(false);
 			this.ResumeLayout(false);
 
