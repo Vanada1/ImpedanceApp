@@ -646,15 +646,6 @@ namespace ImpedanceForms
 				draggedNode.Expand();
 				UpdateListBoxes();
 			}
-			else if (targetNode.Segment is Element )
-			{
-				_project.CurrentCircuit.ReplaceSegment(targetNode.Segment,
-					draggedNode.Segment.Clone() as ISegment);
-				_project.CurrentCircuit.ReplaceSegment(draggedNode.Segment,
-					targetNode.Segment.Clone() as ISegment);
-				FillElementsTreeView();
-				UpdateListBoxes();
-			}
 			else
 			{
 				ISegmentTreeNode parentNode = targetNode;
@@ -671,11 +662,23 @@ namespace ImpedanceForms
 
 					if (canDrop)
 					{
-						_project.CurrentCircuit.RemoveSegment(draggedNode.Segment);
-						draggedNode.Remove();
-						targetNode.Nodes.Add(draggedNode);
-						targetNode.Segment.SubSegments.Add(draggedNode.Segment);
-						draggedNode.Expand();
+						if (targetNode.Segment is Element)
+						{
+							_project.CurrentCircuit.ReplaceSegment(targetNode.Segment,
+								draggedNode.Segment.Clone() as ISegment);
+							_project.CurrentCircuit.ReplaceSegment(draggedNode.Segment,
+								targetNode.Segment.Clone() as ISegment);
+							FillElementsTreeView();
+							UpdateListBoxes();
+						}
+						else
+						{
+							_project.CurrentCircuit.RemoveSegment(draggedNode.Segment);
+							draggedNode.Remove();
+							targetNode.Nodes.Add(draggedNode);
+							targetNode.Segment.SubSegments.Add(draggedNode.Segment);
+							draggedNode.Expand();
+						}
 						UpdateListBoxes();
 					}
 				}

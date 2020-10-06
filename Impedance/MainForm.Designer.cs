@@ -63,6 +63,7 @@
 			this.CircuitsComboBox = new System.Windows.Forms.ComboBox();
 			this.ElementsTreeView = new System.Windows.Forms.TreeView();
 			this.CircuitGroupBox = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.FrequenciesGroupBox.SuspendLayout();
 			this.ElementGroupBox.SuspendLayout();
@@ -75,6 +76,7 @@
 			this.tableLayoutPanel6.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.CircuitGroupBox.SuspendLayout();
+			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// FrequenciesListBox
@@ -129,9 +131,9 @@
 			this.ElementGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.ElementGroupBox.Controls.Add(this.tableLayoutPanel1);
 			this.ElementGroupBox.Controls.Add(this.tableLayoutPanel5);
 			this.ElementGroupBox.Controls.Add(this.tableLayoutPanel7);
-			this.ElementGroupBox.Controls.Add(this.EventLabel);
 			this.ElementGroupBox.Location = new System.Drawing.Point(3, 3);
 			this.ElementGroupBox.Name = "ElementGroupBox";
 			this.ElementGroupBox.Size = new System.Drawing.Size(403, 172);
@@ -314,9 +316,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.EventLabel.AutoSize = true;
-			this.EventLabel.Location = new System.Drawing.Point(14, 131);
+			this.EventLabel.Location = new System.Drawing.Point(3, 0);
 			this.EventLabel.Name = "EventLabel";
-			this.EventLabel.Size = new System.Drawing.Size(35, 13);
+			this.EventLabel.Size = new System.Drawing.Size(196, 37);
 			this.EventLabel.TabIndex = 9;
 			this.EventLabel.Text = "label1";
 			this.EventLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -564,6 +566,18 @@
 			this.CircuitGroupBox.TabStop = false;
 			this.CircuitGroupBox.Text = "Circuit";
 			// 
+			// tableLayoutPanel1
+			// 
+			this.tableLayoutPanel1.ColumnCount = 1;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.Controls.Add(this.EventLabel, 0, 0);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 129);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 1;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 37);
+			this.tableLayoutPanel1.TabIndex = 15;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -579,7 +593,6 @@
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.FrequenciesGroupBox.ResumeLayout(false);
 			this.ElementGroupBox.ResumeLayout(false);
-			this.ElementGroupBox.PerformLayout();
 			this.tableLayoutPanel5.ResumeLayout(false);
 			this.tableLayoutPanel5.PerformLayout();
 			this.tableLayoutPanel7.ResumeLayout(false);
@@ -591,6 +604,8 @@
 			this.tableLayoutPanel6.ResumeLayout(false);
 			this.tableLayoutPanel4.ResumeLayout(false);
 			this.CircuitGroupBox.ResumeLayout(false);
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -632,6 +647,7 @@
 		private System.Windows.Forms.GroupBox FrequenciesGroupBox;
 		private System.Windows.Forms.GroupBox ImpedancesGroupBox;
 		private System.Windows.Forms.GroupBox CircuitGroupBox;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	}
 }
 
