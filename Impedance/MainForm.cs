@@ -580,6 +580,7 @@ namespace ImpedanceForms
 				}
 
 				UpdateListBoxes();
+				FillElementsTreeView();
 			}
 			else
 			{
@@ -608,6 +609,7 @@ namespace ImpedanceForms
 				}
 
 				UpdateListBoxes();
+				FillElementsTreeView();
 			}
 			else
 			{

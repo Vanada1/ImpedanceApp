@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.FrequenciesListBox = new System.Windows.Forms.ListBox();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.FrequenciesGroupBox = new System.Windows.Forms.GroupBox();
@@ -64,6 +65,11 @@
 			this.ElementsTreeView = new System.Windows.Forms.TreeView();
 			this.CircuitGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.CircuitContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.addParallelSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addSerialSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addElementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.FrequenciesGroupBox.SuspendLayout();
 			this.ElementGroupBox.SuspendLayout();
@@ -77,6 +83,7 @@
 			this.tableLayoutPanel4.SuspendLayout();
 			this.CircuitGroupBox.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
+			this.CircuitContextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// FrequenciesListBox
@@ -547,6 +554,7 @@
 			this.ElementsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.ElementsTreeView.ContextMenuStrip = this.CircuitContextMenuStrip;
 			this.ElementsTreeView.Location = new System.Drawing.Point(3, 33);
 			this.ElementsTreeView.Name = "ElementsTreeView";
 			this.ElementsTreeView.Size = new System.Drawing.Size(273, 330);
@@ -578,6 +586,44 @@
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 37);
 			this.tableLayoutPanel1.TabIndex = 15;
 			// 
+			// CircuitContextMenuStrip
+			// 
+			this.CircuitContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addParallelSegmentToolStripMenuItem,
+            this.addSerialSegmentToolStripMenuItem,
+            this.addElementToolStripMenuItem,
+            this.removeToolStripMenuItem});
+			this.CircuitContextMenuStrip.Name = "CircuitContextMenuStrip";
+			this.CircuitContextMenuStrip.Size = new System.Drawing.Size(187, 92);
+			// 
+			// addParallelSegmentToolStripMenuItem
+			// 
+			this.addParallelSegmentToolStripMenuItem.Name = "addParallelSegmentToolStripMenuItem";
+			this.addParallelSegmentToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+			this.addParallelSegmentToolStripMenuItem.Text = "Add parallel segment";
+			this.addParallelSegmentToolStripMenuItem.Click += new System.EventHandler(this.AddParallelSegmentButton_Click);
+			// 
+			// addSerialSegmentToolStripMenuItem
+			// 
+			this.addSerialSegmentToolStripMenuItem.Name = "addSerialSegmentToolStripMenuItem";
+			this.addSerialSegmentToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+			this.addSerialSegmentToolStripMenuItem.Text = "Add serial segment";
+			this.addSerialSegmentToolStripMenuItem.Click += new System.EventHandler(this.AddSerialSegmentButton_Click);
+			// 
+			// addElementToolStripMenuItem
+			// 
+			this.addElementToolStripMenuItem.Name = "addElementToolStripMenuItem";
+			this.addElementToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+			this.addElementToolStripMenuItem.Text = "Add element";
+			this.addElementToolStripMenuItem.Click += new System.EventHandler(this.AddElementButton_Click);
+			// 
+			// removeToolStripMenuItem
+			// 
+			this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+			this.removeToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+			this.removeToolStripMenuItem.Text = "Remove";
+			this.removeToolStripMenuItem.Click += new System.EventHandler(this.RemoveElementButton_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -606,6 +652,7 @@
 			this.CircuitGroupBox.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
+			this.CircuitContextMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -648,6 +695,11 @@
 		private System.Windows.Forms.GroupBox ImpedancesGroupBox;
 		private System.Windows.Forms.GroupBox CircuitGroupBox;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.ContextMenuStrip CircuitContextMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem addParallelSegmentToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem addSerialSegmentToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem addElementToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
 	}
 }
 
