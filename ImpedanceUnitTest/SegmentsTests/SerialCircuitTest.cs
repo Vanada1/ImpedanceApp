@@ -1,6 +1,5 @@
-﻿using System;
+﻿using ImpedanceApp;
 using NUnit.Framework;
-using ImpedanceApp;
 using System.Numerics;
 
 namespace ImpedanceUnitTest
@@ -18,11 +17,12 @@ namespace ImpedanceUnitTest
 		}
 
 		[Test(Description = "Test SerialCircuit constructor")]
-		public void TestSerialCircuitConstructor()
+		public void TestSerialCircuitConstructor_CorrectValue()
 		{
 			string name = "Test";
 			Assert.DoesNotThrow(
-				() => {
+				() =>
+				{
 					SerialCircuit inductor = new SerialCircuit(
 						 CreateCircuit());
 				},
@@ -65,6 +65,7 @@ namespace ImpedanceUnitTest
 			string message = "Positive test of the SubSegments setter not passed";
 			var SerialCircuit = new SerialCircuit(
 				 CreateCircuit());
+
 			Assert.DoesNotThrow(
 				() => { SerialCircuit.SubSegments = subSegments; },
 				message);
@@ -75,7 +76,7 @@ namespace ImpedanceUnitTest
 		{
 			SegmentType expected = SegmentType.SerialCircuit;
 
-			var circuit = new SerialCircuit( 
+			var circuit = new SerialCircuit(
 				new SegmentObservableCollection());
 
 			SegmentType actual = circuit.SegmentType;
@@ -84,24 +85,25 @@ namespace ImpedanceUnitTest
 				"Getter Name returns incorrect value");
 		}
 
-		[Test(Description = "Positive test of the OnCircuitChanged method")]
+		[Test(Description = "Positive test of the SegmentChanged event")]
 		public void TestOnCircuitChanged()
 		{
 			bool wasCalled = false;
 			var SerialCircuit = new SerialCircuit(
 				 CreateCircuit());
 			SerialCircuit.SegmentChanged += (o, e) => wasCalled = true;
-			SerialCircuit.SubSegments.Add(new Resistor( "Test", 1.0));
+			SerialCircuit.SubSegments.Add(new Resistor("Test", 1.0));
+
 			Assert.IsTrue(wasCalled);
 		}
 
 		[Test(Description = "Positive test of the SerialCircuit CalculateZ")]
-		public void TestCalculateZ()
+		public void TestSerialCircuitCalculateZ()
 		{
 			double frequency = 1.0;
 			var r = new Resistor("R", 5.0);
 			var l = new Inductor("L1", 0.05);
-			Complex result = r.CalculateZ(frequency) +  l.CalculateZ(frequency);
+			Complex result = r.CalculateZ(frequency) + l.CalculateZ(frequency);
 			Complex expected = result;
 
 			SerialCircuit SerialCircuit = new SerialCircuit(
@@ -114,7 +116,7 @@ namespace ImpedanceUnitTest
 		}
 
 		[Test(Description = "Test of the SerialCircuit Clone")]
-		public void TestClone()
+		public void TestSerialCircuitClone()
 		{
 			var segments = new SegmentObservableCollection
 			{
@@ -125,7 +127,7 @@ namespace ImpedanceUnitTest
 				new Capacitor("C1", 0.01)
 			};
 
-			var expected = new SerialCircuit( segments);
+			var expected = new SerialCircuit(segments);
 
 			var actual = expected.Clone() as SerialCircuit;
 
@@ -136,6 +138,8 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test of the SerialCircuit Equals ISegment equals")]
 		public void TestEqualsISegment_IsEquals()
 		{
+			var expected = true;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -144,22 +148,20 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = true;
-
-			var circuit2 = new SerialCircuit( segments);
+			var circuit1 = new SerialCircuit(segments);
+			var circuit2 = new SerialCircuit(segments);
 
 			var actual = circuit1.Equals(circuit2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment not equals")]
 		public void TestEqualsISegment_IsNotEquals()
 		{
+			var expected = false;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -168,48 +170,44 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = false;
-
-			var circuit2 = new SerialCircuit( 
-				new SegmentObservableCollection());
-
-			var actual = circuit1.Equals(circuit2);
-
-			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
-		}
-
-		[Test(Description = "Test of the SerialCircuit Equals ISegment other collection")]
-		public void TestEqualsISegment_OtherCollection()
-		{
-			var segments = new SegmentObservableCollection
-			{
-				new ParallelCircuit( new SegmentObservableCollection
-				{
-					new Inductor("L1", 0.05)
-				}),
-				new Capacitor("C1", 0.01)
-			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = false;
-
+			var circuit1 = new SerialCircuit(segments);
 			var circuit2 = new SerialCircuit(
 				new SegmentObservableCollection());
 
 			var actual = circuit1.Equals(circuit2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
+		}
+
+		[Test(Description = "Test of the SerialCircuit Equals ISegment other collection")]
+		public void TestEqualsISegment_OtherCollection()
+		{
+			var expected = false;
+
+			var segments = new SegmentObservableCollection
+			{
+				new ParallelCircuit( new SegmentObservableCollection
+				{
+					new Inductor("L1", 0.05)
+				}),
+				new Capacitor("C1", 0.01)
+			};
+			var circuit1 = new SerialCircuit(segments);
+			var circuit2 = new SerialCircuit(
+				new SegmentObservableCollection());
+
+			var actual = circuit1.Equals(circuit2);
+
+			Assert.AreEqual(expected, actual,
+				"Elements are equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment one is null")]
 		public void TestEqualsISegment_Null()
 		{
+			var expected = false;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -218,22 +216,20 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = false;
-
+			var circuit1 = new SerialCircuit(segments);
 			SerialCircuit circuit2 = null;
 
 			var actual = circuit1.Equals(circuit2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment the same object")]
 		public void TestEqualsISegment_SameObject()
 		{
+			var expected = true;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -242,23 +238,21 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = true;
-
+			var circuit1 = new SerialCircuit(segments);
 			SerialCircuit circuit2 = circuit1;
 
 			var actual = circuit1.Equals(circuit2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment equals " +
-		                    "operation ==")]
+							"operation ==")]
 		public void TestEqualsISegment_IsEqualsOperationTrue()
 		{
+			var expected = true;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -267,22 +261,21 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = true;
-
-			var circuit2 = new SerialCircuit( segments);
+			var circuit1 = new SerialCircuit(segments);
+			var circuit2 = new SerialCircuit(segments);
 
 			var actual = circuit1 == circuit2;
+
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment is not equals " +
-		                    "operation ==")]
+							"operation ==")]
 		public void TestEqualsISegment_IsEqualsOperationFalse()
 		{
+			var expected = false;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -291,11 +284,7 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = false;
-
+			var circuit1 = new SerialCircuit(segments);
 			segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -306,17 +295,20 @@ namespace ImpedanceUnitTest
 				new Inductor("L1", 0.05)
 			};
 
-			var circuit2 = new SerialCircuit( segments);
+			var circuit2 = new SerialCircuit(segments);
 
 			var actual = circuit1 == circuit2;
+
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment not equals" +
-		                    "operation !=")]
+							"operation !=")]
 		public void TestEqualsISegment_IsNotEqualsOperationTrue()
 		{
+			var expected = true;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -325,23 +317,21 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = true;
-
+			var circuit1 = new SerialCircuit(segments);
 			var circuit2 = new SerialCircuit(
 				new SegmentObservableCollection());
 
 			var actual = circuit1 != circuit2;
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment equals" +
-		                    "operation !=")]
+							"operation !=")]
 		public void TestEqualsISegment_IsNotEqualsOperationFalse()
 		{
+			var expected = false;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -350,70 +340,50 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = false;
-
-			var circuit2 = new SerialCircuit( segments);
+			var circuit1 = new SerialCircuit(segments);
+			var circuit2 = new SerialCircuit(segments);
 
 			var actual = circuit1 != circuit2;
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment equals " +
-		                    "operation ==. Null")]
+							"operation ==. Null")]
 		public void TestEqualsISegment_IsEqualsOperationNullTrue()
 		{
-			var segments = new SegmentObservableCollection
-			{
-				new ParallelCircuit( new SegmentObservableCollection
-				{
-					new Inductor("L1", 0.05)
-				}),
-				new Capacitor("C1", 0.01)
-			};
-
-			SerialCircuit circuit1 = null;
-
 			var expected = true;
 
-			SerialCircuit circuit2 =null;
+			SerialCircuit circuit1 = null;
+			SerialCircuit circuit2 = null;
 
 			var actual = circuit1 == circuit2;
+
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment equals" +
-		                    "operation !=. Null")]
+							"operation !=. Null")]
 		public void TestEqualsISegment_IsNotEqualsOperationNullFalse()
 		{
-			var segments = new SegmentObservableCollection
-			{
-				new ParallelCircuit( new SegmentObservableCollection
-				{
-					new Inductor("L1", 0.05)
-				}),
-				new Capacitor("C1", 0.01)
-			};
-
-			SerialCircuit circuit1 = null;
-
 			var expected = false;
 
+			SerialCircuit circuit1 = null;
 			SerialCircuit circuit2 = null;
 
 			var actual = circuit1 != circuit2;
+
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment equals" +
-		                    " with object")]
+							" with object")]
 		public void TestEqualsISegment_IsEqualsObject()
 		{
+			var expected = true;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -422,24 +392,22 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = true;
-
-			object circuit2 = new SerialCircuit( segments);
+			var circuit1 = new SerialCircuit(segments);
+			object circuit2 = new SerialCircuit(segments);
 
 			var actual = circuit1.Equals(circuit2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment equals" +
-		                    " with object = null")]
+							" with object = null")]
 		public void TestEqualsISegment_IsEqualsObjectNull()
 		{
+			var expected = false;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -448,24 +416,22 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = false;
-
+			var circuit1 = new SerialCircuit(segments);
 			object circuit2 = null;
 
 			var actual = circuit1.Equals(circuit2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment equals" +
-		                    " with object different type")]
+							" with object different type")]
 		public void TestEqualsISegment_IsEqualsObjectOtherType()
 		{
+			var expected = false;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -474,24 +440,22 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = false;
-
+			var circuit1 = new SerialCircuit(segments);
 			int circuit2 = 12;
 
 			var actual = circuit1.Equals(circuit2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
 
 		[Test(Description = "Test of the SerialCircuit Equals ISegment equals" +
-		                    " with object the same object")]
+							" with object the same object")]
 		public void TestEqualsISegment_IsEqualsObjectSame()
 		{
+			var expected = true;
+
 			var segments = new SegmentObservableCollection
 			{
 				new ParallelCircuit( new SegmentObservableCollection
@@ -500,17 +464,13 @@ namespace ImpedanceUnitTest
 				}),
 				new Capacitor("C1", 0.01)
 			};
-
-			var circuit1 = new SerialCircuit( segments);
-
-			var expected = true;
-
+			var circuit1 = new SerialCircuit(segments);
 			object circuit2 = circuit1;
 
 			var actual = circuit1.Equals(circuit2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 	}
 }
