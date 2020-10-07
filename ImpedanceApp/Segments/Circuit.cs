@@ -167,9 +167,10 @@ namespace ImpedanceApp
 		public ISegment ReplaceSegment(ISegment insteadSegment,
 			ISegment replacingSegment, ISegment currentSegment = null)
 		{
-			if (currentSegment == null)
+			ISegment result = null;
+			if (ReferenceEquals(currentSegment, null))
 			{
-				if (insteadSegment == this)
+				if (ReferenceEquals(insteadSegment, this))
 				{
 					this.Name = replacingSegment.Name;
 					return this;
@@ -179,12 +180,12 @@ namespace ImpedanceApp
 
 			if (currentSegment is Element)
 			{
-				return null;
+				return result;
 			}
 
 			for (int i = 0; i < currentSegment.SubSegments.Count; i++)
 			{
-				if (currentSegment.SubSegments[i] == insteadSegment)
+				if (ReferenceEquals(currentSegment.SubSegments[i], insteadSegment))
 				{
 					currentSegment.SubSegments[i] = replacingSegment;
 					return currentSegment.SubSegments[i];
@@ -192,12 +193,12 @@ namespace ImpedanceApp
 
 				if (!(currentSegment.SubSegments[i] is Element))
 				{
-					return ReplaceSegment(insteadSegment, replacingSegment,
+					result = ReplaceSegment(insteadSegment, replacingSegment,
 						currentSegment.SubSegments[i]);
 				}
 			}
 
-			return null;
+			return result;
 		}
 
 		/// <summary>
