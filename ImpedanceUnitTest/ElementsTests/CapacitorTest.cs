@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ImpedanceApp;
 using NUnit.Framework;
+using System;
 using System.Numerics;
-using ImpedanceApp;
 
 namespace ImpedanceUnitTest
 {
@@ -13,8 +13,9 @@ namespace ImpedanceUnitTest
 		{
 			string name = "Test";
 			double value = 1.0;
+
 			Assert.DoesNotThrow(
-				()=>{Capacitor capacitor = new Capacitor(name, value);},
+				() => { Capacitor capacitor = new Capacitor(name, value); },
 				"Constructor test not passed");
 		}
 
@@ -38,6 +39,7 @@ namespace ImpedanceUnitTest
 			double value = 1.0;
 			double frequency = 1.0;
 			double result = -1.0 / (2 * Math.PI * frequency * value);
+
 			Complex expected = new Complex(0.0, result);
 
 			Capacitor capacitor = new Capacitor(name, value);
@@ -48,7 +50,7 @@ namespace ImpedanceUnitTest
 				"Incorrect calculations for the CalculateZ method");
 		}
 
-		[Test(Description = "Positive test of the Capacitor CalculateZ")]
+		[Test(Description = "Positive test of the Capacitor ToString method")]
 		public void TestCapacitor_ToString()
 		{
 			string name = "Test";
@@ -64,10 +66,11 @@ namespace ImpedanceUnitTest
 		}
 
 		[Test(Description = "Test of the Clone method")]
-		public void TestClone()
+		public void TestCapacitor_Clone()
 		{
 			string name = "Test";
 			double value = 1.0;
+
 			Capacitor expected = new Capacitor(name, value);
 
 			Capacitor capacitor = new Capacitor(name, value);

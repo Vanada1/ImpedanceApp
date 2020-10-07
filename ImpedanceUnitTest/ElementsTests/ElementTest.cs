@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ImpedanceApp;
 using NUnit.Framework;
-using ImpedanceApp;
+using System;
 
 namespace ImpedanceUnitTest
 {
@@ -32,6 +32,7 @@ namespace ImpedanceUnitTest
 			string wrongName = "";
 			string message = "If the name is empty, an exception should be thrown.";
 			Element element = CreateElement();
+
 			Assert.Throws<ArgumentException>(
 				() => { element.Name = wrongName; },
 				message);
@@ -43,6 +44,7 @@ namespace ImpedanceUnitTest
 			string name = "Test";
 			string message = "Positive test of the Name setter not passed";
 			Element element = CreateElement();
+
 			Assert.DoesNotThrow(
 				() => { element.Name = name; },
 				message);
@@ -68,6 +70,7 @@ namespace ImpedanceUnitTest
 			double wrongValue = -1.0;
 			string message = "If the value is negative, an exception should be thrown.";
 			Element element = CreateElement();
+
 			Assert.Throws<ArgumentException>(
 				() => { element.Value = wrongValue; },
 				message);
@@ -79,6 +82,7 @@ namespace ImpedanceUnitTest
 			double value = 30.0;
 			string message = "Positive test of the Value setter not passed";
 			Element element = CreateElement();
+
 			Assert.DoesNotThrow(
 				() => { element.Value = value; },
 				message);
@@ -92,21 +96,25 @@ namespace ImpedanceUnitTest
 			element.SegmentChanged += (o, e) => wasCalled = true;
 			double value = 30.0;
 			element.Value = value;
+
 			Assert.IsTrue(wasCalled);
 		}
 
 		[Test(Description = "Test SubSegment property on null")]
 		public void TestSubSegmentsGet_Null()
 		{
-			Element element = CreateElement();
 			SegmentObservableCollection expected = null;
+
+			Element element = CreateElement();
+
 			var actual = element.SubSegments;
-			Assert.AreEqual(expected, actual, 
+
+			Assert.AreEqual(expected, actual,
 				"SubSegments getter return not null");
 		}
 
-		[Test(Description = "Test of the Resistor Clone")]
-		public void TestClone()
+		[Test(Description = "Test of the Element Clone")]
+		public void TestElement_Clone()
 		{
 			var expected = new Resistor("Test", 1.0);
 
@@ -116,267 +124,254 @@ namespace ImpedanceUnitTest
 				"Invalid copying of elements");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment equals")]
+		[Test(Description = "Test of the Element Equals ISegment equals")]
 		public void TestEquals_IsEquals()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = true;
 
+			var element1 = new Resistor("Test", 1.0);
 			var element2 = new Resistor("Test", 1.0);
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment not equals")]
+		[Test(Description = "Test of the Element Equals ISegment not equals")]
 		public void TestEquals_IsNotEquals()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = false;
 
+			var element1 = new Resistor("Test", 1.0);
 			var element2 = new Resistor("Test1", 2.0);
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment other name")]
+		[Test(Description = "Test of the Element Equals ISegment other name")]
 		public void TestEquals_OtherName()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = false;
 
-			var element2 = new Resistor("Test1", 1.0);
+			ISegment element1 = new Resistor("Test", 1.0);
+			ISegment element2 = new Resistor("Test1", 1.0);
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment other value")]
+		[Test(Description = "Test of the Element Equals other value")]
 		public void TestEquals_OtherValue()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = false;
 
+			var element1 = new Resistor("Test", 1.0);
 			var element2 = new Resistor("Test", 2.0);
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment one is null")]
-		public void TestEquals_Null()
+		[Test(Description = "Test of the Element Equals ISegment one is null and the other is not")]
+		public void TestEquals_OneIsNull()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = false;
 
+			var element1 = new Resistor("Test", 1.0);
 			Resistor element2 = null;
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment one is null")]
-		public void TestEquals_NullISsegment()
+		[Test(Description = "Test of the Element Equals ISegment one is null and the other is not")]
+		public void TestEquals_NullISegment()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = false;
 
+			ISegment element1 = new Resistor("Test", 1.0);
 			ISegment element2 = null;
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment the same object")]
+		[Test(Description = "Test of the Element Equals the same object")]
 		public void TestEquals_SameObject()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = true;
 
+			Element element1 = new Resistor("Test", 1.0);
 			Element element2 = element1;
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Various objects");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment equals " +
+		[Test(Description = "Test of the Element Equals equals " +
 							"operation ==")]
 		public void TestEquals_IsEqualsOperationTrue()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = true;
 
-			var element2 = new Resistor("Test", 1.0);
+			Element element1 = new Resistor("Test", 1.0);
+			Element element2 = new Resistor("Test", 1.0);
 
 			var actual = element1 == element2;
+
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment is not equals " +
+		[Test(Description = "Test of the Element Equals ISegment is not equals " +
 							"operation ==")]
 		public void TestEquals_IsEqualsOperationFalse()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = false;
 
-			var element2 = new Resistor("Test1", 1.0);
+			Element element1 = new Resistor("Test", 1.0);
+			Element element2 = new Resistor("Test1", 1.0);
 
 			var actual = element1 == element2;
+
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment not equals" +
+		[Test(Description = "Test of the Element Equals ISegment not equals" +
 							"operation !=")]
 		public void TestEquals_IsNotEqualsOperationTrue()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = true;
 
-			var element2 = new Resistor("Test", 2.0);
+			Element element1 = new Resistor("Test", 1.0);
+			Element element2 = new Resistor("Test", 2.0);
 
 			var actual = element1 != element2;
+
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment equals" +
+		[Test(Description = "Test of the Element Equals ISegment equals" +
 							"operation !=")]
 		public void TestEquals_IsNotEqualsOperationFalse()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = false;
 
-			var element2 = new Resistor("Test", 1.0);
+			Element element1 = new Resistor("Test", 1.0);
+			Element element2 = new Resistor("Test", 1.0);
 
 			var actual = element1 != element2;
+
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment equals " +
+		[Test(Description = "Test of the Element Equals ISegment equals " +
 							"operation ==. Null")]
 		public void TestEquals_IsEqualsOperationNullTrue()
 		{
-			Resistor element1 = null;
-
 			var expected = true;
 
-			Resistor element2 = null;
+			Element element1 = null;
+			Element element2 = null;
 
 			var actual = element1 == element2;
+
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment equals" +
+		[Test(Description = "Test of the Element Equals ISegment equals" +
 							"operation !=. Null")]
 		public void TestEquals_IsNotEqualsOperationNullFalse()
 		{
-			Resistor element1 = null;
-
 			var expected = false;
 
-			Resistor element2 = null;
+			Element element1 = null;
+			Element element2 = null;
 
 			var actual = element1 != element2;
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
-		[Test(Description = "Test of the Resistor Equals ISegment equals" +
+		[Test(Description = "Test of the Element Equals ISegment equals" +
 							" with object")]
 		public void TestEquals_IsEqualsObject()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = true;
 
+			Element element1 = new Resistor("Test", 1.0);
 			object element2 = new Resistor("Test", 1.0);
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 
 
-		[Test(Description = "Test of the Resistor Equals ISegment equals" +
+		[Test(Description = "Test of the Element Equals ISegment equals" +
 							" with object = null")]
 		public void TestEquals_IsEqualsObjectNull()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = false;
 
+			Element element1 = new Resistor("Test", 1.0);
 			object element2 = null;
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
 
-		[Test(Description = "Test of the Resistor Equals ISegment equals" +
+		[Test(Description = "Test of the Element Equals ISegment equals" +
 							" with object different type")]
 		public void TestEquals_IsEqualsObjectOtherType()
 		{
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = false;
 
+			var element1 = new Resistor("Test", 1.0);
 			int element2 = 12;
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are equal");
 		}
 
 
-		[Test(Description = "Test of the Resistor Equals ISegment equals" +
+		[Test(Description = "Test of the Element Equals ISegment equals" +
 							" with object the same object")]
 		public void TestEquals_IsEqualsObjectSame()
 		{
-
-			var element1 = new Resistor("Test", 1.0);
-
 			var expected = true;
 
+			var element1 = new Resistor("Test", 1.0);
 			object element2 = element1;
 
 			var actual = element1.Equals(element2);
 
 			Assert.AreEqual(expected, actual,
-				"Invalid copying of elements");
+				"Elements are not equal");
 		}
 	}
 }

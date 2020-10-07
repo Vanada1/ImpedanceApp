@@ -1,6 +1,5 @@
-﻿using System;
+﻿using ImpedanceApp;
 using NUnit.Framework;
-using ImpedanceApp;
 using System.Numerics;
 
 namespace ImpedanceUnitTest
@@ -13,6 +12,7 @@ namespace ImpedanceUnitTest
 		{
 			string name = "Test";
 			double value = 1.0;
+
 			Assert.DoesNotThrow(
 				() => { Resistor inductor = new Resistor(name, value); },
 				"Constructor test not passed");
@@ -28,30 +28,31 @@ namespace ImpedanceUnitTest
 			SegmentType actual = element.SegmentType;
 
 			Assert.AreEqual(expected, actual,
-				"Getter Name returns incorrect value");
+				"Getter SegmentType returns incorrect value");
 		}
 
 		[Test(Description = "Positive test of the Resistor CalculateZ")]
 		public void TestResistor_CalculateZ()
 		{
+			Complex expected = new Complex(1.0, 0.0);
+
 			string name = "Test";
 			double value = 1.0;
 			double frequencies = 1.0;
-			Complex expected = new Complex(value, 0.0);
-
 			Resistor resistor = new Resistor(name, value);
 
 			Complex actual = resistor.CalculateZ(frequencies);
 
-			Assert.AreEqual(expected,actual,
+			Assert.AreEqual(expected, actual,
 				"Incorrect calculations for the CalculateZ method");
 		}
 
-		[Test(Description = "Positive test of the Resistor CalculateZ")]
+		[Test(Description = "Positive test of the Resistor ToString method")]
 		public void TestResistor_ToString()
 		{
 			string name = "Test";
 			double value = 1.0;
+
 			string expected = $"{name} = {value} Om";
 
 			Resistor resistor = new Resistor(name, value);
@@ -63,10 +64,11 @@ namespace ImpedanceUnitTest
 		}
 
 		[Test(Description = "Test of the Clone method")]
-		public void TestClone()
+		public void TestResistor_Clone()
 		{
 			string name = "Test";
 			double value = 1.0;
+
 			Resistor expected = new Resistor(name, value);
 
 			Resistor capacitor = new Resistor(name, value);
