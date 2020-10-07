@@ -62,31 +62,31 @@ namespace Impedance
 				switch (segment)
 				{
 					case ImpedanceApp.SegmentType.Capacitor:
-					{
-						Segment = new Capacitor(name, value);
-						break;
-					}
+						{
+							Segment = new Capacitor(name, value);
+							break;
+						}
 
 					case ImpedanceApp.SegmentType.Inductor:
-					{
-						Segment = new Inductor(name, value);
-					
-						break;
-					}
+						{
+							Segment = new Inductor(name, value);
+
+							break;
+						}
 
 					case ImpedanceApp.SegmentType.Resistor:
-					{
-						Segment = new Resistor(name, value);
-						break;
-					}
+						{
+							Segment = new Resistor(name, value);
+							break;
+						}
 
 					default:
-					{
-						DialogResult = DialogResult.None;
-						MessageBox.Show("Strange type", "Error",
-							MessageBoxButtons.OK, MessageBoxIcon.Error);
-						break;
-					}
+						{
+							DialogResult = DialogResult.None;
+							MessageBox.Show("Strange type", "Error",
+								MessageBoxButtons.OK, MessageBoxIcon.Error);
+							break;
+						}
 				}
 			}
 			else
@@ -120,8 +120,8 @@ namespace Impedance
 			if (SearchName(NameTextBox.Text))
 			{
 				MessageBox.Show("An object already exists with" +
-				                " the same name",
-					"Error", MessageBoxButtons.OK, 
+								" the same name",
+					"Error", MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
 			}
 			else if (SegmentsComboBox.SelectedIndex == 0)
@@ -131,8 +131,8 @@ namespace Impedance
 					MessageBoxIcon.Error);
 			}
 			else if (NameTextBox.Text.Length != 0 &&
-			         ValueTextBox.Text.Length != 0 &&
-			         ValueTextBox.Enabled)
+					 ValueTextBox.Text.Length != 0 &&
+					 ValueTextBox.Enabled)
 			{
 				string name = NameTextBox.Text;
 				try
@@ -161,8 +161,8 @@ namespace Impedance
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
-			else if (NameTextBox.Text.Length != 0  &&
-			         !(Segment is Element))
+			else if (NameTextBox.Text.Length != 0 &&
+					 !(Segment is Element))
 			{
 				string name = NameTextBox.Text;
 				DialogResult = DialogResult.OK;
@@ -180,10 +180,10 @@ namespace Impedance
 			}
 		}
 
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
+		private void CancelButton_Click(object sender, EventArgs e)
+		{
 			DialogResult = DialogResult.Cancel;
-        }
+		}
 
 		private void SegmentComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -193,27 +193,27 @@ namespace Impedance
 				switch (segment)
 				{
 					case ImpedanceApp.SegmentType.Capacitor:
-					{
-						ValueTextBox.Enabled = true;
-						break;
-					}
+						{
+							ValueTextBox.Enabled = true;
+							break;
+						}
 					case ImpedanceApp.SegmentType.Inductor:
-					{
-						ValueTextBox.Enabled = true;
-						break;
-					}
+						{
+							ValueTextBox.Enabled = true;
+							break;
+						}
 					case ImpedanceApp.SegmentType.Resistor:
-					{
-						ValueTextBox.Enabled = true;
-						break;
-					}
+						{
+							ValueTextBox.Enabled = true;
+							break;
+						}
 					default:
-					{
-						DialogResult = DialogResult.None;
+						{
+							DialogResult = DialogResult.None;
 							MessageBox.Show("Strange type", "Error",
 							MessageBoxButtons.OK, MessageBoxIcon.Error);
-						break;
-					}
+							break;
+						}
 				}
 			}
 

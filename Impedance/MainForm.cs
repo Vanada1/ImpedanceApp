@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Impedance;
+using ImpedanceApp;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Numerics;
-using ImpedanceApp;
-using Impedance;
 
 namespace ImpedanceForms
 {
@@ -45,7 +44,7 @@ namespace ImpedanceForms
 		/// <param name="name">Name of segment</param>
 		/// <param name="value">Value of segment if it is
 		/// <see cref="ImpedanceApp.Element"/></param>
-		private ISegment CreateNewSegment(string name, double value, 
+		private ISegment CreateNewSegment(string name, double value,
 			SegmentObservableCollection subSegments)
 		{
 			ISegment segment = null;
@@ -110,28 +109,28 @@ namespace ImpedanceForms
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void OnCircuitCollectionChanged(
-            object sender, EventArgs e)
-        {
-            if (e is ElementEventArgs elem)
-            {
-                EventLabel.Text = elem.Message;
+			object sender, EventArgs e)
+		{
+			if (e is ElementEventArgs elem)
+			{
+				EventLabel.Text = elem.Message;
 				EventLabel.ForeColor = Color.Brown;
-            }
-        }
+			}
+		}
 
-        private void UpdateComboBox()
-        {
-	        CircuitsComboBox.DataSource = null;
-	        CircuitsComboBox.DataSource = _project.AllExamples;
-	        CircuitsComboBox.DisplayMember = "Name";
-        }
+		private void UpdateComboBox()
+		{
+			CircuitsComboBox.DataSource = null;
+			CircuitsComboBox.DataSource = _project.AllExamples;
+			CircuitsComboBox.DisplayMember = "Name";
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Update all list boxes
 		/// </summary>
 		private void UpdateListBoxes()
-        {
-	        FrequenciesListBox.DataSource = null;
+		{
+			FrequenciesListBox.DataSource = null;
 			FrequenciesListBox.DataSource = _project.Frequencies;
 
 			_project.Results = _project.CurrentCircuit.CalculateZ(
@@ -159,64 +158,64 @@ namespace ImpedanceForms
 		/// <summary>
 		/// Create segments tree
 		/// </summary>
-        private void FillElementsTreeView()
-        {
-	        ElementsTreeView.Nodes.Clear();
-	        try
-	        {
-		        ISegmentTreeNode segmentTreeNode = new ISegmentTreeNode
+		private void FillElementsTreeView()
+		{
+			ElementsTreeView.Nodes.Clear();
+			try
+			{
+				ISegmentTreeNode segmentTreeNode = new ISegmentTreeNode
 				{
-			        Name = _project.CurrentCircuit.Name,
-			        Text = _project.CurrentCircuit.Name,
+					Name = _project.CurrentCircuit.Name,
+					Text = _project.CurrentCircuit.Name,
 					Segment = _project.CurrentCircuit
-		        };
-		        FillTreeNode(segmentTreeNode, _project.CurrentCircuit);
-		        ElementsTreeView.Nodes.Add(segmentTreeNode);
+				};
+				FillTreeNode(segmentTreeNode, _project.CurrentCircuit);
+				ElementsTreeView.Nodes.Add(segmentTreeNode);
 				ElementsTreeView.ExpandAll();
-	        }
-	        catch (Exception e)
-	        {
-		        MessageBox.Show(e.Message, "Error",
-			        MessageBoxButtons.OK, MessageBoxIcon.Error);
-	        }
-        }
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(e.Message, "Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
 		/// <summary>
 		/// Add sub-segments in the tree
 		/// </summary>
 		/// <param name="treeNode">node where will add</param>
 		/// <param name="segment">segment where will add</param>
-        private void FillTreeNode(ISegmentTreeNode treeNode, ISegment segment)
-        {
-	        try
-	        {
-		        foreach (var subSegment in segment.SubSegments)
-		        {
-			        if (subSegment is Element element)
-			        {
-				        ISegmentTreeNode segmentTreeNode = new ISegmentTreeNode
+		private void FillTreeNode(ISegmentTreeNode treeNode, ISegment segment)
+		{
+			try
+			{
+				foreach (var subSegment in segment.SubSegments)
+				{
+					if (subSegment is Element element)
+					{
+						ISegmentTreeNode segmentTreeNode = new ISegmentTreeNode
 						{
-					        Name = element.Name,
+							Name = element.Name,
 							Text = element.ToString(),
-							Segment =  element
-				        };
-				        treeNode.Nodes.Add(segmentTreeNode);
-			        }
-			        else
-			        {
-				        string parallel = "Parallel";
-				        string serial = "Serial";
+							Segment = element
+						};
+						treeNode.Nodes.Add(segmentTreeNode);
+					}
+					else
+					{
+						string parallel = "Parallel";
+						string serial = "Serial";
 						ISegmentTreeNode segmentTreeNode = new ISegmentTreeNode
 						{
 							Name = subSegment.Name,
 							Text = subSegment is ParallelCircuit ? parallel : serial,
 							Segment = subSegment
 						};
-				        treeNode.Nodes.Add(segmentTreeNode);
-				        FillTreeNode(segmentTreeNode, subSegment);
-			        }
-		        }
-	        }
+						treeNode.Nodes.Add(segmentTreeNode);
+						FillTreeNode(segmentTreeNode, subSegment);
+					}
+				}
+			}
 			catch (Exception e)
 			{
 				MessageBox.Show(e.Message, "Error",
@@ -296,7 +295,7 @@ namespace ImpedanceForms
 				if (SearchName(NameTextBox.Text))
 				{
 					MessageBox.Show("An object already exists with" +
-					                " the same name",
+									" the same name",
 						"Error", MessageBoxButtons.OK,
 						MessageBoxIcon.Error);
 				}
@@ -407,8 +406,7 @@ namespace ImpedanceForms
 					MessageBoxButtons.YesNo);
 				if (remove == DialogResult.Yes)
 				{
-					ISegment foundElement = _project.CurrentCircuit.FindSegment(
-						node.Segment);
+					ISegment foundElement = node.Segment;
 					var parentNode = node.Parent;
 					if (parentNode != null)
 					{
@@ -468,7 +466,7 @@ namespace ImpedanceForms
 			var editForm = new AddEditCircuitForm();
 			if (index >= 0)
 			{
-				editForm.Circuit = _project.AllExamples[index].Clone() 
+				editForm.Circuit = _project.AllExamples[index].Clone()
 					as Circuit;
 				editForm.ShowDialog();
 				if (editForm.DialogResult == DialogResult.OK)

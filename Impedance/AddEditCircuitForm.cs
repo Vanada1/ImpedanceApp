@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ImpedanceApp;
+using System;
 using System.Windows.Forms;
-using ImpedanceApp;
 
 namespace Impedance
 {
@@ -39,7 +32,7 @@ namespace Impedance
 			}
 			else
 			{
-				MessageBox.Show("Write circuit name", 
+				MessageBox.Show("Write circuit name",
 					"Error", MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
 			}

@@ -33,6 +33,8 @@
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.FrequenciesGroupBox = new System.Windows.Forms.GroupBox();
 			this.ElementGroupBox = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.EventLabel = new System.Windows.Forms.Label();
 			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.NameLabel = new System.Windows.Forms.Label();
 			this.AddSerialSegmentButton = new System.Windows.Forms.Button();
@@ -46,7 +48,6 @@
 			this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
 			this.EditElementButton = new System.Windows.Forms.Button();
 			this.RemoveElementButton = new System.Windows.Forms.Button();
-			this.EventLabel = new System.Windows.Forms.Label();
 			this.FrequencyGgroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
 			this.RemoveFrequencyButton = new System.Windows.Forms.Button();
@@ -63,16 +64,16 @@
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.CircuitsComboBox = new System.Windows.Forms.ComboBox();
 			this.ElementsTreeView = new System.Windows.Forms.TreeView();
-			this.CircuitGroupBox = new System.Windows.Forms.GroupBox();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.CircuitContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.addParallelSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addSerialSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addElementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.CircuitGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.FrequenciesGroupBox.SuspendLayout();
 			this.ElementGroupBox.SuspendLayout();
+			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel5.SuspendLayout();
 			this.tableLayoutPanel7.SuspendLayout();
 			this.FrequencyGgroupBox.SuspendLayout();
@@ -81,9 +82,8 @@
 			this.ImpedancesGroupBox.SuspendLayout();
 			this.tableLayoutPanel6.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
-			this.CircuitGroupBox.SuspendLayout();
-			this.tableLayoutPanel1.SuspendLayout();
 			this.CircuitContextMenuStrip.SuspendLayout();
+			this.CircuitGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// FrequenciesListBox
@@ -147,6 +147,31 @@
 			this.ElementGroupBox.TabIndex = 13;
 			this.ElementGroupBox.TabStop = false;
 			this.ElementGroupBox.Text = "Current Element";
+			// 
+			// tableLayoutPanel1
+			// 
+			this.tableLayoutPanel1.ColumnCount = 1;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.Controls.Add(this.EventLabel, 0, 0);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 129);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 1;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 37);
+			this.tableLayoutPanel1.TabIndex = 15;
+			// 
+			// EventLabel
+			// 
+			this.EventLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.EventLabel.AutoSize = true;
+			this.EventLabel.Location = new System.Drawing.Point(3, 0);
+			this.EventLabel.Name = "EventLabel";
+			this.EventLabel.Size = new System.Drawing.Size(196, 37);
+			this.EventLabel.TabIndex = 9;
+			this.EventLabel.Text = "label1";
+			this.EventLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// tableLayoutPanel5
 			// 
@@ -316,19 +341,6 @@
 			this.RemoveElementButton.Text = "Remove";
 			this.RemoveElementButton.UseVisualStyleBackColor = true;
 			this.RemoveElementButton.Click += new System.EventHandler(this.RemoveElementButton_Click);
-			// 
-			// EventLabel
-			// 
-			this.EventLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.EventLabel.AutoSize = true;
-			this.EventLabel.Location = new System.Drawing.Point(3, 0);
-			this.EventLabel.Name = "EventLabel";
-			this.EventLabel.Size = new System.Drawing.Size(196, 37);
-			this.EventLabel.TabIndex = 9;
-			this.EventLabel.Text = "label1";
-			this.EventLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// FrequencyGgroupBox
 			// 
@@ -564,28 +576,6 @@
 			this.ElementsTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragDrop);
 			this.ElementsTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragEnter);
 			// 
-			// CircuitGroupBox
-			// 
-			this.CircuitGroupBox.Controls.Add(this.tableLayoutPanel4);
-			this.CircuitGroupBox.Location = new System.Drawing.Point(12, 12);
-			this.CircuitGroupBox.Name = "CircuitGroupBox";
-			this.CircuitGroupBox.Size = new System.Drawing.Size(298, 417);
-			this.CircuitGroupBox.TabIndex = 14;
-			this.CircuitGroupBox.TabStop = false;
-			this.CircuitGroupBox.Text = "Circuit";
-			// 
-			// tableLayoutPanel1
-			// 
-			this.tableLayoutPanel1.ColumnCount = 1;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Controls.Add(this.EventLabel, 0, 0);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 129);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 1;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 37);
-			this.tableLayoutPanel1.TabIndex = 15;
-			// 
 			// CircuitContextMenuStrip
 			// 
 			this.CircuitContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -624,6 +614,16 @@
 			this.removeToolStripMenuItem.Text = "Remove";
 			this.removeToolStripMenuItem.Click += new System.EventHandler(this.RemoveElementButton_Click);
 			// 
+			// CircuitGroupBox
+			// 
+			this.CircuitGroupBox.Controls.Add(this.tableLayoutPanel4);
+			this.CircuitGroupBox.Location = new System.Drawing.Point(12, 12);
+			this.CircuitGroupBox.Name = "CircuitGroupBox";
+			this.CircuitGroupBox.Size = new System.Drawing.Size(298, 417);
+			this.CircuitGroupBox.TabIndex = 14;
+			this.CircuitGroupBox.TabStop = false;
+			this.CircuitGroupBox.Text = "Circuit";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -639,6 +639,8 @@
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.FrequenciesGroupBox.ResumeLayout(false);
 			this.ElementGroupBox.ResumeLayout(false);
+			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.tableLayoutPanel5.ResumeLayout(false);
 			this.tableLayoutPanel5.PerformLayout();
 			this.tableLayoutPanel7.ResumeLayout(false);
@@ -649,10 +651,8 @@
 			this.ImpedancesGroupBox.ResumeLayout(false);
 			this.tableLayoutPanel6.ResumeLayout(false);
 			this.tableLayoutPanel4.ResumeLayout(false);
-			this.CircuitGroupBox.ResumeLayout(false);
-			this.tableLayoutPanel1.ResumeLayout(false);
-			this.tableLayoutPanel1.PerformLayout();
 			this.CircuitContextMenuStrip.ResumeLayout(false);
+			this.CircuitGroupBox.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

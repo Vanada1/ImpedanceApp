@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ImpedanceApp;
 using System.Windows.Forms;
-using ImpedanceApp;
 
 namespace Impedance
 {
-	class ISegmentTreeNode: TreeNode
+	class ISegmentTreeNode : TreeNode
 	{
 		public ISegment Segment { get; set; }
 	}

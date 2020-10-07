@@ -1,9 +1,7 @@
-﻿using System;
+﻿using ImpedanceApp;
 using NUnit.Framework;
-using ImpedanceApp;
-using System.Numerics;
 using System.Collections.Generic;
-using NUnit.Framework.Constraints;
+using System.Numerics;
 
 namespace ImpedanceUnitTest
 {
@@ -43,15 +41,16 @@ namespace ImpedanceUnitTest
 			List<double> actual = project.Frequencies;
 
 			Assert.AreEqual(expected, actual,
-				"Getter Name returns incorrect value");
+				"Getter Frequencies returns incorrect value");
 		}
 
 		[Test(Description = "Positive test of the Frequencies setter")]
 		public void TestFrequenciesSet_CorrectValue()
 		{
 			List<double> frequencies = new List<double>();
-			string message = "Positive test of the Name setter not passed";
+			string message = "Positive test of the Frequencies setter not passed";
 			Project element = new Project();
+
 			Assert.DoesNotThrow(
 				() => { element.Frequencies = frequencies; },
 				message);
@@ -68,15 +67,16 @@ namespace ImpedanceUnitTest
 			List<Complex> actual = project.Results;
 
 			Assert.AreEqual(expected, actual,
-				"Getter Name returns incorrect value");
+				"Getter Results returns incorrect value");
 		}
 
 		[Test(Description = "Positive test of the Results setter")]
 		public void TestResultsSet_CorrectValue()
 		{
 			List<Complex> results = new List<Complex>();
-			string message = "Positive test of the Name setter not passed";
+			string message = "Positive test of the Results setter not passed";
 			Project element = new Project();
+
 			Assert.DoesNotThrow(
 				() => { element.Results = results; },
 				message);
@@ -93,14 +93,14 @@ namespace ImpedanceUnitTest
 			List<Circuit> actual = project.AllExamples;
 
 			Assert.AreEqual(expected, actual,
-				"Getter Name returns incorrect value");
+				"Getter AllExamples returns incorrect value");
 		}
 
 		[Test(Description = "Positive test of the AllExamples setter")]
 		public void TestAllExamplesSet_CorrectValue()
 		{
 			List<Circuit> circuits = new List<Circuit>();
-			string message = "Positive test of the Name setter not passed";
+			string message = "Positive test of the AllExamples setter not passed";
 			Project element = new Project();
 			Assert.DoesNotThrow(
 				() => { element.AllExamples = circuits; },
@@ -118,14 +118,14 @@ namespace ImpedanceUnitTest
 			List<string> actual = project.ResultsString;
 
 			Assert.AreEqual(expected, actual,
-				"Getter Name returns incorrect value");
+				"Getter ResultsString returns incorrect value");
 		}
 
 		[Test(Description = "Positive test of the ResultsString setter")]
 		public void TestResultsStringSet_CorrectValue()
 		{
 			List<string> resultsString = new List<string>();
-			string message = "Positive test of the Name setter not passed";
+			string message = "Positive test of the ResultsString setter not passed";
 			Project element = new Project();
 			Assert.DoesNotThrow(
 				() => { element.ResultsString = resultsString; },
@@ -143,14 +143,14 @@ namespace ImpedanceUnitTest
 			List<Element> actual = project.CircuitElements;
 
 			Assert.AreEqual(expected, actual,
-				"Getter Name returns incorrect value");
+				"Getter CircuitElements returns incorrect value");
 		}
 
 		[Test(Description = "Positive test of the CircuitElements setter")]
 		public void TestCircuitElementsSet_CorrectValue()
 		{
 			List<Element> segments = new List<Element>();
-			string message = "Positive test of the Name setter not passed";
+			string message = "Positive test of the CircuitElements setter not passed";
 			Project element = new Project();
 			Assert.DoesNotThrow(
 				() => { element.CircuitElements = segments; },
@@ -167,15 +167,16 @@ namespace ImpedanceUnitTest
 			Circuit actual = project.CurrentCircuit;
 
 			Assert.AreEqual(expected, actual,
-				"Getter Name returns incorrect value");
+				"Getter CurrentCircuit returns incorrect value");
 		}
 
 		[Test(Description = "Positive test of the CurrentCircuit setter")]
 		public void TestCurrentCircuitSet_CorrectValue()
 		{
 			Circuit circuit = new Circuit();
-			string message = "Positive test of the Name setter not passed";
+			string message = "Positive test of the CurrentCircuit setter not passed";
 			Project element = new Project();
+
 			Assert.DoesNotThrow(
 				() => { element.CurrentCircuit = circuit; },
 				message);
@@ -194,6 +195,7 @@ namespace ImpedanceUnitTest
 			Project project = new Project();
 			project.CurrentCircuit = new Circuit("Test", CreateCircuit());
 			project.FindAllElements(project.CurrentCircuit);
+
 			List<Element> actual = project.CircuitElements;
 
 			for (int i = 0; i < project.CircuitElements.Count; i++)
@@ -215,6 +217,7 @@ namespace ImpedanceUnitTest
 			Project project = new Project();
 			project.CurrentCircuit = new Circuit("Test", CreateCircuit());
 			project.FindAllElements(project.CurrentCircuit.SubSegments[0]);
+
 			List<Element> actual = project.CircuitElements;
 
 			for (int i = 0; i < project.CircuitElements.Count; i++)
@@ -235,15 +238,16 @@ namespace ImpedanceUnitTest
 			List<string> actual = project.NameSegments;
 
 			Assert.AreEqual(expected, actual,
-				"Getter Name returns incorrect value");
+				"Getter NameSegments returns incorrect value");
 		}
 
 		[Test(Description = "Positive test of the NameSegments setter")]
 		public void TestNameSegmentsSet_CorrectValue()
 		{
 			List<string> nameSegments = new List<string>();
-			string message = "Positive test of the Name setter not passed";
+			string message = "Positive test of the NameSegments setter not passed";
 			Project element = new Project();
+
 			Assert.DoesNotThrow(
 				() => { element.NameSegments = nameSegments; },
 				message);
@@ -270,10 +274,11 @@ namespace ImpedanceUnitTest
 			};
 
 			project.CreateNameSegments(project.CurrentCircuit);
+
 			List<string> actual = project.NameSegments;
 
 			Assert.AreEqual(expected, actual,
-				"Finds the item incorrectly");
+				"CreateNameSegments incorrectly");
 		}
 
 		[Test(Description = "Test of the CreateNameSegments method with inital segment")]
@@ -297,12 +302,11 @@ namespace ImpedanceUnitTest
 			};
 
 			project.CreateNameSegments(project.CurrentCircuit.SubSegments[0]);
+
 			List<string> actual = project.NameSegments;
 
 			Assert.AreEqual(expected, actual,
-				"Finds the item incorrectly");
+				"CreateNameSegments incorrectly");
 		}
-
-
 	}
 }

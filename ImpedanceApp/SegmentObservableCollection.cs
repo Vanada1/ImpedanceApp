@@ -146,7 +146,7 @@ namespace ImpedanceApp
 		public static bool operator ==(SegmentObservableCollection element1,
 			SegmentObservableCollection element2)
 		{
-			if ((object) element1 == null || (object) element2 == null) return Equals(element1, element2);
+			if ((object)element1 == null || (object)element2 == null) return Equals(element1, element2);
 
 			return element1.Equals(element2);
 		}
@@ -170,7 +170,7 @@ namespace ImpedanceApp
 		public static bool operator !=(SegmentObservableCollection element1,
 			SegmentObservableCollection element2)
 		{
-			if ((object) element1 == null || (object) element2 == null) return !Equals(element1, element2);
+			if ((object)element1 == null || (object)element2 == null) return !Equals(element1, element2);
 
 			return !element1.Equals(element2);
 		}

@@ -99,7 +99,7 @@ namespace ImpedanceApp
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
 			return (Name == other.Name && Equals(SubSegments, other.SubSegments)) ||
-			       (!(this is Element) && !(other is Element) && Equals(SubSegments, other.SubSegments));
+				   (!(this is Element) && !(other is Element) && Equals(SubSegments, other.SubSegments));
 		}
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace ImpedanceApp
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
 			if (obj.GetType() != GetType()) return false;
-			return Equals((ParallelCircuit) obj);
+			return Equals((ParallelCircuit)obj);
 		}
 
 		/// <summary>
@@ -153,7 +153,7 @@ namespace ImpedanceApp
 		/// </returns>
 		public static bool operator ==(ParallelCircuit circuit1, ParallelCircuit circuit2)
 		{
-			if ((object) circuit1 == null || (object) circuit2 == null) return Equals(circuit1, circuit2);
+			if ((object)circuit1 == null || (object)circuit2 == null) return Equals(circuit1, circuit2);
 
 			return circuit1.Equals(circuit2);
 		}
@@ -169,7 +169,7 @@ namespace ImpedanceApp
 		/// </returns>
 		public static bool operator !=(ParallelCircuit circuit1, ParallelCircuit circuit2)
 		{
-			if ((object) circuit1 == null || (object) circuit2 == null) return !Equals(circuit1, circuit2);
+			if ((object)circuit1 == null || (object)circuit2 == null) return !Equals(circuit1, circuit2);
 
 			return !circuit1.Equals(circuit2);
 		}

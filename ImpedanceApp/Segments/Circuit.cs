@@ -50,7 +50,7 @@ namespace ImpedanceApp
 			{
 				if (value.Length == 0)
 					throw new ArgumentException(nameof(Name) +
-					                            " cannot have string length 0");
+												" cannot have string length 0");
 
 				_name = value;
 			}
@@ -140,34 +140,6 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Recursively find a segment by name
-		/// </summary>
-		/// <param name="name"> is segment name</param>
-		/// <param name="segment">
-		///     segment in which the search takes place.
-		///     If <see cref="segment" /> is null, then <see cref="this" /> is taken
-		/// </param>
-		/// <returns>The <see cref="ISegment" /> element .Null if no element is found by name</returns>
-		public ISegment FindSegment(ISegment name, ISegment segment = null)
-		{
-			ISegment result = null;
-			segment ??= this;
-
-			if (segment == name) return segment;
-
-			foreach (var subSegment in segment.SubSegments)
-			{
-				if (result != null) break;
-
-				if (subSegment == name) return subSegment;
-
-				if (!(subSegment is Element)) result = FindSegment(name, subSegment);
-			}
-
-			return result;
-		}
-
-		/// <summary>
 		/// Remove <see cref="ISegment"/> in the circuit
 		/// </summary>
 		/// <param name="removedElement"> <see cref="ISegment"/> for remove</param>
@@ -179,7 +151,9 @@ namespace ImpedanceApp
 			if (foundRoot.SubSegments.Remove(removedElement)) return;
 			foreach (var segment in foundRoot.SubSegments)
 				if (!(segment is Element))
+				{
 					RemoveSegment(removedElement, segment);
+				}
 		}
 
 		/// <summary>
@@ -193,10 +167,9 @@ namespace ImpedanceApp
 		public ISegment ReplaceSegment(ISegment insteadSegment,
 			ISegment replacingSegment, ISegment currentSegment = null)
 		{
-			ISegment result = null;
-			if (ReferenceEquals(currentSegment, null))
+			if (currentSegment == null)
 			{
-				if (ReferenceEquals(insteadSegment, this))
+				if (insteadSegment == this)
 				{
 					this.Name = replacingSegment.Name;
 					return this;
@@ -206,12 +179,12 @@ namespace ImpedanceApp
 
 			if (currentSegment is Element)
 			{
-				return result;
+				return null;
 			}
 
 			for (int i = 0; i < currentSegment.SubSegments.Count; i++)
 			{
-				if (ReferenceEquals(currentSegment.SubSegments[i], insteadSegment))
+				if (currentSegment.SubSegments[i] == insteadSegment)
 				{
 					currentSegment.SubSegments[i] = replacingSegment;
 					return currentSegment.SubSegments[i];
@@ -219,12 +192,12 @@ namespace ImpedanceApp
 
 				if (!(currentSegment.SubSegments[i] is Element))
 				{
-					result = ReplaceSegment(insteadSegment, replacingSegment, 
+					return ReplaceSegment(insteadSegment, replacingSegment,
 						currentSegment.SubSegments[i]);
 				}
 			}
 
-			return result;
+			return null;
 		}
 
 		/// <summary>
@@ -253,7 +226,7 @@ namespace ImpedanceApp
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
 			if (obj.GetType() != GetType()) return false;
-			return Equals((Circuit) obj);
+			return Equals((Circuit)obj);
 		}
 
 		/// <summary>
@@ -267,7 +240,7 @@ namespace ImpedanceApp
 		/// </returns>
 		public static bool operator ==(Circuit circuit1, Circuit circuit2)
 		{
-			if ((object) circuit1 == null || (object) circuit2 == null) return Equals(circuit1, circuit2);
+			if ((object)circuit1 == null || (object)circuit2 == null) return Equals(circuit1, circuit2);
 
 			return circuit1.Equals(circuit2);
 		}
@@ -283,7 +256,7 @@ namespace ImpedanceApp
 		/// </returns>
 		public static bool operator !=(Circuit circuit1, Circuit circuit2)
 		{
-			if ((object) circuit1 == null || (object) circuit2 == null) return !Equals(circuit1, circuit2);
+			if ((object)circuit1 == null || (object)circuit2 == null) return !Equals(circuit1, circuit2);
 
 			return !circuit1.Equals(circuit2);
 		}

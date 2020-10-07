@@ -41,7 +41,7 @@ namespace ImpedanceApp
 			{
 				if (value.Length == 0)
 					throw new ArgumentException(nameof(Name) +
-					                            " cannot have string length 0");
+												" cannot have string length 0");
 
 				_name = value;
 			}
@@ -57,15 +57,15 @@ namespace ImpedanceApp
 			{
 				if (value < 0)
 					throw new ArgumentException(nameof(Value) +
-					                            "cannot have negative value");
+												"cannot have negative value");
 				if (_value != value)
 				{
 					var oldValue = _value;
 					_value = value;
 					SegmentChanged?.Invoke(this,
 						new ElementEventArgs(Name +
-						                     " value has been changed from" +
-						                     $" {oldValue} to {value}"));
+											 " value has been changed from" +
+											 $" {oldValue} to {value}"));
 				}
 			}
 		}
@@ -127,7 +127,7 @@ namespace ImpedanceApp
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
 			return _value.Equals(other._value) && _name == other._name &&
-			       Equals(SubSegments, other.SubSegments);
+				   Equals(SubSegments, other.SubSegments);
 		}
 
 		/// <summary>
@@ -143,7 +143,7 @@ namespace ImpedanceApp
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
 			if (obj.GetType() != GetType()) return false;
-			return Equals((Element) obj);
+			return Equals((Element)obj);
 		}
 
 		/// <summary>
@@ -157,7 +157,7 @@ namespace ImpedanceApp
 		/// </returns>
 		public static bool operator ==(Element element1, Element element2)
 		{
-			if ((object) element1 == null || (object) element2 == null) return Equals(element1, element2);
+			if ((object)element1 == null || (object)element2 == null) return Equals(element1, element2);
 
 			return element1.Equals(element2);
 		}
@@ -173,7 +173,7 @@ namespace ImpedanceApp
 		/// </returns>
 		public static bool operator !=(Element element1, Element element2)
 		{
-			if ((object) element1 == null || (object) element2 == null) return !Equals(element1, element2);
+			if ((object)element1 == null || (object)element2 == null) return !Equals(element1, element2);
 
 			return !element1.Equals(element2);
 		}

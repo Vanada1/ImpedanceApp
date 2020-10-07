@@ -1,6 +1,5 @@
-﻿using System;
+﻿using ImpedanceApp;
 using NUnit.Framework;
-using ImpedanceApp;
 
 
 namespace ImpedanceUnitTest
