@@ -172,6 +172,7 @@ namespace ImpedanceForms
 				FillTreeNode(segmentTreeNode, _project.CurrentCircuit);
 				ElementsTreeView.Nodes.Add(segmentTreeNode);
 				ElementsTreeView.ExpandAll();
+
 			}
 			catch (Exception e)
 			{
