@@ -64,7 +64,7 @@
 			// OKButton
 			// 
 			this.OKButton.Location = new System.Drawing.Point(142, 95);
-			this.OKButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.OKButton.Margin = new System.Windows.Forms.Padding(2);
 			this.OKButton.Name = "OKButton";
 			this.OKButton.Size = new System.Drawing.Size(70, 19);
 			this.OKButton.TabIndex = 2;
@@ -76,7 +76,7 @@
 			// 
 			this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.CancelButton.Location = new System.Drawing.Point(218, 95);
-			this.CancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.CancelButton.Margin = new System.Windows.Forms.Padding(2);
 			this.CancelButton.Name = "CancelButton";
 			this.CancelButton.Size = new System.Drawing.Size(70, 19);
 			this.CancelButton.TabIndex = 3;
@@ -88,7 +88,7 @@
 			// 
 			this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.NameTextBox.Location = new System.Drawing.Point(57, 10);
-			this.NameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.NameTextBox.Margin = new System.Windows.Forms.Padding(2);
 			this.NameTextBox.Name = "NameTextBox";
 			this.NameTextBox.Size = new System.Drawing.Size(218, 20);
 			this.NameTextBox.TabIndex = 4;
@@ -97,7 +97,7 @@
 			// 
 			this.ValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.ValueTextBox.Location = new System.Drawing.Point(57, 50);
-			this.ValueTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ValueTextBox.Margin = new System.Windows.Forms.Padding(2);
 			this.ValueTextBox.Name = "ValueTextBox";
 			this.ValueTextBox.Size = new System.Drawing.Size(218, 20);
 			this.ValueTextBox.TabIndex = 5;
@@ -112,7 +112,7 @@
 			this.tableLayoutPanel1.Controls.Add(this.ValueLabel, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.NameLabel, 0, 0);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 8);
-			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -122,34 +122,36 @@
 			// 
 			// SegmentsComboBox
 			// 
+			this.SegmentsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.SegmentsComboBox.FormattingEnabled = true;
 			this.SegmentsComboBox.Location = new System.Drawing.Point(8, 96);
-			this.SegmentsComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.SegmentsComboBox.Margin = new System.Windows.Forms.Padding(2);
 			this.SegmentsComboBox.Name = "SegmentsComboBox";
 			this.SegmentsComboBox.Size = new System.Drawing.Size(131, 21);
 			this.SegmentsComboBox.TabIndex = 7;
 			this.SegmentsComboBox.SelectedIndexChanged += new System.EventHandler(this.SegmentComboBox_SelectedIndexChanged);
 			// 
-			// AddEditElementForm
+			// AddElementForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(310, 160);
+			this.ClientSize = new System.Drawing.Size(294, 121);
 			this.Controls.Add(this.SegmentsComboBox);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.CancelButton);
 			this.Controls.Add(this.OKButton);
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.MaximizeBox = false;
 			this.MaximumSize = new System.Drawing.Size(310, 160);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(310, 160);
-			this.Name = "AddEditElementForm";
+			this.Name = "AddElementForm";
 			this.Text = "AddEditElements";
 			this.Load += new System.EventHandler(this.AddElement_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
+
 		}
 
 		#endregion
