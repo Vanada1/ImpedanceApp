@@ -252,6 +252,7 @@
 			// TypeComboBox
 			// 
 			this.TypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.TypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.TypeComboBox.FormattingEnabled = true;
 			this.TypeComboBox.Location = new System.Drawing.Point(49, 75);
 			this.TypeComboBox.Name = "TypeComboBox";
@@ -553,6 +554,7 @@
 			this.CircuitsComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.CircuitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.CircuitsComboBox.FormattingEnabled = true;
 			this.CircuitsComboBox.Location = new System.Drawing.Point(3, 3);
 			this.CircuitsComboBox.Name = "CircuitsComboBox";
