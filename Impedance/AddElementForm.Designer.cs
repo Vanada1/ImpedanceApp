@@ -80,7 +80,7 @@
 			this.CancelButton.Name = "CancelButton";
 			this.CancelButton.Size = new System.Drawing.Size(70, 19);
 			this.CancelButton.TabIndex = 3;
-			this.CancelButton.Text = "Cansel";
+			this.CancelButton.Text = "Cancel";
 			this.CancelButton.UseVisualStyleBackColor = true;
 			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
 			// 
@@ -146,7 +146,7 @@
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(310, 160);
 			this.Name = "AddElementForm";
-			this.Text = "AddEditElements";
+			this.Text = "Add Elements";
 			this.Load += new System.EventHandler(this.AddElement_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();

@@ -643,11 +643,7 @@ namespace ImpedanceForms
 								draggedNode.Segment.Clone() as ISegment);
 							_project.CurrentCircuit.ReplaceSegment(draggedNode.Segment,
 								targetNode.Segment.Clone() as ISegment);
-							draggedNode.Parent.Nodes.Add(targetNode);
-							targetNode.Parent.Nodes.Add(draggedNode);
-							targetNode.Parent.Nodes.Remove(targetNode);
-							draggedNode.Parent.Nodes.Remove(draggedNode);
-							//FillElementsTreeView();
+							FillElementsTreeView();
 							UpdateListBoxes();
 						}
 						else
