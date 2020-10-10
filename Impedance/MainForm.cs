@@ -20,25 +20,6 @@ namespace ImpedanceForms
 		private readonly Project _project = new Project();
 
 		/// <summary>
-		/// Searches the list with the same name
-		/// </summary>
-		/// <param name="nameSegment">Name to search in the list</param>
-		/// <returns>True - if found
-		/// False - if not found</returns>
-		private bool SearchName(string nameSegment)
-		{
-			foreach (var name in _project.NameSegments)
-			{
-				if (name == nameSegment)
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		/// <summary>
 		/// Create a new segment for the circuit
 		/// </summary>
 		/// <param name="name">Name of segment</param>
@@ -294,25 +275,18 @@ namespace ImpedanceForms
 			if (ElementsTreeView.SelectedNode is SegmentTreeNode node)
 			{
 				_project.NameSegments.Remove(node.Segment.Name);
-				if (SearchName(NameTextBox.Text))
-				{
-					MessageBox.Show("An object already exists with" +
-									" the same name",
-						"Error", MessageBoxButtons.OK,
-						MessageBoxIcon.Error);
-				}
-				else if (TypeComboBox.SelectedIndex == 0)
+				if (TypeComboBox.SelectedIndex == 0)
 				{
 					MessageBox.Show("Choose the segment",
 						"Error", MessageBoxButtons.OK,
 						MessageBoxIcon.Error);
 				}
-				else if (NameTextBox.Text.Length == 0)
+				else if (NameTextBox.Text.Length == 0 && (node is Element))
 				{
 					MessageBox.Show("Enter Name", "Error",
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
-				else if (ValueTextBox.Text.Length == 0)
+				else if (ValueTextBox.Text.Length == 0 && (node is Element))
 				{
 					MessageBox.Show("Enter Value", "Error",
 						MessageBoxButtons.OK, MessageBoxIcon.Error);

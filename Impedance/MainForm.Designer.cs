@@ -511,7 +511,7 @@
 			this.EditCircuit.Name = "EditCircuit";
 			this.EditCircuit.Size = new System.Drawing.Size(87, 25);
 			this.EditCircuit.TabIndex = 1;
-			this.EditCircuit.Text = "Edit";
+			this.EditCircuit.Text = "Edit circuit";
 			this.EditCircuit.UseVisualStyleBackColor = true;
 			this.EditCircuit.Click += new System.EventHandler(this.EditCircuit_Click);
 			// 
