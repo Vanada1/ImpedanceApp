@@ -281,12 +281,12 @@ namespace ImpedanceForms
 						"Error", MessageBoxButtons.OK,
 						MessageBoxIcon.Error);
 				}
-				else if (NameTextBox.Text.Length == 0 && (node is Element))
+				else if (NameTextBox.Text.Length == 0 && (node.Segment is Element))
 				{
 					MessageBox.Show("Enter Name", "Error",
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
-				else if (ValueTextBox.Text.Length == 0 && (node is Element))
+				else if (ValueTextBox.Text.Length == 0 && (node.Segment is Element))
 				{
 					MessageBox.Show("Enter Value", "Error",
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
