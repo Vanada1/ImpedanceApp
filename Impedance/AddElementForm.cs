@@ -23,32 +23,6 @@ namespace Impedance
 		public List<string> NameSegments { get; set; } = null;
 
 		/// <summary>
-		/// Searches the list with the same name
-		/// </summary>
-		/// <param name="nameSegment">Name to search in the list</param>
-		/// <returns>True - if found
-		/// False - if not found</returns>
-		private bool SearchName(string nameSegment)
-		{
-			if (NameSegments == null)
-			{
-				throw new ArgumentException(
-					"There should be a list of names, " +
-					"but it isn't");
-			}
-
-			foreach (var name in NameSegments)
-			{
-				if (name == nameSegment)
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		/// <summary>
 		/// Create a new segment for the circuit
 		/// </summary>
 		/// <param name="name">Name of segment</param>
@@ -117,14 +91,7 @@ namespace Impedance
 
 		private void OKButton_Click(object sender, EventArgs e)
 		{
-			if (SearchName(NameTextBox.Text))
-			{
-				MessageBox.Show("An object already exists with" +
-								" the same name",
-					"Error", MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
-			}
-			else if (SegmentsComboBox.SelectedIndex == 0)
+			if (SegmentsComboBox.SelectedIndex == 0)
 			{
 				MessageBox.Show("Choose the segment",
 					"Error", MessageBoxButtons.OK,

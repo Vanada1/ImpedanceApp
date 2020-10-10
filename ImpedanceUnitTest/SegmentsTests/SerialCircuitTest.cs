@@ -32,7 +32,7 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Positive test of the Name getter")]
 		public void TestNameGet_CorrectValue()
 		{
-			string expected = "Serial0";
+			string expected = "Serial";
 
 			SerialCircuit SerialCircuit = new SerialCircuit(
 				 CreateCircuit());

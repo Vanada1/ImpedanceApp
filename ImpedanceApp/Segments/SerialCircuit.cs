@@ -9,17 +9,12 @@ namespace ImpedanceApp
 	public class SerialCircuit : ISegment
 	{
 		/// <summary>
-		/// ID Serial segment
-		/// </summary>
-		private static uint _id = 0;
-
-		/// <summary>
 		///     <see cref="SerialCircuit" /> constructor
 		/// </summary>
 		/// <param name="subSegments"> sub-segments of the <see cref="SerialCircuit" /></param>
 		public SerialCircuit(SegmentObservableCollection subSegments)
 		{
-			Name = SetIDSegment();
+			Name = "Serial";
 			SubSegments = subSegments;
 			SubSegments.SegmentObservableCollectionChanged += OnCircuitChanged;
 			SubSegments.CollectionChanged += OnCircuitChanged;
@@ -44,18 +39,7 @@ namespace ImpedanceApp
 		///     Event fires when segment changes
 		/// </summary>
 		public event EventHandler SegmentChanged;
-
-		/// <summary>
-		/// Sets the id for the segment
-		/// </summary>
-		/// <returns>The segment name string</returns>
-		private static string SetIDSegment()
-		{
-			string id = "Serial" + _id.ToString();
-			_id++;
-			return id;
-		}
-
+		
 		/// <summary>
 		///     Calculate impedance in the <see cref="SerialCircuit" />
 		/// </summary>

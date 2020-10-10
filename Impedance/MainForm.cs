@@ -318,7 +318,6 @@ namespace ImpedanceForms
 				}
 				else
 				{
-					ISegment newSegment = null;
 					try
 					{
 						string name;
@@ -334,7 +333,7 @@ namespace ImpedanceForms
 							name = "";
 							value = 0.0;
 						}
-						newSegment = CreateNewSegment(name, value, subSegment);
+						var newSegment = CreateNewSegment(name, value, subSegment);
 						_project.CurrentCircuit.ReplaceSegment(node.Segment,
 							newSegment);
 						node.Name = newSegment.Name;
@@ -511,7 +510,6 @@ namespace ImpedanceForms
 		{
 			if (ElementsTreeView.SelectedNode is SegmentTreeNode node)
 			{
-				NameTextBox.Text = node.Name;
 				if (node.Segment is Circuit circuit)
 				{
 
@@ -525,6 +523,7 @@ namespace ImpedanceForms
 				}
 				else if (node.Segment is Element element)
 				{
+					NameTextBox.Text = node.Name;
 					ValueTextBox.Text = element.Value.ToString();
 					NameTextBox.Enabled = true;
 					ValueTextBox.Enabled = true;
@@ -669,7 +668,11 @@ namespace ImpedanceForms
 								draggedNode.Segment.Clone() as ISegment);
 							_project.CurrentCircuit.ReplaceSegment(draggedNode.Segment,
 								targetNode.Segment.Clone() as ISegment);
-							FillElementsTreeView();
+							draggedNode.Parent.Nodes.Add(targetNode);
+							targetNode.Parent.Nodes.Add(draggedNode);
+							targetNode.Parent.Nodes.Remove(targetNode);
+							draggedNode.Parent.Nodes.Remove(draggedNode);
+							//FillElementsTreeView();
 							UpdateListBoxes();
 						}
 						else

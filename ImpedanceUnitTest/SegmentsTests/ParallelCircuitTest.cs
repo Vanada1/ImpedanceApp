@@ -30,7 +30,7 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Positive test of the Name getter")]
 		public void TestNameGet_CorrectValue()
 		{
-			string expected = "Parallel0";
+			string expected = "Parallel";
 
 			ParallelCircuit ParallelCircuit = new ParallelCircuit(CreateCircuit());
 
