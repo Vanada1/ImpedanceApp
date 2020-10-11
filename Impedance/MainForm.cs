@@ -44,19 +44,26 @@ namespace ImpedanceForms
 			CircuitsComboBox.DisplayMember = "Name";
 		}
 
+		private void UpdateImpedancesDataGridView()
+		{
+			ImpedancesDataGridView.Rows.Clear();
+			for (int i = 0; i < _project.Frequencies.Count; i++)
+			{
+				string[] newRow = {_project.Frequencies[i].ToString(), _project.ResultsString[i]};
+				ImpedancesDataGridView.Rows.Add(newRow);
+			}
+		}
+
 		/// <summary>
 		/// Update all list boxes
 		/// </summary>
 		private void UpdateListBoxes()
 		{
-			FrequenciesListBox.DataSource = null;
-			FrequenciesListBox.DataSource = _project.Frequencies;
 			_project.Results = _project.CurrentCircuit.CalculateZ(_project.Frequencies);
-			ImpedanceListBox.DataSource = null;
-			ImpedanceListBox.DataSource = StringValidator.CreatingStringImpedances(_project.Results);
-			ImpedanceListBox.ClearSelected();
+			_project.ResultsString = StringValidator.CreatingStringImpedances(_project.Results);
 			_project.FindAllElements(_project.CurrentCircuit);
 			ElementsTreeView.ExpandAll();
+			UpdateImpedancesDataGridView();
 		}
 
 		/// <summary>
@@ -160,25 +167,25 @@ namespace ImpedanceForms
 			UpdateListBoxes();
 		}
 
-		private void RemoveFrequenciesButton_Click(object sender, EventArgs e)
-		{
-			var index = FrequenciesListBox.SelectedIndex;
-			if (index == -1)
-			{
+		//private void RemoveFrequenciesButton_Click(object sender, EventArgs e)
+		//{
+		//	var index = FrequenciesListBox.SelectedIndex;
+		//	if (index == -1)
+		//	{
 
-				MessageBox.Show(@"Frequency was not selected", @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
+		//		MessageBox.Show(@"Frequency was not selected", @"Error",
+		//			MessageBoxButtons.OK, MessageBoxIcon.Error);
+		//		return;
+		//	}
 
-			var dialogResult = MessageBox.Show(@"Remove the frequency?", @"Remove?",
-				MessageBoxButtons.YesNo);
-			if (dialogResult == DialogResult.Yes)
-			{
-				_project.Frequencies.RemoveAt(index);
-			}
-			UpdateListBoxes();
-		}
+		//	var dialogResult = MessageBox.Show(@"Remove the frequency?", @"Remove?",
+		//		MessageBoxButtons.YesNo);
+		//	if (dialogResult == DialogResult.Yes)
+		//	{
+		//		_project.Frequencies.RemoveAt(index);
+		//	}
+		//	UpdateListBoxes();
+		//}
 
 		private void EditElementButton_Click(object sender, EventArgs e)
 		{
@@ -542,6 +549,39 @@ namespace ImpedanceForms
 			}
 			
 			ElementsTreeView.SelectedNode = draggedNode;
+		}
+
+		private void AddSegment_Click(object sender, EventArgs e)
+		{
+			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
+			{
+				MessageBox.Show(nameof(Element) + @"was not selected", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			var segmentForm = new SegmentForm();
+			segmentForm.ShowDialog();
+			if(segmentForm.DialogResult != DialogResult.OK) return;
+
+			if (node.Segment is Element element)
+			{
+				segmentForm.Segment.SubSegments.Add(element);
+				_project.CurrentCircuit.ReplaceSegment(node.Segment,
+					segmentForm.Segment);
+			}
+			else
+			{
+				node.Segment.SubSegments.Add(segmentForm.Segment);
+			}
+
+			UpdateListBoxes();
+			FillElementsTreeView();
+		}
+
+		private void ImpedancesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+
 		}
 	}
 }

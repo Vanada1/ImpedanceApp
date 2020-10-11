@@ -34,6 +34,7 @@ namespace ImpedanceApp
 			var name = CircuitTextBox.Text;
 			Circuit = new Circuit(name,
 				new SegmentObservableCollection());
+			DialogResult = DialogResult.OK;
 		}
 
 		private void CancelButton_Click(object sender, EventArgs e)
