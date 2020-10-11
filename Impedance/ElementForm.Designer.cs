@@ -1,6 +1,6 @@
 ﻿namespace ImpedanceApp
 {
-	partial class AddElementForm
+	partial class ElementForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -130,7 +130,7 @@
 			this.SegmentsComboBox.Size = new System.Drawing.Size(131, 21);
 			this.SegmentsComboBox.TabIndex = 7;
 			// 
-			// AddElementForm
+			// ElementForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -144,7 +144,7 @@
 			this.MaximumSize = new System.Drawing.Size(310, 160);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(310, 160);
-			this.Name = "AddElementForm";
+			this.Name = "ElementForm";
 			this.Text = "Add Elements";
 			this.Load += new System.EventHandler(this.AddElement_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);

@@ -5,14 +5,14 @@ using System.Windows.Forms;
 
 namespace ImpedanceApp
 {
-	public partial class AddElementForm : Form
+	public partial class ElementForm : Form
 	{
 		/// <summary>
 		/// Set and return current segment for changed
 		/// </summary>
 		public ISegment Segment { get; set; }
 
-		public AddElementForm()
+		public ElementForm()
 		{
 			InitializeComponent();
 		}

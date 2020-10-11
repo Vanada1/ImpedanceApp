@@ -1,6 +1,6 @@
 ﻿namespace ImpedanceApp
 {
-	partial class AddEditCircuitForm
+	partial class CircuitForm
 	{
 		/// <summary>
 		/// Required designer variable.

@@ -171,9 +171,9 @@ namespace ImpedanceForms
 				return;
 			}
 
-			var remove = MessageBox.Show(@"Remove frequency the ?", @"Remove?",
+			var dialogResult = MessageBox.Show(@"Remove the frequency?", @"Remove?",
 				MessageBoxButtons.YesNo);
-			if (remove == DialogResult.Yes)
+			if (dialogResult == DialogResult.Yes)
 			{
 				_project.Frequencies.RemoveAt(index);
 			}
@@ -248,7 +248,7 @@ namespace ImpedanceForms
 				return;
 			}
 
-			var addForm = new AddElementForm();
+			var addForm = new ElementForm();
 			addForm.ShowDialog();
 			if (addForm.DialogResult == DialogResult.OK)
 			{
@@ -278,7 +278,7 @@ namespace ImpedanceForms
 		{
 			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
 			{
-				MessageBox.Show(nameof(Element) + "was not selected", @"Error",
+				MessageBox.Show(nameof(Element) + @"was not selected", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
@@ -287,20 +287,21 @@ namespace ImpedanceForms
 				MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
-				ISegment foundElement = node.Segment;
+				var foundElement = node.Segment;
 				var parentNode = node.Parent;
-				if (parentNode != null)
-				{
-					parentNode.Nodes.Remove(node);
-					_project.CurrentCircuit.RemoveSegment(
-						foundElement);
-				}
-				else
+				if (parentNode == null)
 				{
 					MessageBox.Show(@"Cannot remove main root",
 						@"Error", MessageBoxButtons.OK,
 						MessageBoxIcon.Error);
+					return;
 				}
+
+				parentNode.Nodes.Remove(node);
+				_project.CurrentCircuit.RemoveSegment(
+					foundElement);
+				
+
 				UpdateListBoxes();
 			}
 		}
@@ -322,7 +323,7 @@ namespace ImpedanceForms
 
 		private void AddCircuit_Click(object sender, EventArgs e)
 		{
-			var addForm = new AddEditCircuitForm();
+			var addForm = new CircuitForm();
 			addForm.ShowDialog();
 			if (addForm.DialogResult == DialogResult.OK)
 			{
@@ -344,7 +345,7 @@ namespace ImpedanceForms
 				return;
 			}
 
-			var editForm = new AddEditCircuitForm
+			var editForm = new CircuitForm
 			{
 				Circuit = _project.AllExamples[index].Clone()
 					as Circuit
@@ -364,7 +365,7 @@ namespace ImpedanceForms
 			var index = CircuitsComboBox.SelectedIndex;
 			if (index == -1)
 			{
-				MessageBox.Show(@"Cercuit was not selected",
+				MessageBox.Show(@"Circuit was not selected",
 					@"Error", MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
 				return;
@@ -423,7 +424,7 @@ namespace ImpedanceForms
 		{
 			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
 			{
-				MessageBox.Show(nameof(Element) + "was not selected", @"Error",
+				MessageBox.Show(nameof(Element) + @"was not selected", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
@@ -448,31 +449,30 @@ namespace ImpedanceForms
 
 		private void AddSerialSegmentButton_Click(object sender, EventArgs e)
 		{
-			if (ElementsTreeView.SelectedNode is SegmentTreeNode node)
+			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
 			{
-				if (node.Segment is Element element)
-				{
-					SegmentObservableCollection collection = new SegmentObservableCollection
-					{
-						element
-					};
-					_project.CurrentCircuit.ReplaceSegment(node.Segment,
-						new SerialCircuit(collection));
-				}
-				else
-				{
-					node.Segment.SubSegments.Add(new SerialCircuit(
-						new SegmentObservableCollection()));
-				}
+				MessageBox.Show(nameof(Element) + @"was not selected", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 
-				UpdateListBoxes();
-				FillElementsTreeView();
+			if (node.Segment is Element element)
+			{
+				SegmentObservableCollection collection = new SegmentObservableCollection
+				{
+					element
+				};
+				_project.CurrentCircuit.ReplaceSegment(node.Segment,
+					new SerialCircuit(collection));
 			}
 			else
 			{
-				MessageBox.Show(nameof(Element) + "was not selected", @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				node.Segment.SubSegments.Add(new SerialCircuit(
+					new SegmentObservableCollection()));
 			}
+
+			UpdateListBoxes();
+			FillElementsTreeView();
 		}
 
 		private void ElementsTreeView_ItemDrag(object sender, ItemDragEventArgs e)

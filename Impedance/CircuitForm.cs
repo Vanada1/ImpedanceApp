@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace ImpedanceApp
 {
-	public partial class AddEditCircuitForm : Form
+	public partial class CircuitForm : Form
 	{
 		public Circuit Circuit { get; set; }
 
-		public AddEditCircuitForm()
+		public CircuitForm()
 		{
 			InitializeComponent();
 		}
@@ -25,7 +25,7 @@ namespace ImpedanceApp
 		{
 			if (CircuitTextBox.Text.Length == 0)
 			{
-				MessageBox.Show(@"Write circuit name",
+				MessageBox.Show(@"Enter circuit name",
 					@"Error", MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
 				return;
