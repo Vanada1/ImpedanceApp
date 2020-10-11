@@ -1,7 +1,7 @@
 ﻿using Impedance;
 using System.Windows.Forms;
 
-namespace Impedance
+namespace ImpedanceApp
 {
 	/// <summary>
 	/// Own TreeNode class for contain <see cref="ISegment"/> element

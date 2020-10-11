@@ -1,4 +1,4 @@
-﻿namespace Impedance
+﻿namespace ImpedanceApp
 {
 	partial class AddElementForm
 	{
@@ -129,7 +129,6 @@
 			this.SegmentsComboBox.Name = "SegmentsComboBox";
 			this.SegmentsComboBox.Size = new System.Drawing.Size(131, 21);
 			this.SegmentsComboBox.TabIndex = 7;
-			this.SegmentsComboBox.SelectedIndexChanged += new System.EventHandler(this.SegmentComboBox_SelectedIndexChanged);
 			// 
 			// AddElementForm
 			// 

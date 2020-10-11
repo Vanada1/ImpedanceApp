@@ -1,7 +1,9 @@
 ﻿using Impedance;
+using ImpedanceApp;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace ImpedanceForms
@@ -32,7 +34,10 @@ namespace ImpedanceForms
 			}
 		}
 
-		private void UpdateComboBox()
+		/// <summary>
+		/// Update circuit combo box
+		/// </summary>
+		private void UpdateCircuitComboBox()
 		{
 			CircuitsComboBox.DataSource = null;
 			CircuitsComboBox.DataSource = _project.AllExamples;
@@ -51,7 +56,6 @@ namespace ImpedanceForms
 			ImpedanceListBox.DataSource = StringValidator.CreatingStringImpedances(_project.Results);
 			ImpedanceListBox.ClearSelected();
 			_project.FindAllElements(_project.CurrentCircuit);
-			_project.CreateNameSegments(_project.CurrentCircuit);
 			ElementsTreeView.ExpandAll();
 		}
 
@@ -74,9 +78,9 @@ namespace ImpedanceForms
 				ElementsTreeView.ExpandAll();
 
 			}
-			catch (Exception e)
+			catch (ArgumentException e)
 			{
-				MessageBox.Show(e.Message, "Error",
+				MessageBox.Show(e.Message, @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -86,7 +90,7 @@ namespace ImpedanceForms
 		/// </summary>
 		/// <param name="treeNode">node where will add</param>
 		/// <param name="segment">segment where will add</param>
-		private void FillTreeNode(SegmentTreeNode treeNode, ISegment segment)
+		private static void FillTreeNode(TreeNode treeNode, ISegment segment)
 		{
 			try
 			{
@@ -94,7 +98,7 @@ namespace ImpedanceForms
 				{
 					if (subSegment is Element element)
 					{
-						SegmentTreeNode segmentTreeNode = new SegmentTreeNode
+						var segmentTreeNode = new SegmentTreeNode
 						{
 							Name = element.Name,
 							Text = element.ToString(),
@@ -104,12 +108,10 @@ namespace ImpedanceForms
 					}
 					else
 					{
-						string parallel = "Parallel";
-						string serial = "Serial";
-						SegmentTreeNode segmentTreeNode = new SegmentTreeNode
+						var segmentTreeNode = new SegmentTreeNode
 						{
 							Name = subSegment.Name,
-							Text = subSegment is ParallelCircuit ? parallel : serial,
+							Text = subSegment.ToString(),
 							Segment = subSegment
 						};
 						treeNode.Nodes.Add(segmentTreeNode);
@@ -117,9 +119,9 @@ namespace ImpedanceForms
 					}
 				}
 			}
-			catch (Exception e)
+			catch (ArgumentException e)
 			{
-				MessageBox.Show(e.Message, "Error",
+				MessageBox.Show(e.Message, @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -132,208 +134,190 @@ namespace ImpedanceForms
 		private void Main_Load(object sender, EventArgs e)
 		{
 			UpdateListBoxes();
-			UpdateComboBox();
+			UpdateCircuitComboBox();
 			EventLabel.Text = "";
 
-			foreach (Circuit example in _project.AllExamples)
+			foreach (var example in _project.AllExamples)
 			{
 				example.SegmentChanged += OnCircuitCollectionChanged;
 			}
 
-			string[] typeSegments = StringValidator.GetSegmentEnum(null);
+			var typeSegments = StringValidator.GetSegmentEnum(null);
 			TypeComboBox.DataSource = typeSegments;
 		}
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
 		{
-			try
+			if (!double.TryParse(FrequencyTextBox.Text, out var frequency))
 			{
-
-				double frequency = double.Parse(FrequencyTextBox.Text);
-				_project.Frequencies.Add(frequency);
-				FrequencyTextBox.Text = "";
-			}
-			catch (FormatException exception)
-			{
-				MessageBox.Show(exception.Message, "Error",
+				MessageBox.Show(@"Incorrect frequency value. Enter the number.", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
 			}
+
+			_project.Frequencies.Add(frequency);
+			FrequencyTextBox.Text = "";
 			UpdateListBoxes();
 		}
 
 		private void RemoveFrequenciesButton_Click(object sender, EventArgs e)
 		{
 			var index = FrequenciesListBox.SelectedIndex;
-			if (index >= 0)
+			if (index == -1)
 			{
-				var remove = MessageBox.Show("Remove?", "Remove?",
-					MessageBoxButtons.YesNo);
-				if (remove == DialogResult.Yes)
-				{
-					_project.Frequencies.RemoveAt(index);
-				}
-				UpdateListBoxes();
-			}
-			else
-			{
-				MessageBox.Show("Frequency was not selected", "Error",
+
+				MessageBox.Show(@"Frequency was not selected", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
 			}
+
+			var remove = MessageBox.Show(@"Remove frequency the ?", @"Remove?",
+				MessageBoxButtons.YesNo);
+			if (remove == DialogResult.Yes)
+			{
+				_project.Frequencies.RemoveAt(index);
+			}
+			UpdateListBoxes();
 		}
 
 		private void EditElementButton_Click(object sender, EventArgs e)
 		{
-			if (ElementsTreeView.SelectedNode is SegmentTreeNode node)
+			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
 			{
-				_project.NameSegments.Remove(node.Segment.Name);
-				if (TypeComboBox.SelectedIndex == 0)
-				{
-					MessageBox.Show("Choose the segment",
-						"Error", MessageBoxButtons.OK,
-						MessageBoxIcon.Error);
-				}
-				else if (NameTextBox.Text.Length == 0 && (node.Segment is Element))
-				{
-					MessageBox.Show("Enter Name", "Error",
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-				else if (ValueTextBox.Text.Length == 0 && (node.Segment is Element))
-				{
-					MessageBox.Show("Enter Value", "Error",
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-				else if (!SegmentType.TryParse(TypeComboBox.Text, out SegmentType segmentType))
-				{
-					MessageBox.Show("Incorrect segment", "Error",
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-				else
-				{
-					SegmentObservableCollection subSegment = node.Segment.SubSegments;
-					try
-					{
-						string name;
-						double value;
-						if (node.Segment is Element)
-						{
-							name = NameTextBox.Text;
-							value = double.Parse(ValueTextBox.Text);
-						}
-						else
-						{
-							name = "";
-							value = 0.0;
-						}
-						var newSegment = CircuitValidator.CreateNewSegment(segmentType, name, value, subSegment);
-						_project.CurrentCircuit.ReplaceSegment(node.Segment,
-							newSegment);
-						node.Name = newSegment.Name;
-						node.Text = newSegment is Element ? newSegment.ToString() : newSegment.Name;
-						node.Segment = newSegment;
-						ElementsTreeView.SelectedNode = null;
-						ElementsTreeView.SelectedNode = node;
-					}
-					catch (FormatException exception)
-					{
-						MessageBox.Show(exception.Message, "Error",
-							MessageBoxButtons.OK, MessageBoxIcon.Error);
-					}
-					UpdateListBoxes();
-				}
-			}
-			else
-			{
-				MessageBox.Show(nameof(Element) + "was not selected", "Error",
+				MessageBox.Show(nameof(Element) + @"was not selected", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
 			}
+
+			if (TypeComboBox.SelectedIndex == 0)
+			{
+				MessageBox.Show(@"Choose the segment",
+					@"Error", MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+				return;
+			}
+
+			if (NameTextBox.Text.Length == 0 && (node.Segment is Element))
+			{
+				MessageBox.Show(@"Enter Name", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (ValueTextBox.Text.Length == 0 && (node.Segment is Element))
+			{
+				MessageBox.Show(@"Enter Value", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (!SegmentType.TryParse(TypeComboBox.Text, out SegmentType segmentType))
+			{
+				MessageBox.Show(@"Incorrect segment", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (!double.TryParse(ValueTextBox.Text, out var value))
+			{
+				MessageBox.Show(@"Incorrect value. Enter the number ", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			var subSegment = node.Segment.SubSegments;
+			var name = NameTextBox.Text;
+			var newSegment = CircuitValidator.CreateNewSegment(segmentType, name, value, subSegment);
+			_project.CurrentCircuit.ReplaceSegment(node.Segment,
+				newSegment);
+			node.Name = newSegment.Name;
+			node.Text = newSegment.ToString();
+			node.Segment = newSegment;
+			ElementsTreeView.SelectedNode = null;
+			ElementsTreeView.SelectedNode = node;
+			UpdateListBoxes();
 		}
 
 		private void AddElementButton_Click(object sender, EventArgs e)
 		{
-			if (ElementsTreeView.SelectedNode is SegmentTreeNode selectedNode)
+			var selectedNode = ElementsTreeView.SelectedNode as SegmentTreeNode;
+			if (selectedNode == null)
 			{
-				var addForm = new AddElementForm
-				{
-					NameSegments = _project.NameSegments
-				};
-				addForm.ShowDialog();
-				if (addForm.DialogResult == DialogResult.OK)
-				{
-					string text = addForm.Segment.Name;
-					if (selectedNode.Segment is Element)
-					{
-						selectedNode = selectedNode.Parent as SegmentTreeNode;
-					}
+				MessageBox.Show(nameof(Element) + @"was not selected", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 
-					if (addForm.Segment is Element)
-					{
-						text = addForm.Segment.ToString();
-					}
-
-					selectedNode.Segment.SubSegments.Add(addForm.Segment);
-					selectedNode.Nodes.Add(new SegmentTreeNode
-					{
-						Name = addForm.Segment.Name,
-						Text = text,
-						Segment = addForm.Segment
-					});
+			var addForm = new AddElementForm();
+			addForm.ShowDialog();
+			if (addForm.DialogResult == DialogResult.OK)
+			{
+				var text = addForm.Segment.Name;
+				if (selectedNode.Segment is Element)
+				{
+					selectedNode = selectedNode.Parent as SegmentTreeNode;
 				}
 
-				UpdateListBoxes();
+				if (addForm.Segment is Element)
+				{
+					text = addForm.Segment.ToString();
+				}
+
+				selectedNode.Segment.SubSegments.Add(addForm.Segment);
+				selectedNode.Nodes.Add(new SegmentTreeNode
+				{
+					Name = addForm.Segment.Name,
+					Text = text,
+					Segment = addForm.Segment
+				});
 			}
-			else
-			{
-				MessageBox.Show(nameof(Element) + "was not selected", "Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+			UpdateListBoxes();
 		}
 
 		private void RemoveElementButton_Click(object sender, EventArgs e)
 		{
-			if (ElementsTreeView.SelectedNode is SegmentTreeNode node)
+			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
 			{
-				var remove = MessageBox.Show("Remove?", "Remove?",
-					MessageBoxButtons.YesNo);
-				if (remove == DialogResult.Yes)
-				{
-					ISegment foundElement = node.Segment;
-					var parentNode = node.Parent;
-					if (parentNode != null)
-					{
-						parentNode.Nodes.Remove(node);
-						_project.CurrentCircuit.RemoveSegment(
-							foundElement);
-					}
-					else
-					{
-						MessageBox.Show("Cannot remove main root",
-							"Error", MessageBoxButtons.OK,
-							MessageBoxIcon.Error);
-					}
-					UpdateListBoxes();
-				}
-			}
-			else
-			{
-				MessageBox.Show(nameof(Element) + "was not selected", "Error",
+				MessageBox.Show(nameof(Element) + "was not selected", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+		
+			var dialogResult = MessageBox.Show(@"Remove the element?", @"Remove?",
+				MessageBoxButtons.YesNo);
+			if (dialogResult == DialogResult.Yes)
+			{
+				ISegment foundElement = node.Segment;
+				var parentNode = node.Parent;
+				if (parentNode != null)
+				{
+					parentNode.Nodes.Remove(node);
+					_project.CurrentCircuit.RemoveSegment(
+						foundElement);
+				}
+				else
+				{
+					MessageBox.Show(@"Cannot remove main root",
+						@"Error", MessageBoxButtons.OK,
+						MessageBoxIcon.Error);
+				}
+				UpdateListBoxes();
 			}
 		}
 
 		private void CircuitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			var index = CircuitsComboBox.SelectedIndex;
-			if (index >= 0)
-			{
-				_project.CurrentCircuit = _project.AllExamples[index];
-				UpdateListBoxes();
-				if (index != _previousCircuitListBoxIndex)
-				{
-					FillElementsTreeView();
-				}
+			if (index == -1) return;
 
-				_previousCircuitListBoxIndex = index;
+			_project.CurrentCircuit = _project.AllExamples[index];
+			UpdateListBoxes();
+			if (index != _previousCircuitListBoxIndex)
+			{
+				FillElementsTreeView();
 			}
+
+			_previousCircuitListBoxIndex = index;
 		}
 
 		private void AddCircuit_Click(object sender, EventArgs e)
@@ -344,7 +328,7 @@ namespace ImpedanceForms
 			{
 				addForm.Circuit.SegmentChanged += OnCircuitCollectionChanged;
 				_project.AllExamples.Add(addForm.Circuit);
-				UpdateComboBox();
+				UpdateCircuitComboBox();
 				CircuitsComboBox.SelectedIndex = _project.AllExamples.Count - 1;
 			}
 			UpdateListBoxes();
@@ -353,128 +337,113 @@ namespace ImpedanceForms
 		private void EditCircuit_Click(object sender, EventArgs e)
 		{
 			var index = CircuitsComboBox.SelectedIndex;
-			var editForm = new AddEditCircuitForm();
-			if (index >= 0)
+			if (index == -1)
 			{
-				editForm.Circuit = _project.AllExamples[index].Clone()
-					as Circuit;
-				editForm.ShowDialog();
-				if (editForm.DialogResult == DialogResult.OK)
-				{
-					_project.AllExamples[index].Name = editForm.Circuit.Name;
-				}
-				UpdateListBoxes();
-				UpdateComboBox();
-			}
-			else
-			{
-				MessageBox.Show("Circuit was not selected", "Error",
+				MessageBox.Show(@"Circuit was not selected", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
 			}
+
+			var editForm = new AddEditCircuitForm
+			{
+				Circuit = _project.AllExamples[index].Clone()
+					as Circuit
+			};
+			editForm.ShowDialog();
+			if (editForm.DialogResult == DialogResult.OK)
+			{
+				_project.AllExamples[index].Name = editForm.Circuit.Name;
+			}
+			UpdateListBoxes();
+			UpdateCircuitComboBox();
+			
 		}
 
 		private void RemoveCircuit_Click(object sender, EventArgs e)
 		{
 			var index = CircuitsComboBox.SelectedIndex;
-			if (index >= 0)
+			if (index == -1)
 			{
-				var remove = MessageBox.Show("Remove?",
-					"Remove?", MessageBoxButtons.YesNo);
-				if (remove == DialogResult.Yes)
-				{
-					_project.AllExamples[index].SegmentChanged -= OnCircuitCollectionChanged;
-					_project.AllExamples.RemoveAt(index);
-					UpdateComboBox();
-				}
-				UpdateListBoxes();
-			}
-			else
-			{
-				MessageBox.Show("Cercuit was not selected",
-					"Error", MessageBoxButtons.OK,
+				MessageBox.Show(@"Cercuit was not selected",
+					@"Error", MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
+				return;
 			}
+			
+			var dialogResult = MessageBox.Show(@"Remove the circuit?",
+				@"Remove?", MessageBoxButtons.YesNo);
+			if (dialogResult == DialogResult.Yes)
+			{
+				_project.AllExamples[index].SegmentChanged -= OnCircuitCollectionChanged;
+				_project.AllExamples.RemoveAt(index);
+				UpdateCircuitComboBox();
+			}
+			UpdateListBoxes();
+			
 		}
 
 		private void ElementsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			if (ElementsTreeView.SelectedNode is SegmentTreeNode node)
-			{
-				if (node.Segment is Circuit circuit)
-				{
-
-					NameTextBox.Enabled = false;
-					ValueTextBox.Enabled = false;
-					List<string> typeSegments = new List<string>
-					{
-						nameof(Impedance.SegmentType.SerialCircuit)
-					};
-					TypeComboBox.DataSource = typeSegments;
-				}
-				else if (node.Segment is Element element)
-				{
-					NameTextBox.Text = node.Name;
-					ValueTextBox.Text = element.Value.ToString();
-					NameTextBox.Enabled = true;
-					ValueTextBox.Enabled = true;
-					List<string> typeSegments = new List<string>
-					{
-						"",
-						nameof(Impedance.SegmentType.Resistor),
-						nameof(Impedance.SegmentType.Capacitor),
-						nameof(Impedance.SegmentType.Inductor)
-					};
-					TypeComboBox.DataSource = typeSegments;
-				}
-				else
-				{
-					NameTextBox.Enabled = false;
-					ValueTextBox.Enabled = false;
-					List<string> typeSegments = new List<string>
-					{
-						"",
-						nameof(Impedance.SegmentType.SerialCircuit),
-						nameof(Impedance.SegmentType.ParallelCircuit),
-					};
-					TypeComboBox.DataSource = typeSegments;
-				}
-				TypeComboBox.Text = node.Segment.SegmentType.ToString();
-			}
-			else
+			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
 			{
 				NameTextBox.Text = "";
 				ValueTextBox.Text = "";
 				TypeComboBox.Text = "";
+				return;
 			}
+
+			switch (node.Segment)
+			{
+				case Circuit _:
+				{
+					NameTextBox.Enabled = false;
+					ValueTextBox.Enabled = false;
+					break;
+				}
+				case Element element:
+				{
+					NameTextBox.Text = node.Name;
+					ValueTextBox.Text = element.Value.ToString(CultureInfo.CurrentCulture);
+					NameTextBox.Enabled = true;
+					ValueTextBox.Enabled = true;
+					break;
+				}
+				default:
+				{
+					NameTextBox.Enabled = false;
+					ValueTextBox.Enabled = false;
+					break;
+				}
+			}
+			TypeComboBox.DataSource = StringValidator.GetSegmentEnum(node.Segment);
+			TypeComboBox.Text = node.Segment.SegmentType.ToString();
 		}
 
 		private void AddParallelSegmentButton_Click(object sender, EventArgs e)
 		{
-			if (ElementsTreeView.SelectedNode is SegmentTreeNode node)
+			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
 			{
-				if (node.Segment is Element element)
-				{
-					SegmentObservableCollection collection = new SegmentObservableCollection
-					{
-						element
-					};
-					_project.CurrentCircuit.ReplaceSegment(node.Segment,
-						new ParallelCircuit(collection));
-				}
-				else
-				{
-					node.Segment.SubSegments.Add(new ParallelCircuit(
-						new SegmentObservableCollection()));
-				}
+				MessageBox.Show(nameof(Element) + "was not selected", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 
-				UpdateListBoxes();
-				FillElementsTreeView();
+			if (node.Segment is Element element)
+			{
+				var collection = new SegmentObservableCollection
+				{
+					element
+				};
+				_project.CurrentCircuit.ReplaceSegment(node.Segment,
+					new ParallelCircuit(collection));
 			}
 			else
 			{
-				MessageBox.Show(nameof(Element) + "was not selected", "Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				node.Segment.SubSegments.Add(new ParallelCircuit(
+					new SegmentObservableCollection()));
 			}
+			UpdateListBoxes();
+			FillElementsTreeView();
 		}
 
 		private void AddSerialSegmentButton_Click(object sender, EventArgs e)
@@ -501,7 +470,7 @@ namespace ImpedanceForms
 			}
 			else
 			{
-				MessageBox.Show(nameof(Element) + "was not selected", "Error",
+				MessageBox.Show(nameof(Element) + "was not selected", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -518,11 +487,10 @@ namespace ImpedanceForms
 
 		private void ElementsTreeView_DragDrop(object sender, DragEventArgs e)
 		{
-			Point targetPoint = ElementsTreeView.PointToClient(new Point(e.X, e.Y));
-			SegmentTreeNode targetNode = ElementsTreeView.GetNodeAt(targetPoint) as SegmentTreeNode;
-			SegmentTreeNode draggedNode = e.Data.GetData(typeof(SegmentTreeNode)) as SegmentTreeNode;
+			var targetPoint = ElementsTreeView.PointToClient(new Point(e.X, e.Y));
+			var targetNode = ElementsTreeView.GetNodeAt(targetPoint) as SegmentTreeNode;
 
-			if (draggedNode == null)
+			if (!(e.Data.GetData(typeof(SegmentTreeNode)) is SegmentTreeNode draggedNode))
 			{
 				return;
 			}
@@ -535,44 +503,44 @@ namespace ImpedanceForms
 				_project.CurrentCircuit.SubSegments.Add(draggedNode.Segment);
 				draggedNode.Expand();
 				UpdateListBoxes();
+				return;
 			}
-			else
+			
+			var parentNode = targetNode;
+
+			if (!draggedNode.Equals(targetNode))
 			{
-				SegmentTreeNode parentNode = targetNode;
+				var canDrop = true;
 
-				if (!draggedNode.Equals(targetNode) && targetNode != null)
+				while (canDrop && (parentNode != null))
 				{
-					bool canDrop = true;
+					canDrop = !object.ReferenceEquals(draggedNode, parentNode);
+					parentNode = parentNode.Parent as SegmentTreeNode;
+				}
 
-					while (canDrop && (parentNode != null))
+				if (canDrop)
+				{
+					if (targetNode.Segment is Element)
 					{
-						canDrop = !Object.ReferenceEquals(draggedNode, parentNode);
-						parentNode = parentNode.Parent as SegmentTreeNode;
-					}
-
-					if (canDrop)
-					{
-						if (targetNode.Segment is Element)
-						{
-							_project.CurrentCircuit.ReplaceSegment(targetNode.Segment,
-								draggedNode.Segment.Clone() as ISegment);
-							_project.CurrentCircuit.ReplaceSegment(draggedNode.Segment,
-								targetNode.Segment.Clone() as ISegment);
-							FillElementsTreeView();
-							UpdateListBoxes();
-						}
-						else
-						{
-							_project.CurrentCircuit.RemoveSegment(draggedNode.Segment);
-							draggedNode.Remove();
-							targetNode.Nodes.Add(draggedNode);
-							targetNode.Segment.SubSegments.Add(draggedNode.Segment);
-							draggedNode.Expand();
-						}
+						_project.CurrentCircuit.ReplaceSegment(targetNode.Segment,
+							draggedNode.Segment.Clone() as ISegment);
+						_project.CurrentCircuit.ReplaceSegment(draggedNode.Segment,
+							targetNode.Segment.Clone() as ISegment);
+						FillElementsTreeView();
 						UpdateListBoxes();
 					}
+					else
+					{
+						_project.CurrentCircuit.RemoveSegment(draggedNode.Segment);
+						draggedNode.Remove();
+						targetNode.Nodes.Add(draggedNode);
+						targetNode.Segment.SubSegments.Add(draggedNode.Segment);
+						draggedNode.Expand();
+					}
+					UpdateListBoxes();
 				}
 			}
+			
 			ElementsTreeView.SelectedNode = draggedNode;
 		}
 	}

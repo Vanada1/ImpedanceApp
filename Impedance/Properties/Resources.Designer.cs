@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Impedance.Properties {
+namespace ImpedanceApp.Properties {
     using System;
     
     

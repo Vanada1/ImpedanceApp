@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Impedance
 {
+	/// <summary>
+	/// Serves class for circuit
+	/// </summary>
 	public static class CircuitValidator
 	{
 		/// <summary>
@@ -14,7 +17,7 @@ namespace Impedance
 		/// <param name="segmentType">Segment type</param>
 		/// <param name="name">Name of segment</param>
 		/// <param name="value">Value of segment if it is
-		/// <see cref="Impedance.Element"/></param>
+		/// <see cref="Element"/></param>
 		/// <param name="subSegments">Segment collection for circuit</param>
 		public static ISegment CreateNewSegment(SegmentType segmentType, string name, 
 			double value, SegmentObservableCollection subSegments)
@@ -22,25 +25,25 @@ namespace Impedance
 			ISegment segment = null;
 			switch (segmentType)
 			{
-				case Impedance.SegmentType.Capacitor:
+				case SegmentType.Capacitor:
 				{
 					segment = new Capacitor(name, value);
 					break;
 				}
 
-				case Impedance.SegmentType.Inductor:
+				case SegmentType.Inductor:
 				{
 					segment = new Inductor(name, value);
 					break;
 				}
 
-				case Impedance.SegmentType.Resistor:
+				case SegmentType.Resistor:
 				{
 					segment = new Resistor(name, value);
 					break;
 				}
 
-				case Impedance.SegmentType.SerialCircuit:
+				case SegmentType.SerialCircuit:
 				{
 					if (subSegments == null)
 					{
@@ -51,7 +54,7 @@ namespace Impedance
 					break;
 				}
 
-				case Impedance.SegmentType.ParallelCircuit:
+				case SegmentType.ParallelCircuit:
 				{
 					if (subSegments == null)
 					{

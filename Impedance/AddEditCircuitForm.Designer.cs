@@ -1,4 +1,4 @@
-﻿namespace Impedance
+﻿namespace ImpedanceApp
 {
 	partial class AddEditCircuitForm
 	{

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Impedance
 {
+	/// <summary>
+	/// Serves class for working with strings
+	/// </summary>
 	public static class StringValidator
 	{
 		/// <summary>
@@ -32,6 +35,11 @@ namespace Impedance
 			return resultsString;
 		}
 
+		/// <summary>
+		/// Defines elements for a combo box
+		/// </summary>
+		/// <param name="segment">A specific segment by which a list of items will be returned</param>
+		/// <returns>Segment list</returns>
 		public static string[] GetSegmentEnum(ISegment segment)
 		{
 			string[] segmentTypes;
@@ -43,24 +51,24 @@ namespace Impedance
 			{
 				segmentTypes = new []
 				{
-					nameof(Impedance.SegmentType.SerialCircuit)
+					nameof(SegmentType.SerialCircuit)
 				};
 			}
 			else if (segment is Element element)
 			{
 				segmentTypes = new[]
 				{
-					nameof(Impedance.SegmentType.Resistor),
-					nameof(Impedance.SegmentType.Capacitor),
-					nameof(Impedance.SegmentType.Inductor)
+					nameof(SegmentType.Resistor),
+					nameof(SegmentType.Capacitor),
+					nameof(SegmentType.Inductor)
 				};
 			}
 			else
 			{
 				segmentTypes = new[]
 				{
-					nameof(Impedance.SegmentType.SerialCircuit),
-					nameof(Impedance.SegmentType.ParallelCircuit),
+					nameof(SegmentType.SerialCircuit),
+					nameof(SegmentType.ParallelCircuit),
 				};
 			}
 

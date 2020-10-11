@@ -134,12 +134,7 @@ namespace Impedance
 		///     Set and return all <see cref="CircuitElements" /> selected <see cref="Circuit" />
 		/// </summary>
 		public List<Element> CircuitElements { get; set; } = new List<Element>();
-
-		/// <summary>
-		///     Set and return all segments name
-		/// </summary>
-		public List<string> NameSegments { get; set; } = new List<string>();
-
+		
 		/// <summary>
 		///     Recursively Find all <see cref="Element" /> in the <see cref="ISegment.SubSegments" />
 		/// </summary>
@@ -153,23 +148,6 @@ namespace Impedance
 					CircuitElements.Add(tempElement);
 				else
 					FindAllElements(element);
-		}
-
-		/// <summary>
-		///     Recursively creates a list of the names of all the <see cref="ISegment" /> in the circuit
-		/// </summary>
-		/// <param name="segment">the <see cref="ISegment" /> in which the items are written to the list</param>
-		public void CreateNameSegments(ISegment segment)
-		{
-			if (segment != null && segment == CurrentCircuit) NameSegments = new List<string>();
-
-			NameSegments.Add(segment.Name);
-
-			foreach (var subSegment in segment.SubSegments)
-				if (subSegment is Element)
-					NameSegments.Add(subSegment.Name);
-				else
-					CreateNameSegments(subSegment);
 		}
 	}
 }
