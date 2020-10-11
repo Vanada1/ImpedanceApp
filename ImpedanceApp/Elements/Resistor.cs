@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace ImpedanceApp
+namespace Impedance
 {
 	/// <summary>
 	///     The <see cref="Resistor" /> class contains information
@@ -16,7 +16,7 @@ namespace ImpedanceApp
 		/// <param name="value">value of the element</param>
 		public Resistor(string name, double value) : base(name, value)
 		{
-			SegmentType = ImpedanceApp.SegmentType.Resistor;
+			SegmentType = SegmentType.Resistor;
 		}
 
 		/// <summary>

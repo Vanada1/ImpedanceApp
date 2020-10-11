@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace ImpedanceApp
+namespace Impedance
 {
 	/// <summary>
 	///     Abstract class Circuit
@@ -76,9 +76,15 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="frequency">for calculate</param>
 		/// <returns><see cref="Complex" /> impedance this <see cref="Circuit" /></returns>
-		Complex ISegment.CalculateZ(double frequency)
+		public Complex CalculateZ(double frequency)
 		{
-			throw new NotImplementedException();
+			var result = new Complex(0.0, 0.0);
+			foreach (var segment in SubSegments)
+			{
+				result += segment.CalculateZ(frequency);
+			}
+
+			return result;
 		}
 
 		/// <summary>
@@ -127,13 +133,7 @@ namespace ImpedanceApp
 			var results = new List<Complex>();
 			for (var i = 0; i < frequencies.Count; i++)
 			{
-				var result = new Complex(0.0, 0.0);
-				foreach (var segment in SubSegments)
-				{
-					result += segment.CalculateZ(frequencies[i]);
-				}
-
-				results.Add(result);
+				results.Add(CalculateZ(frequencies[i]));
 			}
 
 			return results;
@@ -215,7 +215,7 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Comparing object and <see cref="ImpedanceApp.Element" /> Objects
+		///     Comparing object and <see cref="Element" /> Objects
 		/// </summary>
 		/// <param name="obj">This object compares with the current</param>
 		/// <returns>
@@ -260,6 +260,11 @@ namespace ImpedanceApp
 			if ((object)circuit1 == null || (object)circuit2 == null) return !Equals(circuit1, circuit2);
 
 			return !circuit1.Equals(circuit2);
+		}
+
+		public override string ToString()
+		{
+			return Name;
 		}
 	}
 }

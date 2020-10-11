@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace ImpedanceApp
+namespace Impedance
 {
 	/// <summary>
 	///     The base class for all elements
@@ -10,17 +10,17 @@ namespace ImpedanceApp
 	public abstract class Element : ISegment, IEquatable<Element>
 	{
 		/// <summary>
-		///     Name of <see cref="ImpedanceApp.Element" />
+		///     Name of <see cref="Element" />
 		/// </summary>
 		private string _name;
 
 		/// <summary>
-		///     Value of <see cref="ImpedanceApp.Element" />
+		///     Value of <see cref="Element" />
 		/// </summary>
 		private double _value;
 
 		/// <summary>
-		///     <see cref="ImpedanceApp.Element" /> constructor
+		///     <see cref="Element" /> constructor
 		/// </summary>
 		/// <param name="name"> name of the element</param>
 		/// <param name="value"> value of the element</param>
@@ -32,7 +32,7 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Set and return <see cref="Name" /> of <see cref="ImpedanceApp.Element" />
+		///     Set and return <see cref="Name" /> of <see cref="Element" />
 		/// </summary>
 		public string Name
 		{
@@ -48,7 +48,7 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Set and return <see cref="Value" /> of <see cref="ImpedanceApp.Element" />
+		///     Set and return <see cref="Value" /> of <see cref="Element" />
 		/// </summary>
 		public double Value
 		{
@@ -76,7 +76,7 @@ namespace ImpedanceApp
 		public SegmentType SegmentType { get; protected set; }
 
 		/// <summary>
-		///     Return <see cref="SubSegments" /> of <see cref="ImpedanceApp.Element" />
+		///     Return <see cref="SubSegments" /> of <see cref="Element" />
 		/// </summary>
 		public SegmentObservableCollection SubSegments { get; }
 
@@ -89,7 +89,7 @@ namespace ImpedanceApp
 		///     Calculate impedance one element
 		/// </summary>
 		/// <param name="frequency"> is frequency for element</param>
-		/// <returns> <see cref="List{T}" /> impedance this <see cref="ImpedanceApp.Element" /></returns>
+		/// <returns> <see cref="List{T}" /> impedance this <see cref="Element" /></returns>
 		public abstract Complex CalculateZ(double frequency);
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace ImpedanceApp
 		public abstract object Clone();
 
 		/// <summary>
-		///     Comparing <see cref="ISegment" /> and <see cref="ImpedanceApp.Element" /> Objects
+		///     Comparing <see cref="ISegment" /> and <see cref="Element" /> Objects
 		/// </summary>
 		/// <param name="other">This <see cref="ISegment" /> compares with the current</param>
 		/// <returns>
@@ -115,9 +115,9 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Comparing Two <see cref="ImpedanceApp.Element" /> Objects
+		///     Comparing Two <see cref="Element" /> Objects
 		/// </summary>
-		/// <param name="other">This <see cref="ImpedanceApp.Element" /> compares with the current</param>
+		/// <param name="other">This <see cref="Element" /> compares with the current</param>
 		/// <returns>
 		///     Comparison result.True - equal.
 		///     False - not equal
@@ -131,7 +131,7 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Comparing object and <see cref="ImpedanceApp.Element" /> Objects
+		///     Comparing object and <see cref="Element" /> Objects
 		/// </summary>
 		/// <param name="obj">This object compares with the current</param>
 		/// <returns>
@@ -147,10 +147,10 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Overriding the == comparison operator. Comparing two <see cref="ImpedanceApp.Element" />
+		///     Overriding the == comparison operator. Comparing two <see cref="Element" />
 		/// </summary>
-		/// <param name="element1">First <see cref="ImpedanceApp.Element" /> for comparison</param>
-		/// <param name="element2">Second <see cref="ImpedanceApp.Element" /> for comparison</param>
+		/// <param name="element1">First <see cref="Element" /> for comparison</param>
+		/// <param name="element2">Second <see cref="Element" /> for comparison</param>
 		/// <returns>
 		///     Comparison result.True - equal.
 		///     False - not equal
@@ -163,10 +163,10 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		///     Overriding the == comparison operator. Comparing two <see cref="ImpedanceApp.Element" />
+		///     Overriding the == comparison operator. Comparing two <see cref="Element" />
 		/// </summary>
-		/// <param name="element1">First <see cref="ImpedanceApp.Element" /> for comparison</param>
-		/// <param name="element2">Second <see cref="ImpedanceApp.Element" /> for comparison</param>
+		/// <param name="element1">First <see cref="Element" /> for comparison</param>
+		/// <param name="element2">Second <see cref="Element" /> for comparison</param>
 		/// <returns>
 		///     Comparison result.True - not equal.
 		///     False - equal

@@ -1,4 +1,4 @@
-﻿using ImpedanceApp;
+﻿using Impedance;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -774,6 +774,20 @@ namespace ImpedanceUnitTest
 
 			Assert.AreEqual(expected, actual,
 				"Replace the item incorrectly");
+		}
+
+
+		[Test(Description = "Positive test of the ParallelCircuit ToString method")]
+		public void TestParallelCircuit_ToString()
+		{
+			string expected = "Circuit";
+
+			Circuit serialCircuit = new Circuit("Circuit", new SegmentObservableCollection());
+
+			string actual = serialCircuit.ToString();
+
+			Assert.AreEqual(expected, actual,
+				"Incorrect conversion to string in ToString method");
 		}
 	}
 }

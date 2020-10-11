@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-namespace ImpedanceApp
+namespace Impedance
 {
 	/// <summary>
 	///     Class <see cref="Project" /> contain all data of program
@@ -141,7 +141,7 @@ namespace ImpedanceApp
 		public List<string> NameSegments { get; set; } = new List<string>();
 
 		/// <summary>
-		///     Recursively Find all <see cref="ImpedanceApp.Element" /> in the <see cref="ISegment.SubSegments" />
+		///     Recursively Find all <see cref="Element" /> in the <see cref="ISegment.SubSegments" />
 		/// </summary>
 		/// <param name="segment"> of the <see cref="Circuit" /></param>
 		public void FindAllElements(ISegment segment)

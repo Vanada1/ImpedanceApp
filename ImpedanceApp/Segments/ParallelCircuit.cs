@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace ImpedanceApp
+namespace Impedance
 {
 	/// <summary>
 	///     <see cref="ParallelCircuit" /> is inheritor of an abstract class <see cref="ParallelCircuit" />
@@ -156,6 +156,15 @@ namespace ImpedanceApp
 			if ((object)circuit1 == null || (object)circuit2 == null) return !Equals(circuit1, circuit2);
 
 			return !circuit1.Equals(circuit2);
+		}
+
+		/// <summary>
+		/// Translates an element into a string
+		/// </summary>
+		/// <returns>The word Parallel</returns>
+		public override string ToString()
+		{
+			return "Parallel";
 		}
 	}
 }

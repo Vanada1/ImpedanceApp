@@ -1,4 +1,4 @@
-﻿using ImpedanceApp;
+﻿using Impedance;
 using NUnit.Framework;
 
 namespace ImpedanceUnitTest

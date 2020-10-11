@@ -1,4 +1,4 @@
-﻿using ImpedanceApp;
+﻿using Impedance;
 using NUnit.Framework;
 using System.Numerics;
 
@@ -471,6 +471,19 @@ namespace ImpedanceUnitTest
 
 			Assert.AreEqual(expected, actual,
 				"Elements are not equal");
+		}
+
+		[Test(Description = "Positive test of the SerialCircuit ToString method")]
+		public void TestSerialCircuit_ToString()
+		{
+			string expected = "Serial";
+
+			SerialCircuit serialCircuit = new SerialCircuit(new SegmentObservableCollection());
+
+			string actual = serialCircuit.ToString();
+
+			Assert.AreEqual(expected, actual,
+				"Incorrect conversion to string in ToString method");
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿using ImpedanceApp;
+﻿using Impedance;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Numerics;

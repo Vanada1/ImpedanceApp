@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ImpedanceApp
+namespace Impedance
 {
 	/// <summary>
 	///     Event args for elements

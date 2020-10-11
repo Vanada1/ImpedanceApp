@@ -1,4 +1,4 @@
-﻿namespace ImpedanceApp
+﻿namespace Impedance
 {
 	public enum SegmentType
 	{

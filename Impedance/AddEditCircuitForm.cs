@@ -1,4 +1,4 @@
-﻿using ImpedanceApp;
+﻿using Impedance;
 using System;
 using System.Windows.Forms;
 

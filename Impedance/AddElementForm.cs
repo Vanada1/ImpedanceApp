@@ -1,4 +1,4 @@
-﻿using ImpedanceApp;
+﻿using Impedance;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -27,28 +27,28 @@ namespace Impedance
 		/// </summary>
 		/// <param name="name">Name of segment</param>
 		/// <param name="value">Value of segment if it is
-		/// <see cref="ImpedanceApp.Element"/></param>
+		/// <see cref="Impedance.Element"/></param>
 		private void CreateNewSegment(string name, double value)
 		{
 			if (SegmentType.TryParse(SegmentsComboBox.Text,
-				out ImpedanceApp.SegmentType segment))
+				out Impedance.SegmentType segment))
 			{
 				switch (segment)
 				{
-					case ImpedanceApp.SegmentType.Capacitor:
+					case Impedance.SegmentType.Capacitor:
 						{
 							Segment = new Capacitor(name, value);
 							break;
 						}
 
-					case ImpedanceApp.SegmentType.Inductor:
+					case Impedance.SegmentType.Inductor:
 						{
 							Segment = new Inductor(name, value);
 
 							break;
 						}
 
-					case ImpedanceApp.SegmentType.Resistor:
+					case Impedance.SegmentType.Resistor:
 						{
 							Segment = new Resistor(name, value);
 							break;
@@ -81,9 +81,9 @@ namespace Impedance
 			List<string> typeSegments = new List<string>
 			{
 				"",
-				nameof(ImpedanceApp.SegmentType.Resistor),
-				nameof(ImpedanceApp.SegmentType.Capacitor),
-				nameof(ImpedanceApp.SegmentType.Inductor)
+				nameof(Impedance.SegmentType.Resistor),
+				nameof(Impedance.SegmentType.Capacitor),
+				nameof(Impedance.SegmentType.Inductor)
 			};
 
 			SegmentsComboBox.DataSource = typeSegments;
@@ -154,22 +154,22 @@ namespace Impedance
 
 		private void SegmentComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (ImpedanceApp.SegmentType.TryParse(SegmentsComboBox.Text,
-				out ImpedanceApp.SegmentType segment))
+			if (Impedance.SegmentType.TryParse(SegmentsComboBox.Text,
+				out Impedance.SegmentType segment))
 			{
 				switch (segment)
 				{
-					case ImpedanceApp.SegmentType.Capacitor:
+					case Impedance.SegmentType.Capacitor:
 						{
 							ValueTextBox.Enabled = true;
 							break;
 						}
-					case ImpedanceApp.SegmentType.Inductor:
+					case Impedance.SegmentType.Inductor:
 						{
 							ValueTextBox.Enabled = true;
 							break;
 						}
-					case ImpedanceApp.SegmentType.Resistor:
+					case Impedance.SegmentType.Resistor:
 						{
 							ValueTextBox.Enabled = true;
 							break;

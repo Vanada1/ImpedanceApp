@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-namespace ImpedanceApp
+namespace Impedance
 {
 	/// <summary>
 	///     Collection for add method in <see cref="ValueChanged" /> event

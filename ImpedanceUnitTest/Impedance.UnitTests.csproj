@@ -66,9 +66,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ImpedanceApp\ImpedanceApp.csproj">
+    <ProjectReference Include="..\ImpedanceApp\Impedance.csproj">
       <Project>{8541e0fb-232a-47d9-8de5-262579f1ee54}</Project>
-      <Name>ImpedanceApp</Name>
+      <Name>Impedance</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
