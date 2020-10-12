@@ -52,7 +52,6 @@
 			this.AddSegment = new System.Windows.Forms.Button();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.CircuitsComboBox = new System.Windows.Forms.ComboBox();
-			this.ElementsTreeView = new System.Windows.Forms.TreeView();
 			this.CircuitContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.addParallelSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addSerialSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +63,7 @@
 			this.ImpedancesGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.AddFrequencyButton = new System.Windows.Forms.Button();
+			this.ElementsTreeView = new System.Windows.Forms.TreeView();
 			this.ElementGroupBox.SuspendLayout();
 			this.tableLayoutPanel5.SuspendLayout();
 			this.tableLayoutPanel9.SuspendLayout();
@@ -81,7 +81,7 @@
 			// 
 			this.ElementGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.ElementGroupBox.Controls.Add(this.tableLayoutPanel5);
-			this.ElementGroupBox.Location = new System.Drawing.Point(12, 357);
+			this.ElementGroupBox.Location = new System.Drawing.Point(12, 458);
 			this.ElementGroupBox.Name = "ElementGroupBox";
 			this.ElementGroupBox.Size = new System.Drawing.Size(405, 134);
 			this.ElementGroupBox.TabIndex = 13;
@@ -94,8 +94,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tableLayoutPanel5.ColumnCount = 3;
 			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.82796F));
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.31202F));
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.92327F));
+			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.8855F));
+			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.40967F));
 			this.tableLayoutPanel5.Controls.Add(this.RemoveElementButton, 2, 2);
 			this.tableLayoutPanel5.Controls.Add(this.NameLabel, 0, 0);
 			this.tableLayoutPanel5.Controls.Add(this.EditElementButton, 2, 0);
@@ -119,9 +119,9 @@
 			this.RemoveElementButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.RemoveElementButton.Location = new System.Drawing.Point(278, 71);
+			this.RemoveElementButton.Location = new System.Drawing.Point(303, 71);
 			this.RemoveElementButton.Name = "RemoveElementButton";
-			this.RemoveElementButton.Size = new System.Drawing.Size(112, 30);
+			this.RemoveElementButton.Size = new System.Drawing.Size(87, 30);
 			this.RemoveElementButton.TabIndex = 9;
 			this.RemoveElementButton.Text = "Remove";
 			this.RemoveElementButton.UseVisualStyleBackColor = true;
@@ -132,11 +132,11 @@
 			this.NameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.NameLabel.AutoSize = true;
-			this.NameLabel.Location = new System.Drawing.Point(8, 0);
+			this.NameLabel.Location = new System.Drawing.Point(5, 0);
 			this.NameLabel.Name = "NameLabel";
-			this.NameLabel.Size = new System.Drawing.Size(35, 34);
+			this.NameLabel.Size = new System.Drawing.Size(38, 34);
 			this.NameLabel.TabIndex = 0;
-			this.NameLabel.Text = "Name";
+			this.NameLabel.Text = "Name:";
 			this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// EditElementButton
@@ -144,9 +144,9 @@
 			this.EditElementButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.EditElementButton.Location = new System.Drawing.Point(278, 3);
+			this.EditElementButton.Location = new System.Drawing.Point(303, 3);
 			this.EditElementButton.Name = "EditElementButton";
-			this.EditElementButton.Size = new System.Drawing.Size(112, 28);
+			this.EditElementButton.Size = new System.Drawing.Size(87, 28);
 			this.EditElementButton.TabIndex = 8;
 			this.EditElementButton.Text = "Edit";
 			this.EditElementButton.UseVisualStyleBackColor = true;
@@ -157,11 +157,11 @@
 			this.ValueLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.ValueLabel.AutoSize = true;
-			this.ValueLabel.Location = new System.Drawing.Point(9, 34);
+			this.ValueLabel.Location = new System.Drawing.Point(6, 34);
 			this.ValueLabel.Name = "ValueLabel";
-			this.ValueLabel.Size = new System.Drawing.Size(34, 34);
+			this.ValueLabel.Size = new System.Drawing.Size(37, 34);
 			this.ValueLabel.TabIndex = 1;
-			this.ValueLabel.Text = "Value";
+			this.ValueLabel.Text = "Value:";
 			this.ValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// TypeComboBox
@@ -171,7 +171,7 @@
 			this.TypeComboBox.FormattingEnabled = true;
 			this.TypeComboBox.Location = new System.Drawing.Point(49, 75);
 			this.TypeComboBox.Name = "TypeComboBox";
-			this.TypeComboBox.Size = new System.Drawing.Size(223, 21);
+			this.TypeComboBox.Size = new System.Drawing.Size(248, 21);
 			this.TypeComboBox.TabIndex = 10;
 			// 
 			// TypeLabel
@@ -179,11 +179,11 @@
 			this.TypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.TypeLabel.AutoSize = true;
-			this.TypeLabel.Location = new System.Drawing.Point(12, 68);
+			this.TypeLabel.Location = new System.Drawing.Point(9, 68);
 			this.TypeLabel.Name = "TypeLabel";
-			this.TypeLabel.Size = new System.Drawing.Size(31, 36);
+			this.TypeLabel.Size = new System.Drawing.Size(34, 36);
 			this.TypeLabel.TabIndex = 2;
-			this.TypeLabel.Text = "Type";
+			this.TypeLabel.Text = "Type:";
 			this.TypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// NameTextBox
@@ -191,7 +191,7 @@
 			this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.NameTextBox.Location = new System.Drawing.Point(49, 7);
 			this.NameTextBox.Name = "NameTextBox";
-			this.NameTextBox.Size = new System.Drawing.Size(223, 20);
+			this.NameTextBox.Size = new System.Drawing.Size(248, 20);
 			this.NameTextBox.TabIndex = 3;
 			// 
 			// ValueTextBox
@@ -199,7 +199,7 @@
 			this.ValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.ValueTextBox.Location = new System.Drawing.Point(49, 41);
 			this.ValueTextBox.Name = "ValueTextBox";
-			this.ValueTextBox.Size = new System.Drawing.Size(223, 20);
+			this.ValueTextBox.Size = new System.Drawing.Size(248, 20);
 			this.ValueTextBox.TabIndex = 4;
 			// 
 			// AddElementButton
@@ -207,11 +207,11 @@
 			this.AddElementButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.AddElementButton.Location = new System.Drawing.Point(278, 37);
+			this.AddElementButton.Location = new System.Drawing.Point(303, 37);
 			this.AddElementButton.Name = "AddElementButton";
-			this.AddElementButton.Size = new System.Drawing.Size(112, 28);
+			this.AddElementButton.Size = new System.Drawing.Size(87, 28);
 			this.AddElementButton.TabIndex = 7;
-			this.AddElementButton.Text = "Add element";
+			this.AddElementButton.Text = "Add";
 			this.AddElementButton.UseVisualStyleBackColor = true;
 			this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
 			// 
@@ -266,11 +266,11 @@
 			// 
 			this.FrequencyLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.FrequencyLabel.AutoSize = true;
-			this.FrequencyLabel.Location = new System.Drawing.Point(7, 8);
+			this.FrequencyLabel.Location = new System.Drawing.Point(4, 8);
 			this.FrequencyLabel.Name = "FrequencyLabel";
-			this.FrequencyLabel.Size = new System.Drawing.Size(57, 13);
+			this.FrequencyLabel.Size = new System.Drawing.Size(60, 13);
 			this.FrequencyLabel.TabIndex = 14;
-			this.FrequencyLabel.Text = "Frequency";
+			this.FrequencyLabel.Text = "Frequency:";
 			this.FrequencyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// tableLayoutPanel6
@@ -286,7 +286,7 @@
 			this.tableLayoutPanel6.Controls.Add(this.EditCircuit, 1, 0);
 			this.tableLayoutPanel6.Controls.Add(this.RemoveCircuit, 2, 0);
 			this.tableLayoutPanel6.Controls.Add(this.AddSegment, 3, 0);
-			this.tableLayoutPanel6.Location = new System.Drawing.Point(8, 302);
+			this.tableLayoutPanel6.Location = new System.Drawing.Point(8, 405);
 			this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
 			this.tableLayoutPanel6.RowCount = 1;
@@ -363,10 +363,9 @@
 			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			this.tableLayoutPanel4.RowCount = 2;
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.084469F));
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.91553F));
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(331, 287);
+			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(331, 390);
 			this.tableLayoutPanel4.TabIndex = 13;
 			// 
 			// CircuitsComboBox
@@ -381,22 +380,6 @@
 			this.CircuitsComboBox.Size = new System.Drawing.Size(325, 21);
 			this.CircuitsComboBox.TabIndex = 12;
 			this.CircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.CircuitsComboBox_SelectedIndexChanged);
-			// 
-			// ElementsTreeView
-			// 
-			this.ElementsTreeView.AllowDrop = true;
-			this.ElementsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ElementsTreeView.ContextMenuStrip = this.CircuitContextMenuStrip;
-			this.ElementsTreeView.Location = new System.Drawing.Point(3, 23);
-			this.ElementsTreeView.Name = "ElementsTreeView";
-			this.ElementsTreeView.Size = new System.Drawing.Size(325, 261);
-			this.ElementsTreeView.TabIndex = 11;
-			this.ElementsTreeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ElementsTreeView_ItemDrag);
-			this.ElementsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ElementsTreeView_AfterSelect);
-			this.ElementsTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragDrop);
-			this.ElementsTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragEnter);
 			// 
 			// CircuitContextMenuStrip
 			// 
@@ -440,7 +423,7 @@
 			this.CircuitGroupBox.Controls.Add(this.tableLayoutPanel4);
 			this.CircuitGroupBox.Location = new System.Drawing.Point(12, 12);
 			this.CircuitGroupBox.Name = "CircuitGroupBox";
-			this.CircuitGroupBox.Size = new System.Drawing.Size(350, 337);
+			this.CircuitGroupBox.Size = new System.Drawing.Size(350, 440);
 			this.CircuitGroupBox.TabIndex = 14;
 			this.CircuitGroupBox.TabStop = false;
 			this.CircuitGroupBox.Text = "Circuit";
@@ -452,7 +435,7 @@
 			this.tableLayoutPanel1.ColumnCount = 1;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.Controls.Add(this.EventLabel, 0, 0);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(14, 497);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(14, 598);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -461,6 +444,9 @@
 			// 
 			// ImpedancesDataGridView
 			// 
+			this.ImpedancesDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.ImpedancesDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
 			this.ImpedancesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.ImpedancesDataGridView.Location = new System.Drawing.Point(6, 19);
@@ -475,7 +461,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.ImpedancesGroupBox.Controls.Add(this.tableLayoutPanel2);
 			this.ImpedancesGroupBox.Controls.Add(this.ImpedancesDataGridView);
-			this.ImpedancesGroupBox.Location = new System.Drawing.Point(423, 357);
+			this.ImpedancesGroupBox.Location = new System.Drawing.Point(423, 458);
 			this.ImpedancesGroupBox.Name = "ImpedancesGroupBox";
 			this.ImpedancesGroupBox.Size = new System.Drawing.Size(699, 208);
 			this.ImpedancesGroupBox.TabIndex = 17;
@@ -484,6 +470,7 @@
 			// 
 			// tableLayoutPanel2
 			// 
+			this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.tableLayoutPanel2.ColumnCount = 3;
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.18787F));
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.61252F));
@@ -509,17 +496,33 @@
 			this.AddFrequencyButton.UseVisualStyleBackColor = true;
 			this.AddFrequencyButton.Click += new System.EventHandler(this.AddFrequenciesButton_Click);
 			// 
+			// ElementsTreeView
+			// 
+			this.ElementsTreeView.AllowDrop = true;
+			this.ElementsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ElementsTreeView.ContextMenuStrip = this.CircuitContextMenuStrip;
+			this.ElementsTreeView.Location = new System.Drawing.Point(3, 29);
+			this.ElementsTreeView.Name = "ElementsTreeView";
+			this.ElementsTreeView.Size = new System.Drawing.Size(325, 358);
+			this.ElementsTreeView.TabIndex = 11;
+			this.ElementsTreeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ElementsTreeView_ItemDrag);
+			this.ElementsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ElementsTreeView_AfterSelect);
+			this.ElementsTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragDrop);
+			this.ElementsTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragEnter);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1134, 577);
+			this.ClientSize = new System.Drawing.Size(1134, 678);
 			this.Controls.Add(this.ImpedancesGroupBox);
 			this.Controls.Add(this.ElementGroupBox);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.CircuitGroupBox);
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.MinimumSize = new System.Drawing.Size(1150, 39);
+			this.MinimumSize = new System.Drawing.Size(1150, 616);
 			this.Name = "MainForm";
 			this.Text = "ImpedanceApp";
 			this.Load += new System.EventHandler(this.Main_Load);
@@ -548,7 +551,6 @@
 		private System.Windows.Forms.Button RemoveCircuit;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
 		private System.Windows.Forms.ComboBox CircuitsComboBox;
-		private System.Windows.Forms.TreeView ElementsTreeView;
 		private System.Windows.Forms.GroupBox ElementGroupBox;
 		private System.Windows.Forms.Button RemoveElementButton;
 		private System.Windows.Forms.Button EditElementButton;
@@ -577,6 +579,7 @@
 		private System.Windows.Forms.GroupBox ImpedancesGroupBox;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.Button AddFrequencyButton;
+		private System.Windows.Forms.TreeView ElementsTreeView;
 	}
 }
 

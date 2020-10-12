@@ -29,11 +29,11 @@
 		private void InitializeComponent()
 		{
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.SerialRadioButton = new System.Windows.Forms.RadioButton();
+			this.ParallelRadioButton = new System.Windows.Forms.RadioButton();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.OkButton = new System.Windows.Forms.Button();
 			this.CancelButton = new System.Windows.Forms.Button();
-			this.SerialRadioButton = new System.Windows.Forms.RadioButton();
-			this.ParallelRadioButton = new System.Windows.Forms.RadioButton();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
@@ -51,6 +51,28 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(150, 54);
 			this.tableLayoutPanel1.TabIndex = 0;
+			// 
+			// SerialRadioButton
+			// 
+			this.SerialRadioButton.AutoSize = true;
+			this.SerialRadioButton.Location = new System.Drawing.Point(3, 3);
+			this.SerialRadioButton.Name = "SerialRadioButton";
+			this.SerialRadioButton.Size = new System.Drawing.Size(83, 17);
+			this.SerialRadioButton.TabIndex = 0;
+			this.SerialRadioButton.TabStop = true;
+			this.SerialRadioButton.Text = "Serial Circuit";
+			this.SerialRadioButton.UseVisualStyleBackColor = true;
+			// 
+			// ParallelRadioButton
+			// 
+			this.ParallelRadioButton.AutoSize = true;
+			this.ParallelRadioButton.Location = new System.Drawing.Point(3, 30);
+			this.ParallelRadioButton.Name = "ParallelRadioButton";
+			this.ParallelRadioButton.Size = new System.Drawing.Size(91, 17);
+			this.ParallelRadioButton.TabIndex = 1;
+			this.ParallelRadioButton.TabStop = true;
+			this.ParallelRadioButton.Text = "Parallel Circuit";
+			this.ParallelRadioButton.UseVisualStyleBackColor = true;
 			// 
 			// tableLayoutPanel2
 			// 
@@ -93,28 +115,6 @@
 			this.CancelButton.UseVisualStyleBackColor = true;
 			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
 			// 
-			// SerialRadioButton
-			// 
-			this.SerialRadioButton.AutoSize = true;
-			this.SerialRadioButton.Location = new System.Drawing.Point(3, 3);
-			this.SerialRadioButton.Name = "SerialRadioButton";
-			this.SerialRadioButton.Size = new System.Drawing.Size(83, 17);
-			this.SerialRadioButton.TabIndex = 0;
-			this.SerialRadioButton.TabStop = true;
-			this.SerialRadioButton.Text = "Serial Circuit";
-			this.SerialRadioButton.UseVisualStyleBackColor = true;
-			// 
-			// ParallelRadioButton
-			// 
-			this.ParallelRadioButton.AutoSize = true;
-			this.ParallelRadioButton.Location = new System.Drawing.Point(3, 30);
-			this.ParallelRadioButton.Name = "ParallelRadioButton";
-			this.ParallelRadioButton.Size = new System.Drawing.Size(91, 17);
-			this.ParallelRadioButton.TabIndex = 1;
-			this.ParallelRadioButton.TabStop = true;
-			this.ParallelRadioButton.Text = "Parallel Circuit";
-			this.ParallelRadioButton.UseVisualStyleBackColor = true;
-			// 
 			// SegmentForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,7 +127,7 @@
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-			this.Text = "SegmentForm";
+			this.Text = "Segment";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.tableLayoutPanel2.ResumeLayout(false);
