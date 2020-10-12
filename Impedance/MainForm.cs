@@ -11,9 +11,14 @@ namespace ImpedanceForms
 	public partial class MainForm : Form
 	{
 		/// <summary>
-		/// Old <see cref="CircuitsListBox"/> index
+		/// Previous <see cref="CircuitsListBox"/> index
 		/// </summary>
 		private int _previousCircuitListBoxIndex = -1;
+
+		/// <summary>
+		/// Previous <see cref="ImpedancesDataGridView"/> index
+		/// </summary>
+		private int _previousImpedancesDataGridView = 0;
 
 		/// <summary>
 		/// Contains all data in this field
@@ -46,18 +51,32 @@ namespace ImpedanceForms
 
 		private void UpdateImpedancesDataGridView()
 		{
-			ImpedancesDataGridView.Rows.Clear();
+			var impedances = new List<ImpedanceData>();
+
 			for (int i = 0; i < _project.Frequencies.Count; i++)
 			{
-				string[] newRow = {_project.Frequencies[i].ToString(), _project.ResultsString[i]};
-				ImpedancesDataGridView.Rows.Add(newRow);
+				impedances.Add(new ImpedanceData(_project.Frequencies[i],
+					_project.ResultsString[i]));
+			}
+
+			try
+			{
+				ImpedancesDataGridView.DataSource = null;
+				ImpedancesDataGridView.DataSource = impedances;
+				ImpedancesDataGridView.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+				ImpedancesDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+			}
+			catch (InvalidOperationException)
+			{
+				MessageBox.Show(@"Impossible operation", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
 		/// <summary>
-		/// Update all list boxes
+		/// Update project
 		/// </summary>
-		private void UpdateListBoxes()
+		private void UpdateProject()
 		{
 			_project.Results = _project.CurrentCircuit.CalculateZ(_project.Frequencies);
 			_project.ResultsString = StringValidator.CreatingStringImpedances(_project.Results);
@@ -140,7 +159,7 @@ namespace ImpedanceForms
 
 		private void Main_Load(object sender, EventArgs e)
 		{
-			UpdateListBoxes();
+			UpdateProject();
 			UpdateCircuitComboBox();
 			EventLabel.Text = "";
 
@@ -164,28 +183,29 @@ namespace ImpedanceForms
 
 			_project.Frequencies.Add(frequency);
 			FrequencyTextBox.Text = "";
-			UpdateListBoxes();
+			UpdateProject();
 		}
 
-		//private void RemoveFrequenciesButton_Click(object sender, EventArgs e)
-		//{
-		//	var index = FrequenciesListBox.SelectedIndex;
-		//	if (index == -1)
-		//	{
+		private void RemoveFrequenciesButton_Click(object sender, EventArgs e)
+		{
+			var currentRow = ImpedancesDataGridView.CurrentRow;
 
-		//		MessageBox.Show(@"Frequency was not selected", @"Error",
-		//			MessageBoxButtons.OK, MessageBoxIcon.Error);
-		//		return;
-		//	}
+			if (currentRow == null)
+			{
 
-		//	var dialogResult = MessageBox.Show(@"Remove the frequency?", @"Remove?",
-		//		MessageBoxButtons.YesNo);
-		//	if (dialogResult == DialogResult.Yes)
-		//	{
-		//		_project.Frequencies.RemoveAt(index);
-		//	}
-		//	UpdateListBoxes();
-		//}
+				MessageBox.Show(@"Frequency was not selected", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			var dialogResult = MessageBox.Show(@"Remove the frequency?", @"Remove?",
+				MessageBoxButtons.YesNo);
+			if (dialogResult == DialogResult.Yes)
+			{
+				_project.Frequencies.RemoveAt(currentRow.Index);
+			}
+			UpdateProject();
+		}
 
 		private void EditElementButton_Click(object sender, EventArgs e)
 		{
@@ -242,7 +262,7 @@ namespace ImpedanceForms
 			node.Segment = newSegment;
 			ElementsTreeView.SelectedNode = null;
 			ElementsTreeView.SelectedNode = node;
-			UpdateListBoxes();
+			UpdateProject();
 		}
 
 		private void AddElementButton_Click(object sender, EventArgs e)
@@ -278,7 +298,7 @@ namespace ImpedanceForms
 					Segment = addForm.Segment
 				});
 			}
-			UpdateListBoxes();
+			UpdateProject();
 		}
 
 		private void RemoveElementButton_Click(object sender, EventArgs e)
@@ -309,7 +329,7 @@ namespace ImpedanceForms
 					foundElement);
 				
 
-				UpdateListBoxes();
+				UpdateProject();
 			}
 		}
 
@@ -319,7 +339,7 @@ namespace ImpedanceForms
 			if (index == -1) return;
 
 			_project.CurrentCircuit = _project.AllExamples[index];
-			UpdateListBoxes();
+			UpdateProject();
 			if (index != _previousCircuitListBoxIndex)
 			{
 				FillElementsTreeView();
@@ -339,7 +359,7 @@ namespace ImpedanceForms
 				UpdateCircuitComboBox();
 				CircuitsComboBox.SelectedIndex = _project.AllExamples.Count - 1;
 			}
-			UpdateListBoxes();
+			UpdateProject();
 		}
 
 		private void EditCircuit_Click(object sender, EventArgs e)
@@ -362,7 +382,7 @@ namespace ImpedanceForms
 			{
 				_project.AllExamples[index].Name = editForm.Circuit.Name;
 			}
-			UpdateListBoxes();
+			UpdateProject();
 			UpdateCircuitComboBox();
 			
 		}
@@ -386,7 +406,7 @@ namespace ImpedanceForms
 				_project.AllExamples.RemoveAt(index);
 				UpdateCircuitComboBox();
 			}
-			UpdateListBoxes();
+			UpdateProject();
 			
 		}
 
@@ -427,61 +447,6 @@ namespace ImpedanceForms
 			TypeComboBox.Text = node.Segment.SegmentType.ToString();
 		}
 
-		private void AddParallelSegmentButton_Click(object sender, EventArgs e)
-		{
-			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
-			{
-				MessageBox.Show(nameof(Element) + @"was not selected", @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
-
-			if (node.Segment is Element element)
-			{
-				var collection = new SegmentObservableCollection
-				{
-					element
-				};
-				_project.CurrentCircuit.ReplaceSegment(node.Segment,
-					new ParallelCircuit(collection));
-			}
-			else
-			{
-				node.Segment.SubSegments.Add(new ParallelCircuit(
-					new SegmentObservableCollection()));
-			}
-			UpdateListBoxes();
-			FillElementsTreeView();
-		}
-
-		private void AddSerialSegmentButton_Click(object sender, EventArgs e)
-		{
-			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode node))
-			{
-				MessageBox.Show(nameof(Element) + @"was not selected", @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
-
-			if (node.Segment is Element element)
-			{
-				SegmentObservableCollection collection = new SegmentObservableCollection
-				{
-					element
-				};
-				_project.CurrentCircuit.ReplaceSegment(node.Segment,
-					new SerialCircuit(collection));
-			}
-			else
-			{
-				node.Segment.SubSegments.Add(new SerialCircuit(
-					new SegmentObservableCollection()));
-			}
-
-			UpdateListBoxes();
-			FillElementsTreeView();
-		}
-
 		private void ElementsTreeView_ItemDrag(object sender, ItemDragEventArgs e)
 		{
 			DoDragDrop(e.Item, DragDropEffects.Move);
@@ -509,7 +474,7 @@ namespace ImpedanceForms
 				ElementsTreeView.Nodes[0].Nodes.Add(draggedNode);
 				_project.CurrentCircuit.SubSegments.Add(draggedNode.Segment);
 				draggedNode.Expand();
-				UpdateListBoxes();
+				UpdateProject();
 				return;
 			}
 			
@@ -534,7 +499,7 @@ namespace ImpedanceForms
 						_project.CurrentCircuit.ReplaceSegment(draggedNode.Segment,
 							targetNode.Segment.Clone() as ISegment);
 						FillElementsTreeView();
-						UpdateListBoxes();
+						UpdateProject();
 					}
 					else
 					{
@@ -544,7 +509,7 @@ namespace ImpedanceForms
 						targetNode.Segment.SubSegments.Add(draggedNode.Segment);
 						draggedNode.Expand();
 					}
-					UpdateListBoxes();
+					UpdateProject();
 				}
 			}
 			
@@ -575,13 +540,32 @@ namespace ImpedanceForms
 				node.Segment.SubSegments.Add(segmentForm.Segment);
 			}
 
-			UpdateListBoxes();
+			UpdateProject();
 			FillElementsTreeView();
 		}
 
-		private void ImpedancesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		private void ImpedancesDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
 		{
+			string s = ImpedancesDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
 
+			if (!double.TryParse(s, out var value))
+			{
+				MessageBox.Show(@"Cannot read the value", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (e.RowIndex >= _project.Frequencies.Count)
+			{
+				_project.Frequencies.Add(value);
+			}
+			else
+			{
+				_project.Frequencies[e.RowIndex] = value;
+			}
+
+			_previousImpedancesDataGridView = e.RowIndex;
+			UpdateProject();
 		}
 	}
 }
