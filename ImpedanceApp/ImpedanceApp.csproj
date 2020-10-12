@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImpedanceApp\Impedance.csproj" />
     <ProjectReference Include="..\Impedance\Impedance.csproj" />
   </ItemGroup>
 
