@@ -41,7 +41,6 @@
 			this.ValueTextBox = new System.Windows.Forms.TextBox();
 			this.AddElementButton = new System.Windows.Forms.Button();
 			this.EventLabel = new System.Windows.Forms.Label();
-			this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
 			this.RemoveFrequencyButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
 			this.FrequencyTextBox = new System.Windows.Forms.TextBox();
@@ -226,21 +225,6 @@
 			this.EventLabel.TabIndex = 9;
 			this.EventLabel.Text = "label1";
 			this.EventLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// tableLayoutPanel8
-			// 
-			this.tableLayoutPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tableLayoutPanel8.ColumnCount = 1;
-			this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel8.Location = new System.Drawing.Point(488, 165);
-			this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-			this.tableLayoutPanel8.RowCount = 3;
-			this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-			this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel8.Size = new System.Drawing.Size(239, 104);
-			this.tableLayoutPanel8.TabIndex = 14;
 			// 
 			// RemoveFrequencyButton
 			// 
@@ -530,7 +514,6 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1134, 577);
-			this.Controls.Add(this.tableLayoutPanel8);
 			this.Controls.Add(this.ImpedancesGroupBox);
 			this.Controls.Add(this.ElementGroupBox);
 			this.Controls.Add(this.tableLayoutPanel1);
@@ -581,7 +564,6 @@
 		private System.Windows.Forms.Button AddElementButton;
 		private System.Windows.Forms.ComboBox TypeComboBox;
 		private System.Windows.Forms.Label TypeLabel;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
 		private System.Windows.Forms.GroupBox CircuitGroupBox;
 		private System.Windows.Forms.ContextMenuStrip CircuitContextMenuStrip;
