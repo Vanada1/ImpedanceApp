@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.ElementGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.RemoveElementButton = new System.Windows.Forms.Button();
@@ -216,7 +215,7 @@
 			this.TypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.TypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.TypeComboBox.FormattingEnabled = true;
-			this.TypeComboBox.Location = new System.Drawing.Point(84, 94);
+			this.TypeComboBox.Location = new System.Drawing.Point(84, 93);
 			this.TypeComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.TypeComboBox.Name = "TypeComboBox";
 			this.TypeComboBox.Size = new System.Drawing.Size(436, 24);
@@ -274,7 +273,7 @@
 			this.RemoveFrequencyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.RemoveFrequencyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.RemoveFrequencyButton.ForeColor = System.Drawing.SystemColors.Control;
-			this.RemoveFrequencyButton.Location = new System.Drawing.Point(618, 4);
+			this.RemoveFrequencyButton.Location = new System.Drawing.Point(624, 4);
 			this.RemoveFrequencyButton.Margin = new System.Windows.Forms.Padding(4);
 			this.RemoveFrequencyButton.Name = "RemoveFrequencyButton";
 			this.RemoveFrequencyButton.Size = new System.Drawing.Size(41, 38);
@@ -297,23 +296,23 @@
 			this.tableLayoutPanel9.Name = "tableLayoutPanel9";
 			this.tableLayoutPanel9.RowCount = 1;
 			this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel9.Size = new System.Drawing.Size(557, 38);
+			this.tableLayoutPanel9.Size = new System.Drawing.Size(563, 38);
 			this.tableLayoutPanel9.TabIndex = 0;
 			// 
 			// FrequencyTextBox
 			// 
 			this.FrequencyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.FrequencyTextBox.Location = new System.Drawing.Point(123, 8);
+			this.FrequencyTextBox.Location = new System.Drawing.Point(125, 8);
 			this.FrequencyTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.FrequencyTextBox.Name = "FrequencyTextBox";
-			this.FrequencyTextBox.Size = new System.Drawing.Size(430, 22);
+			this.FrequencyTextBox.Size = new System.Drawing.Size(434, 22);
 			this.FrequencyTextBox.TabIndex = 15;
 			// 
 			// FrequencyLabel
 			// 
 			this.FrequencyLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.FrequencyLabel.AutoSize = true;
-			this.FrequencyLabel.Location = new System.Drawing.Point(36, 10);
+			this.FrequencyLabel.Location = new System.Drawing.Point(38, 10);
 			this.FrequencyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.FrequencyLabel.Name = "FrequencyLabel";
 			this.FrequencyLabel.Size = new System.Drawing.Size(79, 17);
@@ -516,12 +515,12 @@
 			this.tableLayoutPanel1.ColumnCount = 1;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.Controls.Add(this.EventLabel, 0, 0);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(19, 774);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 774);
 			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(537, 46);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(540, 46);
 			this.tableLayoutPanel1.TabIndex = 15;
 			// 
 			// ImpedancesDataGridView
@@ -535,7 +534,7 @@
 			this.ImpedancesDataGridView.Margin = new System.Windows.Forms.Padding(4);
 			this.ImpedancesDataGridView.Name = "ImpedancesDataGridView";
 			this.ImpedancesDataGridView.RowHeadersWidth = 51;
-			this.ImpedancesDataGridView.Size = new System.Drawing.Size(904, 175);
+			this.ImpedancesDataGridView.Size = new System.Drawing.Size(916, 175);
 			this.ImpedancesDataGridView.TabIndex = 16;
 			this.ImpedancesDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ImpedancesDataGridView_CellEndEdit);
 			// 
@@ -569,7 +568,7 @@
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 1;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(663, 46);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(669, 46);
 			this.tableLayoutPanel2.TabIndex = 17;
 			// 
 			// AddFrequencyButton
@@ -581,7 +580,7 @@
 			this.AddFrequencyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.AddFrequencyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.AddFrequencyButton.ForeColor = System.Drawing.SystemColors.Control;
-			this.AddFrequencyButton.Location = new System.Drawing.Point(569, 4);
+			this.AddFrequencyButton.Location = new System.Drawing.Point(575, 4);
 			this.AddFrequencyButton.Margin = new System.Windows.Forms.Padding(4);
 			this.AddFrequencyButton.Name = "AddFrequencyButton";
 			this.AddFrequencyButton.Size = new System.Drawing.Size(41, 38);
