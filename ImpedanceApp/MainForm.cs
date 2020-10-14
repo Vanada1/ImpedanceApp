@@ -49,6 +49,9 @@ namespace ImpedanceForms
 			CircuitsComboBox.DisplayMember = "Name";
 		}
 
+		/// <summary>
+		/// Update ImpedancesDataGridView
+		/// </summary>
 		private void UpdateImpedancesDataGridView()
 		{
 			var impedances = new List<ImpedanceData>();
@@ -192,7 +195,6 @@ namespace ImpedanceForms
 
 			if (currentRow == null)
 			{
-
 				MessageBox.Show(@"Frequency was not selected", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
@@ -216,28 +218,6 @@ namespace ImpedanceForms
 				return;
 			}
 
-			if (TypeComboBox.SelectedIndex == 0)
-			{
-				MessageBox.Show(@"Choose the segment",
-					@"Error", MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
-				return;
-			}
-
-			if (NameTextBox.Text.Length == 0 && (node.Segment is Element))
-			{
-				MessageBox.Show(@"Enter Name", @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
-
-			if (ValueTextBox.Text.Length == 0 && (node.Segment is Element))
-			{
-				MessageBox.Show(@"Enter Value", @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
-
 			if (!SegmentType.TryParse(TypeComboBox.Text, out SegmentType segmentType))
 			{
 				MessageBox.Show(@"Incorrect segment", @"Error",
@@ -254,7 +234,18 @@ namespace ImpedanceForms
 
 			var subSegment = node.Segment.SubSegments;
 			var name = NameTextBox.Text;
-			var newSegment = CircuitValidator.CreateNewSegment(segmentType, name, value, subSegment);
+			ISegment newSegment;
+			try
+			{
+				newSegment = CircuitValidator.CreateNewSegment(segmentType,
+					name, value, subSegment);
+			}
+			catch (ArgumentException)
+			{
+				MessageBox.Show(@"Enter Name", @"Error",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 			_project.CurrentCircuit.ReplaceSegment(node.Segment,
 				newSegment);
 			node.Name = newSegment.Name;
@@ -267,8 +258,7 @@ namespace ImpedanceForms
 
 		private void AddElementButton_Click(object sender, EventArgs e)
 		{
-			var selectedNode = ElementsTreeView.SelectedNode as SegmentTreeNode;
-			if (selectedNode == null)
+			if (!(ElementsTreeView.SelectedNode is SegmentTreeNode selectedNode))
 			{
 				MessageBox.Show(nameof(Element) + @"was not selected", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -359,6 +349,7 @@ namespace ImpedanceForms
 				UpdateCircuitComboBox();
 				CircuitsComboBox.SelectedIndex = _project.AllExamples.Count - 1;
 			}
+
 			UpdateProject();
 		}
 
