@@ -29,18 +29,18 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.ElementGroupBox = new System.Windows.Forms.GroupBox();
-			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.RemoveElementButton = new System.Windows.Forms.Button();
-			this.NameLabel = new System.Windows.Forms.Label();
 			this.EditElementButton = new System.Windows.Forms.Button();
+			this.AddElementButton = new System.Windows.Forms.Button();
+			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+			this.NameLabel = new System.Windows.Forms.Label();
 			this.ValueLabel = new System.Windows.Forms.Label();
 			this.TypeComboBox = new System.Windows.Forms.ComboBox();
 			this.TypeLabel = new System.Windows.Forms.Label();
 			this.NameTextBox = new System.Windows.Forms.TextBox();
 			this.ValueTextBox = new System.Windows.Forms.TextBox();
-			this.AddElementButton = new System.Windows.Forms.Button();
 			this.EventLabel = new System.Windows.Forms.Label();
 			this.RemoveFrequencyButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
@@ -53,6 +53,7 @@
 			this.AddSegment = new System.Windows.Forms.Button();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.CircuitsComboBox = new System.Windows.Forms.ComboBox();
+			this.ElementsTreeView = new System.Windows.Forms.TreeView();
 			this.CircuitContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.addParallelSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addSerialSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,9 +65,8 @@
 			this.ImpedancesGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.AddFrequencyButton = new System.Windows.Forms.Button();
-			this.ElementsTreeView = new System.Windows.Forms.TreeView();
-			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.ElementGroupBox.SuspendLayout();
+			this.tableLayoutPanel3.SuspendLayout();
 			this.tableLayoutPanel5.SuspendLayout();
 			this.tableLayoutPanel9.SuspendLayout();
 			this.tableLayoutPanel6.SuspendLayout();
@@ -77,7 +77,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.ImpedancesDataGridView)).BeginInit();
 			this.ImpedancesGroupBox.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
-			this.tableLayoutPanel3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// ElementGroupBox
@@ -91,6 +90,70 @@
 			this.ElementGroupBox.TabIndex = 13;
 			this.ElementGroupBox.TabStop = false;
 			this.ElementGroupBox.Text = "Current Element";
+			// 
+			// tableLayoutPanel3
+			// 
+			this.tableLayoutPanel3.ColumnCount = 3;
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel3.Controls.Add(this.RemoveElementButton, 2, 0);
+			this.tableLayoutPanel3.Controls.Add(this.EditElementButton, 1, 0);
+			this.tableLayoutPanel3.Controls.Add(this.AddElementButton, 0, 0);
+			this.tableLayoutPanel3.Location = new System.Drawing.Point(287, 122);
+			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+			this.tableLayoutPanel3.RowCount = 1;
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(112, 37);
+			this.tableLayoutPanel3.TabIndex = 18;
+			// 
+			// RemoveElementButton
+			// 
+			this.RemoveElementButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.RemoveElementButton.BackgroundImage = global::ImpedanceApp.Properties.Resources.remove;
+			this.RemoveElementButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.RemoveElementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.RemoveElementButton.ForeColor = System.Drawing.SystemColors.Control;
+			this.RemoveElementButton.Location = new System.Drawing.Point(77, 3);
+			this.RemoveElementButton.Name = "RemoveElementButton";
+			this.RemoveElementButton.Size = new System.Drawing.Size(32, 31);
+			this.RemoveElementButton.TabIndex = 9;
+			this.RemoveElementButton.UseVisualStyleBackColor = true;
+			this.RemoveElementButton.Click += new System.EventHandler(this.RemoveElementButton_Click);
+			// 
+			// EditElementButton
+			// 
+			this.EditElementButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.EditElementButton.BackgroundImage = global::ImpedanceApp.Properties.Resources.edit1;
+			this.EditElementButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.EditElementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.EditElementButton.ForeColor = System.Drawing.SystemColors.Control;
+			this.EditElementButton.Location = new System.Drawing.Point(40, 3);
+			this.EditElementButton.Name = "EditElementButton";
+			this.EditElementButton.Size = new System.Drawing.Size(31, 31);
+			this.EditElementButton.TabIndex = 8;
+			this.EditElementButton.UseVisualStyleBackColor = true;
+			this.EditElementButton.Click += new System.EventHandler(this.EditElementButton_Click);
+			// 
+			// AddElementButton
+			// 
+			this.AddElementButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.AddElementButton.BackgroundImage = global::ImpedanceApp.Properties.Resources.add;
+			this.AddElementButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.AddElementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.AddElementButton.ForeColor = System.Drawing.SystemColors.Control;
+			this.AddElementButton.Location = new System.Drawing.Point(3, 3);
+			this.AddElementButton.Name = "AddElementButton";
+			this.AddElementButton.Size = new System.Drawing.Size(31, 31);
+			this.AddElementButton.TabIndex = 7;
+			this.AddElementButton.UseVisualStyleBackColor = true;
+			this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
 			// 
 			// tableLayoutPanel5
 			// 
@@ -114,22 +177,6 @@
 			this.tableLayoutPanel5.Size = new System.Drawing.Size(393, 104);
 			this.tableLayoutPanel5.TabIndex = 14;
 			// 
-			// RemoveElementButton
-			// 
-			this.RemoveElementButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.RemoveElementButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RemoveElementButton.BackgroundImage")));
-			this.RemoveElementButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.RemoveElementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.RemoveElementButton.ForeColor = System.Drawing.SystemColors.Control;
-			this.RemoveElementButton.Location = new System.Drawing.Point(77, 3);
-			this.RemoveElementButton.Name = "RemoveElementButton";
-			this.RemoveElementButton.Size = new System.Drawing.Size(32, 31);
-			this.RemoveElementButton.TabIndex = 9;
-			this.RemoveElementButton.UseVisualStyleBackColor = true;
-			this.RemoveElementButton.Click += new System.EventHandler(this.RemoveElementButton_Click);
-			// 
 			// NameLabel
 			// 
 			this.NameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -141,22 +188,6 @@
 			this.NameLabel.TabIndex = 0;
 			this.NameLabel.Text = "Name:";
 			this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// EditElementButton
-			// 
-			this.EditElementButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.EditElementButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("EditElementButton.BackgroundImage")));
-			this.EditElementButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.EditElementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.EditElementButton.ForeColor = System.Drawing.SystemColors.Control;
-			this.EditElementButton.Location = new System.Drawing.Point(3, 3);
-			this.EditElementButton.Name = "EditElementButton";
-			this.EditElementButton.Size = new System.Drawing.Size(31, 31);
-			this.EditElementButton.TabIndex = 8;
-			this.EditElementButton.UseVisualStyleBackColor = true;
-			this.EditElementButton.Click += new System.EventHandler(this.EditElementButton_Click);
 			// 
 			// ValueLabel
 			// 
@@ -208,22 +239,6 @@
 			this.ValueTextBox.Size = new System.Drawing.Size(327, 20);
 			this.ValueTextBox.TabIndex = 4;
 			// 
-			// AddElementButton
-			// 
-			this.AddElementButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.AddElementButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AddElementButton.BackgroundImage")));
-			this.AddElementButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.AddElementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.AddElementButton.ForeColor = System.Drawing.SystemColors.Control;
-			this.AddElementButton.Location = new System.Drawing.Point(40, 3);
-			this.AddElementButton.Name = "AddElementButton";
-			this.AddElementButton.Size = new System.Drawing.Size(31, 31);
-			this.AddElementButton.TabIndex = 7;
-			this.AddElementButton.UseVisualStyleBackColor = true;
-			this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
-			// 
 			// EventLabel
 			// 
 			this.EventLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -240,7 +255,7 @@
 			this.RemoveFrequencyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.RemoveFrequencyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RemoveFrequencyButton.BackgroundImage")));
+			this.RemoveFrequencyButton.BackgroundImage = global::ImpedanceApp.Properties.Resources.remove;
 			this.RemoveFrequencyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.RemoveFrequencyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.RemoveFrequencyButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -299,8 +314,8 @@
 			this.tableLayoutPanel6.Controls.Add(this.EditCircuit, 1, 0);
 			this.tableLayoutPanel6.Controls.Add(this.RemoveCircuit, 2, 0);
 			this.tableLayoutPanel6.Controls.Add(this.AddSegment, 3, 0);
-			this.tableLayoutPanel6.Location = new System.Drawing.Point(189, 28);
-			this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tableLayoutPanel6.Location = new System.Drawing.Point(198, 28);
+			this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
 			this.tableLayoutPanel6.RowCount = 1;
 			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -312,12 +327,12 @@
 			this.AddCircuit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.AddCircuit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AddCircuit.BackgroundImage")));
+			this.AddCircuit.BackgroundImage = global::ImpedanceApp.Properties.Resources.add;
 			this.AddCircuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.AddCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.AddCircuit.ForeColor = System.Drawing.SystemColors.Control;
 			this.AddCircuit.Location = new System.Drawing.Point(2, 2);
-			this.AddCircuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AddCircuit.Margin = new System.Windows.Forms.Padding(2);
 			this.AddCircuit.Name = "AddCircuit";
 			this.AddCircuit.Size = new System.Drawing.Size(31, 31);
 			this.AddCircuit.TabIndex = 0;
@@ -329,12 +344,12 @@
 			this.EditCircuit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.EditCircuit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("EditCircuit.BackgroundImage")));
+			this.EditCircuit.BackgroundImage = global::ImpedanceApp.Properties.Resources.edit1;
 			this.EditCircuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.EditCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.EditCircuit.ForeColor = System.Drawing.SystemColors.Control;
 			this.EditCircuit.Location = new System.Drawing.Point(37, 2);
-			this.EditCircuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.EditCircuit.Margin = new System.Windows.Forms.Padding(2);
 			this.EditCircuit.Name = "EditCircuit";
 			this.EditCircuit.Size = new System.Drawing.Size(31, 31);
 			this.EditCircuit.TabIndex = 1;
@@ -346,12 +361,12 @@
 			this.RemoveCircuit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.RemoveCircuit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RemoveCircuit.BackgroundImage")));
+			this.RemoveCircuit.BackgroundImage = global::ImpedanceApp.Properties.Resources.remove;
 			this.RemoveCircuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.RemoveCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.RemoveCircuit.ForeColor = System.Drawing.SystemColors.Control;
 			this.RemoveCircuit.Location = new System.Drawing.Point(72, 2);
-			this.RemoveCircuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.RemoveCircuit.Margin = new System.Windows.Forms.Padding(2);
 			this.RemoveCircuit.Name = "RemoveCircuit";
 			this.RemoveCircuit.Size = new System.Drawing.Size(31, 31);
 			this.RemoveCircuit.TabIndex = 2;
@@ -368,7 +383,7 @@
 			this.AddSegment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.AddSegment.ForeColor = System.Drawing.SystemColors.Control;
 			this.AddSegment.Location = new System.Drawing.Point(107, 2);
-			this.AddSegment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AddSegment.Margin = new System.Windows.Forms.Padding(2);
 			this.AddSegment.Name = "AddSegment";
 			this.AddSegment.Size = new System.Drawing.Size(31, 31);
 			this.AddSegment.TabIndex = 3;
@@ -385,14 +400,14 @@
 			this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel6, 0, 1);
 			this.tableLayoutPanel4.Controls.Add(this.CircuitsComboBox, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.ElementsTreeView, 0, 2);
-			this.tableLayoutPanel4.Location = new System.Drawing.Point(8, 13);
-			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tableLayoutPanel4.Location = new System.Drawing.Point(5, 13);
+			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			this.tableLayoutPanel4.RowCount = 3;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(331, 390);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(340, 422);
 			this.tableLayoutPanel4.TabIndex = 13;
 			// 
 			// CircuitsComboBox
@@ -404,9 +419,25 @@
 			this.CircuitsComboBox.FormattingEnabled = true;
 			this.CircuitsComboBox.Location = new System.Drawing.Point(3, 3);
 			this.CircuitsComboBox.Name = "CircuitsComboBox";
-			this.CircuitsComboBox.Size = new System.Drawing.Size(325, 21);
+			this.CircuitsComboBox.Size = new System.Drawing.Size(334, 21);
 			this.CircuitsComboBox.TabIndex = 12;
 			this.CircuitsComboBox.SelectedIndexChanged += new System.EventHandler(this.CircuitsComboBox_SelectedIndexChanged);
+			// 
+			// ElementsTreeView
+			// 
+			this.ElementsTreeView.AllowDrop = true;
+			this.ElementsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ElementsTreeView.ContextMenuStrip = this.CircuitContextMenuStrip;
+			this.ElementsTreeView.Location = new System.Drawing.Point(3, 68);
+			this.ElementsTreeView.Name = "ElementsTreeView";
+			this.ElementsTreeView.Size = new System.Drawing.Size(334, 351);
+			this.ElementsTreeView.TabIndex = 11;
+			this.ElementsTreeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ElementsTreeView_ItemDrag);
+			this.ElementsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ElementsTreeView_AfterSelect);
+			this.ElementsTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragDrop);
+			this.ElementsTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragEnter);
 			// 
 			// CircuitContextMenuStrip
 			// 
@@ -518,7 +549,7 @@
 			this.AddFrequencyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.AddFrequencyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AddFrequencyButton.BackgroundImage")));
+			this.AddFrequencyButton.BackgroundImage = global::ImpedanceApp.Properties.Resources.add;
 			this.AddFrequencyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.AddFrequencyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.AddFrequencyButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -528,38 +559,6 @@
 			this.AddFrequencyButton.TabIndex = 18;
 			this.AddFrequencyButton.UseVisualStyleBackColor = true;
 			this.AddFrequencyButton.Click += new System.EventHandler(this.AddFrequenciesButton_Click);
-			// 
-			// ElementsTreeView
-			// 
-			this.ElementsTreeView.AllowDrop = true;
-			this.ElementsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ElementsTreeView.ContextMenuStrip = this.CircuitContextMenuStrip;
-			this.ElementsTreeView.Location = new System.Drawing.Point(3, 68);
-			this.ElementsTreeView.Name = "ElementsTreeView";
-			this.ElementsTreeView.Size = new System.Drawing.Size(325, 319);
-			this.ElementsTreeView.TabIndex = 11;
-			this.ElementsTreeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ElementsTreeView_ItemDrag);
-			this.ElementsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ElementsTreeView_AfterSelect);
-			this.ElementsTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragDrop);
-			this.ElementsTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ElementsTreeView_DragEnter);
-			// 
-			// tableLayoutPanel3
-			// 
-			this.tableLayoutPanel3.ColumnCount = 3;
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel3.Controls.Add(this.EditElementButton, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.RemoveElementButton, 2, 0);
-			this.tableLayoutPanel3.Controls.Add(this.AddElementButton, 1, 0);
-			this.tableLayoutPanel3.Location = new System.Drawing.Point(287, 122);
-			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-			this.tableLayoutPanel3.RowCount = 1;
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(112, 37);
-			this.tableLayoutPanel3.TabIndex = 18;
 			// 
 			// MainForm
 			// 
@@ -576,6 +575,7 @@
 			this.Text = "ImpedanceApp";
 			this.Load += new System.EventHandler(this.Main_Load);
 			this.ElementGroupBox.ResumeLayout(false);
+			this.tableLayoutPanel3.ResumeLayout(false);
 			this.tableLayoutPanel5.ResumeLayout(false);
 			this.tableLayoutPanel5.PerformLayout();
 			this.tableLayoutPanel9.ResumeLayout(false);
@@ -589,7 +589,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.ImpedancesDataGridView)).EndInit();
 			this.ImpedancesGroupBox.ResumeLayout(false);
 			this.tableLayoutPanel2.ResumeLayout(false);
-			this.tableLayoutPanel3.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
