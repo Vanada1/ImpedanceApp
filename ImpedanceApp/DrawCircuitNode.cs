@@ -83,6 +83,11 @@ namespace ImpedanceApp
 		{
 			Parent = parent;
 			Segment = segment;
+
+			if (segment is Element)
+			{
+				Size = new Size(_width,_height);
+			}
 		}
 
 		/// <summary>
@@ -98,29 +103,31 @@ namespace ImpedanceApp
 				elementPoint.Y += _addY;
 			}
 
-			if (Segment is Element)
+			ElementPoint = elementPoint;
+			Size = GetSizeSegment(this);
+
+			if (!(Segment is Element))
 			{
-				ElementPoint = elementPoint;
+				for (int i = 0; i < Segment.SubSegments.Count; i++)
+				{
+
+				}
 			}
+			
 		}
 
+		/// <summary>
+		/// Calculates segment size
+		/// </summary>
+		/// <param name="node">Segment for calculation</param>
+		/// <returns>Segment size</returns>
 		private Size GetSizeSegment(DrawCircuitNode node)
 		{
 			Size segmentSize;
 
 			switch (node.Segment)
 			{
-				case Capacitor _:
-				{
-					segmentSize = new Size(_width, _height);
-					break;
-				}
-				case Inductor _:
-				{
-					segmentSize = new Size(_width, _height);
-					break;
-				}
-				case Resistor _:
+				case Element _:
 				{
 					segmentSize = new Size(_width, _height);
 					break;
@@ -129,34 +136,61 @@ namespace ImpedanceApp
 				{
 					var startSegment = node.SubNodes[0].ElementPoint.Y;
 					var endSegment = node.SubNodes[SubNodes.Count - 1].ElementPoint.Y;
-					var height = endSegment - startSegment + _height;
-					segmentSize = new Size(SubNodes[0].Size.Width, height);
-					break;
-				}
-				case SerialCircuit _:
-				{
-					var startSegment = node.SubNodes[0].ElementPoint.X;
-					var endSegment = node.SubNodes[SubNodes.Count - 1].ElementPoint.X;
-					var width = endSegment - startSegment + _width;
-					segmentSize = new Size(width, _height);
-					break;
-				}
-				case Circuit _:
-				{
-					var startSegment = node.SubNodes[0].ElementPoint.X;
-					var endSegment = node.SubNodes[SubNodes.Count - 1].ElementPoint.X;
-					var width = endSegment - startSegment + _width;
-					segmentSize = new Size(width, _height);
+					var height = Math.Abs(endSegment - startSegment) + _height;
+					segmentSize = new Size(FindMaxWidth(node), height);
 					break;
 				}
 				default:
 				{
-					segmentSize = new Size(-1,-1);
+					var startSegment = node.SubNodes[0].ElementPoint.X;
+					var endSegment = node.SubNodes[SubNodes.Count - 1].ElementPoint.X;
+					var width = Math.Abs(endSegment - startSegment) + _width;
+					segmentSize = new Size(width, FindMaxHeight(node));
 					break;
 				}
 			}
 
 			return segmentSize;
+		}
+
+		/// <summary>
+		/// Finds the maximum Width of an segment
+		/// </summary>
+		/// <param name="node">The element in which the search occurs</param>
+		/// <returns>Maximum Width</returns>
+		private static int FindMaxWidth(DrawCircuitNode node)
+		{
+			var maxWidth = node.SubNodes[0].Size.Width;
+
+			foreach (var subNode in node.SubNodes)
+			{
+				if (maxWidth < subNode.Size.Width)
+				{
+					maxWidth = subNode.Size.Width;
+				}
+			}
+			
+			return maxWidth;
+		}
+
+		/// <summary>
+		/// Finds the maximum Height of an segment
+		/// </summary>
+		/// <param name="node">The element in which the search occurs</param>
+		/// <returns>Maximum Height</returns>
+		private static int FindMaxHeight(DrawCircuitNode node)
+		{
+			var maxHeight = node.SubNodes[0].Size.Height;
+
+			foreach (var subNode in node.SubNodes)
+			{
+				if (maxHeight < subNode.Size.Height)
+				{
+					maxHeight = subNode.Size.Height;
+				}
+			}
+
+			return maxHeight;
 		}
 	}
 }
