@@ -68,6 +68,8 @@ namespace ImpedanceForms
 				ImpedancesDataGridView.DataSource = impedances;
 				ImpedancesDataGridView.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 				ImpedancesDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+				ImpedancesDataGridView.Columns[0].HeaderText += @", Hz";
+				ImpedancesDataGridView.Columns[1].HeaderText += @", Om";
 			}
 			catch (InvalidOperationException)
 			{
