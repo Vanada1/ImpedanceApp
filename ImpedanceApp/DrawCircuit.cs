@@ -34,6 +34,7 @@ namespace ImpedanceApp
 				if (!(subSegment is Element))
 				{
 					SetDrawCircuitNode(node, subSegment);
+					node.CalculatePosition();
 				}
 			}
 		}

@@ -16,6 +16,16 @@ namespace ImpedanceForms
 		private int _previousCircuitListBoxIndex = -1;
 
 		/// <summary>
+		/// Support draw <see cref="Circuit"/>
+		/// </summary>
+		private Graphics _circuitGraphics;
+
+		/// <summary>
+		/// Drawing line
+		/// </summary>
+		private readonly Pen _linePen = new Pen(Color.DeepPink);
+
+		/// <summary>
 		/// Object for drawing current circuit
 		/// </summary>
 		private DrawCircuit _drawCircuit;
@@ -157,6 +167,20 @@ namespace ImpedanceForms
 			}
 		}
 
+		private void DrawCircuit(DrawCircuitNode node)
+		{
+			foreach (var subNode in node.SubNodes)
+			{
+				if (!(subNode.Segment is Element))
+				{
+					DrawCircuit(subNode);
+					continue;
+				}
+				_circuitGraphics?.DrawRectangle(_linePen, subNode.ElementPoint.X, subNode.ElementPoint.Y,
+					subNode.Size.Width, subNode.Size.Height);
+			}
+		}
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -175,6 +199,7 @@ namespace ImpedanceForms
 
 			var typeSegments = StringValidator.GetSegmentEnum(null);
 			TypeComboBox.DataSource = typeSegments;
+			_circuitGraphics = CircuitPictureBox.CreateGraphics();
 		}
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
@@ -336,6 +361,8 @@ namespace ImpedanceForms
 			{
 				FillElementsTreeView();
 				_drawCircuit = new DrawCircuit(_project.CurrentCircuit);
+				_circuitGraphics?.Clear(Color.AliceBlue);
+				DrawCircuit(_drawCircuit.Circuit);
 			}
 
 			_previousCircuitListBoxIndex = index;

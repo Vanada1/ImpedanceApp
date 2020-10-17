@@ -65,6 +65,8 @@
 			this.ImpedancesGroupBox = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.AddFrequencyButton = new System.Windows.Forms.Button();
+			this.CircuitPictureGroupBox = new System.Windows.Forms.GroupBox();
+			this.CircuitPictureBox = new System.Windows.Forms.PictureBox();
 			this.ElementGroupBox.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.tableLayoutPanel5.SuspendLayout();
@@ -77,6 +79,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.ImpedancesDataGridView)).BeginInit();
 			this.ImpedancesGroupBox.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
+			this.CircuitPictureGroupBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ElementGroupBox
@@ -315,7 +319,7 @@
 			this.tableLayoutPanel6.Controls.Add(this.RemoveCircuit, 2, 0);
 			this.tableLayoutPanel6.Controls.Add(this.AddSegment, 3, 0);
 			this.tableLayoutPanel6.Location = new System.Drawing.Point(198, 28);
-			this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
 			this.tableLayoutPanel6.RowCount = 1;
 			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -332,7 +336,7 @@
 			this.AddCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.AddCircuit.ForeColor = System.Drawing.SystemColors.Control;
 			this.AddCircuit.Location = new System.Drawing.Point(2, 2);
-			this.AddCircuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AddCircuit.Margin = new System.Windows.Forms.Padding(2);
 			this.AddCircuit.Name = "AddCircuit";
 			this.AddCircuit.Size = new System.Drawing.Size(31, 31);
 			this.AddCircuit.TabIndex = 0;
@@ -349,7 +353,7 @@
 			this.EditCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.EditCircuit.ForeColor = System.Drawing.SystemColors.Control;
 			this.EditCircuit.Location = new System.Drawing.Point(37, 2);
-			this.EditCircuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.EditCircuit.Margin = new System.Windows.Forms.Padding(2);
 			this.EditCircuit.Name = "EditCircuit";
 			this.EditCircuit.Size = new System.Drawing.Size(31, 31);
 			this.EditCircuit.TabIndex = 1;
@@ -366,7 +370,7 @@
 			this.RemoveCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.RemoveCircuit.ForeColor = System.Drawing.SystemColors.Control;
 			this.RemoveCircuit.Location = new System.Drawing.Point(72, 2);
-			this.RemoveCircuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.RemoveCircuit.Margin = new System.Windows.Forms.Padding(2);
 			this.RemoveCircuit.Name = "RemoveCircuit";
 			this.RemoveCircuit.Size = new System.Drawing.Size(31, 31);
 			this.RemoveCircuit.TabIndex = 2;
@@ -383,7 +387,7 @@
 			this.AddSegment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.AddSegment.ForeColor = System.Drawing.SystemColors.Control;
 			this.AddSegment.Location = new System.Drawing.Point(107, 2);
-			this.AddSegment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AddSegment.Margin = new System.Windows.Forms.Padding(2);
 			this.AddSegment.Name = "AddSegment";
 			this.AddSegment.Size = new System.Drawing.Size(31, 31);
 			this.AddSegment.TabIndex = 3;
@@ -401,7 +405,7 @@
 			this.tableLayoutPanel4.Controls.Add(this.CircuitsComboBox, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.ElementsTreeView, 0, 2);
 			this.tableLayoutPanel4.Location = new System.Drawing.Point(5, 13);
-			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			this.tableLayoutPanel4.RowCount = 3;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -560,11 +564,37 @@
 			this.AddFrequencyButton.UseVisualStyleBackColor = true;
 			this.AddFrequencyButton.Click += new System.EventHandler(this.AddFrequenciesButton_Click);
 			// 
+			// CircuitPictureGroupBox
+			// 
+			this.CircuitPictureGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.CircuitPictureGroupBox.Controls.Add(this.CircuitPictureBox);
+			this.CircuitPictureGroupBox.Location = new System.Drawing.Point(368, 12);
+			this.CircuitPictureGroupBox.Name = "CircuitPictureGroupBox";
+			this.CircuitPictureGroupBox.Size = new System.Drawing.Size(754, 440);
+			this.CircuitPictureGroupBox.TabIndex = 18;
+			this.CircuitPictureGroupBox.TabStop = false;
+			this.CircuitPictureGroupBox.Text = "Circuit Picture";
+			// 
+			// CircuitPictureBox
+			// 
+			this.CircuitPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.CircuitPictureBox.Location = new System.Drawing.Point(6, 19);
+			this.CircuitPictureBox.Name = "CircuitPictureBox";
+			this.CircuitPictureBox.Size = new System.Drawing.Size(742, 415);
+			this.CircuitPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.CircuitPictureBox.TabIndex = 0;
+			this.CircuitPictureBox.TabStop = false;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1134, 678);
+			this.Controls.Add(this.CircuitPictureGroupBox);
 			this.Controls.Add(this.ImpedancesGroupBox);
 			this.Controls.Add(this.ElementGroupBox);
 			this.Controls.Add(this.tableLayoutPanel1);
@@ -590,6 +620,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.ImpedancesDataGridView)).EndInit();
 			this.ImpedancesGroupBox.ResumeLayout(false);
 			this.tableLayoutPanel2.ResumeLayout(false);
+			this.CircuitPictureGroupBox.ResumeLayout(false);
+			this.CircuitPictureGroupBox.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -631,6 +664,8 @@
 		private System.Windows.Forms.Button AddFrequencyButton;
 		private System.Windows.Forms.TreeView ElementsTreeView;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+		private System.Windows.Forms.GroupBox CircuitPictureGroupBox;
+		private System.Windows.Forms.PictureBox CircuitPictureBox;
 	}
 }
 
