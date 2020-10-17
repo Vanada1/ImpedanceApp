@@ -93,37 +93,46 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Calculate position for this Node
 		/// </summary>
-		public void CalculatePosition()
+		public void CalculatePosition(Size pervPoint = new Size())
 		{
 			var elementPoint = _startPoint;
-			if (Parent != null)
-			{
-				elementPoint = Parent.ElementPoint;
-				elementPoint.X += _addX;
-				elementPoint.Y += _addY;
-			}
-
+			
 			ElementPoint = elementPoint;
-			Size = GetSizeSegment(this);
 
 			if (Segment is Element) return;
 
-			SubNodes[0].ElementPoint = ElementPoint;
+			if(Segment.SubSegments.Count == 0) return;
+
+			SubNodes[0].CalculatePosition();
+			if (Segment is ParallelCircuit)
+			{
+				SubNodes[0].ElementPoint = new Point(ElementPoint.X + pervPoint.Width, ElementPoint.Y );
+			}
+			else
+			{
+				SubNodes[0].ElementPoint = new Point(ElementPoint.X , ElementPoint.Y + pervPoint.Height);
+			}
+
 			for (var i = 1; i < Segment.SubSegments.Count; i++)
 			{
-				SubNodes[i].CalculatePosition();
-				if(Segment is ParallelCircuit)
+				var newSegmentSize = 
+					new Size(SubNodes[i - 1].Size.Width * i, SubNodes[i - 1].Size.Height * i) 
+					+ new Size(_addX * i, _addY * i);
+				SubNodes[i].CalculatePosition(newSegmentSize);
+				if (Segment is ParallelCircuit && Segment.SubSegments.Count > 1)
 				{
-					SubNodes[i].ElementPoint = new Point(ElementPoint.X,
+					SubNodes[i].ElementPoint = new Point(elementPoint.X + pervPoint.Width,
 						SubNodes[i - 1].ElementPoint.Y + SubNodes[i - 1].Size.Height + _addY);
 				}
 				else
 				{
 					SubNodes[i].ElementPoint = new Point(
 						SubNodes[i - 1].ElementPoint.X + SubNodes[i - 1].Size.Width + _addX,
-						ElementPoint.Y);
+						elementPoint.Y + pervPoint.Height);
 				}
 			}
+
+			Size = GetSizeSegment(this);
 		}
 
 		/// <summary>
@@ -139,7 +148,7 @@ namespace ImpedanceApp
 			{
 				case Element _:
 				{
-					segmentSize = new Size(_width, _height);
+					segmentSize = node.Size;
 					break;
 				}
 				case ParallelCircuit _:

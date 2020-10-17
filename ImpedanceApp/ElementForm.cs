@@ -25,28 +25,6 @@ namespace ImpedanceApp
 
 		private void OKButton_Click(object sender, EventArgs e)
 		{
-			if (SegmentsComboBox.SelectedIndex == 0)
-			{
-				MessageBox.Show(@"Choose the segment",
-					@"Error", MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
-				return;
-			}
-
-			if (NameTextBox.Text.Length == 0)
-			{
-				MessageBox.Show(@"Enter Name", @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
-
-			if (ValueTextBox.Text.Length == 0)
-			{
-				MessageBox.Show(@"Enter Value", @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
-
 			if (!Enum.TryParse(SegmentsComboBox.Text, out SegmentType segmentType))
 			{
 				MessageBox.Show(@"Incorrect segment type", @"Error",
@@ -68,9 +46,9 @@ namespace ImpedanceApp
 					null);
 				DialogResult = DialogResult.OK;
 			}
-			catch (ArgumentException)
+			catch (ArgumentException exception)
 			{
-				MessageBox.Show(@"Value cannot be negative", @"Error",
+				MessageBox.Show(exception.Message, @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 				DialogResult = DialogResult.None;
 			}

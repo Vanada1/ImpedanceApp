@@ -98,6 +98,18 @@ namespace ImpedanceForms
 			_project.FindAllElements(_project.CurrentCircuit);
 			ElementsTreeView.ExpandAll();
 			UpdateImpedancesDataGridView();
+			UpdatePictureBox();
+		}
+
+		/// <summary>
+		/// Update <see cref="CircuitPictureBox"/>
+		/// </summary>
+		private void UpdatePictureBox()
+		{
+			_circuitGraphics = CircuitPictureBox.CreateGraphics();
+			_drawCircuit = new DrawCircuit(_project.CurrentCircuit);
+			_circuitGraphics.Clear(Color.AliceBlue);
+			DrawCircuit(_drawCircuit.Circuit);
 		}
 
 		/// <summary>
@@ -167,6 +179,10 @@ namespace ImpedanceForms
 			}
 		}
 
+		/// <summary>
+		/// Recursively draws circuit elements
+		/// </summary>
+		/// <param name="node">Started node</param>
 		private void DrawCircuit(DrawCircuitNode node)
 		{
 			foreach (var subNode in node.SubNodes)
@@ -176,7 +192,7 @@ namespace ImpedanceForms
 					DrawCircuit(subNode);
 					continue;
 				}
-				_circuitGraphics?.DrawRectangle(_linePen, subNode.ElementPoint.X, subNode.ElementPoint.Y,
+				_circuitGraphics.DrawRectangle(_linePen, subNode.ElementPoint.X, subNode.ElementPoint.Y,
 					subNode.Size.Width, subNode.Size.Height);
 			}
 		}
@@ -188,7 +204,6 @@ namespace ImpedanceForms
 
 		private void Main_Load(object sender, EventArgs e)
 		{
-			UpdateProject();
 			UpdateCircuitComboBox();
 			EventLabel.Text = "";
 
@@ -199,7 +214,7 @@ namespace ImpedanceForms
 
 			var typeSegments = StringValidator.GetSegmentEnum(null);
 			TypeComboBox.DataSource = typeSegments;
-			_circuitGraphics = CircuitPictureBox.CreateGraphics();
+			UpdateProject();
 		}
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
@@ -267,9 +282,9 @@ namespace ImpedanceForms
 				newSegment = CircuitValidator.CreateNewSegment(segmentType,
 					name, value, subSegment);
 			}
-			catch (ArgumentException)
+			catch (ArgumentException exception)
 			{
-				MessageBox.Show(@"Enter Name", @"Error",
+				MessageBox.Show(exception.Message, @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
@@ -356,16 +371,13 @@ namespace ImpedanceForms
 			if (index == -1) return;
 
 			_project.CurrentCircuit = _project.AllExamples[index];
-			UpdateProject();
 			if (index != _previousCircuitListBoxIndex)
 			{
 				FillElementsTreeView();
-				_drawCircuit = new DrawCircuit(_project.CurrentCircuit);
-				_circuitGraphics?.Clear(Color.AliceBlue);
-				DrawCircuit(_drawCircuit.Circuit);
 			}
 
 			_previousCircuitListBoxIndex = index;
+			UpdateProject();
 		}
 
 		private void AddCircuit_Click(object sender, EventArgs e)

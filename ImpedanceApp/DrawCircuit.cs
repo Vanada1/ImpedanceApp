@@ -23,6 +23,7 @@ namespace ImpedanceApp
 
 			Circuit = new DrawCircuitNode(null, segment);
 			SetDrawCircuitNode(Circuit, segment);
+			Circuit.CalculatePosition();
 		}
 
 		private void SetDrawCircuitNode(DrawCircuitNode parent, ISegment segment)
@@ -34,7 +35,6 @@ namespace ImpedanceApp
 				if (!(subSegment is Element))
 				{
 					SetDrawCircuitNode(node, subSegment);
-					node.CalculatePosition();
 				}
 			}
 		}
