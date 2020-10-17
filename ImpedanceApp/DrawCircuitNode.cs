@@ -106,14 +106,24 @@ namespace ImpedanceApp
 			ElementPoint = elementPoint;
 			Size = GetSizeSegment(this);
 
-			if (!(Segment is Element))
-			{
-				for (int i = 0; i < Segment.SubSegments.Count; i++)
-				{
+			if (Segment is Element) return;
 
+			SubNodes[0].ElementPoint = ElementPoint;
+			for (var i = 1; i < Segment.SubSegments.Count; i++)
+			{
+				SubNodes[i].CalculatePosition();
+				if(Segment is ParallelCircuit)
+				{
+					SubNodes[i].ElementPoint = new Point(ElementPoint.X,
+						SubNodes[i - 1].ElementPoint.Y + SubNodes[i - 1].Size.Height + _addY);
+				}
+				else
+				{
+					SubNodes[i].ElementPoint = new Point(
+						SubNodes[i - 1].ElementPoint.X + SubNodes[i - 1].Size.Width + _addX,
+						ElementPoint.Y);
 				}
 			}
-			
 		}
 
 		/// <summary>

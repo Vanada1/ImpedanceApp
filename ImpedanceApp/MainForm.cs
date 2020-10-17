@@ -16,9 +16,9 @@ namespace ImpedanceForms
 		private int _previousCircuitListBoxIndex = -1;
 
 		/// <summary>
-		/// Previous <see cref="ImpedancesDataGridView"/> index
+		/// Object for drawing current circuit
 		/// </summary>
-		private int _previousImpedancesDataGridView = 0;
+		private DrawCircuit _drawCircuit;
 
 		/// <summary>
 		/// Contains all data in this field
@@ -335,6 +335,7 @@ namespace ImpedanceForms
 			if (index != _previousCircuitListBoxIndex)
 			{
 				FillElementsTreeView();
+				_drawCircuit = new DrawCircuit(_project.CurrentCircuit);
 			}
 
 			_previousCircuitListBoxIndex = index;
@@ -557,7 +558,6 @@ namespace ImpedanceForms
 				_project.Frequencies[e.RowIndex] = value;
 			}
 
-			_previousImpedancesDataGridView = e.RowIndex;
 			UpdateProject();
 		}
 	}
