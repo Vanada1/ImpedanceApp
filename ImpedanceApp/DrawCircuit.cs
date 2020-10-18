@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,12 +10,32 @@ namespace ImpedanceApp
 {
 	class DrawCircuit
 	{
+		private Point _startPoint;
+
 		/// <summary>
 		/// Return main <see cref="DrawCircuitNode"/>
 		/// </summary>
 		public DrawCircuitNode Circuit { get; }
 
-		public DrawCircuit(ISegment segment)
+		/// <summary>
+		/// Set and return start point
+		/// </summary>
+		public Point StartPoint { 
+			get => _startPoint;
+			set
+			{
+				_startPoint = value;
+				Circuit.SegmentPoint = value;
+			}
+
+		}
+
+		/// <summary>
+		/// DrawCircuit constructor
+		/// </summary>
+		/// <param name="segment"><see cref="Circuit"/></param>
+		/// <param name="startPoint">Starting point for drawing</param>
+		public DrawCircuit(ISegment segment, Point startPoint)
 		{
 			if (!(segment is Circuit))
 			{
@@ -22,11 +43,17 @@ namespace ImpedanceApp
 			}
 
 			Circuit = new DrawCircuitNode(null, segment);
+			StartPoint = startPoint;
 			SetDrawCircuitNode(Circuit, segment);
 			Circuit.CalculatePosition();
 		}
 
-		private void SetDrawCircuitNode(DrawCircuitNode parent, ISegment segment)
+		/// <summary>
+		/// Connects all sub-segments of a segment
+		/// </summary>
+		/// <param name="parent">Parent <see cref="DrawCircuitNode"/></param>
+		/// <param name="segment">The segment that will communicate with the parent</param>
+		private static void SetDrawCircuitNode(DrawCircuitNode parent, ISegment segment)
 		{
 			foreach (var subSegment in segment.SubSegments)
 			{

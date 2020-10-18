@@ -121,7 +121,9 @@ namespace ImpedanceForms
 		private void UpdatePictureBox()
 		{
 			_circuitGraphics = CircuitPictureBox.CreateGraphics();
-			_drawCircuit = new DrawCircuit(_project.CurrentCircuit);
+			var startPoint = new Point(CircuitPictureBox.Size.Width/2,
+				CircuitPictureBox.Size.Height / 2);
+			_drawCircuit = new DrawCircuit(_project.CurrentCircuit, startPoint);
 			_circuitGraphics.Clear(DefaultBackColor);
 			DrawCircuit(_drawCircuit.Circuit);
 		}
@@ -208,7 +210,7 @@ namespace ImpedanceForms
 					DrawCircuit(subNode);
 					continue;
 				}
-				_circuitGraphics.DrawRectangle(_linePen, subNode.ElementPoint.X, subNode.ElementPoint.Y,
+				_circuitGraphics.DrawRectangle(_linePen, subNode.SegmentPoint.X, subNode.SegmentPoint.Y,
 				subNode.Size.Width, subNode.Size.Height);
 			}
 		}
@@ -220,7 +222,6 @@ namespace ImpedanceForms
 
 		private void Main_Load(object sender, EventArgs e)
 		{
-			UpdateCircuitComboBox();
 			EventLabel.Text = "";
 
 			foreach (var example in _project.AllExamples)
@@ -231,6 +232,7 @@ namespace ImpedanceForms
 			var typeSegments = StringValidator.GetSegmentEnum(null);
 			TypeComboBox.DataSource = typeSegments;
 			UpdateProject();
+			UpdateCircuitComboBox();
 		}
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
@@ -614,6 +616,11 @@ namespace ImpedanceForms
 			}
 
 			UpdateProject();
+		}
+
+		private void MainForm_SizeChanged(object sender, EventArgs e)
+		{
+			UpdatePictureBox();
 		}
 	}
 }
