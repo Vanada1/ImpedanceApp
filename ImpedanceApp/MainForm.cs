@@ -20,10 +20,18 @@ namespace ImpedanceForms
 		/// </summary>
 		private Graphics _circuitGraphics;
 
+		private readonly Color[] _colors=new Color[]
+		{
+			Color.DeepPink, Color.Black, Color.DarkGoldenrod, Color.DarkRed, 
+			Color.Blue, Color.DarkSlateGray, Color.DarkMagenta, 
+		};
+
+		private int _colorIndex = 0;
+
 		/// <summary>
 		/// Drawing line
 		/// </summary>
-		private readonly Pen _linePen = new Pen(Color.DeepPink);
+		private Pen _linePen = new Pen(Color.DeepPink);
 
 		/// <summary>
 		/// Object for drawing current circuit
@@ -108,7 +116,7 @@ namespace ImpedanceForms
 		{
 			_circuitGraphics = CircuitPictureBox.CreateGraphics();
 			_drawCircuit = new DrawCircuit(_project.CurrentCircuit);
-			_circuitGraphics.Clear(Color.AliceBlue);
+			_circuitGraphics.Clear(DefaultBackColor);
 			DrawCircuit(_drawCircuit.Circuit);
 		}
 

@@ -35,6 +35,11 @@ namespace ImpedanceApp
 		private readonly int _addY = 5;
 
 		/// <summary>
+		/// check start
+		/// </summary>
+		private bool _isStart = true;
+
+		/// <summary>
 		/// Adding distance for correct display Y coordinate
 		/// </summary>
 		private readonly Point _startPoint = new Point(0,0);
@@ -93,25 +98,33 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Calculate position for this Node
 		/// </summary>
-		public void CalculatePosition(Size pervPoint = new Size())
+		public void CalculatePosition(Size prevPoint = new Size())
 		{
-			var elementPoint = _startPoint;
-			
-			ElementPoint = elementPoint;
+			var startPoint = _startPoint;
+
+			if (Parent != null)
+			{
+				startPoint = Parent.ElementPoint;
+				if (Parent.Segment is ParallelCircuit)
+				{
+					startPoint.Y += prevPoint.Height;
+				}
+				else
+				{
+					startPoint.X += prevPoint.Width;
+				}
+			}
+
+			ElementPoint = startPoint;
 
 			if (Segment is Element) return;
 
 			if(Segment.SubSegments.Count == 0) return;
 
 			SubNodes[0].CalculatePosition();
-			if (Segment is ParallelCircuit)
-			{
-				SubNodes[0].ElementPoint = new Point(ElementPoint.X + pervPoint.Width, ElementPoint.Y );
-			}
-			else
-			{
-				SubNodes[0].ElementPoint = new Point(ElementPoint.X , ElementPoint.Y + pervPoint.Height);
-			}
+			SubNodes[0].ElementPoint = Segment is ParallelCircuit ? 
+				new Point(startPoint.X + prevPoint.Width, startPoint.Y ) :
+				new Point(startPoint.X , startPoint.Y + prevPoint.Height);
 
 			for (var i = 1; i < Segment.SubSegments.Count; i++)
 			{
@@ -119,20 +132,26 @@ namespace ImpedanceApp
 					new Size(SubNodes[i - 1].Size.Width * i, SubNodes[i - 1].Size.Height * i) 
 					+ new Size(_addX * i, _addY * i);
 				SubNodes[i].CalculatePosition(newSegmentSize);
-				if (Segment is ParallelCircuit && Segment.SubSegments.Count > 1)
-				{
-					SubNodes[i].ElementPoint = new Point(elementPoint.X + pervPoint.Width,
-						SubNodes[i - 1].ElementPoint.Y + SubNodes[i - 1].Size.Height + _addY);
-				}
-				else
-				{
-					SubNodes[i].ElementPoint = new Point(
-						SubNodes[i - 1].ElementPoint.X + SubNodes[i - 1].Size.Width + _addX,
-						elementPoint.Y + pervPoint.Height);
-				}
+				//if (Segment is ParallelCircuit && Segment.SubSegments.Count > 1)
+				//{
+				//	SubNodes[i].ElementPoint = new Point(startPoint.X + prevPoint.Width,
+				//		SubNodes[i - 1].ElementPoint.Y + SubNodes[i - 1].Size.Height + _addY);
+				//}
+				//else
+				//{
+				//	SubNodes[i].ElementPoint = new Point(
+				//		SubNodes[i - 1].ElementPoint.X + SubNodes[i - 1].Size.Width + _addX,
+				//		startPoint.Y + prevPoint.Height);
+				//}
 			}
 
 			Size = GetSizeSegment(this);
+
+			if (_isStart)
+			{
+				_isStart = false;
+				CalculatePosition();
+			}
 		}
 
 		/// <summary>
