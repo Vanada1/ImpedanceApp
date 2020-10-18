@@ -20,12 +20,18 @@ namespace ImpedanceForms
 		/// </summary>
 		private Graphics _circuitGraphics;
 
+		/// <summary>
+		/// Array of colors for drawing different segments
+		/// </summary>
 		private readonly Color[] _colors=new Color[]
 		{
 			Color.DeepPink, Color.Black, Color.DarkGoldenrod, Color.DarkRed, 
 			Color.Blue, Color.DarkSlateGray, Color.DarkMagenta, 
 		};
 
+		/// <summary>
+		/// To iterate over colors
+		/// </summary>
 		private int _colorIndex = 0;
 
 		/// <summary>
@@ -193,6 +199,8 @@ namespace ImpedanceForms
 		/// <param name="node">Started node</param>
 		private void DrawCircuit(DrawCircuitNode node)
 		{
+			_linePen = new Pen(_colors[_colorIndex]);
+			_colorIndex = (_colorIndex + 1) % _colors.Length;
 			foreach (var subNode in node.SubNodes)
 			{
 				if (!(subNode.Segment is Element))
@@ -201,7 +209,7 @@ namespace ImpedanceForms
 					continue;
 				}
 				_circuitGraphics.DrawRectangle(_linePen, subNode.ElementPoint.X, subNode.ElementPoint.Y,
-					subNode.Size.Width, subNode.Size.Height);
+				subNode.Size.Width, subNode.Size.Height);
 			}
 		}
 
