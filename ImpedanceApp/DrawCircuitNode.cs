@@ -17,12 +17,12 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Element width
 		/// </summary>
-		private readonly int _width = 50;
+		private readonly int _widthElement = 50;
 
 		/// <summary>
 		/// Element height
 		/// </summary>
-		private readonly int _height = 25;
+		private readonly int _heightElement = 25;
 
 		/// <summary>
 		/// Adding distance for correct display X coordinate
@@ -40,9 +40,25 @@ namespace ImpedanceApp
 		private bool _isStart = true;
 
 		/// <summary>
+		/// Segment point
+		/// </summary>
+		private Point _segmentPoint;
+
+		/// <summary>
 		/// Set and return <see cref="SegmentPoint"/>
 		/// </summary>
-		public Point SegmentPoint { get; set; }
+		public Point SegmentPoint
+		{
+			get=> _segmentPoint;
+			set
+			{
+				_segmentPoint = value;
+				ConnectToLeft = new Point(value.X,
+					value.Y + Size.Height / 2);
+				ConnectToRight = new Point(value.X + Size.Width,
+					value.Y + Size.Height / 2);
+			}
+		}
 
 		/// <summary>
 		/// Set and return element size
@@ -86,7 +102,7 @@ namespace ImpedanceApp
 
 			if (segment is Element)
 			{
-				Size = new Size(_width,_height);
+				Size = new Size(_widthElement,_heightElement);
 			}
 		}
 
@@ -120,22 +136,29 @@ namespace ImpedanceApp
 			if (Segment is Element) return;
 			if(Segment.SubSegments.Count == 0) return;
 
-			SubNodes[0].CalculatePosition();
-			SubNodes[0].SegmentPoint = startPoint;
-			for (var i = 1; i < Segment.SubSegments.Count; i++)
+			for (var i = 0; i < Segment.SubSegments.Count; i++)
 			{
-				ConnectToLeft = new Point(SegmentPoint.X, SegmentPoint.Y + Size.Height / 2);
-				ConnectToRight = new Point(SegmentPoint.X + Size.Width,
-					SegmentPoint.Y + Size.Height / 2);
+				if (i == 0)
+				{
+					SubNodes[i].SegmentPoint = startPoint;
+					startPoint = new Point();
+				}
+				else
+				{
+					startPoint = new Point((SubNodes[i - 1].Size.Width + _addX) * i,
+							(SubNodes[i - 1].Size.Height + _addY) * i);
+				}
 
-				var newSegmentSize =
-					new Point((SubNodes[i - 1].Size.Width + _addX) * i,
-					(SubNodes[i - 1].Size.Height + _addY) * i);
+				SubNodes[i].CalculatePosition(startPoint);
 
-				SubNodes[i].CalculatePosition(newSegmentSize);
+				if (!(Segment is ParallelCircuit) && i != 0)
+				{
+					SubNodes[i].SegmentPoint = new Point(SubNodes[i].SegmentPoint.X,
+						SubNodes[i].SegmentPoint.Y + SubNodes[i - 1].ConnectToRight.Y - SubNodes[i].ConnectToLeft.Y);
+				}
 			}
 
-			Size = GetSizeSegment(this);
+			Size = GetSizeSegment();
 
 			if (_isStart)
 			{
@@ -149,31 +172,31 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="node">Segment for calculation</param>
 		/// <returns>Segment size</returns>
-		private Size GetSizeSegment(DrawCircuitNode node)
+		private Size GetSizeSegment()
 		{
 			Size segmentSize;
 
-			switch (node.Segment)
+			switch (Segment)
 			{
 				case Element _:
 				{
-					segmentSize = node.Size;
+					segmentSize = Size;
 					break;
 				}
 				case ParallelCircuit _:
 				{
-					var startSegment = node.SubNodes[0].SegmentPoint.Y;
-					var endSegment = node.SubNodes[SubNodes.Count - 1].SegmentPoint.Y;
-					var height = Math.Abs(endSegment - startSegment) + _height;
-					segmentSize = new Size(FindMaxWidth(node), height);
+					var startSegment = SubNodes[0].SegmentPoint.Y;
+					var endSegment = SubNodes[SubNodes.Count - 1].SegmentPoint.Y;
+					var height = Math.Abs(endSegment - startSegment) + _heightElement;
+					segmentSize = new Size(FindMaxWidth(this), height);
 					break;
 				}
 				default:
 				{
-					var startSegment = node.SubNodes[0].SegmentPoint.X;
-					var endSegment = node.SubNodes[SubNodes.Count - 1].SegmentPoint.X;
-					var width = Math.Abs(endSegment - startSegment) + _width;
-					segmentSize = new Size(width, FindMaxHeight(node));
+					var startSegment = SubNodes[0].SegmentPoint.X;
+					var endSegment = SubNodes[SubNodes.Count - 1].SegmentPoint.X;
+					var width = Math.Abs(endSegment - startSegment) + _widthElement;
+					segmentSize = new Size(width, FindMaxHeight(this));
 					break;
 				}
 			}
