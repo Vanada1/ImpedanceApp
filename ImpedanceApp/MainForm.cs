@@ -121,7 +121,7 @@ namespace ImpedanceForms
 		private void UpdatePictureBox()
 		{
 			_circuitGraphics = CircuitPictureBox.CreateGraphics();
-			var startPoint = new Point(CircuitPictureBox.Size.Width/2,
+			var startPoint = new Point(0,
 				CircuitPictureBox.Size.Height / 2);
 			_drawCircuit = new DrawCircuit(_project.CurrentCircuit, startPoint);
 			_circuitGraphics.Clear(DefaultBackColor);
@@ -208,7 +208,7 @@ namespace ImpedanceForms
 				if (!(subNode.Segment is Element))
 				{
 					DrawCircuit(subNode); 
-					continue;
+					//continue;
 				}
 				_circuitGraphics.DrawRectangle(_linePen, subNode.SegmentPoint.X, subNode.SegmentPoint.Y,
 				subNode.Size.Width, subNode.Size.Height);

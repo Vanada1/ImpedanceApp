@@ -45,6 +45,16 @@ namespace ImpedanceApp
 		private Point _segmentPoint;
 
 		/// <summary>
+		/// Connect point to left
+		/// </summary>
+		private Point _connectToLeft;
+
+		/// <summary>
+		/// Connect point to right
+		/// </summary>
+		private Point _connectToRight;
+
+		/// <summary>
 		/// Set and return <see cref="SegmentPoint"/>
 		/// </summary>
 		public Point SegmentPoint
@@ -53,9 +63,9 @@ namespace ImpedanceApp
 			set
 			{
 				_segmentPoint = value;
-				ConnectToLeft = new Point(value.X,
+				_connectToLeft = new Point(value.X,
 					value.Y + Size.Height / 2);
-				ConnectToRight = new Point(value.X + Size.Width,
+				_connectToRight = new Point(value.X + Size.Width,
 					value.Y + Size.Height / 2);
 			}
 		}
@@ -68,12 +78,30 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Set and return connect position to the element of left side
 		/// </summary>
-		public Point ConnectToLeft { get; set; }
+		public Point ConnectToLeft
+		{
+			get=> _connectToLeft;
+			set
+			{
+				_connectToLeft = value;
+				_connectToRight = new Point(value.X + Size.Width, value.Y);
+				_segmentPoint = new Point(value.X, value.Y - Size.Height / 2);
+			}
+		}
 
 		/// <summary>
 		/// Set and return connect position to the element of right side
 		/// </summary>
-		public Point ConnectToRight { get; set; }
+		public Point ConnectToRight
+		{
+			get=>_connectToRight;
+			set
+			{
+				_connectToRight = value;
+				_connectToLeft = new Point(value.X - Size.Width, value.Y);
+				_segmentPoint = new Point(value.X - Size.Width, value.Y - Size.Height / 2);
+			}
+		}
 
 		/// <summary>
 		/// Set and return element parent 
@@ -156,10 +184,12 @@ namespace ImpedanceApp
 
 				SubNodes[i].CalculatePosition(startPoint);
 
-				if (!(Segment is ParallelCircuit) && i != 0)
+				if (i == 0) continue;
+
+				if (!(Segment is ParallelCircuit))
 				{
-					SubNodes[i].SegmentPoint = new Point(SubNodes[i].SegmentPoint.X,
-						SubNodes[i].SegmentPoint.Y + SubNodes[i - 1].ConnectToRight.Y - SubNodes[i].ConnectToLeft.Y);
+					SubNodes[i].ConnectToLeft = new Point(SubNodes[i - 1].ConnectToRight.X + _addX,
+						SubNodes[i - 1].ConnectToRight.Y);
 				}
 			}
 
