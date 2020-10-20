@@ -55,8 +55,6 @@
 			this.CircuitsComboBox = new System.Windows.Forms.ComboBox();
 			this.ElementsTreeView = new System.Windows.Forms.TreeView();
 			this.CircuitContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.addParallelSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.addSerialSegmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addElementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CircuitGroupBox = new System.Windows.Forms.GroupBox();
@@ -447,34 +445,22 @@
 			// 
 			this.CircuitContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.CircuitContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addParallelSegmentToolStripMenuItem,
-            this.addSerialSegmentToolStripMenuItem,
             this.addElementToolStripMenuItem,
             this.removeToolStripMenuItem});
 			this.CircuitContextMenuStrip.Name = "CircuitContextMenuStrip";
-			this.CircuitContextMenuStrip.Size = new System.Drawing.Size(143, 92);
-			// 
-			// addParallelSegmentToolStripMenuItem
-			// 
-			this.addParallelSegmentToolStripMenuItem.Name = "addParallelSegmentToolStripMenuItem";
-			this.addParallelSegmentToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-			// 
-			// addSerialSegmentToolStripMenuItem
-			// 
-			this.addSerialSegmentToolStripMenuItem.Name = "addSerialSegmentToolStripMenuItem";
-			this.addSerialSegmentToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+			this.CircuitContextMenuStrip.Size = new System.Drawing.Size(181, 70);
 			// 
 			// addElementToolStripMenuItem
 			// 
 			this.addElementToolStripMenuItem.Name = "addElementToolStripMenuItem";
-			this.addElementToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+			this.addElementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.addElementToolStripMenuItem.Text = "Add element";
 			this.addElementToolStripMenuItem.Click += new System.EventHandler(this.AddElementButton_Click);
 			// 
 			// removeToolStripMenuItem
 			// 
 			this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-			this.removeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+			this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.removeToolStripMenuItem.Text = "Remove";
 			this.removeToolStripMenuItem.Click += new System.EventHandler(this.RemoveElementButton_Click);
 			// 
@@ -653,8 +639,6 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
 		private System.Windows.Forms.GroupBox CircuitGroupBox;
 		private System.Windows.Forms.ContextMenuStrip CircuitContextMenuStrip;
-		private System.Windows.Forms.ToolStripMenuItem addParallelSegmentToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem addSerialSegmentToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addElementToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
 		private System.Windows.Forms.Button AddSegment;

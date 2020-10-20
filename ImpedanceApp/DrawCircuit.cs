@@ -10,8 +10,6 @@ namespace ImpedanceApp
 {
 	class DrawCircuit
 	{
-		private Point _startPoint;
-
 		/// <summary>
 		/// Return main <see cref="DrawCircuitNode"/>
 		/// </summary>
@@ -21,13 +19,8 @@ namespace ImpedanceApp
 		/// Set and return start point
 		/// </summary>
 		public Point StartPoint { 
-			get => _startPoint;
-			set
-			{
-				_startPoint = value;
-				Circuit.SegmentPoint = value;
-			}
-
+			get => Circuit.SegmentPoint;
+			set => Circuit.SegmentPoint = value;
 		}
 
 		/// <summary>

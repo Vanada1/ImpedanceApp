@@ -121,13 +121,18 @@ namespace ImpedanceApp
 			if (Parent != null)
 			{
 				startPoint = Parent.SegmentPoint;
-				if (Parent.Segment is ParallelCircuit)
+				if ((Parent.Segment is ParallelCircuit))
 				{
 					startPoint.Y += prevPoint.Y;
 				}
 				else
 				{
 					startPoint.X += prevPoint.X;
+
+					if(Parent.Segment is Circuit)
+					{
+						startPoint.Y += SegmentPoint.Y - ConnectToLeft.Y;
+					}
 				}
 
 				SegmentPoint = startPoint;
@@ -140,13 +145,13 @@ namespace ImpedanceApp
 			{
 				if (i == 0)
 				{
-					SubNodes[i].SegmentPoint = startPoint;
+					SubNodes[i].SegmentPoint = SegmentPoint;
 					startPoint = new Point();
 				}
 				else
 				{
-					startPoint = new Point((SubNodes[i - 1].Size.Width + _addX) * i,
-							(SubNodes[i - 1].Size.Height + _addY) * i);
+					startPoint += new Size(SubNodes[i - 1].Size.Width + _addX ,
+							(SubNodes[i - 1].Size.Height + _addY));
 				}
 
 				SubNodes[i].CalculatePosition(startPoint);
