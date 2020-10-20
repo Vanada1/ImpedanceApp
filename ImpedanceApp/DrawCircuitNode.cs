@@ -142,55 +142,29 @@ namespace ImpedanceApp
 		/// If you send a point, then he began to draw from a certain point.
 		/// If nothing is sent, it will start from the default point.
 		/// </param>
-		public void CalculatePosition(Point prevPoint = new Point())
+		public void CalculatePosition()
 		{
-			var startPoint = SegmentPoint;
-
-			if (Parent != null)
-			{
-				startPoint = Parent.SegmentPoint;
-				if ((Parent.Segment is ParallelCircuit))
-				{
-					startPoint.Y += prevPoint.Y;
-				}
-				else
-				{
-					startPoint.X += prevPoint.X;
-
-					if(Parent.Segment is Circuit)
-					{
-						startPoint.Y += SegmentPoint.Y - ConnectToLeft.Y;
-					}
-				}
-
-				SegmentPoint = startPoint;
-			}
-
-			if (Segment is Element) return;
-			if(Segment.SubSegments.Count == 0) return;
+			if(SubNodes.Count == 0) return;
 
 			for (var i = 0; i < Segment.SubSegments.Count; i++)
 			{
-				if (i == 0)
+				SubNodes[i].SegmentPoint = SubNodes[i].Parent.SegmentPoint;
+
+				if (i != 0)
 				{
-					SubNodes[i].SegmentPoint = SegmentPoint;
-					startPoint = new Point();
-				}
-				else
-				{
-					startPoint += new Size(SubNodes[i - 1].Size.Width + _addX ,
-							(SubNodes[i - 1].Size.Height + _addY));
+					if (Segment is ParallelCircuit)
+					{
+						SubNodes[i].SegmentPoint = new Point(SubNodes[i].SegmentPoint.X,
+							SubNodes[i - 1].SegmentPoint.Y + SubNodes[i - 1].Size.Height + _addY);
+					}
+					else
+					{
+						SubNodes[i].ConnectToLeft = new Point(SubNodes[i - 1].ConnectToRight.X + _addX,
+							SubNodes[i - 1].ConnectToRight.Y);
+					}
 				}
 
-				SubNodes[i].CalculatePosition(startPoint);
-
-				if (i == 0) continue;
-
-				if (!(Segment is ParallelCircuit))
-				{
-					SubNodes[i].ConnectToLeft = new Point(SubNodes[i - 1].ConnectToRight.X + _addX,
-						SubNodes[i - 1].ConnectToRight.Y);
-				}
+				SubNodes[i].CalculatePosition();
 			}
 
 			Size = GetSizeSegment();

@@ -121,7 +121,7 @@ namespace ImpedanceForms
 		private void UpdatePictureBox()
 		{
 			_circuitGraphics = CircuitPictureBox.CreateGraphics();
-			var startPoint = new Point(0,
+			var startPoint = new Point(CircuitPictureBox.Size.Width/2,
 				CircuitPictureBox.Size.Height / 2);
 			_drawCircuit = new DrawCircuit(_project.CurrentCircuit, startPoint);
 			_circuitGraphics.Clear(DefaultBackColor);
