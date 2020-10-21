@@ -12,7 +12,7 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Node class for drawing elements
 	/// </summary>
-	class DrawCircuitNode
+	public class DrawCircuitNode
 	{
 		/// <summary>
 		/// Element width

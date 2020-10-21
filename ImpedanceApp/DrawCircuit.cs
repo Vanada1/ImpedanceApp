@@ -8,7 +8,7 @@ using Impedance;
 
 namespace ImpedanceApp
 {
-	class DrawCircuit
+	public class DrawCircuit
 	{
 		/// <summary>
 		/// Return main <see cref="DrawCircuitNode"/>
