@@ -195,16 +195,16 @@ namespace ImpedanceApp
 				case ParallelCircuit _:
 				{
 					var startSegment = SubNodes[0].SegmentPoint.Y;
-					var endSegment = SubNodes[SubNodes.Count - 1].SegmentPoint.Y;
-					var height = Math.Abs(endSegment - startSegment) + _heightElement;
+					var endSegment = SubNodes[SubNodes.Count - 1].SegmentPoint.Y + SubNodes[SubNodes.Count - 1].Size.Height;
+					var height = Math.Abs(endSegment - startSegment);
 					segmentSize = new Size(FindMaxWidth(this), height);
 					break;
 				}
 				default:
 				{
 					var startSegment = SubNodes[0].SegmentPoint.X;
-					var endSegment = SubNodes[SubNodes.Count - 1].SegmentPoint.X;
-					var width = Math.Abs(endSegment - startSegment) + _widthElement;
+					var endSegment = SubNodes[SubNodes.Count - 1].SegmentPoint.X + SubNodes[SubNodes.Count - 1].Size.Width;
+					var width = Math.Abs(endSegment - startSegment);
 					segmentSize = new Size(width, FindMaxHeight(this));
 					break;
 				}

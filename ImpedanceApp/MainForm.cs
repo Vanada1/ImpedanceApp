@@ -208,7 +208,7 @@ namespace ImpedanceForms
 				if (!(subNode.Segment is Element))
 				{
 					DrawCircuit(subNode); 
-					//continue;
+					continue;
 				}
 				_circuitGraphics.DrawRectangle(_linePen, subNode.SegmentPoint.X, subNode.SegmentPoint.Y,
 				subNode.Size.Width, subNode.Size.Height);
