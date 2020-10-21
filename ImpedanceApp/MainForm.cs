@@ -73,6 +73,13 @@ namespace ImpedanceForms
 			CircuitsComboBox.DisplayMember = "Name";
 		}
 
+		private void UpdateElementTextBoxes()
+		{
+			NameTextBox.Text = "";
+			ValueTextBox.Text = "";
+			TypeComboBox.Text = "";
+		}
+
 		/// <summary>
 		/// Update ImpedancesDataGridView
 		/// </summary>
@@ -121,9 +128,14 @@ namespace ImpedanceForms
 		private void UpdatePictureBox()
 		{
 			_circuitGraphics = CircuitPictureBox.CreateGraphics();
-			var startPoint = new Point(CircuitPictureBox.Size.Width/2,
-				CircuitPictureBox.Size.Height / 2);
-			_drawCircuit = new DrawCircuit(_project.CurrentCircuit, startPoint);
+			_drawCircuit = new DrawCircuit(_project.CurrentCircuit);
+			var startPoint = new Point(
+				CircuitPictureBox.Size.Width / 2 -
+			                           _drawCircuit.Circuit.Size.Width / 2,
+				CircuitPictureBox.Size.Height / 2 - 
+				_drawCircuit.Circuit.Size.Width / 2);
+			_drawCircuit.StartPoint = startPoint;
+			_drawCircuit.Circuit.CalculatePosition();
 			_circuitGraphics.Clear(DefaultBackColor);
 			DrawCircuit(_drawCircuit.Circuit);
 		}
@@ -231,8 +243,9 @@ namespace ImpedanceForms
 
 			var typeSegments = StringValidator.GetSegmentEnum(null);
 			TypeComboBox.DataSource = typeSegments;
-			UpdateProject();
 			UpdateCircuitComboBox();
+			UpdateProject();
+			DrawCircuit(_drawCircuit.Circuit);
 		}
 
 		private void AddFrequenciesButton_Click(object sender, EventArgs e)
@@ -396,6 +409,7 @@ namespace ImpedanceForms
 
 			_previousCircuitListBoxIndex = index;
 			UpdateProject();
+			UpdateElementTextBoxes();
 		}
 
 		private void AddCircuit_Click(object sender, EventArgs e)

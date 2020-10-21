@@ -21,14 +21,14 @@ namespace ImpedanceApp
 		public Point StartPoint { 
 			get => Circuit.SegmentPoint;
 			set => Circuit.SegmentPoint = value;
-		}
+		} 
 
 		/// <summary>
 		/// DrawCircuit constructor
 		/// </summary>
 		/// <param name="segment"><see cref="Circuit"/></param>
 		/// <param name="startPoint">Starting point for drawing</param>
-		public DrawCircuit(ISegment segment, Point startPoint)
+		public DrawCircuit(ISegment segment)
 		{
 			if (!(segment is Circuit))
 			{
@@ -36,7 +36,7 @@ namespace ImpedanceApp
 			}
 
 			Circuit = new DrawCircuitNode(null, segment);
-			StartPoint = startPoint;
+			StartPoint = new Point();
 			SetDrawCircuitNode(Circuit, segment);
 			Circuit.CalculatePosition();
 		}
