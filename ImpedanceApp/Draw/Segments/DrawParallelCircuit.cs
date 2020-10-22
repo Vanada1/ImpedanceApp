@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using Impedance;
 
-namespace ImpedanceApp.Segments
+namespace ImpedanceApp
 {
 	public class DrawParallelCircuit:DrawableSegment
 	{
@@ -14,16 +14,6 @@ namespace ImpedanceApp.Segments
 		/// Set and return connect position to the element of right side
 		/// </summary>
 		public override Point SegmentEndPoint { get; set; }
-
-		/// <summary>
-		/// Set and return Serial segments count
-		/// </summary>
-		public override int SerialCircuitsCount { get; set; } = 0;
-
-		/// <summary>
-		/// Set and return Parallel segments count
-		/// </summary>
-		public override int ParallelCircuitsCount { get; set; } = 0;
 
 		/// <summary>
 		/// Set and return segment size
@@ -40,15 +30,54 @@ namespace ImpedanceApp.Segments
 		/// <see cref="DrawParallelCircuit"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="ParallelCircuit"/></param>
-		DrawParallelCircuit(ISegment segment)
+		public DrawParallelCircuit(ISegment segment)
 		{
 			Segment = segment;
+			CalculateCoordinates();
 			Size = GetSegmentSize();
 		}
 
 		public override void DrawSegment(Graphics graphics, Pen pen)
 		{
-			throw new System.NotImplementedException();
+			var startX = SegmentStartPoint.X;
+			var endX = SegmentEndPoint.X;
+
+			var leftTopCorner = new Point();
+			var leftBottomCorner = new Point();
+			var rightTopCorner = new Point();
+			var rightBottomCorner = new Point();
+
+			//TODO Дублирование
+			foreach (DrawableSegment node in Nodes)
+			{
+				if (node.Index == 0 )
+				{
+					leftTopCorner.X = startX;
+					leftTopCorner.Y = node.SegmentStartPoint.Y;
+					rightTopCorner.X = endX;
+					rightTopCorner.Y = node.SegmentStartPoint.Y;
+				}
+
+				if (node.Index == Nodes.Count - 1)
+				{
+					leftBottomCorner.X = startX;
+					leftBottomCorner.Y = node.SegmentStartPoint.Y;
+					rightBottomCorner.X = endX;
+					rightBottomCorner.Y = node.SegmentStartPoint.Y;
+				}
+
+				DrawConnect(new Point(startX, node.SegmentStartPoint.Y), node.SegmentStartPoint,
+					graphics, pen);
+				node.DrawSegment(graphics, pen);
+				DrawConnect(node.SegmentStartPoint, new Point(endX, node.SegmentStartPoint.Y),
+					graphics, pen);
+			}
+
+			if (Nodes.Count > 1)
+			{
+				DrawConnect(leftTopCorner, leftBottomCorner, graphics, pen);
+				DrawConnect(rightTopCorner, rightBottomCorner, graphics, pen);
+			}
 		}
 
 		public override void CalculateCoordinates()

@@ -24,16 +24,6 @@ namespace ImpedanceApp
 		Size Size { get; set; }
 
 		/// <summary>
-		/// Set and return Serial segments count
-		/// </summary>
-		int SerialCircuitsCount { get; }
-
-		/// <summary>
-		/// Set and return Parallel segments count
-		/// </summary>
-		int ParallelCircuitsCount { get; }
-
-		/// <summary>
 		/// Set and return element <see cref="ISegment"/>
 		/// </summary>
 		ISegment Segment { get; set; }

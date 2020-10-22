@@ -19,25 +19,11 @@ namespace ImpedanceForms
 		/// Support draw <see cref="Circuit"/>
 		/// </summary>
 		private Graphics _circuitGraphics;
-
-		/// <summary>
-		/// Array of colors for drawing different segments
-		/// </summary>
-		private readonly Color[] _colors=new Color[]
-		{
-			Color.DeepPink, Color.Black, Color.DarkGoldenrod, Color.DarkRed, 
-			Color.Blue, Color.DarkSlateGray, Color.DarkMagenta, 
-		};
-
-		/// <summary>
-		/// To iterate over colors
-		/// </summary>
-		private int _colorIndex = 0;
-
+		
 		/// <summary>
 		/// Drawing line
 		/// </summary>
-		private Pen _linePen = new Pen(Color.DeepPink);
+		private Pen _pen = new Pen(Color.Black);
 
 		/// <summary>
 		/// Object for drawing current circuit
@@ -121,47 +107,15 @@ namespace ImpedanceForms
 		private void UpdatePictureBox()
 		{
 			_circuitGraphics = CircuitPictureBox.CreateGraphics();
-			var startPoint = new Point(CircuitPictureBox.Size.Width/2,
-				CircuitPictureBox.Size.Height / 2);
-			_drawCircuit = new DrawCircuit(_project.CurrentCircuit, startPoint);
+			_drawCircuit = new DrawCircuit(_project.CurrentCircuit);
 			_circuitGraphics.Clear(DefaultBackColor);
-			DrawCircuit(_drawCircuit.Circuit);
-		}
-
-		/// <summary>
-		/// Recursively draws circuit elements
-		/// </summary>
-		/// <param name="node">Started node</param>
-		private void DrawCircuit(DrawCircuitNode node)
-		{
-			_linePen = new Pen(_colors[_colorIndex]);
-			_colorIndex = (_colorIndex + 1) % _colors.Length;
-			for (var index = 0; index < node.SubNodes.Count; index++)
-			{
-				var subNode = node.SubNodes[index];
-				if (index != 0)
-				{
-					_circuitGraphics.DrawLine(_linePen, subNode.ConnectToRight, node.SubNodes[index - 1].ConnectToRight);
-				}
-
-				if (!(subNode.Segment is Element))
-				{
-					DrawCircuit(subNode);
-					
-					continue;
-				}
-
-				_circuitGraphics.DrawRectangle(_linePen, subNode.SegmentPoint.X, subNode.SegmentPoint.Y,
-					subNode.Size.Width, subNode.Size.Height);
-			}
+			_drawCircuit.DrawNewCircuit(_circuitGraphics, _pen);
 		}
 
 		public MainForm()
 		{
 			InitializeComponent();
 		}
-
-		private DrawingManager _drawingManager = new DrawingManager();
 
 		private void Main_Load(object sender, EventArgs e)
 		{
@@ -174,8 +128,8 @@ namespace ImpedanceForms
 			}
 
 			var typeSegments = StringValidator.GetSegmentEnum(null);
-			TypeComboBox.DataSource = typeSegments;
-			_drawingManager.Picture = CircuitPictureBox;
+			TypeComboBox.DataSource = typeSegments; 
+			DrawCircuit.Picture = CircuitPictureBox;
 			UpdateProject();
 			UpdateCircuitComboBox();
 		}
@@ -342,7 +296,6 @@ namespace ImpedanceForms
 			_previousCircuitListBoxIndex = index;
 			UpdateProject();
 			TreeViewManager.FillElementsTreeView(_project.CurrentCircuit);
-			_drawingManager.DrawCircuit(TreeViewManager.DrawMainCircuit.Nodes[0] as DrawTreeNode);
 		}
 
 		private void AddCircuit_Click(object sender, EventArgs e)

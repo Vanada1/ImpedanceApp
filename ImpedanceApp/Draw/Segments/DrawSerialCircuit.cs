@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Impedance;
 
-namespace ImpedanceApp.Segments
+namespace ImpedanceApp
 {
 	public class DrawSerialCircuit : DrawableSegment
 	{
@@ -17,16 +17,6 @@ namespace ImpedanceApp.Segments
 		/// Set and return connect position to the element of right side
 		/// </summary>
 		public override Point SegmentEndPoint { get; set; }
-
-		/// <summary>
-		/// Set and return Serial segments count
-		/// </summary>
-		public override int SerialCircuitsCount { get; set; } = 0;
-
-		/// <summary>
-		/// Set and return Parallel segments count
-		/// </summary>
-		public override int ParallelCircuitsCount { get; set; } = 0;
 
 		/// <summary>
 		/// Set and return segment size
@@ -42,18 +32,30 @@ namespace ImpedanceApp.Segments
 		/// <see cref="DrawSerialCircuit"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="SerialCircuit"/></param>
-		DrawSerialCircuit(ISegment segment)
+		public DrawSerialCircuit(ISegment segment)
 		{
 			Segment = segment;
+			CalculateCoordinates();
 			Size = GetSegmentSize();
 		}
 
 		/// <summary>
-		/// Method for drawing segment
+		/// Draw Serial segment
 		/// </summary>
 		public override void DrawSegment(Graphics graphics, Pen pen)
 		{
-			throw new System.NotImplementedException();
+			foreach (DrawableSegment node in Nodes)
+			{
+				DrawConnect(node.Index == 0 ? SegmentStartPoint : ((DrawableSegment) node.PrevNode).SegmentEndPoint,
+					node.SegmentStartPoint, graphics, pen);
+
+				node.DrawSegment(graphics, pen);
+
+				if (node.Index == Nodes.Count - 1)
+				{
+					DrawConnect(node.SegmentEndPoint, SegmentEndPoint, graphics, pen);
+				}
+			}
 		}
 
 		/// <summary>
@@ -66,35 +68,38 @@ namespace ImpedanceApp.Segments
 				throw new ArgumentException("Parent is not " + nameof(DrawableSegment));
 			}
 
-			if (Index == 0)
+			foreach (var node in Nodes)
 			{
-				SegmentStartPoint = new Point(parent.SegmentStartPoint.X,
-					parent.SegmentStartPoint.Y);
-			}
-			else
-			{
-				var prevNode = PrevNode as IDrawableSegment;
-				SegmentStartPoint = new Point(prevNode.SegmentEndPoint.X + Range,
-					prevNode.SegmentEndPoint.Y);
-			}
+				var segmentNode = node as DrawableSegment;
 
-			if (Index == parent.Nodes.Count - 1)
-			{
-				SegmentEndPoint = new Point(parent.SegmentEndPoint.X, parent.SegmentEndPoint.Y);
-			}
-			else
-			{
-				var connectRightX = SegmentStartPoint.X + SerialCircuitsCount * (ElementWidth + Range) - Range;
+				if (Index == 0)
+				{
+					segmentNode.SegmentStartPoint = new Point(parent.SegmentStartPoint.X,
+						parent.SegmentStartPoint.Y);
+				}
+				else
+				{
+					var prevNode = segmentNode.PrevNode as DrawableSegment;
+					segmentNode.SegmentStartPoint = new Point(prevNode.SegmentEndPoint.X + Range,
+						prevNode.SegmentEndPoint.Y);
+				}
 
-				SegmentEndPoint = new Point(connectRightX, SegmentEndPoint.Y);
-			}
+				if (Index == parent.Nodes.Count - 1)
+				{
+					segmentNode.SegmentEndPoint = new Point(parent.SegmentEndPoint.X, parent.SegmentEndPoint.Y);
+				}
+				else
+				{
+					var connectRightX = segmentNode.SegmentStartPoint.X + segmentNode.Size.Width;
 
-			if (Nodes.Count != 0)
-			{
-				(Nodes[0] as DrawableSegment)?.CalculateCoordinates();
-			}
+					segmentNode.SegmentEndPoint = new Point(connectRightX, SegmentEndPoint.Y);
+				}
 
-			(NextNode as DrawableSegment)?.CalculateCoordinates();
+				if (segmentNode.Nodes.Count != 0)
+				{
+					(Nodes[0] as DrawableSegment)?.CalculateCoordinates();
+				}
+			}
 		}
 
 		/// <summary>

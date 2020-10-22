@@ -4,7 +4,7 @@ using System;
 
 namespace ImpedanceApp
 {
-	public static class TreeViewManager
+	public static class DrawTreeViewManager
 	{
 		public static TreeView ElementsTreeView { get; set; }
 

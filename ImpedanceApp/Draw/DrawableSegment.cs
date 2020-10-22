@@ -38,16 +38,6 @@ namespace ImpedanceApp
 		public abstract Point SegmentEndPoint { get; set; }
 
 		/// <summary>
-		/// Set and return Serial segments count
-		/// </summary>
-		public abstract int SerialCircuitsCount { get; set; }
-
-		/// <summary>
-		/// Set and return Parallel segments count
-		/// </summary>
-		public abstract int ParallelCircuitsCount { get; set; }
-
-		/// <summary>
 		/// Set and return element <see cref="ISegment"/>
 		/// </summary>
 		public abstract ISegment Segment { get; set; }
@@ -62,6 +52,35 @@ namespace ImpedanceApp
 		/// </summary>
 		public abstract void CalculateCoordinates();
 
+		/// <summary>
+		/// Get segment size
+		/// </summary>
+		/// <returns>Segment size</returns>
 		public abstract Size GetSegmentSize();
+
+		/// <summary>
+		/// Draw connection
+		/// </summary>
+		/// <param name="startPoint">Start Point</param>
+		/// <param name="graphics"></param>
+		/// <param name="pen"></param>
+		protected static void DrawConnect(Point startPoint, Graphics graphics, Pen pen)
+		{
+			var x = startPoint.X;
+			var y = startPoint.Y;
+			graphics.DrawLine(pen, x, y, x + Range, y);
+		}
+
+		/// <summary>
+		/// Method for drawing connection line
+		/// </summary>
+		/// <param name="startPoint"></param>
+		/// <param name="endPoint"></param>
+		/// /// <param name="graphics"></param>
+		/// <param name="pen"></param>
+		protected static void DrawConnect(Point startPoint, Point endPoint, Graphics graphics, Pen pen)
+		{
+			graphics.DrawLine(pen, startPoint, endPoint);
+		}
 	}
 }

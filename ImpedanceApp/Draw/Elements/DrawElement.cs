@@ -29,16 +29,6 @@ namespace ImpedanceApp
 		public abstract override Size Size { get; set; }
 
 		/// <summary>
-		/// Set and return Serial segments count
-		/// </summary>
-		public override int SerialCircuitsCount { get; set; } = 1;
-
-		/// <summary>
-		/// Set and return Parallel segments count
-		/// </summary>
-		public override int ParallelCircuitsCount { get; set; } = 1;
-
-		/// <summary>
 		/// Set and return element <see cref="ISegment"/>
 		/// </summary>
 		public override ISegment Segment
@@ -94,7 +84,7 @@ namespace ImpedanceApp
 			}
 			else
 			{
-				var connectRightX = SegmentStartPoint.X + SerialCircuitsCount * (ElementWidth + Range) - Range;
+				var connectRightX = SegmentStartPoint.X + Size.Width;
 
 				SegmentEndPoint = new Point(connectRightX, SegmentEndPoint.Y);
 			}
