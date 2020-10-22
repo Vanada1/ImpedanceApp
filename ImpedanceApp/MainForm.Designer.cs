@@ -448,19 +448,19 @@
             this.addElementToolStripMenuItem,
             this.removeToolStripMenuItem});
 			this.CircuitContextMenuStrip.Name = "CircuitContextMenuStrip";
-			this.CircuitContextMenuStrip.Size = new System.Drawing.Size(181, 70);
+			this.CircuitContextMenuStrip.Size = new System.Drawing.Size(143, 48);
 			// 
 			// addElementToolStripMenuItem
 			// 
 			this.addElementToolStripMenuItem.Name = "addElementToolStripMenuItem";
-			this.addElementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.addElementToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
 			this.addElementToolStripMenuItem.Text = "Add element";
 			this.addElementToolStripMenuItem.Click += new System.EventHandler(this.AddElementButton_Click);
 			// 
 			// removeToolStripMenuItem
 			// 
 			this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-			this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.removeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
 			this.removeToolStripMenuItem.Text = "Remove";
 			this.removeToolStripMenuItem.Click += new System.EventHandler(this.RemoveElementButton_Click);
 			// 
@@ -571,7 +571,7 @@
 			this.CircuitPictureBox.Location = new System.Drawing.Point(6, 19);
 			this.CircuitPictureBox.Name = "CircuitPictureBox";
 			this.CircuitPictureBox.Size = new System.Drawing.Size(742, 415);
-			this.CircuitPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.CircuitPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
 			this.CircuitPictureBox.TabIndex = 0;
 			this.CircuitPictureBox.TabStop = false;
 			// 
@@ -608,7 +608,6 @@
 			this.ImpedancesGroupBox.ResumeLayout(false);
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.CircuitPictureGroupBox.ResumeLayout(false);
-			this.CircuitPictureGroupBox.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).EndInit();
 			this.ResumeLayout(false);
 

@@ -112,7 +112,7 @@ namespace ImpedanceForms
 			_project.FindAllElements(_project.CurrentCircuit);
 			ElementsTreeView.ExpandAll();
 			UpdateImpedancesDataGridView();
-			UpdatePictureBox();
+			//UpdatePictureBox();
 		}
 
 		/// <summary>
@@ -126,73 +126,6 @@ namespace ImpedanceForms
 			_drawCircuit = new DrawCircuit(_project.CurrentCircuit, startPoint);
 			_circuitGraphics.Clear(DefaultBackColor);
 			DrawCircuit(_drawCircuit.Circuit);
-		}
-
-		/// <summary>
-		/// Create segments tree
-		/// </summary>
-		private void FillElementsTreeView()
-		{
-			ElementsTreeView.Nodes.Clear();
-			try
-			{
-				SegmentTreeNode segmentTreeNode = new SegmentTreeNode
-				{
-					Name = _project.CurrentCircuit.Name,
-					Text = _project.CurrentCircuit.Name,
-					Segment = _project.CurrentCircuit
-				};
-				FillTreeNode(segmentTreeNode, _project.CurrentCircuit);
-				ElementsTreeView.Nodes.Add(segmentTreeNode);
-				ElementsTreeView.ExpandAll();
-
-			}
-			catch (ArgumentException e)
-			{
-				MessageBox.Show(e.Message, @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-
-		/// <summary>
-		/// Add sub-segments in the tree
-		/// </summary>
-		/// <param name="treeNode">node where will add</param>
-		/// <param name="segment">segment where will add</param>
-		private static void FillTreeNode(TreeNode treeNode, ISegment segment)
-		{
-			try
-			{
-				foreach (var subSegment in segment.SubSegments)
-				{
-					if (subSegment is Element element)
-					{
-						var segmentTreeNode = new SegmentTreeNode
-						{
-							Name = element.Name,
-							Text = element.ToString(),
-							Segment = element
-						};
-						treeNode.Nodes.Add(segmentTreeNode);
-					}
-					else
-					{
-						var segmentTreeNode = new SegmentTreeNode
-						{
-							Name = subSegment.Name,
-							Text = subSegment.ToString(),
-							Segment = subSegment
-						};
-						treeNode.Nodes.Add(segmentTreeNode);
-						FillTreeNode(segmentTreeNode, subSegment);
-					}
-				}
-			}
-			catch (ArgumentException e)
-			{
-				MessageBox.Show(e.Message, @"Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
 		}
 
 		/// <summary>
@@ -228,9 +161,12 @@ namespace ImpedanceForms
 			InitializeComponent();
 		}
 
+		private DrawingManager _drawingManager = new DrawingManager();
+
 		private void Main_Load(object sender, EventArgs e)
 		{
 			EventLabel.Text = "";
+			TreeViewManager.ElementsTreeView = ElementsTreeView;
 
 			foreach (var example in _project.AllExamples)
 			{
@@ -239,6 +175,7 @@ namespace ImpedanceForms
 
 			var typeSegments = StringValidator.GetSegmentEnum(null);
 			TypeComboBox.DataSource = typeSegments;
+			_drawingManager.Picture = CircuitPictureBox;
 			UpdateProject();
 			UpdateCircuitComboBox();
 		}
@@ -399,11 +336,13 @@ namespace ImpedanceForms
 			_project.CurrentCircuit = _project.AllExamples[index];
 			if (index != _previousCircuitListBoxIndex)
 			{
-				FillElementsTreeView();
+				TreeViewManager.FillElementsTreeView(_project.CurrentCircuit);
 			}
 
 			_previousCircuitListBoxIndex = index;
 			UpdateProject();
+			TreeViewManager.FillElementsTreeView(_project.CurrentCircuit);
+			_drawingManager.DrawCircuit(TreeViewManager.DrawMainCircuit.Nodes[0] as DrawTreeNode);
 		}
 
 		private void AddCircuit_Click(object sender, EventArgs e)
@@ -557,7 +496,7 @@ namespace ImpedanceForms
 							draggedNode.Segment.Clone() as ISegment);
 						_project.CurrentCircuit.ReplaceSegment(draggedNode.Segment,
 							targetNode.Segment.Clone() as ISegment);
-						FillElementsTreeView();
+						TreeViewManager.FillElementsTreeView(_project.CurrentCircuit);
 						UpdateProject();
 					}
 					else
@@ -600,7 +539,7 @@ namespace ImpedanceForms
 			}
 
 			UpdateProject();
-			FillElementsTreeView();
+			TreeViewManager.FillElementsTreeView(_project.CurrentCircuit);
 		}
 
 		private void ImpedancesDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
