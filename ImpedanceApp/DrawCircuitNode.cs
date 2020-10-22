@@ -17,22 +17,22 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Element width
 		/// </summary>
-		private readonly int _widthElement = 50;
+		private const int _widthElement = 50;
 
 		/// <summary>
 		/// Element height
 		/// </summary>
-		private readonly int _heightElement = 25;
+		private const int _heightElement = 25;
 
 		/// <summary>
 		/// Adding distance for correct display X coordinate
 		/// </summary>
-		private readonly int _addX = 5;
+		private const int _addX = 5;
 
 		/// <summary>
 		/// Adding distance for correct display Y coordinate
 		/// </summary>
-		private readonly int _addY = 5;
+		private const int _addY = 5;
 
 		/// <summary>
 		/// check start

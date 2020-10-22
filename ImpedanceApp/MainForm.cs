@@ -203,15 +203,23 @@ namespace ImpedanceForms
 		{
 			_linePen = new Pen(_colors[_colorIndex]);
 			_colorIndex = (_colorIndex + 1) % _colors.Length;
-			foreach (var subNode in node.SubNodes)
+			for (var index = 0; index < node.SubNodes.Count; index++)
 			{
+				var subNode = node.SubNodes[index];
+				if (index != 0)
+				{
+					_circuitGraphics.DrawLine(_linePen, subNode.ConnectToRight, node.SubNodes[index - 1].ConnectToRight);
+				}
+
 				if (!(subNode.Segment is Element))
 				{
-					DrawCircuit(subNode); 
+					DrawCircuit(subNode);
+					
 					continue;
 				}
+
 				_circuitGraphics.DrawRectangle(_linePen, subNode.SegmentPoint.X, subNode.SegmentPoint.Y,
-				subNode.Size.Width, subNode.Size.Height);
+					subNode.Size.Width, subNode.Size.Height);
 			}
 		}
 
