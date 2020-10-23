@@ -22,8 +22,12 @@ namespace ImpedanceApp
 
 		public void DrawNewCircuit(Graphics graphics, Pen pen)
 		{
+			if (Size.Width == 0 && Size.Height == 0)
+			{
+				Size = new Size(Picture.Size.Width - Range, Picture.Size.Height - Range);
+			}
 			CalculateCoordinates();
-			var bitmap = new Bitmap(Size.Width, Size.Height);
+			var bitmap = new Bitmap(Picture.Size.Width - Range, Picture.Size.Height - Range);
 			graphics = Graphics.FromImage(bitmap);
 
 			foreach (DrawableSegment node in Nodes)
@@ -35,16 +39,14 @@ namespace ImpedanceApp
 
 		public override void CalculateCoordinates()
 		{
+
+			SegmentStartPoint = new Point(StartPosition, StartPosition * Size.Height / 2);
+			var endX = SegmentStartPoint.X + Size.Width;
+			SegmentEndPoint = new Point(endX, SegmentStartPoint.Y);
+
 			foreach (DrawableSegment node in Nodes)
 			{
-				SegmentStartPoint = new Point(StartPosition, StartPosition * Size.Height / 2);
-				var endX = SegmentStartPoint.X + Size.Width;
-				SegmentEndPoint = new Point(endX, SegmentStartPoint.Y);
-
-				if (Nodes.Count != 0)
-				{
-					(Nodes[0] as DrawableSegment)?.CalculateCoordinates();
-				}
+				node.CalculateCoordinates();
 			}
 		}
 	}

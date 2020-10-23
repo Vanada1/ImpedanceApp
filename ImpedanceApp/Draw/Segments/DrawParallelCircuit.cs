@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Impedance;
 
 namespace ImpedanceApp
@@ -33,8 +34,6 @@ namespace ImpedanceApp
 		public DrawParallelCircuit(ISegment segment)
 		{
 			Segment = segment;
-			CalculateCoordinates();
-			Size = GetSegmentSize();
 		}
 
 		public override void DrawSegment(Graphics graphics, Pen pen)
@@ -82,34 +81,47 @@ namespace ImpedanceApp
 
 		public override void CalculateCoordinates()
 		{
-			foreach (var node in Nodes)
+			if (Index == 0)
 			{
-				var segmentNode = node as DrawableSegment;
+				SegmentStartPoint = (Parent as DrawableSegment).SegmentStartPoint;
+				SegmentEndPoint = (Parent as DrawableSegment).SegmentEndPoint;
+			}
+			else
+			{
+				var prevNode = PrevNode as DrawableSegment;
+				SegmentStartPoint = new Point(prevNode.SegmentEndPoint.X + Range, prevNode.SegmentEndPoint.Y);
+				SegmentEndPoint = new Point(SegmentStartPoint.X + Size.Width + Range, SegmentStartPoint.Y);
+			}
+
+			foreach (DrawableSegment node in Nodes)
+			{
 				if (Nodes.Count == 1)
 				{
-					segmentNode.SegmentStartPoint = SegmentStartPoint;
-					segmentNode.SegmentEndPoint = SegmentEndPoint;
+					node.SegmentStartPoint = SegmentStartPoint;
+					node.SegmentEndPoint = SegmentEndPoint;
 					return;
 				}
 
 				var middleLine = (SegmentEndPoint.X - SegmentStartPoint.X - Size.Width) / 2;
 				var x = SegmentStartPoint.X + middleLine;
 				var y = 0;
-				if (Index == 0)
+				if (node.Index == 0)
 				{
-					y = segmentNode.SegmentStartPoint.Y - segmentNode.Size.Height / 2;
+					y = Math.Abs(SegmentStartPoint.Y - Size.Height / 2);
 				}
 				else
 				{
-					var prevSegment = segmentNode.PrevNode as DrawableSegment;
-					y = prevSegment.SegmentStartPoint.Y + segmentNode.Size.Height;
+					if (node.PrevNode is DrawableSegment prevSegment)
+					{
+						y = prevSegment.SegmentStartPoint.Y + node.Size.Height;
+					}
 				}
 
-				segmentNode.SegmentStartPoint = new Point(x, y);
+				node.SegmentStartPoint = new Point(x, y);
 
-				if (segmentNode.Nodes.Count != 0)
+				if (node.Nodes.Count != 0)
 				{
-					segmentNode.CalculateCoordinates();
+					node.CalculateCoordinates();
 				}
 			}
 		}
@@ -124,23 +136,26 @@ namespace ImpedanceApp
 				height += segmentNode.GetSegmentSize().Height;
 			}
 
-			return new Size(width, height);
+			Size = new Size(width, height);
+
+			return Size;
 		}
 
 		private int GetMaxWidth()
 		{
-			var maxHeight = (Nodes[0] as DrawableSegment).Size.Width;
+			if (Nodes.Count == 0) return 0;
+
+			var sizeWidth = ((DrawableSegment) Nodes[0]).Size.Width;
 
 			foreach (var node in Nodes)
 			{
-				var segmentNode = node as DrawableSegment;
-				if (segmentNode.Size.Width > maxHeight)
+				if (node is DrawableSegment segmentNode && segmentNode.Size.Width > sizeWidth)
 				{
-					maxHeight = segmentNode.Size.Width;
+					sizeWidth = segmentNode.Size.Width;
 				}
 			}
 
-			return maxHeight;
+			return sizeWidth;
 		}
 	}
 }

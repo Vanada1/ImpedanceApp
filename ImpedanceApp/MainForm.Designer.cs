@@ -568,6 +568,7 @@
 			this.CircuitPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.CircuitPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 			this.CircuitPictureBox.Location = new System.Drawing.Point(6, 19);
 			this.CircuitPictureBox.Name = "CircuitPictureBox";
 			this.CircuitPictureBox.Size = new System.Drawing.Size(742, 415);

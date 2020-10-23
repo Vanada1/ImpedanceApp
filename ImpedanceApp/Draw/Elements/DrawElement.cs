@@ -86,7 +86,7 @@ namespace ImpedanceApp
 			{
 				var connectRightX = SegmentStartPoint.X + Size.Width;
 
-				SegmentEndPoint = new Point(connectRightX, SegmentEndPoint.Y);
+				SegmentEndPoint = new Point(connectRightX, SegmentStartPoint.Y);
 			}
 		}
 	}

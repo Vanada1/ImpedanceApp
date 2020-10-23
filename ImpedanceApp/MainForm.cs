@@ -26,11 +26,6 @@ namespace ImpedanceForms
 		private Pen _pen = new Pen(Color.Black);
 
 		/// <summary>
-		/// Object for drawing current circuit
-		/// </summary>
-		private DrawCircuit _drawCircuit;
-
-		/// <summary>
 		/// Contains all data in this field
 		/// </summary>
 		private readonly Project _project = new Project();
@@ -98,7 +93,7 @@ namespace ImpedanceForms
 			_project.FindAllElements(_project.CurrentCircuit);
 			ElementsTreeView.ExpandAll();
 			UpdateImpedancesDataGridView();
-			//UpdatePictureBox();
+			UpdatePictureBox();
 		}
 
 		/// <summary>
@@ -106,10 +101,14 @@ namespace ImpedanceForms
 		/// </summary>
 		private void UpdatePictureBox()
 		{
+
+			DrawTreeViewManager.DrawCircuit = new DrawCircuit(_project.CurrentCircuit);
 			_circuitGraphics = CircuitPictureBox.CreateGraphics();
-			_drawCircuit = new DrawCircuit(_project.CurrentCircuit);
 			_circuitGraphics.Clear(DefaultBackColor);
-			_drawCircuit.DrawNewCircuit(_circuitGraphics, _pen);
+			DrawTreeViewManager.FillDrawTreeView(_project.CurrentCircuit);
+			DrawTreeViewManager.DrawCircuit.GetSegmentSize();
+			DrawTreeViewManager.DrawCircuit.CalculateCoordinates();
+			DrawTreeViewManager.DrawCircuit.DrawNewCircuit(_circuitGraphics, _pen);
 		}
 
 		public MainForm()
