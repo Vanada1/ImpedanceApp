@@ -592,7 +592,6 @@
 			this.Name = "MainForm";
 			this.Text = "ImpedanceApp";
 			this.Load += new System.EventHandler(this.Main_Load);
-			this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
 			this.ElementGroupBox.ResumeLayout(false);
 			this.tableLayoutPanel3.ResumeLayout(false);
 			this.tableLayoutPanel5.ResumeLayout(false);

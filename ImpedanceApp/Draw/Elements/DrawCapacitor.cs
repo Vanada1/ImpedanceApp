@@ -8,7 +8,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Distance between capacitor plates
 		/// </summary>
-		private const int DistancePlates = 6;
+		private const int DistancePlates = 9;
 
 		/// <summary>
 		/// Connect line
@@ -38,8 +38,8 @@ namespace ImpedanceApp
 		/// <param name="pen"></param>
 		public override void DrawSegment(Graphics graphics, Pen pen)
 		{
-			var x1 = SegmentStartPoint.X + Range;
-			var y = SegmentStartPoint.Y;
+			var x1 = ConnectToLeft.X;
+			var y = ConnectToLeft.Y;
 			var x2 = x1 + ConnectLine;
 			graphics.DrawLine(pen, x1, y, x2, y);
 			graphics.DrawLine(pen, x2, y - LengthPlates, x2, y + LengthPlates);

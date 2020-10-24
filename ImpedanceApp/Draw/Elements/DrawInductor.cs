@@ -23,7 +23,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Size Inductor Element
 		/// </summary>
-		public override Size Size { get; set; } = new Size(3 * CircleRadius, 2 * CircleRadius);
+		public override Size Size { get; set; } = new Size(CircleRadius, 2 * CircleRadius);
 
 		/// <summary>
 		/// <see cref="DrawInductor"/> constructor
@@ -38,8 +38,8 @@ namespace ImpedanceApp
 		/// <param name="pen"></param>
 		public override void DrawSegment(Graphics graphics, Pen pen)
 		{
-			var x = SegmentStartPoint.X + Range;
-			var y = SegmentStartPoint.Y - Range;
+			var x = StartPoint.X + CircleRadius;
+			var y = StartPoint.Y + CircleRadius / 2;
 
 			for (int i = 0; i < 3; i++)
 			{

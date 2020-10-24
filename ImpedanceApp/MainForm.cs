@@ -183,7 +183,9 @@ namespace ImpedanceForms
 				return;
 			}
 
-			if (!double.TryParse(ValueTextBox.Text, out var value))
+			var value = 0.0;
+
+			if (!double.TryParse(ValueTextBox.Text, out value) && node.Segment is Element)
 			{
 				MessageBox.Show(@"Incorrect value. Enter the number ", @"Error",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);

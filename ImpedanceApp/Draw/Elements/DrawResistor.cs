@@ -11,7 +11,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Size <see cref="Resistor"/> Element 
 		/// </summary>
-		public override Size Size { get; set; } = new Size(40, 20);
+		public override Size Size { get; set; } = new Size(30, 15);
 
 		/// <summary>
 		/// <see cref="DrawResistor"/> constructor 
@@ -26,8 +26,8 @@ namespace ImpedanceApp
 		/// <param name="pen"></param>
 		public override void DrawSegment(Graphics graphics, Pen pen)
 		{
-			var rectangle = new Rectangle(SegmentStartPoint.X + Range,
-				SegmentStartPoint.Y - Range, Size.Width, Size.Height);
+			var rectangle = new Rectangle(StartPoint.X,
+				StartPoint.Y, Size.Width, Size.Height);
 			graphics.DrawRectangle(pen, rectangle);
 		}
 

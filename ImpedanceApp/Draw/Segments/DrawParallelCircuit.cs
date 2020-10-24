@@ -7,26 +7,10 @@ namespace ImpedanceApp
 	public class DrawParallelCircuit:DrawableSegment
 	{
 		/// <summary>
-		/// Set and return <see cref="SegmentStartPoint"/>
-		/// </summary>
-		public override Point SegmentStartPoint { get; set; }
-
-		/// <summary>
-		/// Set and return connect position to the element of right side
-		/// </summary>
-		public override Point SegmentEndPoint { get; set; }
-
-		/// <summary>
 		/// Set and return segment size
 		/// </summary>
 		public override Size Size { get; set; }
-
-		/// <summary>
-		/// Set and return element <see cref="ISegment"/>
-		/// </summary>
-		public override ISegment Segment { get; set; }
-
-
+		
 		/// <summary>
 		/// <see cref="DrawParallelCircuit"/> constructor
 		/// </summary>
@@ -38,37 +22,36 @@ namespace ImpedanceApp
 
 		public override void DrawSegment(Graphics graphics, Pen pen)
 		{
-			var startX = SegmentStartPoint.X;
-			var endX = SegmentEndPoint.X;
+			var startX = ConnectToLeft.X;
+			var endX = ConnectToRight.X;
 
 			var leftTopCorner = new Point();
 			var leftBottomCorner = new Point();
 			var rightTopCorner = new Point();
 			var rightBottomCorner = new Point();
 
-			//TODO Дублирование
 			foreach (DrawableSegment node in Nodes)
 			{
 				if (node.Index == 0 )
 				{
 					leftTopCorner.X = startX;
-					leftTopCorner.Y = node.SegmentStartPoint.Y;
+					leftTopCorner.Y = node.ConnectToLeft.Y;
 					rightTopCorner.X = endX;
-					rightTopCorner.Y = node.SegmentStartPoint.Y;
+					rightTopCorner.Y = node.ConnectToRight.Y;
 				}
 
 				if (node.Index == Nodes.Count - 1)
 				{
 					leftBottomCorner.X = startX;
-					leftBottomCorner.Y = node.SegmentStartPoint.Y;
+					leftBottomCorner.Y = node.ConnectToLeft.Y;
 					rightBottomCorner.X = endX;
-					rightBottomCorner.Y = node.SegmentStartPoint.Y;
+					rightBottomCorner.Y = node.ConnectToRight.Y;
 				}
 
-				DrawConnect(new Point(startX, node.SegmentStartPoint.Y), node.SegmentStartPoint,
+				DrawConnect(new Point(ConnectToRight.X, node.ConnectToLeft.Y), node.ConnectToLeft,
 					graphics, pen);
 				node.DrawSegment(graphics, pen);
-				DrawConnect(node.SegmentStartPoint, new Point(endX, node.SegmentStartPoint.Y),
+				DrawConnect(node.ConnectToLeft, new Point(ConnectToRight.X, node.ConnectToLeft.Y),
 					graphics, pen);
 			}
 
@@ -83,41 +66,33 @@ namespace ImpedanceApp
 		{
 			if (Index == 0)
 			{
-				SegmentStartPoint = (Parent as DrawableSegment).SegmentStartPoint;
-				SegmentEndPoint = (Parent as DrawableSegment).SegmentEndPoint;
+				var parent = Parent as DrawableSegment;
+				StartPoint = new Point(parent.StartPoint.X, parent.StartPoint.Y);
 			}
 			else
 			{
 				var prevNode = PrevNode as DrawableSegment;
-				SegmentStartPoint = new Point(prevNode.SegmentEndPoint.X + Range, prevNode.SegmentEndPoint.Y);
-				SegmentEndPoint = new Point(SegmentStartPoint.X + Size.Width + Range, SegmentStartPoint.Y);
+				StartPoint = new Point(prevNode.ConnectToRight.X + Range, prevNode.StartPoint.Y - Size.Height / 2);
 			}
 
 			foreach (DrawableSegment node in Nodes)
 			{
 				if (Nodes.Count == 1)
 				{
-					node.SegmentStartPoint = SegmentStartPoint;
-					node.SegmentEndPoint = SegmentEndPoint;
+					node.StartPoint = StartPoint;
 					return;
 				}
 
-				var middleLine = (SegmentEndPoint.X - SegmentStartPoint.X - Size.Width) / 2;
-				var x = SegmentStartPoint.X + middleLine;
-				var y = 0;
-				if (node.Index == 0)
-				{
-					y = Math.Abs(SegmentStartPoint.Y - Size.Height / 2);
-				}
-				else
+				var y = StartPoint.Y;
+				if(node.Index != 0)
 				{
 					if (node.PrevNode is DrawableSegment prevSegment)
 					{
-						y = prevSegment.SegmentStartPoint.Y + node.Size.Height;
+						y = prevSegment.StartPoint.Y + prevSegment.Size.Height + Range / 2;
 					}
 				}
 
-				node.SegmentStartPoint = new Point(x, y);
+				node.StartPoint = new Point(StartPoint.X, y);
 
 				if (node.Nodes.Count != 0)
 				{
@@ -145,13 +120,13 @@ namespace ImpedanceApp
 		{
 			if (Nodes.Count == 0) return 0;
 
-			var sizeWidth = ((DrawableSegment) Nodes[0]).Size.Width;
+			var sizeWidth = ((DrawableSegment) Nodes[0]).GetSegmentSize().Width;
 
-			foreach (var node in Nodes)
+			foreach (DrawableSegment node in Nodes)
 			{
-				if (node is DrawableSegment segmentNode && segmentNode.Size.Width > sizeWidth)
+				if (node.GetSegmentSize().Width > sizeWidth)
 				{
-					sizeWidth = segmentNode.Size.Width;
+					sizeWidth = node.GetSegmentSize().Width;
 				}
 			}
 

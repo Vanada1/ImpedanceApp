@@ -9,14 +9,19 @@ namespace ImpedanceApp
 	public interface IDrawableSegment
 	{
 		/// <summary>
-		/// Set and return <see cref="SegmentStartPoint"/>
+		/// Set and return <see cref="StartPoint"/>
 		/// </summary>
-		Point SegmentStartPoint { get; set; }
+		Point StartPoint { get; set; }
+
+		/// <summary>
+		/// Set and return connect position to the element of left side
+		/// </summary>
+		Point ConnectToLeft { get; set; }
 
 		/// <summary>
 		/// Set and return connect position to the element of right side
 		/// </summary>
-		Point SegmentEndPoint { get; set; }
+		Point ConnectToRight { get; set; }
 
 		/// <summary>
 		/// Set and return segment size

@@ -54,7 +54,10 @@ namespace Impedance
 			{
 				if (!(segment is ParallelCircuit && segment.SubSegments.Count == 0))
 				{
-					result += 1.0 / segment.CalculateZ(frequency);
+					var segmentResult = segment.CalculateZ(frequency);
+					if (segmentResult == 0) continue;
+
+					result += 1.0 / segmentResult;
 				}
 			}
 

@@ -10,22 +10,66 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Range between Segments
 		/// </summary>
-		protected const int Range = 10;
+		protected const int Range = 20;
 
 		/// <summary>
-		/// Default element width
+		/// Segment point
 		/// </summary>
-		protected const int ElementWidth = 50;
+		private Point _startPoint;
 
 		/// <summary>
-		/// Default element height
+		/// Connect point to left
 		/// </summary>
-		protected const int ElementHeight = 25;
+		private Point _connectToLeft;
 
 		/// <summary>
-		/// Set and return <see cref="SegmentStartPoint"/>
+		/// Connect point to right
 		/// </summary>
-		public abstract Point SegmentStartPoint { get; set; }
+		private Point _connectToRight;
+
+		/// <summary>
+		/// Set and return connect position to the element of left side
+		/// </summary>
+		public Point ConnectToLeft
+		{
+			get => _connectToLeft;
+			set
+			{
+				_connectToLeft = value;
+				_connectToRight = new Point(value.X + Size.Width, value.Y);
+				_startPoint = new Point(value.X, value.Y - Size.Height / 2);
+			}
+		}
+
+		/// <summary>
+		/// Set and return connect position to the element of right side
+		/// </summary>
+		public Point ConnectToRight
+		{
+			get => _connectToRight;
+			set
+			{
+				_connectToRight = value;
+				_connectToLeft = new Point(value.X - Size.Width, value.Y);
+				_startPoint = new Point(value.X - Size.Width, value.Y - Size.Height / 2);
+			}
+		}
+
+		/// <summary>
+		/// Set and return <see cref="StartPoint"/>
+		/// </summary>
+		public Point StartPoint 
+		{
+			get => _startPoint;
+			set
+			{
+				_startPoint = value;
+				_connectToLeft = new Point(value.X,
+					value.Y + Size.Height / 2);
+				_connectToRight = new Point(value.X + Size.Width,
+					value.Y + Size.Height / 2);
+			}
+		}
 
 		/// <summary>
 		/// Set and return segment size
@@ -33,14 +77,9 @@ namespace ImpedanceApp
 		public abstract Size Size { get; set; }
 
 		/// <summary>
-		/// Set and return connect position to the element of right side
-		/// </summary>
-		public abstract Point SegmentEndPoint { get; set; }
-
-		/// <summary>
 		/// Set and return element <see cref="ISegment"/>
 		/// </summary>
-		public abstract ISegment Segment { get; set; }
+		public ISegment Segment { get; set; }
 
 		/// <summary>
 		/// Method for drawing segment

@@ -9,25 +9,10 @@ namespace ImpedanceApp
 	public class DrawSerialCircuit : DrawableSegment
 	{
 		/// <summary>
-		/// Set and return <see cref="SegmentStartPoint"/>
-		/// </summary>
-		public override Point SegmentStartPoint { get; set; }
-
-		/// <summary>
-		/// Set and return connect position to the element of right side
-		/// </summary>
-		public override Point SegmentEndPoint { get; set; }
-
-		/// <summary>
 		/// Set and return segment size
 		/// </summary>
 		public override Size Size { get; set; }
-
-		/// <summary>
-		/// Set and return element <see cref="ISegment"/>
-		/// </summary>
-		public override ISegment Segment { get; set; }
-
+		
 		/// <summary>
 		/// <see cref="DrawSerialCircuit"/> constructor
 		/// </summary>
@@ -44,14 +29,14 @@ namespace ImpedanceApp
 		{
 			foreach (DrawableSegment node in Nodes)
 			{
-				DrawConnect(node.Index == 0 ? SegmentStartPoint : ((DrawableSegment) node.PrevNode).SegmentEndPoint,
-					node.SegmentStartPoint, graphics, pen);
+				DrawConnect(node.Index == 0 ? ConnectToLeft : ((DrawableSegment) node.PrevNode).ConnectToRight,
+					node.ConnectToLeft, graphics, pen);
 
 				node.DrawSegment(graphics, pen);
 
 				if (node.Index == Nodes.Count - 1)
 				{
-					DrawConnect(node.SegmentEndPoint, SegmentEndPoint, graphics, pen);
+					DrawConnect(node.ConnectToRight, ConnectToRight, graphics, pen);
 				}
 			}
 		}
@@ -68,44 +53,37 @@ namespace ImpedanceApp
 
 			if (Index == 0)
 			{
-				SegmentStartPoint = (Parent as DrawableSegment).SegmentStartPoint;
-				SegmentEndPoint = (Parent as DrawableSegment).SegmentEndPoint;
+				StartPoint = (Parent as DrawableSegment).StartPoint;
 			}
 			else
 			{
 				var prevNode = PrevNode as DrawableSegment;
-				SegmentStartPoint = new Point(prevNode.SegmentEndPoint.X + Range, prevNode.SegmentEndPoint.Y);
-				SegmentEndPoint = new Point(SegmentStartPoint.X + Size.Width + Range, SegmentStartPoint.Y);
+				StartPoint = new Point(prevNode.ConnectToRight.X + Range, prevNode.StartPoint.Y);
 			}
 
 			foreach (DrawableSegment node in Nodes)
 			{
-				if (Index == 0)
+				if (node.Index == 0)
 				{
-					node.SegmentStartPoint = new Point(parent.SegmentStartPoint.X,
-						parent.SegmentStartPoint.Y);
+					node.StartPoint = new Point(StartPoint.X,
+						StartPoint.Y);
 				}
 				else
 				{
-					var prevNode = PrevNode as DrawableSegment;
-					node.SegmentStartPoint = new Point(prevNode.SegmentEndPoint.X + Range,
-						prevNode.SegmentEndPoint.Y);
-				}
-
-				if (Index == parent.Nodes.Count - 1)
-				{
-					node.SegmentEndPoint = new Point(parent.SegmentEndPoint.X, parent.SegmentEndPoint.Y);
-				}
-				else
-				{
-					var connectRightX = node.SegmentStartPoint.X + node.Size.Width;
-
-					node.SegmentEndPoint = new Point(connectRightX, SegmentEndPoint.Y);
+					var prevNode = node.PrevNode as DrawableSegment;
+					node.StartPoint = new Point(prevNode.ConnectToRight.X + Range,
+						prevNode.StartPoint.Y);
 				}
 
 				if (node.Nodes.Count != 0)
 				{
 					node.CalculateCoordinates();
+				}
+
+				if (node.Index != 0)
+				{
+					var prevNode = node.PrevNode as DrawableSegment;
+					node.ConnectToLeft = new Point(node.ConnectToLeft.X, prevNode.ConnectToRight.Y);
 				}
 			}
 		}
@@ -118,10 +96,9 @@ namespace ImpedanceApp
 		{
 			var height = GetMaxHeight();
 			var width = 0;
-			foreach (var node in Nodes)
+			foreach (DrawableSegment node in Nodes)
 			{
-				var segmentNode = node as DrawableSegment;
-				width += segmentNode.GetSegmentSize().Width;
+				width += node.GetSegmentSize().Width;
 			}
 
 			Size = new Size(width, height);
@@ -129,17 +106,17 @@ namespace ImpedanceApp
 			return Size;
 		}
 
-		private int GetMaxHeight()
+		protected int GetMaxHeight()
 		{
 			if (Nodes.Count == 0) return 0;
 
-			var sizeHeight = ((DrawableSegment) Nodes[0]).Size.Height;
+			var sizeHeight = ((DrawableSegment) Nodes[0]).GetSegmentSize().Height;
 
 			foreach (var node in Nodes)
 			{
-				if (node is DrawableSegment segmentNode && segmentNode.Size.Height > sizeHeight)
+				if (node is DrawableSegment segmentNode && segmentNode.GetSegmentSize().Height > sizeHeight)
 				{
-					sizeHeight = segmentNode.Size.Height;
+					sizeHeight = segmentNode.GetSegmentSize().Height;
 				}
 			}
 

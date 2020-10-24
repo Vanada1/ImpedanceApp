@@ -6,7 +6,7 @@ namespace ImpedanceApp
 {
 	public class DrawCircuit : DrawSerialCircuit
 	{
-		private const int StartPosition = 10;
+		private int _startPosition = 0;
 
 		/// <summary>
 		/// Set and return Picture
@@ -22,32 +22,56 @@ namespace ImpedanceApp
 
 		public void DrawNewCircuit(Graphics graphics, Pen pen)
 		{
+			GetSegmentSize();
 			if (Size.Width == 0 && Size.Height == 0)
 			{
 				Size = new Size(Picture.Size.Width - Range, Picture.Size.Height - Range);
 			}
 			CalculateCoordinates();
-			var bitmap = new Bitmap(Picture.Size.Width - Range, Picture.Size.Height - Range);
+			var bitmap = new Bitmap(Size.Width + Range, Size.Height + Range);
 			graphics = Graphics.FromImage(bitmap);
 
 			foreach (DrawableSegment node in Nodes)
 			{
+				DrawConnect(node.Index == 0 ? ConnectToLeft : ((DrawableSegment)node.PrevNode).ConnectToRight,
+					node.ConnectToLeft, graphics, pen);
 				node.DrawSegment(graphics, pen);
+				if (node.Index == Nodes.Count - 1)
+				{
+					DrawConnect(node.ConnectToRight, ConnectToRight, graphics, pen);
+				}
 			}
+
 			Picture.Image = bitmap;
 		}
 
 		public override void CalculateCoordinates()
 		{
-
-			SegmentStartPoint = new Point(StartPosition, StartPosition * Size.Height / 2);
-			var endX = SegmentStartPoint.X + Size.Width;
-			SegmentEndPoint = new Point(endX, SegmentStartPoint.Y);
-
+			StartPoint = new Point(0, _startPosition);
+			
 			foreach (DrawableSegment node in Nodes)
 			{
 				node.CalculateCoordinates();
+
+				if (node.Index != 0)
+				{
+					var prevNode = node.PrevNode as DrawableSegment;
+					node.ConnectToLeft = new Point(node.ConnectToLeft.X, prevNode.ConnectToRight.Y);
+				}
 			}
+		}
+
+		public override Size GetSegmentSize()
+		{
+			if(Nodes.Count == 0) return new Size();
+
+			var width = ((DrawableSegment) Nodes[Nodes.Count - 1]).ConnectToRight.X;
+			var height = GetMaxHeight();
+
+			Size = new Size(width, height);
+			_startPosition = height / 2;
+
+			return Size;
 		}
 	}
 }
