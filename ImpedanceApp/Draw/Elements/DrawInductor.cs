@@ -23,7 +23,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Size Inductor Element
 		/// </summary>
-		public override Size Size { get; set; } = new Size(CircleRadius, 2 * CircleRadius);
+		public override Size Size { get; set; } = new Size(3 * CircleRadius, 2 * CircleRadius);
 
 		/// <summary>
 		/// <see cref="DrawInductor"/> constructor

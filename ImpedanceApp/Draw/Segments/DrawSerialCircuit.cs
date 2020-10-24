@@ -55,11 +55,6 @@ namespace ImpedanceApp
 			{
 				StartPoint = (Parent as DrawableSegment).StartPoint;
 			}
-			else
-			{
-				var prevNode = PrevNode as DrawableSegment;
-				StartPoint = new Point(prevNode.ConnectToRight.X + Range, prevNode.StartPoint.Y);
-			}
 
 			foreach (DrawableSegment node in Nodes)
 			{
@@ -112,11 +107,11 @@ namespace ImpedanceApp
 
 			var sizeHeight = ((DrawableSegment) Nodes[0]).GetSegmentSize().Height;
 
-			foreach (var node in Nodes)
+			foreach (DrawableSegment node in Nodes)
 			{
-				if (node is DrawableSegment segmentNode && segmentNode.GetSegmentSize().Height > sizeHeight)
+				if (node.GetSegmentSize().Height > sizeHeight)
 				{
-					sizeHeight = segmentNode.GetSegmentSize().Height;
+					sizeHeight = node.Size.Height;
 				}
 			}
 

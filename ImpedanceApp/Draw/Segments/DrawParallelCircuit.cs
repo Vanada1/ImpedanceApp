@@ -69,11 +69,6 @@ namespace ImpedanceApp
 				var parent = Parent as DrawableSegment;
 				StartPoint = new Point(parent.StartPoint.X, parent.StartPoint.Y);
 			}
-			else
-			{
-				var prevNode = PrevNode as DrawableSegment;
-				StartPoint = new Point(prevNode.ConnectToRight.X + Range, prevNode.StartPoint.Y - Size.Height / 2);
-			}
 
 			foreach (DrawableSegment node in Nodes)
 			{

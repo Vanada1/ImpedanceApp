@@ -28,18 +28,17 @@ namespace ImpedanceApp
 				Size = new Size(Picture.Size.Width - Range, Picture.Size.Height - Range);
 			}
 			CalculateCoordinates();
-			var bitmap = new Bitmap(Size.Width + Range, Size.Height + Range);
+			var bitmap = new Bitmap(Size.Width, Size.Height);
 			graphics = Graphics.FromImage(bitmap);
 
 			foreach (DrawableSegment node in Nodes)
 			{
-				DrawConnect(node.Index == 0 ? ConnectToLeft : ((DrawableSegment)node.PrevNode).ConnectToRight,
-					node.ConnectToLeft, graphics, pen);
-				node.DrawSegment(graphics, pen);
-				if (node.Index == Nodes.Count - 1)
+				if(node.Index != 0)
 				{
-					DrawConnect(node.ConnectToRight, ConnectToRight, graphics, pen);
+					DrawConnect(((DrawableSegment) node.PrevNode).ConnectToRight,
+						node.ConnectToLeft, graphics, pen);
 				}
+				node.DrawSegment(graphics, pen);
 			}
 
 			Picture.Image = bitmap;
@@ -56,6 +55,7 @@ namespace ImpedanceApp
 				if (node.Index != 0)
 				{
 					var prevNode = node.PrevNode as DrawableSegment;
+					node.StartPoint = new Point(prevNode.ConnectToRight.X + Range, prevNode.StartPoint.Y);
 					node.ConnectToLeft = new Point(node.ConnectToLeft.X, prevNode.ConnectToRight.Y);
 				}
 			}
@@ -65,12 +65,13 @@ namespace ImpedanceApp
 		{
 			if(Nodes.Count == 0) return new Size();
 
-			var width = ((DrawableSegment) Nodes[Nodes.Count - 1]).ConnectToRight.X;
-			var height = GetMaxHeight();
+			var lastNode = Nodes[Nodes.Count - 1] as DrawableSegment;
 
-			Size = new Size(width, height);
+			var width = lastNode.ConnectToRight.X + lastNode.Size.Width;
+			var height = GetMaxHeight() + Range;
 			_startPosition = height / 2;
-
+			height *= 2;
+			Size = new Size(width, height);
 			return Size;
 		}
 	}
