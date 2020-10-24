@@ -27,7 +27,7 @@ namespace ImpedanceApp
 			{
 				Size = new Size(Picture.Size.Width - Range, Picture.Size.Height - Range);
 			}
-			CalculateCoordinates();
+			CalculatePoints();
 			var bitmap = new Bitmap(Size.Width, Size.Height);
 			graphics = Graphics.FromImage(bitmap);
 
@@ -38,19 +38,19 @@ namespace ImpedanceApp
 					DrawConnect(((DrawableSegment) node.PrevNode).ConnectToRight,
 						node.ConnectToLeft, graphics, pen);
 				}
-				node.DrawSegment(graphics, pen);
+				node.Draw(graphics, pen);
 			}
 
 			Picture.Image = bitmap;
 		}
 
-		public override void CalculateCoordinates()
+		public override void CalculatePoints()
 		{
 			StartPoint = new Point(0, _startPosition);
 			
 			foreach (DrawableSegment node in Nodes)
 			{
-				node.CalculateCoordinates();
+				node.CalculatePoints();
 
 				if (node.Index != 0)
 				{

@@ -36,7 +36,7 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="graphics"></param>
 		/// <param name="pen"></param>
-		public override void DrawSegment(Graphics graphics, Pen pen)
+		public override void Draw(Graphics graphics, Pen pen)
 		{
 			var x1 = ConnectToLeft.X;
 			var y = ConnectToLeft.Y;
@@ -46,6 +46,13 @@ namespace ImpedanceApp
 			x2 += DistancePlates;
 			graphics.DrawLine(pen, x2, y - LengthPlates, x2, y + LengthPlates);
 			graphics.DrawLine(pen, x2, y, x2 + ConnectLine, y);
+			var parent = Parent as DrawableSegment;
+			if (Index == 0)
+			{
+				DrawConnect(new Point(parent.StartPoint.X, ConnectToLeft.Y),
+					ConnectToLeft, graphics, pen);
+			}
+			
 		}
 
 		/// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using Impedance;
 
@@ -25,18 +26,28 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Draw Serial segment
 		/// </summary>
-		public override void DrawSegment(Graphics graphics, Pen pen)
+		public override void Draw(Graphics graphics, Pen pen)
 		{
 			foreach (DrawableSegment node in Nodes)
 			{
-				DrawConnect(node.Index == 0 ? ConnectToLeft : ((DrawableSegment) node.PrevNode).ConnectToRight,
-					node.ConnectToLeft, graphics, pen);
+				if (node.Index == 0)
+				{
+					DrawConnect(new Point(StartPoint.X, node.ConnectToLeft.Y),
+						ConnectToLeft, graphics, pen);
+				}
+				else
+				{
+					DrawConnect(((DrawableSegment) node.PrevNode).ConnectToRight,
+						node.ConnectToLeft, graphics, pen);
+				}
 
-				node.DrawSegment(graphics, pen);
+				node.Draw(graphics, pen);
 
 				if (node.Index == Nodes.Count - 1)
 				{
-					DrawConnect(node.ConnectToRight, ConnectToRight, graphics, pen);
+					DrawConnect(node.ConnectToRight,
+						new Point(ConnectToRight.X, node.ConnectToRight.Y),
+						graphics, pen);
 				}
 			}
 		}
@@ -44,7 +55,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Calculating the coordinates for each node
 		/// </summary>
-		public override void CalculateCoordinates()
+		public override void CalculatePoints()
 		{
 			if (!(Parent is DrawableSegment parent))
 			{
@@ -53,7 +64,7 @@ namespace ImpedanceApp
 
 			if (Index == 0)
 			{
-				StartPoint = (Parent as DrawableSegment).StartPoint;
+				StartPoint = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
 			}
 
 			foreach (DrawableSegment node in Nodes)
@@ -72,7 +83,7 @@ namespace ImpedanceApp
 
 				if (node.Nodes.Count != 0)
 				{
-					node.CalculateCoordinates();
+					node.CalculatePoints();
 				}
 
 				if (node.Index != 0)
@@ -96,7 +107,7 @@ namespace ImpedanceApp
 				width += node.GetSegmentSize().Width;
 			}
 
-			Size = new Size(width, height);
+			Size = new Size(width + Range, height);
 
 			return Size;
 		}

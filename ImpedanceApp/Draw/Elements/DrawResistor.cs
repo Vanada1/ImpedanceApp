@@ -24,11 +24,18 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="graphics"></param>
 		/// <param name="pen"></param>
-		public override void DrawSegment(Graphics graphics, Pen pen)
+		public override void Draw(Graphics graphics, Pen pen)
 		{
 			var rectangle = new Rectangle(StartPoint.X,
 				StartPoint.Y, Size.Width, Size.Height);
 			graphics.DrawRectangle(pen, rectangle);
+
+			var parent = Parent as DrawableSegment;
+			if (Index == 0)
+			{
+				DrawConnect(new Point(parent.StartPoint.X, ConnectToLeft.Y),
+					ConnectToLeft, graphics, pen);
+			}
 		}
 
 		/// <summary>

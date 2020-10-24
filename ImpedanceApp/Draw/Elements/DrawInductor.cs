@@ -36,15 +36,22 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="graphics"></param>
 		/// <param name="pen"></param>
-		public override void DrawSegment(Graphics graphics, Pen pen)
+		public override void Draw(Graphics graphics, Pen pen)
 		{
-			var x = StartPoint.X + CircleRadius;
+			var x = StartPoint.X;
 			var y = StartPoint.Y + CircleRadius / 2;
 
 			for (int i = 0; i < 3; i++)
 			{
 				graphics.DrawArc(pen,x,y, CircleRadius, CircleRadius, StartAngle, EndAngle);
 				x += CircleRadius;
+			}
+
+			var parent = Parent as DrawableSegment;
+			if (Index == 0)
+			{
+				DrawConnect(new Point(parent.StartPoint.X, ConnectToLeft.Y),
+					ConnectToLeft, graphics, pen);
 			}
 		}
 

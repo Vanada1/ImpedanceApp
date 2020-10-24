@@ -10,7 +10,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Range between Segments
 		/// </summary>
-		protected const int Range = 20;
+		protected const int Range = 10;
 
 		/// <summary>
 		/// Segment point
@@ -84,12 +84,12 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Method for drawing segment
 		/// </summary>
-		public abstract void DrawSegment(Graphics graphics, Pen pen);
+		public abstract void Draw(Graphics graphics, Pen pen);
 
 		/// <summary>
 		/// Calculating the coordinates for each node
 		/// </summary>
-		public abstract void CalculateCoordinates();
+		public abstract void CalculatePoints();
 
 		/// <summary>
 		/// Get segment size

@@ -20,49 +20,41 @@ namespace ImpedanceApp
 			Segment = segment;
 		}
 
-		public override void DrawSegment(Graphics graphics, Pen pen)
+		public override void Draw(Graphics graphics, Pen pen)
 		{
 			var startX = ConnectToLeft.X;
 			var endX = ConnectToRight.X;
 
-			var leftTopCorner = new Point();
-			var leftBottomCorner = new Point();
-			var rightTopCorner = new Point();
-			var rightBottomCorner = new Point();
-
 			foreach (DrawableSegment node in Nodes)
 			{
-				if (node.Index == 0 )
+				if (!(node is DrawElement) && node.Nodes.Count == 0)
 				{
-					leftTopCorner.X = startX;
-					leftTopCorner.Y = node.ConnectToLeft.Y;
-					rightTopCorner.X = endX;
-					rightTopCorner.Y = node.ConnectToRight.Y;
+					continue;
 				}
 
-				if (node.Index == Nodes.Count - 1)
-				{
-					leftBottomCorner.X = startX;
-					leftBottomCorner.Y = node.ConnectToLeft.Y;
-					rightBottomCorner.X = endX;
-					rightBottomCorner.Y = node.ConnectToRight.Y;
-				}
+				DrawConnect(new Point(ConnectToLeft.X, node.ConnectToLeft.Y), 
+					node.ConnectToLeft, graphics, pen);
 
-				DrawConnect(new Point(ConnectToRight.X, node.ConnectToLeft.Y), node.ConnectToLeft,
-					graphics, pen);
-				node.DrawSegment(graphics, pen);
-				DrawConnect(node.ConnectToLeft, new Point(ConnectToRight.X, node.ConnectToLeft.Y),
-					graphics, pen);
+				node.Draw(graphics, pen);
+
+				DrawConnect(node.ConnectToRight, new Point(ConnectToRight.X, node.ConnectToRight.Y),
+						graphics, pen);
 			}
 
 			if (Nodes.Count > 1)
 			{
-				DrawConnect(leftTopCorner, leftBottomCorner, graphics, pen);
-				DrawConnect(rightTopCorner, rightBottomCorner, graphics, pen);
+				var topY = (Nodes[0] as DrawableSegment).ConnectToLeft.Y;
+				var bottomY = (Nodes[Nodes.Count - 1] as DrawableSegment).ConnectToLeft.Y;
+				DrawConnect(new Point(startX, topY),
+					new Point(startX, bottomY), graphics, pen);
+				topY = (Nodes[0] as DrawableSegment).ConnectToRight.Y;
+				bottomY = (Nodes[Nodes.Count - 1] as DrawableSegment).ConnectToRight.Y;
+				DrawConnect(new Point(endX, topY),
+					new Point(endX, bottomY), graphics, pen);
 			}
 		}
 
-		public override void CalculateCoordinates()
+		public override void CalculatePoints()
 		{
 			if (Index == 0)
 			{
@@ -87,11 +79,17 @@ namespace ImpedanceApp
 					}
 				}
 
-				node.StartPoint = new Point(StartPoint.X, y);
+				node.StartPoint = new Point(StartPoint.X + Range, y);
 
 				if (node.Nodes.Count != 0)
 				{
-					node.CalculateCoordinates();
+					node.CalculatePoints();
+				}
+
+
+				if (ConnectToRight.X == node.ConnectToRight.X)
+				{
+					ConnectToRight = new Point(ConnectToRight.X, ConnectToRight.Y);
 				}
 			}
 		}
@@ -106,7 +104,7 @@ namespace ImpedanceApp
 				height += segmentNode.GetSegmentSize().Height;
 			}
 
-			Size = new Size(width, height);
+			Size = new Size(width + Range, height);
 
 			return Size;
 		}

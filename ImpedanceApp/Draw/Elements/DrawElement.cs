@@ -16,21 +16,17 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Method for drawing segment
 		/// </summary>
-		public abstract override void DrawSegment(Graphics graphics, Pen pen);
+		public abstract override void Draw(Graphics graphics, Pen pen);
 
 		/// <summary>
 		/// Calculating the coordinates for each node
 		/// </summary>
-		public override void CalculateCoordinates()
+		public override void CalculatePoints()
 		{
 			if (!(Parent is DrawableSegment parent))
 			{
 				throw new ArgumentException("Parent is not " + nameof(DrawableSegment));
 			}
-
-			var startX = (parent.StartPoint.X + parent.Size.Width) / parent.Nodes.Count * Index + 5;
-
-			StartPoint = new Point(startX, parent.StartPoint.Y);
 
 			if (Index == 0)
 			{
@@ -40,7 +36,7 @@ namespace ImpedanceApp
 			else
 			{
 				var prevNode = PrevNode as DrawableSegment;
-				StartPoint = new Point(prevNode.ConnectToRight.X + Range,
+				StartPoint = new Point(prevNode.ConnectToRight.X,
 					prevNode.StartPoint.Y);
 			}
 

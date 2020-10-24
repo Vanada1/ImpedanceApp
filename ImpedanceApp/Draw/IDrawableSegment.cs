@@ -36,12 +36,12 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Method for drawing segment
 		/// </summary>
-		void DrawSegment(Graphics graphics, Pen pen);
+		void Draw(Graphics graphics, Pen pen);
 
 		/// <summary>
 		/// Calculating the coordinates for each node
 		/// </summary>
-		void CalculateCoordinates();
+		void CalculatePoints();
 
 		/// <summary>
 		/// Get Segment size
