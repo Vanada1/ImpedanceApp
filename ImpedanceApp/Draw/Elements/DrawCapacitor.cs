@@ -61,7 +61,7 @@ namespace ImpedanceApp
 		/// <returns><see cref="Capacitor"/> size</returns>
 		public override Size GetSegmentSize()
 		{
-			return new Size(Size.Width + Range, Size.Height);
+			return Size;
 		}
 	}
 }

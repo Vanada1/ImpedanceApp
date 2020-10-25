@@ -22,9 +22,6 @@ namespace ImpedanceApp
 
 		public override void Draw(Graphics graphics, Pen pen)
 		{
-			var startX = ConnectToLeft.X;
-			var endX = ConnectToRight.X;
-
 			foreach (DrawableSegment node in Nodes)
 			{
 				if (!(node is DrawElement) && node.Nodes.Count == 0)
@@ -41,17 +38,19 @@ namespace ImpedanceApp
 						graphics, pen);
 			}
 
-			if (Nodes.Count > 1)
-			{
-				var topY = (Nodes[0] as DrawableSegment).ConnectToLeft.Y;
-				var bottomY = (Nodes[Nodes.Count - 1] as DrawableSegment).ConnectToLeft.Y;
-				DrawConnect(new Point(startX, topY),
-					new Point(startX, bottomY), graphics, pen);
-				topY = (Nodes[0] as DrawableSegment).ConnectToRight.Y;
-				bottomY = (Nodes[Nodes.Count - 1] as DrawableSegment).ConnectToRight.Y;
-				DrawConnect(new Point(endX, topY),
-					new Point(endX, bottomY), graphics, pen);
-			}
+			if (Nodes.Count <= 1) return;
+
+			var startX = ConnectToLeft.X;
+			var topY = ((DrawableSegment) Nodes[0]).ConnectToLeft.Y;
+			var bottomY = ((DrawableSegment) Nodes[Nodes.Count - 1]).ConnectToLeft.Y;
+			DrawConnect(new Point(startX, topY),
+				new Point(startX, bottomY), graphics, pen);
+
+			var endX = ConnectToRight.X;
+			topY = ((DrawableSegment) Nodes[0]).ConnectToRight.Y;
+			bottomY = ((DrawableSegment) Nodes[Nodes.Count - 1]).ConnectToRight.Y;
+			DrawConnect(new Point(endX, topY),
+				new Point(endX, bottomY), graphics, pen);
 		}
 
 		public override void CalculatePoints()
@@ -60,26 +59,30 @@ namespace ImpedanceApp
 			{
 				var parent = Parent as DrawableSegment;
 				StartPoint = new Point(parent.StartPoint.X, parent.StartPoint.Y);
+				ConnectToLeft = new Point(StartPoint.X, parent.ConnectToLeft.Y);
 			}
 
 			foreach (DrawableSegment node in Nodes)
 			{
 				if (Nodes.Count == 1)
 				{
-					node.StartPoint = StartPoint;
+					var parent = node.Parent as DrawableSegment;
+					node.ConnectToLeft = new Point(StartPoint.X, parent.ConnectToLeft.Y);
 					return;
 				}
+
+				var x = StartPoint.X + Size.Width / 2 - node.Size.Width / 2;
 
 				var y = StartPoint.Y;
 				if(node.Index != 0)
 				{
 					if (node.PrevNode is DrawableSegment prevSegment)
 					{
-						y = prevSegment.StartPoint.Y + prevSegment.Size.Height + Range / 2;
+						y = prevSegment.StartPoint.Y + prevSegment.Size.Height + Range;
 					}
 				}
 
-				node.StartPoint = new Point(StartPoint.X + Range, y);
+				node.StartPoint = new Point(x, y);
 
 				if (node.Nodes.Count != 0)
 				{
@@ -87,24 +90,27 @@ namespace ImpedanceApp
 				}
 
 
-				if (ConnectToRight.X == node.ConnectToRight.X)
+				while (ConnectToRight.X <= node.ConnectToRight.X)
 				{
-					ConnectToRight = new Point(ConnectToRight.X, ConnectToRight.Y);
+					Size = new Size(Size.Width + Range, Size.Height);
+					ConnectToRight = new Point(ConnectToRight.X + Range, ConnectToRight.Y);
 				}
 			}
 		}
 
 		public override Size GetSegmentSize()
 		{
-			var width = GetMaxWidth();
+			if (Nodes.Count == 0) return new Size(0, 0);
+
+			var width = GetMaxWidth() + Range;
 			var height = 0;
 			foreach (var node in Nodes)
 			{
 				var segmentNode = node as DrawableSegment;
-				height += segmentNode.GetSegmentSize().Height;
+				height += segmentNode.GetSegmentSize().Height + Range;
 			}
 
-			Size = new Size(width + Range, height);
+			Size = new Size(width, height);
 
 			return Size;
 		}

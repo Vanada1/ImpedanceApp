@@ -69,27 +69,22 @@ namespace ImpedanceApp
 
 			foreach (DrawableSegment node in Nodes)
 			{
-				if (node.Index == 0)
-				{
-					node.StartPoint = new Point(StartPoint.X,
-						StartPoint.Y);
-				}
-				else
-				{
-					var prevNode = node.PrevNode as DrawableSegment;
-					node.StartPoint = new Point(prevNode.ConnectToRight.X + Range,
-						prevNode.StartPoint.Y);
-				}
+				var prevNode = node.PrevNode as DrawableSegment;
 
 				if (node.Nodes.Count != 0)
 				{
 					node.CalculatePoints();
 				}
 
-				if (node.Index != 0)
+				if (node.Index == 0)
 				{
-					var prevNode = node.PrevNode as DrawableSegment;
-					node.ConnectToLeft = new Point(node.ConnectToLeft.X, prevNode.ConnectToRight.Y);
+					node.ConnectToLeft = new Point(StartPoint.X,
+						ConnectToLeft.Y);
+				}
+				else
+				{
+					node.ConnectToLeft = new Point(prevNode.ConnectToRight.X + Range,
+						ConnectToRight.Y);
 				}
 			}
 		}
@@ -100,11 +95,13 @@ namespace ImpedanceApp
 		/// <returns><see cref="SerialCircuit"/> size</returns>
 		public override Size GetSegmentSize()
 		{
+			if (Nodes.Count == 0) return new Size(0, 0);
+
 			var height = GetMaxHeight();
 			var width = 0;
 			foreach (DrawableSegment node in Nodes)
 			{
-				width += node.GetSegmentSize().Width;
+				width += node.GetSegmentSize().Width + Range / 2;
 			}
 
 			Size = new Size(width + Range, height);
@@ -126,7 +123,7 @@ namespace ImpedanceApp
 				}
 			}
 
-			return sizeHeight;
+			return sizeHeight + Range;
 		}
 }
 }

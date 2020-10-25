@@ -8,6 +8,8 @@ namespace ImpedanceApp
 	{
 		private int _startPosition = 0;
 
+		private const int Scale = 2;
+
 		/// <summary>
 		/// Set and return Picture
 		/// </summary>
@@ -41,6 +43,8 @@ namespace ImpedanceApp
 				node.Draw(graphics, pen);
 			}
 
+			bitmap = new Bitmap(bitmap, new Size(Size.Width * Scale, Size.Height * Scale));
+
 			Picture.Image = bitmap;
 		}
 
@@ -67,10 +71,9 @@ namespace ImpedanceApp
 
 			var lastNode = Nodes[Nodes.Count - 1] as DrawableSegment;
 
-			var width = lastNode.ConnectToRight.X + lastNode.Size.Width;
-			var height = GetMaxHeight() + Range;
-			_startPosition = height / 2;
-			height *= 2;
+			var width = lastNode.ConnectToRight.X + Range;
+			var maxHeight = GetMaxHeight();
+			var height = maxHeight;
 			Size = new Size(width, height);
 			return Size;
 		}

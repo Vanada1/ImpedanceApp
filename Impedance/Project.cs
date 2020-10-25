@@ -21,12 +21,25 @@ namespace Impedance
 			var segment =
 				new SegmentObservableCollection
 				{
-					new Resistor("R", 100),
-					new ParallelCircuit(new SegmentObservableCollection
+					new SerialCircuit(new SegmentObservableCollection
+					{
+						new Inductor("jng5", 56.0),
+						new Resistor("fr4tt", 32.6),
+						new ParallelCircuit(new SegmentObservableCollection()
 						{
-							new Capacitor("C", 0.002),
-							new Inductor("L", 10)
+							new Capacitor("th", 24.6),
+							new SerialCircuit(new SegmentObservableCollection()
+							{
+								new Resistor("g55", 43.6),
+								new Resistor("shf7", 21),
+							})
 						})
+					}),
+					new ParallelCircuit(new SegmentObservableCollection
+					{
+						new Resistor("g56", 7.8),
+						new Capacitor("duj", 22.6)
+					}),
 				};
 			AllExamples.Add(new Circuit("First example", segment));
 
@@ -63,31 +76,81 @@ namespace Impedance
 
 			segment = new SegmentObservableCollection
 			{
-				new Resistor("R", 40.0),
-				new Capacitor("C1", 0.002),
-				new Capacitor("C2", 0.002)
+				new ParallelCircuit(new SegmentObservableCollection
+				{
+					new Inductor("bb7", 11.3),
+					new Resistor("ji9", 81.0),
+					new Capacitor("trg", 43.2),
+					new SerialCircuit(new SegmentObservableCollection()
+					{
+						new Resistor("asf", 54),
+						new Resistor("efe3", 32.8),
+					})
+				}),
+				new ParallelCircuit(new SegmentObservableCollection
+				{
+					new Inductor("dfg4", 55.8),
+					new Inductor("gg6", 89.3),
+				}),
+				new SerialCircuit(new SegmentObservableCollection
+				{
+					new Capacitor("j55t", 32.5),
+					new Resistor("sct", 4.6)
+				})
 			};
 			AllExamples.Add(new Circuit("Third example", segment));
 
 			segment = new SegmentObservableCollection
 			{
-				new Resistor("R1", 40.0),
 				new ParallelCircuit(new SegmentObservableCollection
+				{
+					new SerialCircuit(new SegmentObservableCollection
 					{
-						new Resistor("R2", 40.0),
-						new Capacitor("C", 0.002)
-					})
+						new Resistor("dht5", 32.9),
+						new Resistor("ret3", 33.7),
+					}),
+					new SerialCircuit(new SegmentObservableCollection
+					{
+						new Inductor("fhj7", 43.9),
+						new Capacitor("lop8", 11.2),
+						new Resistor("rte3", 66.9),
+					}),
+					new Inductor("ff5", 7.8)
+				}),
+				new SerialCircuit(new SegmentObservableCollection
+				{
+					new Inductor("nh78", 57.8),
+					new Capacitor("d45t", 90.4),
+					new Capacitor("rgr", 41.2),
+					new Capacitor("rdg5", 77.3),
+				}),
 			};
 			AllExamples.Add(new Circuit("Fourth example", segment));
 
 			segment = new SegmentObservableCollection
 			{
-				new ParallelCircuit( new SegmentObservableCollection
+				new SerialCircuit(new SegmentObservableCollection
 				{
-					new Resistor("R", 5.0),
-					new Inductor("L1", 0.05)
+					new Resistor("h6j7", 32.5),
+					new Resistor("s23", 4.6),
+					new Resistor("rtr4", 54.8)
 				}),
-				new Capacitor("C1", 0.01)
+				new ParallelCircuit(new SegmentObservableCollection
+				{
+					new SerialCircuit(new SegmentObservableCollection
+					{
+						new Resistor("g5h6", 44.7),
+						new Capacitor("a23", 1.9),
+						new Capacitor("ty6k", 87.0)
+					}),
+					new SerialCircuit(new SegmentObservableCollection
+					{
+						new Resistor("f67", 55.2),
+						new Capacitor("h89", 77.3),
+					}),
+					new Inductor("bb7", 11.3),
+					new Inductor("d4t", 88.9),
+				}),
 			};
 			AllExamples.Add(new Circuit("Fifth example", segment));
 
