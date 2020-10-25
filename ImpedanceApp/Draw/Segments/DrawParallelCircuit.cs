@@ -107,12 +107,6 @@ namespace ImpedanceApp
 				{
 					node.CalculatePoints();
 				}
-
-				while (ConnectToRight.X <= node.ConnectToRight.X)
-				{
-					Size = new Size(Size.Width + Range / 2, Size.Height);
-					ConnectToRight = new Point(ConnectToRight.X + Range / 2, ConnectToRight.Y);
-				}
 			}
 
 			if (Nodes.Count % 2 == 1)
