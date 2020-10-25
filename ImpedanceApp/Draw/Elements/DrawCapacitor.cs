@@ -3,6 +3,9 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Draw <see cref="Capacitor"/> class
+	/// </summary>
 	public class DrawCapacitor : DrawElement
 	{
 		/// <summary>
@@ -59,7 +62,7 @@ namespace ImpedanceApp
 		/// Get <see cref="Capacitor"/> size
 		/// </summary>
 		/// <returns><see cref="Capacitor"/> size</returns>
-		public override Size GetSegmentSize()
+		public override Size CalculateSegmentSize()
 		{
 			return Size;
 		}

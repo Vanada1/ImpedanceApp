@@ -7,6 +7,9 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Draw <see cref="SerialCircuit"/> class
+	/// </summary>
 	public class DrawSerialCircuit : DrawableSegment
 	{
 		/// <summary>
@@ -24,7 +27,7 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
-		/// Draw Serial segment
+		/// Draw <see cref="SerialCircuit"/> segment
 		/// </summary>
 		public override void Draw(Graphics graphics, Pen pen)
 		{
@@ -93,15 +96,15 @@ namespace ImpedanceApp
 		/// Get <see cref="SerialCircuit"/> size
 		/// </summary>
 		/// <returns><see cref="SerialCircuit"/> size</returns>
-		public override Size GetSegmentSize()
+		public override Size CalculateSegmentSize()
 		{
 			if (Nodes.Count == 0) return new Size(0, 0);
 
-			var height = GetMaxHeight();
+			var height = FindMaxHeight();
 			var width = 0;
 			foreach (DrawableSegment node in Nodes)
 			{
-				width += node.GetSegmentSize().Width + Range / 2;
+				width += node.CalculateSegmentSize().Width + Range / 2;
 			}
 
 			Size = new Size(width + Range, height);
@@ -109,15 +112,19 @@ namespace ImpedanceApp
 			return Size;
 		}
 
-		protected int GetMaxHeight()
+		/// <summary>
+		/// Find max Height between all SubSegments
+		/// </summary>
+		/// <returns>SubSegments max Height </returns>
+		protected int FindMaxHeight()
 		{
 			if (Nodes.Count == 0) return 0;
 
-			var sizeHeight = ((DrawableSegment) Nodes[0]).GetSegmentSize().Height;
+			var sizeHeight = ((DrawableSegment) Nodes[0]).CalculateSegmentSize().Height;
 
 			foreach (DrawableSegment node in Nodes)
 			{
-				if (node.GetSegmentSize().Height > sizeHeight)
+				if (node.CalculateSegmentSize().Height > sizeHeight)
 				{
 					sizeHeight = node.Size.Height;
 				}

@@ -5,6 +5,9 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Base class for all Segments of <see cref="Circuit"/>
+	/// </summary>
 	public abstract class DrawableSegment : TreeNode, IDrawableSegment
 	{
 		/// <summary>
@@ -95,20 +98,7 @@ namespace ImpedanceApp
 		/// Get segment size
 		/// </summary>
 		/// <returns>Segment size</returns>
-		public abstract Size GetSegmentSize();
-
-		/// <summary>
-		/// Draw connection
-		/// </summary>
-		/// <param name="startPoint">Start Point</param>
-		/// <param name="graphics"></param>
-		/// <param name="pen"></param>
-		protected static void DrawConnect(Point startPoint, Graphics graphics, Pen pen)
-		{
-			var x = startPoint.X;
-			var y = startPoint.Y;
-			graphics.DrawLine(pen, x, y, x + Range, y);
-		}
+		public abstract Size CalculateSegmentSize();
 
 		/// <summary>
 		/// Method for drawing connection line

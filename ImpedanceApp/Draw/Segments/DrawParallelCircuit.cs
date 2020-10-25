@@ -4,6 +4,9 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Draw <see cref="ParallelCircuit"/> class
+	/// </summary>
 	public class DrawParallelCircuit:DrawableSegment
 	{
 		/// <summary>
@@ -20,6 +23,11 @@ namespace ImpedanceApp
 			Segment = segment;
 		}
 
+		/// <summary>
+		/// Draw <see cref="ParallelCircuit"/>
+		/// </summary>
+		/// <param name="graphics"></param>
+		/// <param name="pen"></param>
 		public override void Draw(Graphics graphics, Pen pen)
 		{
 			foreach (DrawableSegment node in Nodes)
@@ -53,6 +61,9 @@ namespace ImpedanceApp
 				new Point(endX, bottomY), graphics, pen);
 		}
 
+		/// <summary>
+		/// Calculate all points for SubSegments of <see cref="ParallelCircuit"/>
+		/// </summary>
 		public override void CalculatePoints()
 		{
 			if (Index == 0)
@@ -98,16 +109,20 @@ namespace ImpedanceApp
 			}
 		}
 
-		public override Size GetSegmentSize()
+		/// <summary>
+		/// Calculate <see cref="ParallelCircuit"/> size
+		/// </summary>
+		/// <returns><see cref="ParallelCircuit"/> size</returns>
+		public override Size CalculateSegmentSize()
 		{
 			if (Nodes.Count == 0) return new Size(0, 0);
 
-			var width = GetMaxWidth() + Range;
+			var width = FindMaxWidth() + Range;
 			var height = 0;
 			foreach (var node in Nodes)
 			{
 				var segmentNode = node as DrawableSegment;
-				height += segmentNode.GetSegmentSize().Height + Range;
+				height += segmentNode.CalculateSegmentSize().Height + Range;
 			}
 
 			Size = new Size(width, height);
@@ -115,17 +130,21 @@ namespace ImpedanceApp
 			return Size;
 		}
 
-		private int GetMaxWidth()
+		/// <summary>
+		/// Find max Width between all SubSegments
+		/// </summary>
+		/// <returns>SubSegments max Width </returns>
+		private int FindMaxWidth()
 		{
 			if (Nodes.Count == 0) return 0;
 
-			var sizeWidth = ((DrawableSegment) Nodes[0]).GetSegmentSize().Width;
+			var sizeWidth = ((DrawableSegment) Nodes[0]).CalculateSegmentSize().Width;
 
 			foreach (DrawableSegment node in Nodes)
 			{
-				if (node.GetSegmentSize().Width > sizeWidth)
+				if (node.CalculateSegmentSize().Width > sizeWidth)
 				{
-					sizeWidth = node.GetSegmentSize().Width;
+					sizeWidth = node.CalculateSegmentSize().Width;
 				}
 			}
 

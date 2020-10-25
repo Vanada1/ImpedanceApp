@@ -106,7 +106,7 @@ namespace ImpedanceForms
 			_circuitGraphics = CircuitPictureBox.CreateGraphics();
 			_circuitGraphics.Clear(DefaultBackColor);
 			DrawTreeViewManager.FillDrawTreeView(_project.CurrentCircuit);
-			DrawTreeViewManager.DrawCircuit.GetSegmentSize();
+			DrawTreeViewManager.DrawCircuit.CalculateSegmentSize();
 			DrawTreeViewManager.DrawCircuit.CalculatePoints();
 			DrawTreeViewManager.DrawCircuit.DrawNewCircuit(_circuitGraphics, _pen);
 		}

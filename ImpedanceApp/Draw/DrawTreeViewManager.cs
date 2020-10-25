@@ -5,6 +5,9 @@ using System.Drawing;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Draw Tree View Manager class
+	/// </summary>
 	public static class DrawTreeViewManager
 	{
 		public static DrawCircuit DrawCircuit { get; set; }

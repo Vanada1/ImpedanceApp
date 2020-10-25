@@ -4,10 +4,19 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Draw <see cref="Circuit"/> class
+	/// </summary>
 	public class DrawCircuit : DrawSerialCircuit
 	{
+		/// <summary>
+		/// Start position for draw
+		/// </summary>
 		private int _startPosition = 0;
 
+		/// <summary>
+		/// Scale picture size
+		/// </summary>
 		private const int Scale = 2;
 
 		/// <summary>
@@ -22,9 +31,14 @@ namespace ImpedanceApp
 		public DrawCircuit(ISegment segment) : base(segment)
 		{ }
 
+		/// <summary>
+		/// Draw <see cref="Circuit"/> 
+		/// </summary>
+		/// <param name="graphics"></param>
+		/// <param name="pen"></param>
 		public void DrawNewCircuit(Graphics graphics, Pen pen)
 		{
-			GetSegmentSize();
+			CalculateSegmentSize();
 			if (Size.Width == 0 && Size.Height == 0)
 			{
 				Size = new Size(Picture.Size.Width - Range, Picture.Size.Height - Range);
@@ -48,6 +62,9 @@ namespace ImpedanceApp
 			Picture.Image = bitmap;
 		}
 
+		/// <summary>
+		/// Calculate all points for segments
+		/// </summary>
 		public override void CalculatePoints()
 		{
 			StartPoint = new Point(0, _startPosition);
@@ -65,14 +82,18 @@ namespace ImpedanceApp
 			}
 		}
 
-		public override Size GetSegmentSize()
+		/// <summary>
+		/// Calculate <see cref="Circuit"/> size
+		/// </summary>
+		/// <returns><see cref="Circuit"/> size</returns>
+		public override Size CalculateSegmentSize()
 		{
 			if(Nodes.Count == 0) return new Size();
 
 			var lastNode = Nodes[Nodes.Count - 1] as DrawableSegment;
 
 			var width = lastNode.ConnectToRight.X + Range;
-			var maxHeight = GetMaxHeight();
+			var maxHeight = FindMaxHeight();
 			var height = maxHeight;
 			Size = new Size(width, height);
 			return Size;

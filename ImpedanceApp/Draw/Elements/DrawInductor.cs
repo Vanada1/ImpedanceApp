@@ -3,6 +3,9 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Draw <see cref="Inductor"/> class
+	/// </summary>
 	public class DrawInductor:DrawElement
 	{
 		/// <summary>
@@ -11,19 +14,29 @@ namespace ImpedanceApp
 		private const int CircleRadius = 10;
 
 		/// <summary>
+		/// Circle diameter 
+		/// </summary>
+		private const int CircleDiameter = CircleRadius * 2;
+
+		/// <summary>
+		/// Circle count in <see cref="Inductor"/>
+		/// </summary>
+		private const int CircleCount = 3;
+
+		/// <summary>
 		/// Start angle
 		/// </summary>
-		private const int StartAngle = 0;
+		private const int StartAngle = 180;
 
 		/// <summary>
 		/// End angle
 		/// </summary>
-		private const int EndAngle = 180;
+		private const int SweepAngle = 180;
 
 		/// <summary>
 		/// Size Inductor Element
 		/// </summary>
-		public override Size Size { get; set; } = new Size(3 * CircleRadius, 2 * CircleRadius);
+		public override Size Size { get; set; } = new Size(CircleCount * CircleRadius, CircleDiameter);
 
 		/// <summary>
 		/// <see cref="DrawInductor"/> constructor
@@ -41,9 +54,9 @@ namespace ImpedanceApp
 			var x = StartPoint.X;
 			var y = StartPoint.Y + CircleRadius / 2;
 
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < CircleCount; i++)
 			{
-				graphics.DrawArc(pen,x,y, CircleRadius, CircleRadius, StartAngle, EndAngle);
+				graphics.DrawArc(pen,x,y, CircleRadius, CircleRadius, StartAngle, SweepAngle);
 				x += CircleRadius;
 			}
 
@@ -59,7 +72,7 @@ namespace ImpedanceApp
 		/// Get <see cref="Inductor"/> size
 		/// </summary>
 		/// <returns><see cref="Inductor"/> size</returns>
-		public override Size GetSegmentSize()
+		public override Size CalculateSegmentSize()
 		{
 			return Size;
 		}

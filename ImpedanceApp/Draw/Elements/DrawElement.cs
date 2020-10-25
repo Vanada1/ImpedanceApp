@@ -6,8 +6,15 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Base class for all elements
+	/// </summary>
 	public abstract class DrawElement : DrawableSegment
 	{
+		/// <summary>
+		/// Base constructor for all elements
+		/// </summary>
+		/// <param name="segment"><see cref="Element"/></param>
 		protected DrawElement(ISegment segment)
 		{
 			Segment = segment;

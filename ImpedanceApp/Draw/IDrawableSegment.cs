@@ -6,6 +6,9 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Draw segments interface
+	/// </summary>
 	public interface IDrawableSegment
 	{
 		/// <summary>
@@ -47,6 +50,6 @@ namespace ImpedanceApp
 		/// Get Segment size
 		/// </summary>
 		/// <returns>Segment size</returns>
-		Size GetSegmentSize();
+		Size CalculateSegmentSize();
 	}
 }

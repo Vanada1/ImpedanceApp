@@ -6,12 +6,25 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+	/// <summary>
+	/// Draw <see cref="Resistor"/> class
+	/// </summary>
 	public class DrawResistor : DrawElement
 	{
 		/// <summary>
+		/// Rectangle width
+		/// </summary>
+		private const int Width = 30;
+
+		/// <summary>
+		/// Rectangle height
+		/// </summary>
+		private const int Height = 15;
+
+		/// <summary>
 		/// Size <see cref="Resistor"/> Element 
 		/// </summary>
-		public override Size Size { get; set; } = new Size(30, 15);
+		public override Size Size { get; set; } = new Size(Width, Height);
 
 		/// <summary>
 		/// <see cref="DrawResistor"/> constructor 
@@ -42,7 +55,7 @@ namespace ImpedanceApp
 		/// Get <see cref="Resistor"/> size
 		/// </summary>
 		/// <returns><see cref="Resistor"/> size</returns>
-		public override Size GetSegmentSize()
+		public override Size CalculateSegmentSize()
 		{
 			return Size;
 		}
