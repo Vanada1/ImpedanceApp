@@ -67,16 +67,24 @@ namespace ImpedanceApp
 
 			if (Index == 0)
 			{
-				StartPoint = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
+				if (parent is DrawCircuit)
+				{
+					ConnectToLeft = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
+				}
+				else
+				{
+					StartPoint = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
+				}
 			}
 
 			foreach (DrawableSegment node in Nodes)
 			{
-				var prevNode = node.PrevNode as DrawableSegment;
+				if (node == null) continue;
 
-				if (node.Nodes.Count != 0)
+				if (!(node is DrawElement) && node.Nodes.Count == 0)
 				{
-					node.CalculatePoints();
+					node.Remove();
+					continue;
 				}
 
 				if (node.Index == 0)
@@ -86,8 +94,14 @@ namespace ImpedanceApp
 				}
 				else
 				{
+					var prevNode = node.PrevNode as DrawableSegment;
 					node.ConnectToLeft = new Point(prevNode.ConnectToRight.X + Range,
 						ConnectToRight.Y);
+				}
+
+				if (node.Nodes.Count != 0)
+				{
+					node.CalculatePoints();
 				}
 			}
 		}
@@ -104,10 +118,10 @@ namespace ImpedanceApp
 			var width = 0;
 			foreach (DrawableSegment node in Nodes)
 			{
-				width += node.CalculateSegmentSize().Width + Range / 2;
+				width += node.CalculateSegmentSize().Width + Range;
 			}
 
-			Size = new Size(width + Range, height);
+			Size = new Size(width, height);
 
 			return Size;
 		}

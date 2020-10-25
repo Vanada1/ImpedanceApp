@@ -32,11 +32,6 @@ namespace ImpedanceApp
 		{
 			foreach (DrawableSegment node in Nodes)
 			{
-				if (!(node is DrawElement) && node.Nodes.Count == 0)
-				{
-					continue;
-				}
-
 				DrawConnect(new Point(ConnectToLeft.X, node.ConnectToLeft.Y), 
 					node.ConnectToLeft, graphics, pen);
 
@@ -69,43 +64,61 @@ namespace ImpedanceApp
 			if (Index == 0)
 			{
 				var parent = Parent as DrawableSegment;
-				StartPoint = new Point(parent.StartPoint.X, parent.StartPoint.Y);
-				ConnectToLeft = new Point(StartPoint.X, parent.ConnectToLeft.Y);
+				if (parent is DrawCircuit)
+				{
+					ConnectToLeft = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
+				}
+				else
+				{
+					StartPoint = new Point(parent.StartPoint.X, parent.StartPoint.Y);
+					ConnectToLeft = new Point(StartPoint.X, parent.ConnectToLeft.Y);
+				}
 			}
 
 			foreach (DrawableSegment node in Nodes)
 			{
+				if(node == null) continue;
+
+				if (!(node is DrawElement) && node.Nodes.Count == 0)
+				{
+					node.Remove();
+					continue;
+				}
+
 				if (Nodes.Count == 1)
 				{
 					var parent = node.Parent as DrawableSegment;
 					node.ConnectToLeft = new Point(StartPoint.X, parent.ConnectToLeft.Y);
-					return;
 				}
-
-				var x = StartPoint.X + Size.Width / 2 - node.Size.Width / 2;
-
-				var y = StartPoint.Y;
-				if(node.Index != 0)
+				else
 				{
-					if (node.PrevNode is DrawableSegment prevSegment)
+					var x = StartPoint.X + Size.Width / 2 - node.Size.Width / 2;
+
+					var y = StartPoint.Y;
+					if (node.Index != 0 && node.PrevNode is DrawableSegment prevSegment)
 					{
 						y = prevSegment.StartPoint.Y + prevSegment.Size.Height + Range;
 					}
-				}
 
-				node.StartPoint = new Point(x, y);
+					node.StartPoint = new Point(x, y);
+				}
 
 				if (node.Nodes.Count != 0)
 				{
 					node.CalculatePoints();
 				}
 
-
 				while (ConnectToRight.X <= node.ConnectToRight.X)
 				{
-					Size = new Size(Size.Width + Range, Size.Height);
-					ConnectToRight = new Point(ConnectToRight.X + Range, ConnectToRight.Y);
+					Size = new Size(Size.Width + Range / 2, Size.Height);
+					ConnectToRight = new Point(ConnectToRight.X + Range / 2, ConnectToRight.Y);
 				}
+			}
+
+			if (Nodes.Count % 2 == 1)
+			{
+				var middleNode = Nodes[Nodes.Count / 2] as DrawableSegment;
+				ConnectToLeft = new Point(StartPoint.X, middleNode.ConnectToLeft.Y);
 			}
 		}
 
@@ -119,11 +132,12 @@ namespace ImpedanceApp
 
 			var width = FindMaxWidth() + Range;
 			var height = 0;
-			foreach (var node in Nodes)
+			foreach (DrawableSegment node in Nodes)
 			{
-				var segmentNode = node as DrawableSegment;
-				height += segmentNode.CalculateSegmentSize().Height + Range;
+				height += node.CalculateSegmentSize().Height;
 			}
+
+			height += ((DrawableSegment) Nodes[Nodes.Count - 1]).Size.Height / 2;
 
 			Size = new Size(width, height);
 

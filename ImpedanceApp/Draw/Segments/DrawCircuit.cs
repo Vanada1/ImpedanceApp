@@ -17,7 +17,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Scale picture size
 		/// </summary>
-		private const int Scale = 2;
+		private const double Scale = 1.5;
 
 		/// <summary>
 		/// Set and return Picture
@@ -43,10 +43,12 @@ namespace ImpedanceApp
 			{
 				Size = new Size(Picture.Size.Width - Range, Picture.Size.Height - Range);
 			}
+
 			CalculatePoints();
 			var bitmap = new Bitmap(Size.Width, Size.Height);
 			graphics = Graphics.FromImage(bitmap);
-
+			// Для проверки границ картинки
+			//graphics.DrawRectangle(pen, 0, 0, Size.Width-1, Size.Height-1);
 			foreach (DrawableSegment node in Nodes)
 			{
 				if(node.Index != 0)
@@ -57,8 +59,7 @@ namespace ImpedanceApp
 				node.Draw(graphics, pen);
 			}
 
-			bitmap = new Bitmap(bitmap, new Size(Size.Width * Scale, Size.Height * Scale));
-
+			bitmap = new Bitmap(bitmap, new Size((int)(Size.Width * Scale), (int)(Size.Height * Scale)));
 			Picture.Image = bitmap;
 		}
 
@@ -68,16 +69,19 @@ namespace ImpedanceApp
 		public override void CalculatePoints()
 		{
 			StartPoint = new Point(0, _startPosition);
-			
+
 			foreach (DrawableSegment node in Nodes)
 			{
 				node.CalculatePoints();
-
-				if (node.Index != 0)
+				if (node.Index == 0)
+				{
+					node.ConnectToLeft = new Point(node.ConnectToLeft.X, StartPoint.Y);
+				}
+				else
 				{
 					var prevNode = node.PrevNode as DrawableSegment;
 					node.StartPoint = new Point(prevNode.ConnectToRight.X + Range, prevNode.StartPoint.Y);
-					node.ConnectToLeft = new Point(node.ConnectToLeft.X, prevNode.ConnectToRight.Y);
+					node.ConnectToLeft = new Point(node.ConnectToLeft.X, StartPoint.Y);
 				}
 			}
 		}
@@ -90,11 +94,12 @@ namespace ImpedanceApp
 		{
 			if(Nodes.Count == 0) return new Size();
 
+			var addPixel = 10;
 			var lastNode = Nodes[Nodes.Count - 1] as DrawableSegment;
-
-			var width = lastNode.ConnectToRight.X + Range;
+			var width = lastNode.ConnectToRight.X;
 			var maxHeight = FindMaxHeight();
-			var height = maxHeight;
+			_startPosition = maxHeight / 2 + addPixel/3;
+			var height = maxHeight + addPixel;
 			Size = new Size(width, height);
 			return Size;
 		}

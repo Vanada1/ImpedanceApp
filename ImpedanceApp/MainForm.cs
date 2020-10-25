@@ -419,8 +419,10 @@ namespace ImpedanceForms
 				return;
 			}
 
-			if (targetNode == null || targetNode.Segment is Circuit)
+			if ((targetNode == null || targetNode.Segment is Circuit))
 			{
+				if (draggedNode.Segment is Circuit) return;
+
 				_project.CurrentCircuit.RemoveSegment(draggedNode.Segment);
 				draggedNode.Remove();
 				ElementsTreeView.Nodes[0].Nodes.Add(draggedNode);
