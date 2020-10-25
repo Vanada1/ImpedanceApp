@@ -12,6 +12,21 @@ namespace ImpedanceApp
 	public abstract class DrawElement : DrawableSegment
 	{
 		/// <summary>
+		/// Font for Name Element
+		/// </summary>
+		private static readonly Font Font = new Font(FontFamily.GenericSerif, 11);
+
+		/// <summary>
+		/// For spelling a name
+		/// </summary>
+		private readonly Brush _brush = new SolidBrush(Color.Black);
+
+		/// <summary>
+		/// Name height
+		/// </summary>
+		private const int StringHeight = 16;
+
+		/// <summary>
 		/// Base constructor for all elements
 		/// </summary>
 		/// <param name="segment"><see cref="Element"/></param>
@@ -47,6 +62,22 @@ namespace ImpedanceApp
 					prevNode.StartPoint.Y);
 			}
 
+		}
+
+		/// <summary>
+		/// Draw element name
+		/// </summary>
+		/// <param name="graphics"></param>
+		protected void DrawName(Graphics graphics)
+		{
+			var elementContour = new Rectangle(StartPoint.X, StartPoint.Y - Size.Height,
+				Size.Width, StringHeight);
+			var format = new StringFormat
+			{
+				Alignment = StringAlignment.Center,
+			};
+
+			graphics.DrawString(Segment.Name, Font, _brush, elementContour, format);
 		}
 	}
 }

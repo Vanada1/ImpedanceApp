@@ -97,7 +97,7 @@ namespace ImpedanceApp
 					var y = StartPoint.Y;
 					if (node.Index != 0 && node.PrevNode is DrawableSegment prevSegment)
 					{
-						y = prevSegment.StartPoint.Y + prevSegment.Size.Height + Range;
+						y = prevSegment.StartPoint.Y + prevSegment.Size.Height + Range * 2;
 					}
 
 					node.StartPoint = new Point(x, y);

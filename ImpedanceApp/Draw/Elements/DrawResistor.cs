@@ -39,6 +39,7 @@ namespace ImpedanceApp
 		/// <param name="pen"></param>
 		public override void Draw(Graphics graphics, Pen pen)
 		{
+			DrawName(graphics);
 			var rectangle = new Rectangle(StartPoint.X,
 				StartPoint.Y, Size.Width, Size.Height);
 			graphics.DrawRectangle(pen, rectangle);

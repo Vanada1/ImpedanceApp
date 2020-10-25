@@ -17,7 +17,7 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Scale picture size
 		/// </summary>
-		private const double Scale = 1.5;
+		private const double Scale = 1;
 
 		/// <summary>
 		/// Set and return Picture
@@ -94,11 +94,12 @@ namespace ImpedanceApp
 		{
 			if(Nodes.Count == 0) return new Size();
 
-			var addPixel = 10;
+			var addPixel = 50;
+			var scale = 5;
 			var lastNode = Nodes[Nodes.Count - 1] as DrawableSegment;
 			var width = lastNode.ConnectToRight.X;
 			var maxHeight = FindMaxHeight();
-			_startPosition = maxHeight / 2 + addPixel/3;
+			_startPosition = maxHeight / 2 + addPixel / scale;
 			var height = maxHeight + addPixel;
 			Size = new Size(width, height);
 			return Size;

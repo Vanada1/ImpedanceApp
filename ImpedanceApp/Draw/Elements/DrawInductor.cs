@@ -51,6 +51,7 @@ namespace ImpedanceApp
 		/// <param name="pen"></param>
 		public override void Draw(Graphics graphics, Pen pen)
 		{
+			DrawName(graphics);
 			var x = StartPoint.X;
 			var y = StartPoint.Y + CircleRadius / 2;
 

@@ -41,6 +41,7 @@ namespace ImpedanceApp
 		/// <param name="pen"></param>
 		public override void Draw(Graphics graphics, Pen pen)
 		{
+			DrawName(graphics);
 			var x1 = ConnectToLeft.X;
 			var y = ConnectToLeft.Y;
 			var x2 = x1 + ConnectLine;
