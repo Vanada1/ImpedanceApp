@@ -96,7 +96,7 @@ namespace ImpedanceApp
 				{
 					var prevNode = node.PrevNode as DrawableSegment;
 					node.ConnectToLeft = new Point(prevNode.ConnectToRight.X + Range,
-						ConnectToRight.Y);
+						prevNode.ConnectToRight.Y);
 				}
 
 				if (node.Nodes.Count != 0)

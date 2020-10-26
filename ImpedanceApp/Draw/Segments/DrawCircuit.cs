@@ -94,13 +94,13 @@ namespace ImpedanceApp
 		{
 			if(Nodes.Count == 0) return new Size();
 
-			const int addPixel = 50;
-			const int scale = 5;
+			const int addPixels = 50;
+			const int scale = 2;
 			var lastNode = Nodes[Nodes.Count - 1] as DrawableSegment;
-			var width = lastNode.ConnectToRight.X;
+			var width = lastNode.ConnectToRight.X + addPixels;
 			var maxHeight = FindMaxHeight();
-			_startPosition = maxHeight / 2 + addPixel / scale;
-			var height = maxHeight + addPixel;
+			_startPosition = maxHeight / 2 + addPixels / scale;
+			var height = maxHeight + addPixels * scale;
 			Size = new Size(width, height);
 			return Size;
 		}

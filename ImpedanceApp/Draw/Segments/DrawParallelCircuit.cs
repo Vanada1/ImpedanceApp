@@ -68,11 +68,6 @@ namespace ImpedanceApp
 				{
 					ConnectToLeft = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
 				}
-				else
-				{
-					StartPoint = new Point(parent.StartPoint.X, parent.StartPoint.Y);
-					ConnectToLeft = new Point(StartPoint.X, parent.ConnectToLeft.Y);
-				}
 			}
 
 			foreach (DrawableSegment node in Nodes)
@@ -107,12 +102,6 @@ namespace ImpedanceApp
 				{
 					node.CalculatePoints();
 				}
-			}
-
-			if (Nodes.Count % 2 == 1)
-			{
-				var middleNode = Nodes[Nodes.Count / 2] as DrawableSegment;
-				ConnectToLeft = new Point(StartPoint.X, middleNode.ConnectToLeft.Y);
 			}
 		}
 
