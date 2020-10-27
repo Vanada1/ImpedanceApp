@@ -24,15 +24,13 @@ namespace ImpedanceApp
 		private const int LengthPlates = 10;
 
 		/// <summary>
-		/// Size Inductor Element
-		/// </summary>
-		public override Size Size { get; set; } = new Size(2 * ConnectLine + DistancePlates, LengthPlates * 2);
-
-		/// <summary>
 		/// <see cref="DrawInductor"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="Capacitor"/></param>
-		public DrawCapacitor(ISegment segment) : base(segment) { }
+		public DrawCapacitor(ISegment segment) : base(segment)
+		{
+			Size = new Size(2 * ConnectLine + DistancePlates, LengthPlates * 2);
+		}
 
 		/// <summary>
 		/// Draw <see cref="Capacitor"/>
@@ -57,15 +55,6 @@ namespace ImpedanceApp
 					ConnectToLeft, graphics, pen);
 			}
 			
-		}
-
-		/// <summary>
-		/// Get <see cref="Capacitor"/> size
-		/// </summary>
-		/// <returns><see cref="Capacitor"/> size</returns>
-		public override Size CalculateSegmentSize()
-		{
-			return Size;
 		}
 	}
 }

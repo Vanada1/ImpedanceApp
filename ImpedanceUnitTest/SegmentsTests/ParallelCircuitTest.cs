@@ -20,10 +20,8 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test ParallelCircuit constructor")]
 		public void TestParallelCircuitConstructor_CorrectValue()
 		{
-			string name = "Test";
-
 			Assert.DoesNotThrow(
-				() => { ParallelCircuit inductor = new ParallelCircuit(CreateCircuit()); },
+				() => { ParallelCircuit parallelCircuit = new ParallelCircuit(CreateCircuit()); },
 				"Constructor test not passed");
 		}
 
@@ -32,9 +30,9 @@ namespace ImpedanceUnitTest
 		{
 			string expected = "Parallel";
 
-			ParallelCircuit ParallelCircuit = new ParallelCircuit(CreateCircuit());
+			ParallelCircuit parallelCircuit = new ParallelCircuit(CreateCircuit());
 
-			string actual = ParallelCircuit.Name;
+			string actual = parallelCircuit.Name;
 
 			Assert.AreEqual(expected, actual,
 				"Getter Name returns incorrect value");
@@ -45,10 +43,10 @@ namespace ImpedanceUnitTest
 		{
 			var expected = CreateCircuit();
 
-			ParallelCircuit element = new ParallelCircuit(CreateCircuit());
-			element.SubSegments = expected;
+			ParallelCircuit parallelCircuit = new ParallelCircuit(
+				CreateCircuit()) {SubSegments = expected};
 
-			var actual = element.SubSegments;
+			var actual = parallelCircuit.SubSegments;
 
 			Assert.AreEqual(expected, actual,
 				"Getter SubSegments returns incorrect value");
@@ -59,9 +57,9 @@ namespace ImpedanceUnitTest
 		{
 			var subSegments = CreateCircuit();
 			string message = "Positive test of the SubSegments setter not passed";
-			var ParallelCircuit = new ParallelCircuit(CreateCircuit());
+			var parallelCircuit = new ParallelCircuit(CreateCircuit());
 			Assert.DoesNotThrow(
-				() => { ParallelCircuit.SubSegments = subSegments; },
+				() => { parallelCircuit.SubSegments = subSegments; },
 				message);
 		}
 
@@ -82,9 +80,9 @@ namespace ImpedanceUnitTest
 		public void TestOnCircuitChanged()
 		{
 			bool wasCalled = false;
-			var ParallelCircuit = new ParallelCircuit(CreateCircuit());
-			ParallelCircuit.SegmentChanged += (o, e) => wasCalled = true;
-			ParallelCircuit.SubSegments.Add(new Resistor("Test", 1.0));
+			var parallelCircuit = new ParallelCircuit(CreateCircuit());
+			parallelCircuit.SegmentChanged += (o, e) => wasCalled = true;
+			parallelCircuit.SubSegments.Add(new Resistor("Test", 1.0));
 
 			Assert.IsTrue(wasCalled);
 		}

@@ -86,7 +86,7 @@ namespace Impedance
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
 			return (Name == other.Name && Equals(SubSegments, other.SubSegments)) ||
-				   (!(this is Element) && !(other is Element) && Equals(SubSegments, other.SubSegments));
+				   (!(other is Element) && Equals(SubSegments, other.SubSegments));
 		}
 
 		/// <summary>

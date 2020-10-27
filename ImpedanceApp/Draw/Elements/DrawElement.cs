@@ -22,6 +22,11 @@ namespace ImpedanceApp
 		private readonly Brush _brush = new SolidBrush(Color.Black);
 
 		/// <summary>
+		/// Size Inductor Element
+		/// </summary>
+		public override Size Size { get; set; }
+
+		/// <summary>
 		/// Name height
 		/// </summary>
 		private const int StringHeight = 16;
@@ -78,6 +83,15 @@ namespace ImpedanceApp
 			};
 
 			graphics.DrawString(Segment.Name, Font, _brush, elementContour, format);
+		}
+
+		/// <summary>
+		/// Get <see cref="Capacitor"/> size
+		/// </summary>
+		/// <returns><see cref="Capacitor"/> size</returns>
+		public override Size CalculateSegmentSize()
+		{
+			return Size;
 		}
 	}
 }

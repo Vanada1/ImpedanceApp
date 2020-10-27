@@ -9,11 +9,6 @@ namespace Impedance
 	public class Project
 	{
 		/// <summary>
-		///     <see cref="_name" /> for all <see cref="Circuit" />
-		/// </summary>
-		private static readonly string _name = "Main Circuit";
-
-		/// <summary>
 		///     <see cref="Project" /> constructor
 		/// </summary>
 		public Project()

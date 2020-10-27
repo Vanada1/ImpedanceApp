@@ -34,16 +34,14 @@ namespace ImpedanceApp
 		private const int SweepAngle = 180;
 
 		/// <summary>
-		/// Size Inductor Element
-		/// </summary>
-		public override Size Size { get; set; } = new Size(CircleCount * CircleRadius, CircleDiameter);
-
-		/// <summary>
 		/// <see cref="DrawInductor"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="Inductor"/></param>
-		public DrawInductor(ISegment segment) : base(segment) { }
-
+		public DrawInductor(ISegment segment) : base(segment)
+		{
+			Size = new Size(CircleCount * CircleRadius, CircleDiameter);
+		}
+			
 		/// <summary>
 		/// Draw <see cref="Inductor"/>
 		/// </summary>
@@ -67,15 +65,6 @@ namespace ImpedanceApp
 				DrawConnect(new Point(parent.StartPoint.X, ConnectToLeft.Y),
 					ConnectToLeft, graphics, pen);
 			}
-		}
-
-		/// <summary>
-		/// Get <see cref="Inductor"/> size
-		/// </summary>
-		/// <returns><see cref="Inductor"/> size</returns>
-		public override Size CalculateSegmentSize()
-		{
-			return Size;
 		}
 	}
 }

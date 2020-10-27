@@ -19,11 +19,10 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test SerialCircuit constructor")]
 		public void TestSerialCircuitConstructor_CorrectValue()
 		{
-			string name = "Test";
 			Assert.DoesNotThrow(
 				() =>
 				{
-					SerialCircuit inductor = new SerialCircuit(
+					SerialCircuit serialCircuit = new SerialCircuit(
 						 CreateCircuit());
 				},
 				"Constructor test not passed");
@@ -34,10 +33,10 @@ namespace ImpedanceUnitTest
 		{
 			string expected = "Serial";
 
-			SerialCircuit SerialCircuit = new SerialCircuit(
+			SerialCircuit serialCircuit = new SerialCircuit(
 				 CreateCircuit());
 
-			string actual = SerialCircuit.Name;
+			string actual = serialCircuit.Name;
 
 			Assert.AreEqual(expected, actual,
 				"Getter Name returns incorrect value");
@@ -48,11 +47,11 @@ namespace ImpedanceUnitTest
 		{
 			var expected = CreateCircuit();
 
-			SerialCircuit element = new SerialCircuit(
+			SerialCircuit serialCircuit = new SerialCircuit(
 				 CreateCircuit());
-			element.SubSegments = expected;
+			serialCircuit.SubSegments = expected;
 
-			var actual = element.SubSegments;
+			var actual = serialCircuit.SubSegments;
 
 			Assert.AreEqual(expected, actual,
 				"Getter SubSegments returns incorrect value");
@@ -63,11 +62,11 @@ namespace ImpedanceUnitTest
 		{
 			var subSegments = CreateCircuit();
 			string message = "Positive test of the SubSegments setter not passed";
-			var SerialCircuit = new SerialCircuit(
+			var serialCircuit = new SerialCircuit(
 				 CreateCircuit());
 
 			Assert.DoesNotThrow(
-				() => { SerialCircuit.SubSegments = subSegments; },
+				() => { serialCircuit.SubSegments = subSegments; },
 				message);
 		}
 
@@ -89,10 +88,10 @@ namespace ImpedanceUnitTest
 		public void TestOnCircuitChanged()
 		{
 			bool wasCalled = false;
-			var SerialCircuit = new SerialCircuit(
+			var serialCircuit = new SerialCircuit(
 				 CreateCircuit());
-			SerialCircuit.SegmentChanged += (o, e) => wasCalled = true;
-			SerialCircuit.SubSegments.Add(new Resistor("Test", 1.0));
+			serialCircuit.SegmentChanged += (o, e) => wasCalled = true;
+			serialCircuit.SubSegments.Add(new Resistor("Test", 1.0));
 
 			Assert.IsTrue(wasCalled);
 		}

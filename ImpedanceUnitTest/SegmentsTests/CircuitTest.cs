@@ -31,7 +31,7 @@ namespace ImpedanceUnitTest
 			Assert.DoesNotThrow(
 				() =>
 				{
-					Circuit inductor = new Circuit(
+					Circuit circuit = new Circuit(
 						name, CreateCircuit());
 				},
 				"Constructor test not passed");
@@ -40,12 +40,10 @@ namespace ImpedanceUnitTest
 		[Test(Description = "Test Circuit default constructor")]
 		public void TestCircuit_DefaultConstructor()
 		{
-			string name = "Test";
-
 			Assert.DoesNotThrow(
 				() =>
 				{
-					Circuit inductor = new Circuit();
+					Circuit circuit = new Circuit();
 				},
 				"Constructor test not passed");
 		}

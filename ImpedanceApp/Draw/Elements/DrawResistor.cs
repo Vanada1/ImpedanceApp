@@ -22,15 +22,13 @@ namespace ImpedanceApp
 		private const int Height = 15;
 
 		/// <summary>
-		/// Size <see cref="Resistor"/> Element 
-		/// </summary>
-		public override Size Size { get; set; } = new Size(Width, Height);
-
-		/// <summary>
 		/// <see cref="DrawResistor"/> constructor 
 		/// </summary>
 		/// <param name="segment"><see cref="Resistor"/></param>
-		public DrawResistor(ISegment segment) : base(segment) { }
+		public DrawResistor(ISegment segment) : base(segment)
+		{
+			Size = new Size(Width, Height);
+		}
 
 		/// <summary>
 		/// Draw <see cref="Resistor"/>
@@ -50,15 +48,6 @@ namespace ImpedanceApp
 				DrawConnect(new Point(parent.StartPoint.X, ConnectToLeft.Y),
 					ConnectToLeft, graphics, pen);
 			}
-		}
-
-		/// <summary>
-		/// Get <see cref="Resistor"/> size
-		/// </summary>
-		/// <returns><see cref="Resistor"/> size</returns>
-		public override Size CalculateSegmentSize()
-		{
-			return Size;
 		}
 	}
 }
