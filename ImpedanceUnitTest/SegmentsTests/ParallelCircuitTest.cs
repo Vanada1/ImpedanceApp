@@ -106,6 +106,30 @@ namespace ImpedanceUnitTest
 				"Incorrect calculations for the CalculateZ method");
 		}
 
+		[Test(Description = "Positive test of the ParallelCircuit CalculateZ with zero segment")]
+		public void TestCalculateZ_WithZeroSegment()
+		{
+			double frequency = 1.0;
+			var r = new Resistor("R", 5.0);
+			var l = new Inductor("L1", 0.0);
+			Complex result = 1 / r.CalculateZ(frequency);
+			result = 1 / result;
+
+			Complex expected = result;
+
+			ParallelCircuit parallelCircuit = new ParallelCircuit(
+				new SegmentObservableCollection
+			{
+				new Resistor("R", 5.0),
+				new Inductor("L1", 0.0)
+			});
+
+			Complex actual = parallelCircuit.CalculateZ(frequency);
+
+			Assert.AreEqual(expected, actual,
+				"Incorrect calculations for the CalculateZ method");
+		}
+
 		[Test(Description = "Test of the ParallelCircuit Clone")]
 		public void TestClone()
 		{
