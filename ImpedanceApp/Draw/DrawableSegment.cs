@@ -5,6 +5,7 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+    //TODO: название не отражает, что это базовый абстрактный класс
 	/// <summary>
 	/// Base class for all Segments of <see cref="Circuit"/>
 	/// </summary>
@@ -100,6 +101,7 @@ namespace ImpedanceApp
 		/// <returns>Segment size</returns>
 		public abstract Size CalculateSegmentSize();
 
+        //TODO: почему статик?
 		/// <summary>
 		/// Method for drawing connection line
 		/// </summary>

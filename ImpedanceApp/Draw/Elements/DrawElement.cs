@@ -6,6 +6,7 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+    //TODO: название не отражает, что это базовый абстрактный класс
 	/// <summary>
 	/// Base class for all elements
 	/// </summary>

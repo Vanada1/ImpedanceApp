@@ -4,6 +4,7 @@ using Impedance;
 
 namespace ImpedanceApp
 {
+    //TODO: неудачное название - именование от глагола (здесь и в остальных классах). Либо сохранить именование Drawable от интерфейса, или сделать именования типа CircuitDrawer
 	/// <summary>
 	/// Draw <see cref="Circuit"/> class
 	/// </summary>
@@ -19,6 +20,7 @@ namespace ImpedanceApp
 		/// </summary>
 		private const double Scale = 1;
 
+        //TODO: почему статик? То есть, сделать две картинки с отрисовкой цепей будет невозможно? Интересная САПР...
 		/// <summary>
 		/// Set and return Picture
 		/// </summary>
@@ -31,6 +33,7 @@ namespace ImpedanceApp
 		public DrawCircuit(ISegment segment) : base(segment)
 		{ }
 
+        //TODO: не надо New. Если речь идет о перерисовке, тогда Redraw
 		/// <summary>
 		/// Draw <see cref="Circuit"/> 
 		/// </summary>

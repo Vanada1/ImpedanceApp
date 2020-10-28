@@ -5,6 +5,7 @@ using System.Drawing;
 
 namespace ImpedanceApp
 {
+    //TODO: почему статик?
 	/// <summary>
 	/// Draw Tree View Manager class
 	/// </summary>
@@ -64,7 +65,11 @@ namespace ImpedanceApp
 		private static DrawableSegment GetDrawSegment(ISegment segment)
 		{
 			DrawableSegment drawableSegment;
-
+			//TODO: как-то не полиморфно. Хорошо бы сделать получение инфы об рисуемом элементе через рефлексию,
+			//где инфа хранится в атрибутах отрисовщика...
+            //TODO: но может попробовать сделать хотя бы словарь <Type, Type>,...
+            //где каждому элементу будет соответствовать свой отрисовщик,...
+            //а здесь будет просто вызываться метод активатора для создания объектов?
 			switch (segment)
 			{
 				case Resistor _:
