@@ -8,9 +8,9 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Draw Tree View Manager class
 	/// </summary>
-	public static class DrawTreeViewManager
+	public static class DrawingTreeViewManager
 	{
-		public static DrawCircuit DrawCircuit { get; set; }
+		public static DrawingCircuit DrawCircuit { get; set; }
 
 		/// <summary>
 		/// Create segments tree
@@ -19,7 +19,7 @@ namespace ImpedanceApp
 		{
 			try
 			{
-				DrawCircuit = new DrawCircuit(circuit);
+				DrawCircuit = new DrawingCircuit(circuit);
 				FillTreeNode(DrawCircuit, circuit);
 			}
 			catch (ArgumentException e)
@@ -69,37 +69,37 @@ namespace ImpedanceApp
 			{
 				case Resistor _:
 				{
-					drawableSegment = new DrawResistor(segment);
+					drawableSegment = new DrawingResistor(segment);
 					break;
 				}
 
 				case Inductor _:
 				{
-					drawableSegment = new DrawInductor(segment);
+					drawableSegment = new DrawingInductor(segment);
 					break;
 				}
 
 				case Capacitor _:
 				{
-					drawableSegment = new DrawCapacitor(segment);
+					drawableSegment = new DrawingCapacitor(segment);
 					break;
 				}
 
 				case ParallelCircuit _:
 				{
-					drawableSegment = new DrawParallelCircuit(segment);
+					drawableSegment = new DrawingParallelCircuit(segment);
 					break;
 				}
 
 				case SerialCircuit _:
 				{
-					drawableSegment = new DrawSerialCircuit(segment);
+					drawableSegment = new DrawingSerialCircuit(segment);
 					break;
 				}
 
 				case Circuit _:
 				{
-					drawableSegment = new DrawCircuit(segment);
+					drawableSegment = new DrawingCircuit(segment);
 					break;
 				}
 

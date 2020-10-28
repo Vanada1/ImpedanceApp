@@ -102,13 +102,13 @@ namespace ImpedanceForms
 		private void UpdatePictureBox()
 		{
 
-			DrawTreeViewManager.DrawCircuit = new DrawCircuit(_project.CurrentCircuit);
+			DrawingTreeViewManager.DrawCircuit = new DrawingCircuit(_project.CurrentCircuit);
 			_circuitGraphics = CircuitPictureBox.CreateGraphics();
 			_circuitGraphics.Clear(DefaultBackColor);
-			DrawTreeViewManager.FillDrawTreeView(_project.CurrentCircuit);
-			DrawTreeViewManager.DrawCircuit.CalculateSegmentSize();
-			DrawTreeViewManager.DrawCircuit.CalculatePoints();
-			DrawTreeViewManager.DrawCircuit.DrawNewCircuit(_circuitGraphics, _pen);
+			DrawingTreeViewManager.FillDrawTreeView(_project.CurrentCircuit);
+			DrawingTreeViewManager.DrawCircuit.CalculateSegmentSize();
+			DrawingTreeViewManager.DrawCircuit.CalculatePoints();
+			DrawingTreeViewManager.DrawCircuit.DrawNewCircuit(_circuitGraphics, _pen);
 		}
 
 		public MainForm()
@@ -128,7 +128,7 @@ namespace ImpedanceForms
 
 			var typeSegments = StringValidator.GetSegmentEnum(null);
 			TypeComboBox.DataSource = typeSegments; 
-			DrawCircuit.Picture = CircuitPictureBox;
+			DrawingCircuit.Picture = CircuitPictureBox;
 			UpdateProject();
 			UpdateCircuitComboBox();
 		}

@@ -10,7 +10,7 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Draw <see cref="SerialCircuit"/> class
 	/// </summary>
-	public class DrawSerialCircuit : DrawableSegment
+	public class DrawingSerialCircuit : DrawableSegment
 	{
 		/// <summary>
 		/// Set and return segment size
@@ -18,10 +18,10 @@ namespace ImpedanceApp
 		public override Size Size { get; set; }
 		
 		/// <summary>
-		/// <see cref="DrawSerialCircuit"/> constructor
+		/// <see cref="DrawingSerialCircuit"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="SerialCircuit"/></param>
-		public DrawSerialCircuit(ISegment segment)
+		public DrawingSerialCircuit(ISegment segment)
 		{
 			Segment = segment;
 		}
@@ -67,7 +67,7 @@ namespace ImpedanceApp
 
 			if (Index == 0)
 			{
-				if (parent is DrawCircuit)
+				if (parent is DrawingCircuit)
 				{
 					ConnectToLeft = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
 				}
@@ -81,7 +81,7 @@ namespace ImpedanceApp
 			{
 				if (node == null) continue;
 
-				if (!(node is DrawElement) && node.Nodes.Count == 0)
+				if (!(node is DrawingElement) && node.Nodes.Count == 0)
 				{
 					node.Remove();
 					continue;
