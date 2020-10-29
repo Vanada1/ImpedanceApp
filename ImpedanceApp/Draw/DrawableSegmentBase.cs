@@ -101,7 +101,7 @@ namespace ImpedanceApp.Draw
 		/// <returns>Segment size</returns>
 		public abstract Size CalculateSegmentSize();
 
-        //TODO: почему статик?
+        //TODO: почему статик? (Done)
 		/// <summary>
 		/// Method for drawing connection line
 		/// </summary>
@@ -109,7 +109,7 @@ namespace ImpedanceApp.Draw
 		/// <param name="endPoint"></param>
 		/// /// <param name="graphics"></param>
 		/// <param name="pen"></param>
-		protected static void DrawConnect(Point startPoint, Point endPoint, Graphics graphics, Pen pen)
+		protected void DrawConnect(Point startPoint, Point endPoint, Graphics graphics, Pen pen)
 		{
 			graphics.DrawLine(pen, startPoint, endPoint);
 		}
