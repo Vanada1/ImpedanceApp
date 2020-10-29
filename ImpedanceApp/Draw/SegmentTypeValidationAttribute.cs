@@ -5,7 +5,10 @@ using ImpedanceApp.Draw.Segments;
 
 namespace ImpedanceApp.Draw
 {
-	public class SegmentTypeValidationAttribute : System.Attribute
+	/// <summary>
+	/// Attribute for converting <see cref="ISegment"/> in <see cref="DrawableSegmentBase"/>
+	/// </summary>
+	public class SegmentTypeValidationAttribute : Attribute
 
 	{
 		/// <summary>
