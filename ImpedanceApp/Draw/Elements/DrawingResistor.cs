@@ -9,7 +9,7 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Draw <see cref="Resistor"/> class
 	/// </summary>
-	public class DrawResistor : DrawElement
+	public class DrawingResistor : DrawingElement
 	{
 		/// <summary>
 		/// Rectangle width
@@ -25,10 +25,10 @@ namespace ImpedanceApp
         // например, передать в отрисовщик резистора элемент индуктор. ...
         // Нет защиты по типам данных, что приведет к ошибкам работы. Подумай, как можно обеспечить защиту типов.
 		/// <summary>
-		/// <see cref="DrawResistor"/> constructor 
+		/// <see cref="DrawingResistor"/> constructor 
 		/// </summary>
 		/// <param name="segment"><see cref="Resistor"/></param>
-		public DrawResistor(ISegment segment) : base(segment)
+		public DrawingResistor(ISegment segment) : base(segment)
 		{
 			Size = new Size(Width, Height);
 		}

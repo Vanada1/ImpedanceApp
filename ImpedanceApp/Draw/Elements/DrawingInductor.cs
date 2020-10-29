@@ -6,7 +6,7 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Draw <see cref="Inductor"/> class
 	/// </summary>
-	public class DrawInductor:DrawElement
+	public class DrawingInductor:DrawingElement
 	{
 		/// <summary>
 		/// Circle radius
@@ -34,10 +34,10 @@ namespace ImpedanceApp
 		private const int SweepAngle = 180;
 
 		/// <summary>
-		/// <see cref="DrawInductor"/> constructor
+		/// <see cref="DrawingInductor"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="Inductor"/></param>
-		public DrawInductor(ISegment segment) : base(segment)
+		public DrawingInductor(ISegment segment) : base(segment)
 		{
 			Size = new Size(CircleCount * CircleRadius, CircleDiameter);
 		}

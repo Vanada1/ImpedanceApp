@@ -10,7 +10,7 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Base class for all elements
 	/// </summary>
-	public abstract class DrawElement : DrawableSegment
+	public abstract class DrawingElement : DrawableSegment
 	{
 		/// <summary>
 		/// Font for Name Element
@@ -36,7 +36,7 @@ namespace ImpedanceApp
 		/// Base constructor for all elements
 		/// </summary>
 		/// <param name="segment"><see cref="Element"/></param>
-		protected DrawElement(ISegment segment)
+		protected DrawingElement(ISegment segment)
 		{
 			Segment = segment;
 		}

@@ -6,7 +6,7 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Draw <see cref="Capacitor"/> class
 	/// </summary>
-	public class DrawCapacitor : DrawElement
+	public class DrawingCapacitor : DrawingElement
 	{
 		/// <summary>
 		/// Distance between capacitor plates
@@ -24,10 +24,10 @@ namespace ImpedanceApp
 		private const int LengthPlates = 10;
 
 		/// <summary>
-		/// <see cref="DrawInductor"/> constructor
+		/// <see cref="DrawingInductor"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="Capacitor"/></param>
-		public DrawCapacitor(ISegment segment) : base(segment)
+		public DrawingCapacitor(ISegment segment) : base(segment)
 		{
 			Size = new Size(2 * ConnectLine + DistancePlates, LengthPlates * 2);
 		}

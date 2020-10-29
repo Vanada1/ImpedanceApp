@@ -8,7 +8,7 @@ namespace ImpedanceApp
 	/// <summary>
 	/// Draw <see cref="Circuit"/> class
 	/// </summary>
-	public class DrawCircuit : DrawSerialCircuit
+	public class DrawingCircuit : DrawingSerialCircuit
 	{
 		/// <summary>
 		/// Start position for draw
@@ -27,10 +27,10 @@ namespace ImpedanceApp
 		public static PictureBox Picture { get; set; }
 
 		/// <summary>
-		/// <see cref="DrawSerialCircuit"/> constructor
+		/// <see cref="DrawingSerialCircuit"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="SerialCircuit"/></param>
-		public DrawCircuit(ISegment segment) : base(segment)
+		public DrawingCircuit(ISegment segment) : base(segment)
 		{ }
 
         //TODO: не надо New. Если речь идет о перерисовке, тогда Redraw
