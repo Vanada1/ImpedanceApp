@@ -1,45 +1,68 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Impedance;
 
-namespace ImpedanceApp
+namespace ImpedanceApp.Draw.Segments
 {
-    //TODO: неудачное название - именование от глагола (здесь и в остальных классах). Либо сохранить именование Drawable от интерфейса, или сделать именования типа CircuitDrawer
+    //TODO: неудачное название - именование от глагола (здесь и в остальных классах). Либо сохранить именование Drawable от интерфейса, или сделать именования типа CircuitDrawer (Done)
 	/// <summary>
 	/// Draw <see cref="Circuit"/> class
 	/// </summary>
-	public class DrawingCircuit : DrawingSerialCircuit
+	public class CircuitDrawer : DrawingSerialCircuit
 	{
+		/// <summary>
+		/// Scale picture size
+		/// </summary>
+		private const double Scale = 1;
+
 		/// <summary>
 		/// Start position for draw
 		/// </summary>
 		private int _startPosition = 0;
 
 		/// <summary>
-		/// Scale picture size
+		/// Segment of the class
 		/// </summary>
-		private const double Scale = 1;
+		private ISegment _segment;
 
-        //TODO: почему статик? То есть, сделать две картинки с отрисовкой цепей будет невозможно? Интересная САПР...
+		/// <summary>
+		/// Set and return element <see cref="ISegment"/>
+		/// </summary>
+		public override ISegment Segment
+		{
+			get => _segment;
+			set
+			{
+				if (!(value is Circuit))
+				{
+					throw new ArgumentException("It's not " + nameof(Circuit));
+				}
+
+				_segment = value;
+			}
+		}
+
+		//TODO: почему статик? То есть, сделать две картинки с отрисовкой цепей будет невозможно? Интересная САПР... (Done)
 		/// <summary>
 		/// Set and return Picture
 		/// </summary>
-		public static PictureBox Picture { get; set; }
+		public PictureBox Picture { get; set; }
 
 		/// <summary>
 		/// <see cref="DrawingSerialCircuit"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="SerialCircuit"/></param>
-		public DrawingCircuit(ISegment segment) : base(segment)
+		public CircuitDrawer(ISegment segment) : base(segment)
 		{ }
 
-        //TODO: не надо New. Если речь идет о перерисовке, тогда Redraw
+        //TODO: не надо New. Если речь идет о перерисовке, тогда Redraw(Done)
 		/// <summary>
 		/// Draw <see cref="Circuit"/> 
 		/// </summary>
 		/// <param name="graphics"></param>
 		/// <param name="pen"></param>
-		public void DrawNewCircuit(Graphics graphics, Pen pen)
+		public void RedrawCircuit(Graphics graphics, Pen pen)
 		{
 			CalculateSegmentSize();
 			if (Size.Width == 0 && Size.Height == 0)
@@ -52,11 +75,11 @@ namespace ImpedanceApp
 			graphics = Graphics.FromImage(bitmap);
 			// Для проверки границ картинки
 			//graphics.DrawRectangle(pen, 0, 0, Size.Width-1, Size.Height-1);
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				if(node.Index != 0)
 				{
-					DrawConnect(((DrawableSegment) node.PrevNode).ConnectToRight,
+					DrawConnect(((DrawableSegmentBase) node.PrevNode).ConnectToRight,
 						node.ConnectToLeft, graphics, pen);
 				}
 				node.Draw(graphics, pen);
@@ -73,7 +96,7 @@ namespace ImpedanceApp
 		{
 			StartPoint = new Point(0, _startPosition);
 
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				node.CalculatePoints();
 				if (node.Index == 0)
@@ -82,7 +105,7 @@ namespace ImpedanceApp
 				}
 				else
 				{
-					var prevNode = node.PrevNode as DrawableSegment;
+					var prevNode = node.PrevNode as DrawableSegmentBase;
 					node.StartPoint = new Point(prevNode.ConnectToRight.X + Range, prevNode.StartPoint.Y);
 					node.ConnectToLeft = new Point(node.ConnectToLeft.X, StartPoint.Y);
 				}
@@ -99,7 +122,7 @@ namespace ImpedanceApp
 
 			const int addPixels = 50;
 			const int scale = 2;
-			var lastNode = Nodes[Nodes.Count - 1] as DrawableSegment;
+			var lastNode = Nodes[Nodes.Count - 1] as DrawableSegmentBase;
 			var width = lastNode.ConnectToRight.X + addPixels;
 			var maxHeight = FindMaxHeight();
 			_startPosition = maxHeight / 2 + addPixels / scale;

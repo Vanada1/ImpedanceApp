@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using Impedance;
 
-//TODO: поправить пространства имен
-namespace ImpedanceApp
+//TODO: поправить пространства имен (Done)
+namespace ImpedanceApp.Draw
 {
 	/// <summary>
 	/// Draw segments interface

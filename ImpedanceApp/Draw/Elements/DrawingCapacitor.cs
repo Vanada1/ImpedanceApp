@@ -1,12 +1,13 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Impedance;
 
-namespace ImpedanceApp
+namespace ImpedanceApp.Draw.Elements
 {
 	/// <summary>
 	/// Draw <see cref="Capacitor"/> class
 	/// </summary>
-	public class DrawingCapacitor : DrawingElement
+	public class DrawingCapacitor : DrawingElementBase
 	{
 		/// <summary>
 		/// Distance between capacitor plates
@@ -22,6 +23,28 @@ namespace ImpedanceApp
 		/// Length of plates
 		/// </summary>
 		private const int LengthPlates = 10;
+
+		/// <summary>
+		/// Segment of the class
+		/// </summary>
+		private ISegment _segment;
+
+		/// <summary>
+		/// Set and return element <see cref="ISegment"/>
+		/// </summary>
+		public override ISegment Segment
+		{
+			get => _segment;
+			set
+			{
+				if (!(value is Capacitor))
+				{
+					throw new ArgumentException("It's not " + nameof(Capacitor));
+				}
+
+				_segment = value;
+			}
+		}
 
 		/// <summary>
 		/// <see cref="DrawingInductor"/> constructor
@@ -48,7 +71,7 @@ namespace ImpedanceApp
 			x2 += DistancePlates;
 			graphics.DrawLine(pen, x2, y - LengthPlates, x2, y + LengthPlates);
 			graphics.DrawLine(pen, x2, y, x2 + ConnectLine, y);
-			var parent = Parent as DrawableSegment;
+			var parent = Parent as DrawableSegmentBase;
 			if (Index == 0)
 			{
 				DrawConnect(new Point(parent.StartPoint.X, ConnectToLeft.Y),

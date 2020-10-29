@@ -1,22 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Security.Cryptography;
-using System.Windows.Forms;
 using Impedance;
+using ImpedanceApp.Draw.Elements;
 
-namespace ImpedanceApp
+namespace ImpedanceApp.Draw.Segments
 {
 	/// <summary>
 	/// Draw <see cref="SerialCircuit"/> class
 	/// </summary>
-	public class DrawingSerialCircuit : DrawableSegment
+	public class DrawingSerialCircuit : DrawableSegmentBase
 	{
 		/// <summary>
-		/// Set and return segment size
+		/// Segment of the class
 		/// </summary>
-		public override Size Size { get; set; }
-		
+		private ISegment _segment;
+
+		/// <summary>
+		/// Set and return element <see cref="ISegment"/>
+		/// </summary>
+		public override ISegment Segment
+		{
+			get => _segment;
+			set
+			{
+				if (!(value is SerialCircuit))
+				{
+					throw new ArgumentException("It's not " + nameof(SerialCircuit));
+				}
+
+				_segment = value;
+			}
+		}
+
 		/// <summary>
 		/// <see cref="DrawingSerialCircuit"/> constructor
 		/// </summary>
@@ -31,7 +46,7 @@ namespace ImpedanceApp
 		/// </summary>
 		public override void Draw(Graphics graphics, Pen pen)
 		{
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				if (node.Index == 0)
 				{
@@ -40,7 +55,7 @@ namespace ImpedanceApp
 				}
 				else
 				{
-					DrawConnect(((DrawableSegment) node.PrevNode).ConnectToRight,
+					DrawConnect(((DrawableSegmentBase) node.PrevNode).ConnectToRight,
 						node.ConnectToLeft, graphics, pen);
 				}
 
@@ -60,14 +75,14 @@ namespace ImpedanceApp
 		/// </summary>
 		public override void CalculatePoints()
 		{
-			if (!(Parent is DrawableSegment parent))
+			if (!(Parent is DrawableSegmentBase parent))
 			{
-				throw new ArgumentException("Parent is not " + nameof(DrawableSegment));
+				throw new ArgumentException("Parent is not " + nameof(DrawableSegmentBase));
 			}
 
 			if (Index == 0)
 			{
-				if (parent is DrawingCircuit)
+				if (parent is CircuitDrawer)
 				{
 					ConnectToLeft = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
 				}
@@ -77,11 +92,11 @@ namespace ImpedanceApp
 				}
 			}
 
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				if (node == null) continue;
 
-				if (!(node is DrawingElement) && node.Nodes.Count == 0)
+				if (!(node is DrawingElementBase) && node.Nodes.Count == 0)
 				{
 					node.Remove();
 					continue;
@@ -94,7 +109,7 @@ namespace ImpedanceApp
 				}
 				else
 				{
-					var prevNode = node.PrevNode as DrawableSegment;
+					var prevNode = node.PrevNode as DrawableSegmentBase;
 					node.ConnectToLeft = new Point(prevNode.ConnectToRight.X + Range,
 						prevNode.ConnectToRight.Y);
 				}
@@ -116,7 +131,7 @@ namespace ImpedanceApp
 
 			var height = FindMaxHeight();
 			var width = 0;
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				width += node.CalculateSegmentSize().Width + Range;
 			}
@@ -134,9 +149,9 @@ namespace ImpedanceApp
 		{
 			if (Nodes.Count == 0) return 0;
 
-			var sizeHeight = ((DrawableSegment) Nodes[0]).CalculateSegmentSize().Height;
+			var sizeHeight = ((DrawableSegmentBase) Nodes[0]).CalculateSegmentSize().Height;
 
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				if (node.CalculateSegmentSize().Height > sizeHeight)
 				{

@@ -3,13 +3,13 @@ using System.Drawing;
 using System.Windows.Forms;
 using Impedance;
 
-namespace ImpedanceApp
+namespace ImpedanceApp.Draw
 {
-    //TODO: название не отражает, что это базовый абстрактный класс
+    //TODO: название не отражает, что это базовый абстрактный класс(Done)
 	/// <summary>
 	/// Base class for all Segments of <see cref="Circuit"/>
 	/// </summary>
-	public abstract class DrawableSegment : TreeNode, IDrawableSegment
+	public abstract class DrawableSegmentBase : TreeNode, IDrawableSegment
 	{
 		/// <summary>
 		/// Range between Segments
@@ -78,12 +78,12 @@ namespace ImpedanceApp
 		/// <summary>
 		/// Set and return segment size
 		/// </summary>
-		public abstract Size Size { get; set; }
+		public Size Size { get; set; }
 
 		/// <summary>
 		/// Set and return element <see cref="ISegment"/>
 		/// </summary>
-		public ISegment Segment { get; set; }
+		public abstract ISegment Segment { get; set; }
 
 		/// <summary>
 		/// Method for drawing segment

@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 using Impedance;
 
-namespace ImpedanceApp
+namespace ImpedanceApp.Draw.Elements
 {
-    //TODO: название не отражает, что это базовый абстрактный класс
+    //TODO: название не отражает, что это базовый абстрактный класс (Done)
 	/// <summary>
 	/// Base class for all elements
 	/// </summary>
-	public abstract class DrawingElement : DrawableSegment
+	public abstract class DrawingElementBase : DrawableSegmentBase
 	{
 		/// <summary>
 		/// Font for Name Element
@@ -21,12 +19,7 @@ namespace ImpedanceApp
 		/// For spelling a name
 		/// </summary>
 		private readonly Brush _brush = new SolidBrush(Color.Black);
-
-		/// <summary>
-		/// Size Inductor Element
-		/// </summary>
-		public override Size Size { get; set; }
-
+		
 		/// <summary>
 		/// Name height
 		/// </summary>
@@ -36,7 +29,7 @@ namespace ImpedanceApp
 		/// Base constructor for all elements
 		/// </summary>
 		/// <param name="segment"><see cref="Element"/></param>
-		protected DrawingElement(ISegment segment)
+		protected DrawingElementBase(ISegment segment)
 		{
 			Segment = segment;
 		}
@@ -51,9 +44,9 @@ namespace ImpedanceApp
 		/// </summary>
 		public override void CalculatePoints()
 		{
-			if (!(Parent is DrawableSegment parent))
+			if (!(Parent is DrawableSegmentBase parent))
 			{
-				throw new ArgumentException("Parent is not " + nameof(DrawableSegment));
+				throw new ArgumentException("Parent is not " + nameof(DrawableSegmentBase));
 			}
 
 			if (Index == 0)
@@ -63,7 +56,7 @@ namespace ImpedanceApp
 			}
 			else
 			{
-				var prevNode = PrevNode as DrawableSegment;
+				var prevNode = PrevNode as DrawableSegmentBase;
 				StartPoint = new Point(prevNode.ConnectToRight.X,
 					prevNode.StartPoint.Y);
 			}

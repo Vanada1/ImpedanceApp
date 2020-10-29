@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Drawing;
 using Impedance;
+using ImpedanceApp.Draw.Elements;
 
-namespace ImpedanceApp
+namespace ImpedanceApp.Draw.Segments
 {
 	/// <summary>
 	/// Draw <see cref="ParallelCircuit"/> class
 	/// </summary>
-	public class DrawingParallelCircuit:DrawableSegment
+	public class DrawingParallelCircuit:DrawableSegmentBase
 	{
 		/// <summary>
-		/// Set and return segment size
+		/// Segment of the class
 		/// </summary>
-		public override Size Size { get; set; }
-		
+		private ISegment _segment;
+
 		/// <summary>
 		/// <see cref="DrawingParallelCircuit"/> constructor
 		/// </summary>
@@ -24,13 +25,30 @@ namespace ImpedanceApp
 		}
 
 		/// <summary>
+		/// Set and return element <see cref="ISegment"/>
+		/// </summary>
+		public override ISegment Segment
+		{
+			get => _segment;
+			set
+			{
+				if (!(value is ParallelCircuit))
+				{
+					throw new ArgumentException("It's not " + nameof(ParallelCircuit));
+				}
+
+				_segment = value;
+			}
+		}
+
+		/// <summary>
 		/// Draw <see cref="ParallelCircuit"/>
 		/// </summary>
 		/// <param name="graphics"></param>
 		/// <param name="pen"></param>
 		public override void Draw(Graphics graphics, Pen pen)
 		{
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				DrawConnect(new Point(ConnectToLeft.X, node.ConnectToLeft.Y), 
 					node.ConnectToLeft, graphics, pen);
@@ -44,14 +62,14 @@ namespace ImpedanceApp
 			if (Nodes.Count <= 1) return;
 
 			var startX = ConnectToLeft.X;
-			var topY = ((DrawableSegment) Nodes[0]).ConnectToLeft.Y;
-			var bottomY = ((DrawableSegment) Nodes[Nodes.Count - 1]).ConnectToLeft.Y;
+			var topY = ((DrawableSegmentBase) Nodes[0]).ConnectToLeft.Y;
+			var bottomY = ((DrawableSegmentBase) Nodes[Nodes.Count - 1]).ConnectToLeft.Y;
 			DrawConnect(new Point(startX, topY),
 				new Point(startX, bottomY), graphics, pen);
 
 			var endX = ConnectToRight.X;
-			topY = ((DrawableSegment) Nodes[0]).ConnectToRight.Y;
-			bottomY = ((DrawableSegment) Nodes[Nodes.Count - 1]).ConnectToRight.Y;
+			topY = ((DrawableSegmentBase) Nodes[0]).ConnectToRight.Y;
+			bottomY = ((DrawableSegmentBase) Nodes[Nodes.Count - 1]).ConnectToRight.Y;
 			DrawConnect(new Point(endX, topY),
 				new Point(endX, bottomY), graphics, pen);
 		}
@@ -63,18 +81,18 @@ namespace ImpedanceApp
 		{
 			if (Index == 0)
 			{
-				var parent = Parent as DrawableSegment;
-				if (parent is DrawingCircuit)
+				var parent = Parent as DrawableSegmentBase;
+				if (parent is CircuitDrawer)
 				{
 					ConnectToLeft = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
 				}
 			}
 
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				if(node == null) continue;
 
-				if (!(node is DrawingElement) && node.Nodes.Count == 0)
+				if (!(node is DrawingElementBase) && node.Nodes.Count == 0)
 				{
 					node.Remove();
 					continue;
@@ -82,7 +100,7 @@ namespace ImpedanceApp
 
 				if (Nodes.Count == 1)
 				{
-					var parent = node.Parent as DrawableSegment;
+					var parent = node.Parent as DrawableSegmentBase;
 					node.ConnectToLeft = new Point(StartPoint.X, parent.ConnectToLeft.Y);
 				}
 				else
@@ -90,7 +108,7 @@ namespace ImpedanceApp
 					var x = StartPoint.X + Size.Width / 2 - node.Size.Width / 2;
 
 					var y = StartPoint.Y;
-					if (node.Index != 0 && node.PrevNode is DrawableSegment prevSegment)
+					if (node.Index != 0 && node.PrevNode is DrawableSegmentBase prevSegment)
 					{
 						y = prevSegment.StartPoint.Y + prevSegment.Size.Height + Range * 2;
 					}
@@ -115,12 +133,12 @@ namespace ImpedanceApp
 
 			var width = FindMaxWidth() + Range;
 			var height = 0;
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				height += node.CalculateSegmentSize().Height;
 			}
 
-			height += ((DrawableSegment) Nodes[Nodes.Count - 1]).Size.Height / 2;
+			height += ((DrawableSegmentBase) Nodes[Nodes.Count - 1]).Size.Height / 2;
 
 			Size = new Size(width, height);
 
@@ -135,9 +153,9 @@ namespace ImpedanceApp
 		{
 			if (Nodes.Count == 0) return 0;
 
-			var sizeWidth = ((DrawableSegment) Nodes[0]).CalculateSegmentSize().Width;
+			var sizeWidth = ((DrawableSegmentBase) Nodes[0]).CalculateSegmentSize().Width;
 
-			foreach (DrawableSegment node in Nodes)
+			foreach (DrawableSegmentBase node in Nodes)
 			{
 				if (node.CalculateSegmentSize().Width > sizeWidth)
 				{

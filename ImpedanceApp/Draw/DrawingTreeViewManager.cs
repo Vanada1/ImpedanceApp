@@ -2,26 +2,34 @@
 using Impedance;
 using System;
 using System.Drawing;
+using ImpedanceApp.Draw.Elements;
+using ImpedanceApp.Draw.Segments;
 
-namespace ImpedanceApp
+namespace ImpedanceApp.Draw
 {
-    //TODO: почему статик?
+    //TODO: почему статик? (Done)
 	/// <summary>
 	/// Draw Tree View Manager class
 	/// </summary>
-	public static class DrawingTreeViewManager
+	public class DrawingTreeViewManager
 	{
-		public static DrawingCircuit DrawCircuit { get; set; }
+		public CircuitDrawer CircuitDrawer { get; set; }
+
+		public DrawingTreeViewManager(Circuit circuit)
+		{
+			CircuitDrawer = new CircuitDrawer(circuit);
+			FillDrawTreeView(circuit);
+		}
 
 		/// <summary>
 		/// Create segments tree
 		/// </summary>
-		public static void FillDrawTreeView(Circuit circuit)
+		private void FillDrawTreeView(Circuit circuit)
 		{
 			try
 			{
-				DrawCircuit = new DrawingCircuit(circuit);
-				FillTreeNode(DrawCircuit, circuit);
+				CircuitDrawer = new CircuitDrawer(circuit);
+				FillTreeNode(CircuitDrawer, circuit);
 			}
 			catch (ArgumentException e)
 			{
@@ -35,7 +43,7 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="treeNode">node where will add</param>
 		/// <param name="segment">segment where will add</param>
-		private static void FillTreeNode(DrawableSegment treeNode, ISegment segment)
+		private static void FillTreeNode(DrawableSegmentBase treeNode, ISegment segment)
 		{
 			try
 			{
@@ -44,7 +52,7 @@ namespace ImpedanceApp
 					var segmentTreeNode = GetDrawSegment(subSegment);
 
 					treeNode.Nodes.Add(segmentTreeNode);
-					if (!(subSegment is Element element))
+					if (!(subSegment is Element))
 					{
 						FillTreeNode(segmentTreeNode, subSegment);
 					}
@@ -62,9 +70,9 @@ namespace ImpedanceApp
 		/// </summary>
 		/// <param name="segment">segment for check</param>
 		/// <returns>Draw Segment</returns>
-		private static DrawableSegment GetDrawSegment(ISegment segment)
+		private static DrawableSegmentBase GetDrawSegment(ISegment segment)
 		{
-			DrawableSegment drawableSegment;
+			DrawableSegmentBase drawableSegmentBase;
 			//TODO: как-то не полиморфно. Хорошо бы сделать получение инфы об рисуемом элементе через рефлексию,
 			//где инфа хранится в атрибутах отрисовщика...
             //TODO: но может попробовать сделать хотя бы словарь <Type, Type>,...
@@ -74,37 +82,37 @@ namespace ImpedanceApp
 			{
 				case Resistor _:
 				{
-					drawableSegment = new DrawingResistor(segment);
+					drawableSegmentBase = new DrawingResistor(segment);
 					break;
 				}
 
 				case Inductor _:
 				{
-					drawableSegment = new DrawingInductor(segment);
+					drawableSegmentBase = new DrawingInductor(segment);
 					break;
 				}
 
 				case Capacitor _:
 				{
-					drawableSegment = new DrawingCapacitor(segment);
+					drawableSegmentBase = new DrawingCapacitor(segment);
 					break;
 				}
 
 				case ParallelCircuit _:
 				{
-					drawableSegment = new DrawingParallelCircuit(segment);
+					drawableSegmentBase = new DrawingParallelCircuit(segment);
 					break;
 				}
 
 				case SerialCircuit _:
 				{
-					drawableSegment = new DrawingSerialCircuit(segment);
+					drawableSegmentBase = new DrawingSerialCircuit(segment);
 					break;
 				}
 
 				case Circuit _:
 				{
-					drawableSegment = new DrawingCircuit(segment);
+					drawableSegmentBase = new CircuitDrawer(segment);
 					break;
 				}
 
@@ -114,7 +122,7 @@ namespace ImpedanceApp
 				}
 			}
 
-			return drawableSegment;
+			return drawableSegmentBase;
 		}
 	}
 }

@@ -1,12 +1,13 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Impedance;
 
-namespace ImpedanceApp
+namespace ImpedanceApp.Draw.Elements
 {
 	/// <summary>
 	/// Draw <see cref="Inductor"/> class
 	/// </summary>
-	public class DrawingInductor:DrawingElement
+	public class DrawingInductor:DrawingElementBase
 	{
 		/// <summary>
 		/// Circle radius
@@ -34,6 +35,28 @@ namespace ImpedanceApp
 		private const int SweepAngle = 180;
 
 		/// <summary>
+		/// Segment of the class
+		/// </summary>
+		private ISegment _segment;
+
+		/// <summary>
+		/// Set and return element <see cref="ISegment"/>
+		/// </summary>
+		public override ISegment Segment
+		{
+			get => _segment;
+			set
+			{
+				if (!(value is Inductor))
+				{
+					throw new ArgumentException("It's not " + nameof(Inductor));
+				}
+
+				_segment = value;
+			}
+		}
+
+		/// <summary>
 		/// <see cref="DrawingInductor"/> constructor
 		/// </summary>
 		/// <param name="segment"><see cref="Inductor"/></param>
@@ -59,7 +82,7 @@ namespace ImpedanceApp
 				x += CircleRadius;
 			}
 
-			var parent = Parent as DrawableSegment;
+			var parent = Parent as DrawableSegmentBase;
 			if (Index == 0)
 			{
 				DrawConnect(new Point(parent.StartPoint.X, ConnectToLeft.Y),
