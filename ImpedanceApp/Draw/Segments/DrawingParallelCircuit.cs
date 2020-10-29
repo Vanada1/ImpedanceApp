@@ -8,39 +8,9 @@ namespace ImpedanceApp.Draw.Segments
 	/// <summary>
 	/// Draw <see cref="ParallelCircuit"/> class
 	/// </summary>
+	[SegmentTypeValidation]
 	public class DrawingParallelCircuit:DrawableSegmentBase
 	{
-		/// <summary>
-		/// Segment of the class
-		/// </summary>
-		private ISegment _segment;
-
-		/// <summary>
-		/// <see cref="DrawingParallelCircuit"/> constructor
-		/// </summary>
-		/// <param name="segment"><see cref="ParallelCircuit"/></param>
-		public DrawingParallelCircuit(ISegment segment)
-		{
-			Segment = segment;
-		}
-
-		/// <summary>
-		/// Set and return element <see cref="ISegment"/>
-		/// </summary>
-		public override ISegment Segment
-		{
-			get => _segment;
-			set
-			{
-				if (!(value is ParallelCircuit))
-				{
-					throw new ArgumentException("It's not " + nameof(ParallelCircuit));
-				}
-
-				_segment = value;
-			}
-		}
-
 		/// <summary>
 		/// Draw <see cref="ParallelCircuit"/>
 		/// </summary>

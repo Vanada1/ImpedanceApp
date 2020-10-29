@@ -33,11 +33,6 @@ namespace ImpedanceApp.Draw
 		Size Size { get; set; }
 
 		/// <summary>
-		/// Set and return element <see cref="ISegment"/>
-		/// </summary>
-		ISegment Segment { get; set; }
-
-		/// <summary>
 		/// Method for drawing segment
 		/// </summary>
 		void Draw(Graphics graphics, Pen pen);

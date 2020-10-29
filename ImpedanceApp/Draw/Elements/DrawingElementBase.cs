@@ -26,15 +26,6 @@ namespace ImpedanceApp.Draw.Elements
 		private const int StringHeight = 16;
 
 		/// <summary>
-		/// Base constructor for all elements
-		/// </summary>
-		/// <param name="segment"><see cref="Element"/></param>
-		protected DrawingElementBase(ISegment segment)
-		{
-			Segment = segment;
-		}
-
-		/// <summary>
 		/// Method for drawing segment
 		/// </summary>
 		public abstract override void Draw(Graphics graphics, Pen pen);
@@ -76,7 +67,7 @@ namespace ImpedanceApp.Draw.Elements
 				Alignment = StringAlignment.Center,
 			};
 
-			graphics.DrawString(Segment.Name, Font, _brush, elementContour, format);
+			graphics.DrawString(Name, Font, _brush, elementContour, format);
 		}
 
 		/// <summary>

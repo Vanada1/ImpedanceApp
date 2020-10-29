@@ -9,6 +9,7 @@ namespace ImpedanceApp.Draw
 	/// <summary>
 	/// Base class for all Segments of <see cref="Circuit"/>
 	/// </summary>
+	[SegmentTypeValidation]
 	public abstract class DrawableSegmentBase : TreeNode, IDrawableSegment
 	{
 		/// <summary>
@@ -79,11 +80,6 @@ namespace ImpedanceApp.Draw
 		/// Set and return segment size
 		/// </summary>
 		public Size Size { get; set; }
-
-		/// <summary>
-		/// Set and return element <see cref="ISegment"/>
-		/// </summary>
-		public abstract ISegment Segment { get; set; }
 
 		/// <summary>
 		/// Method for drawing segment
