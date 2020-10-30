@@ -31,6 +31,8 @@ namespace ImpedanceApp.Draw
 		    {
 			    CircuitDrawer = new CircuitDrawer(circuit);
 			    FillTreeNode(CircuitDrawer, circuit);
+			    ClearEmptySegments(CircuitDrawer);
+
 		    }
 		    catch (ArgumentException e)
 		    {
@@ -135,5 +137,30 @@ namespace ImpedanceApp.Draw
 			    }
 		    }
 	    }
-    }
+
+	    private static void ClearEmptySegments(DrawableSegmentBase root)
+	    {
+		    if (root.Nodes.Count == 0)
+		    {
+			    return;
+		    }
+		    DrawableSegmentBase node = root.Nodes[0] as DrawableSegmentBase;
+		    while (node != null)
+		    {
+			    DrawableSegmentBase nextSegment = node.NextNode as DrawableSegmentBase;
+			    if (!(node is DrawingElementBase))
+			    {
+				    if (node.Nodes.Count != 0)
+				    {
+					    ClearEmptySegments(node);
+				    }
+				    if (node.Nodes.Count == 0)
+				    {
+					    node.Remove();
+				    }
+			    }
+			    node = nextSegment;
+		    }
+	    }
+	}
 }

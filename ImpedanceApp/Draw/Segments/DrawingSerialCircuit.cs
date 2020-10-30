@@ -94,14 +94,6 @@ namespace ImpedanceApp.Draw.Segments
 
 			foreach (DrawableSegmentBase node in Nodes)
 			{
-				if (node == null) continue;
-
-				if (!(node is DrawingElementBase) && node.Nodes.Count == 0)
-				{
-					node.Remove();
-					continue;
-				}
-
 				if (node.Index == 0)
 				{
 					node.ConnectToLeft = new Point(StartPoint.X,

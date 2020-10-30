@@ -90,14 +90,6 @@ namespace ImpedanceApp.Draw.Segments
 
 			foreach (DrawableSegmentBase node in Nodes)
 			{
-				if(node == null) continue;
-
-				if (!(node is DrawingElementBase) && node.Nodes.Count == 0)
-				{
-					node.Remove();
-					continue;
-				}
-
 				if (Nodes.Count == 1)
 				{
 					var parent = node.Parent as DrawableSegmentBase;
