@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Security.Policy;
 using System.Windows.Forms;
 using Impedance;
 
@@ -9,6 +10,7 @@ namespace ImpedanceApp.Draw.Segments
 	/// <summary>
 	/// Draw <see cref="Circuit"/> class
 	/// </summary>
+	[SegmentTypeValidation]
 	public class CircuitDrawer : DrawingSerialCircuit
 	{
 		/// <summary>
@@ -21,42 +23,13 @@ namespace ImpedanceApp.Draw.Segments
 		/// </summary>
 		private int _startPosition = 0;
 
-		/// <summary>
-		/// Segment of the class
-		/// </summary>
-		private ISegment _segment;
-
-		/// <summary>
-		/// Set and return element <see cref="ISegment"/>
-		/// </summary>
-		public override ISegment Segment
-		{
-			get => _segment;
-			set
-			{
-				if (!(value is Circuit))
-				{
-					throw new ArgumentException("It's not " + nameof(Circuit));
-				}
-
-				_segment = value;
-			}
-		}
-
 		//TODO: почему статик? То есть, сделать две картинки с отрисовкой цепей будет невозможно? Интересная САПР... (Done)
 		/// <summary>
 		/// Set and return Picture
 		/// </summary>
 		public PictureBox Picture { get; set; }
 
-		/// <summary>
-		/// <see cref="DrawingSerialCircuit"/> constructor
-		/// </summary>
-		/// <param name="segment"><see cref="SerialCircuit"/></param>
-		public CircuitDrawer(ISegment segment) : base(segment)
-		{ }
-
-        //TODO: не надо New. Если речь идет о перерисовке, тогда Redraw(Done)
+		//TODO: не надо New. Если речь идет о перерисовке, тогда Redraw(Done)
 		/// <summary>
 		/// Draw <see cref="Circuit"/> 
 		/// </summary>

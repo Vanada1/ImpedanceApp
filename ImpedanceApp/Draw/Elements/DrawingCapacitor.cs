@@ -7,6 +7,7 @@ namespace ImpedanceApp.Draw.Elements
 	/// <summary>
 	/// Draw <see cref="Capacitor"/> class
 	/// </summary>
+	[SegmentTypeValidation]
 	public class DrawingCapacitor : DrawingElementBase
 	{
 		/// <summary>
@@ -25,32 +26,9 @@ namespace ImpedanceApp.Draw.Elements
 		private const int LengthPlates = 10;
 
 		/// <summary>
-		/// Segment of the class
-		/// </summary>
-		private ISegment _segment;
-
-		/// <summary>
-		/// Set and return element <see cref="ISegment"/>
-		/// </summary>
-		public override ISegment Segment
-		{
-			get => _segment;
-			set
-			{
-				if (!(value is Capacitor))
-				{
-					throw new ArgumentException("It's not " + nameof(Capacitor));
-				}
-
-				_segment = value;
-			}
-		}
-
-		/// <summary>
 		/// <see cref="DrawingInductor"/> constructor
 		/// </summary>
-		/// <param name="segment"><see cref="Capacitor"/></param>
-		public DrawingCapacitor(ISegment segment) : base(segment)
+		public DrawingCapacitor()
 		{
 			Size = new Size(2 * ConnectLine + DistancePlates, LengthPlates * 2);
 		}

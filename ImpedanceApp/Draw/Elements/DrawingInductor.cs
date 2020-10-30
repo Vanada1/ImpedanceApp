@@ -7,6 +7,7 @@ namespace ImpedanceApp.Draw.Elements
 	/// <summary>
 	/// Draw <see cref="Inductor"/> class
 	/// </summary>
+	[SegmentTypeValidation]
 	public class DrawingInductor:DrawingElementBase
 	{
 		/// <summary>
@@ -35,32 +36,9 @@ namespace ImpedanceApp.Draw.Elements
 		private const int SweepAngle = 180;
 
 		/// <summary>
-		/// Segment of the class
-		/// </summary>
-		private ISegment _segment;
-
-		/// <summary>
-		/// Set and return element <see cref="ISegment"/>
-		/// </summary>
-		public override ISegment Segment
-		{
-			get => _segment;
-			set
-			{
-				if (!(value is Inductor))
-				{
-					throw new ArgumentException("It's not " + nameof(Inductor));
-				}
-
-				_segment = value;
-			}
-		}
-
-		/// <summary>
 		/// <see cref="DrawingInductor"/> constructor
 		/// </summary>
-		/// <param name="segment"><see cref="Inductor"/></param>
-		public DrawingInductor(ISegment segment) : base(segment)
+		public DrawingInductor()
 		{
 			Size = new Size(CircleCount * CircleRadius, CircleDiameter);
 		}
