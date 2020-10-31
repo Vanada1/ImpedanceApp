@@ -50,18 +50,6 @@ namespace ImpedanceApp.Draw.Segments
 				throw new ArgumentException("Parent is not " + nameof(DrawableSegmentBase));
 			}
 
-			if (Index == 0)
-			{
-				if (parent is CircuitDrawer)
-				{
-					ConnectToLeft = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
-				}
-				else
-				{
-					StartPoint = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
-				}
-			}
-
 			foreach (DrawableSegmentBase node in Nodes)
 			{
 				if (node.Index == 0)
@@ -98,6 +86,7 @@ namespace ImpedanceApp.Draw.Segments
 				width += node.CalculateSegmentSize().Width + Range;
 			}
 
+			width -= Range;
 			Size = new Size(width, height);
 
 			return Size;

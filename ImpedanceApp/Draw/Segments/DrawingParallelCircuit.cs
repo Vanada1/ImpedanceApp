@@ -49,21 +49,14 @@ namespace ImpedanceApp.Draw.Segments
 		/// </summary>
 		public override void CalculatePoints()
 		{
-			if (Index == 0)
-			{
-				var parent = Parent as DrawableSegmentBase;
-				if (parent is CircuitDrawer)
-				{
-					ConnectToLeft = new Point(parent.StartPoint.X + Range, parent.StartPoint.Y);
-				}
-			}
-
 			foreach (DrawableSegmentBase node in Nodes)
 			{
 				if (Nodes.Count == 1)
 				{
-					var parent = node.Parent as DrawableSegmentBase;
-					node.ConnectToLeft = new Point(StartPoint.X, parent.ConnectToLeft.Y);
+					if (node.Parent is DrawableSegmentBase parent)
+					{
+						node.ConnectToLeft = new Point(StartPoint.X, parent.ConnectToLeft.Y);
+					}
 				}
 				else
 				{
@@ -97,10 +90,8 @@ namespace ImpedanceApp.Draw.Segments
 			var height = 0;
 			foreach (DrawableSegmentBase node in Nodes)
 			{
-				height += node.CalculateSegmentSize().Height;
+				height += node.CalculateSegmentSize().Height + Range;
 			}
-
-			height += ((DrawableSegmentBase) Nodes[Nodes.Count - 1]).Size.Height / 2;
 
 			Size = new Size(width, height);
 
