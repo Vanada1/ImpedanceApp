@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using Impedance;
 
-//TODO: поправить пространства имен (Done)
 namespace ImpedanceApp.Draw
 {
 	/// <summary>

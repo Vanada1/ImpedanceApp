@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using ImpedanceApp.Draw;
-
+//TODO: неправильное название пространства имен. Исправить
 namespace ImpedanceForms
 {
 	public partial class MainForm : Form

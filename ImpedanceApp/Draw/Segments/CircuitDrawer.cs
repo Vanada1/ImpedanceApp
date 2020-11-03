@@ -6,8 +6,7 @@ using Impedance;
 
 namespace ImpedanceApp.Draw.Segments
 {
-    //TODO: неудачное название - именование от глагола (здесь и в остальных классах). Либо сохранить именование Drawable от интерфейса, или сделать именования типа CircuitDrawer (Done)
-	/// <summary>
+    /// <summary>
 	/// Draw <see cref="Circuit"/> class
 	/// </summary>
 	[SegmentTypeValidation]
@@ -23,13 +22,11 @@ namespace ImpedanceApp.Draw.Segments
 		/// </summary>
 		private int _startPosition = 0;
 
-		//TODO: почему статик? То есть, сделать две картинки с отрисовкой цепей будет невозможно? Интересная САПР... (Done)
 		/// <summary>
 		/// Set and return Picture
 		/// </summary>
 		public PictureBox Picture { get; set; }
 
-		//TODO: не надо New. Если речь идет о перерисовке, тогда Redraw(Done)
 		/// <summary>
 		/// Draw <see cref="Circuit"/> 
 		/// </summary>

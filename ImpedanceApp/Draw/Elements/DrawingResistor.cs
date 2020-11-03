@@ -21,9 +21,6 @@ namespace ImpedanceApp.Draw.Elements
 		/// </summary>
 		private const int Height = 15;
 
-		//TODO: здесь, в других классах и в самом интерфейсе - архитектура позволяет, ...(Done)
-		// например, передать в отрисовщик резистора элемент индуктор. ...(Done)
-		// Нет защиты по типам данных, что приведет к ошибкам работы. Подумай, как можно обеспечить защиту типов. (Done)
 		/// <summary>
 		/// <see cref="DrawingResistor"/> constructor 
 		/// </summary>

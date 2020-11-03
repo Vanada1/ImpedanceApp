@@ -8,7 +8,6 @@ using System.Reflection;
 
 namespace ImpedanceApp.Draw
 {
-    //TODO: почему статик? (Done)
     /// <summary>
     /// Draw Tree View Manager class
     /// </summary>
@@ -75,13 +74,7 @@ namespace ImpedanceApp.Draw
 	    /// <returns>Draw Segment</returns>
 	    private static DrawableSegmentBase GetDrawSegment(ISegment segment)
 	    {
-		    //TODO: как-то не полиморфно. Хорошо бы сделать получение инфы об рисуемом элементе через рефлексию, (Done)
-		    //где инфа хранится в атрибутах отрисовщика...
-		    //TODO: но может попробовать сделать хотя бы словарь <Type, Type>,... (Done)
-		    //где каждому элементу будет соответствовать свой отрисовщик,...
-		    //а здесь будет просто вызываться метод активатора для создания объектов?
-
-		    var segmentType = typeof(DrawableSegmentBase);
+            var segmentType = typeof(DrawableSegmentBase);
 			var attributes = segmentType.GetCustomAttributes();
 
 			if (attributes is null)

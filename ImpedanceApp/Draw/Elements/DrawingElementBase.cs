@@ -4,8 +4,7 @@ using Impedance;
 
 namespace ImpedanceApp.Draw.Elements
 {
-    //TODO: название не отражает, что это базовый абстрактный класс (Done)
-	/// <summary>
+    /// <summary>
 	/// Base class for all elements
 	/// </summary>
 	public abstract class DrawingElementBase : DrawableSegmentBase
