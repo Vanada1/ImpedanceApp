@@ -19,7 +19,6 @@ namespace ImpedanceApp.Draw
 	public class SegmentTypeValidationAttribute : Attribute
 	{
 		public Type SegmentType;
-
 		public SegmentTypeValidationAttribute(Type segmentType)
 		{
 			SegmentType = segmentType;
