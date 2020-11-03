@@ -8,7 +8,6 @@ namespace ImpedanceApp.Draw
     /// <summary>
 	/// Base class for all Segments of <see cref="Circuit"/>
 	/// </summary>
-	[SegmentTypeValidation]
 	public abstract class DrawableSegmentBase : TreeNode, IDrawableSegment
 	{
 		/// <summary>

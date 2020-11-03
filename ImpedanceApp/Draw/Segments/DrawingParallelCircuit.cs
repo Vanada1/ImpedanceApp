@@ -8,9 +8,14 @@ namespace ImpedanceApp.Draw.Segments
 	/// <summary>
 	/// Draw <see cref="ParallelCircuit"/> class
 	/// </summary>
-	[SegmentTypeValidation]
+	[SegmentTypeValidation(typeof(ParallelCircuit))]
 	public class DrawingParallelCircuit:DrawableSegmentBase
 	{
+		/// <summary>
+		/// <see cref="DrawingParallelCircuit"/> constructor
+		/// </summary>
+		public DrawingParallelCircuit(){}
+
 		/// <summary>
 		/// Draw <see cref="ParallelCircuit"/>
 		/// </summary>

@@ -8,7 +8,7 @@ namespace ImpedanceApp.Draw.Elements
 	/// <summary>
 	/// Draw <see cref="Resistor"/> class
 	/// </summary>
-	[SegmentTypeValidation]
+	[SegmentTypeValidation(typeof(Resistor))]
 	public class DrawingResistor : DrawingElementBase
 	{
 		/// <summary>

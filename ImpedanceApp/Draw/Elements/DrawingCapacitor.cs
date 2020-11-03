@@ -7,7 +7,7 @@ namespace ImpedanceApp.Draw.Elements
 	/// <summary>
 	/// Draw <see cref="Capacitor"/> class
 	/// </summary>
-	[SegmentTypeValidation]
+	[SegmentTypeValidation(typeof(Capacitor))]
 	public class DrawingCapacitor : DrawingElementBase
 	{
 		/// <summary>

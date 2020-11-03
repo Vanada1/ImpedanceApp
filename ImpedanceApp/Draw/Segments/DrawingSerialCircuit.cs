@@ -8,9 +8,14 @@ namespace ImpedanceApp.Draw.Segments
 	/// <summary>
 	/// Draw <see cref="SerialCircuit"/> class
 	/// </summary>
-	[SegmentTypeValidation]
+	[SegmentTypeValidation(typeof(SerialCircuit))]
 	public class DrawingSerialCircuit : DrawableSegmentBase
 	{
+		/// <summary>
+		/// <see cref="DrawingSerialCircuit"/> constructor
+		/// </summary>
+		public DrawingSerialCircuit(){}
+
 		/// <summary>
 		/// Draw <see cref="SerialCircuit"/> segment
 		/// </summary>

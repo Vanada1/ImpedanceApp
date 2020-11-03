@@ -9,7 +9,7 @@ namespace ImpedanceApp.Draw.Segments
     /// <summary>
 	/// Draw <see cref="Circuit"/> class
 	/// </summary>
-	[SegmentTypeValidation]
+	[SegmentTypeValidation(typeof(Circuit))]
 	public class CircuitDrawer : DrawingSerialCircuit
 	{
 		/// <summary>
@@ -26,6 +26,11 @@ namespace ImpedanceApp.Draw.Segments
 		/// Set and return Picture
 		/// </summary>
 		public PictureBox Picture { get; set; }
+
+		/// <summary>
+		/// <see cref="CircuitDrawer"/> constructor
+		/// </summary>
+		public CircuitDrawer():base(){}
 
 		/// <summary>
 		/// Draw <see cref="Circuit"/> 
