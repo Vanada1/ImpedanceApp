@@ -28,8 +28,8 @@ namespace Impedance
 				{
 					sign = "";
 				}
-				resultsString.Add($"{result.Real} {sign} " +
-				                  $"{result.Imaginary}i");
+				resultsString.Add($"{Math.Round(result.Real, 3)} {sign} " +
+				                  $"{Math.Round(result.Imaginary, 3)}i");
 			}
 
 			return resultsString;
