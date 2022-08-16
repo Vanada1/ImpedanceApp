@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImpedanceVM
+namespace Services
 {
-    public class Class1
-    {
-    }
+	public enum Result
+	{
+		Ok,
+		Cancel,
+		Yes,
+		No,
+	}
 }
