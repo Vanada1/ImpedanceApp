@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impedance", "Impedance\Impe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImpedanceApp", "ImpedanceApp\ImpedanceApp.csproj", "{CE0A78DB-8702-49BA-BB0D-B39A7259EA5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImpendanceAppWPF", "ImpendanceAppWPF\ImpendanceAppWPF.csproj", "{AB8B78CD-D9D6-42CD-965A-667B4F4ECE79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImpedanceVM", "ImpedanceVM\ImpedanceVM.csproj", "{EB5F3123-D39C-4F7A-9336-7A14FEBF80C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegmentsDrawing", "SegmentsDrawing\SegmentsDrawing.csproj", "{2728AB1C-2105-486A-B5D8-C98B1B2A86D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{CE0A78DB-8702-49BA-BB0D-B39A7259EA5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE0A78DB-8702-49BA-BB0D-B39A7259EA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE0A78DB-8702-49BA-BB0D-B39A7259EA5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8B78CD-D9D6-42CD-965A-667B4F4ECE79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8B78CD-D9D6-42CD-965A-667B4F4ECE79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8B78CD-D9D6-42CD-965A-667B4F4ECE79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8B78CD-D9D6-42CD-965A-667B4F4ECE79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB5F3123-D39C-4F7A-9336-7A14FEBF80C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB5F3123-D39C-4F7A-9336-7A14FEBF80C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB5F3123-D39C-4F7A-9336-7A14FEBF80C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB5F3123-D39C-4F7A-9336-7A14FEBF80C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2728AB1C-2105-486A-B5D8-C98B1B2A86D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2728AB1C-2105-486A-B5D8-C98B1B2A86D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2728AB1C-2105-486A-B5D8-C98B1B2A86D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2728AB1C-2105-486A-B5D8-C98B1B2A86D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

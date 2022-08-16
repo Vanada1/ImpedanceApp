@@ -1,9 +1,7 @@
 ﻿using System;
 using Impedance;
-using ImpedanceApp.Draw.Elements;
-using ImpedanceApp.Draw.Segments;
 
-namespace ImpedanceApp.Draw
+namespace SegmentsDrawing
 {
     /// <summary>
 	/// Attribute for converting <see cref="ISegment"/> in <see cref="DrawableSegmentBase"/>
