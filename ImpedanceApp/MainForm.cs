@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using Impedance.Managers;
 using ImpedanceApp.Draw;
 //TODO: неправильное название пространства имен. Исправить
 namespace ImpedanceForms

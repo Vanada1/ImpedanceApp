@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Impedance
+namespace Impedance.Managers
 {
 	/// <summary>
 	/// Serves class for circuit
@@ -72,18 +68,13 @@ namespace Impedance
 		/// <summary>
 		/// Create new segment by string parameters.
 		/// </summary>
-		/// <param name="stringSegment">String segment type.</param>
+		/// <param name="segmentType">Segment type.</param>
 		/// <param name="name">Segment name.</param>
 		/// <param name="value">Segment value.</param>
 		/// <returns>New segment.</returns>
-		/// <exception cref="ArgumentException">If cannot find segment type or get value from string.</exception>
-		public static ISegment CreateNewSegment(string stringSegment, string name, string value)
+		/// <exception cref="ArgumentException">If cannot get value from string.</exception>
+		public static ISegment CreateNewElement(SegmentType segmentType, string name, string value)
 		{
-			if (!Enum.TryParse(stringSegment, out SegmentType segmentType))
-			{
-				throw new ArgumentException(@"Incorrect segment type.");
-			}
-
 			if (!double.TryParse(value, out var doubleValue))
 			{
 				throw new ArgumentException(@"Incorrect value. Enter the number.");

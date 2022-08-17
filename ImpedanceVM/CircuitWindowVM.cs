@@ -64,11 +64,11 @@ namespace ImpedanceVM
 			{
 				_messageBoxService.Show("Circuit name cannot be empty",
 					MessageBoxButton.Ok, MessageBoxIcon.Error);
-				Result = Result.None;
+				DialogResult = DialogResult.None;
 				return;
 			}
 			
-			Result = Result.Ok;
+			DialogResult = DialogResult.Ok;
 		}
     }
 }

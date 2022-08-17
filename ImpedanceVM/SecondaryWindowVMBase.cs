@@ -16,7 +16,7 @@ namespace ImpedanceVM
         /// <summary>
         /// Returns result window.
         /// </summary>
-        public Result Result { get; protected set; }
+        public DialogResult DialogResult { get; protected set; }
         
         /// <summary>
         /// Returns Ok command button click.
@@ -44,7 +44,7 @@ namespace ImpedanceVM
         /// </summary>
         protected virtual void OnCancelClick()
         {
-            Result = Result.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         /// <summary>

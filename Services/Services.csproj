@@ -46,7 +46,7 @@
     <Compile Include="MessageBoxButton.cs" />
     <Compile Include="MessageBoxIcon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Result.cs" />
+    <Compile Include="DialogResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

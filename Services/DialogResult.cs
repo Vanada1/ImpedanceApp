@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-	public enum Result
+	public enum DialogResult
 	{
 		None,
 		Ok,
