@@ -16,6 +16,11 @@ namespace ImpedanceVM
     /// </summary>
     public class CircuitWindowVM : ObservableObject
     {
+	    /// <summary>
+	    /// Message Box service.
+	    /// </summary>
+	    private readonly IMessageBoxService _messageBoxService;
+	    
 		/// <summary>
 		/// New or editing circuit.
 		/// </summary>
@@ -70,8 +75,9 @@ namespace ImpedanceVM
 		/// <summary>
 		/// Constructor.
 		/// </summary>
-		public CircuitWindowVM()
+		public CircuitWindowVM(IMessageBoxService messageBoxService)
 		{
+			_messageBoxService = messageBoxService;
 			OkClickCommand = new RelayCommand(OnOkClick);
 			CancelClickCommand = new RelayCommand(OnCancelClick);
 		}
