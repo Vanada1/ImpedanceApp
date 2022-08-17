@@ -14,24 +14,14 @@ namespace ImpedanceVM
     /// <summary>
     /// View Model Circuit window.
     /// </summary>
-    public class CircuitWindowVM : ObservableObject
+    public class CircuitWindowVM : SecondaryWindowVMBase
     {
 	    /// <summary>
-	    /// Message Box service.
-	    /// </summary>
-	    private readonly IMessageBoxService _messageBoxService;
-	    
-		/// <summary>
 		/// New or editing circuit.
 		/// </summary>
 	    private Circuit _circuit;
 
-		/// <summary>
-		/// Result window.
-		/// </summary>
-		private Result _result;
-
-		/// <summary>
+	    /// <summary>
 		/// Returns or sets new or editing circuit.
 		/// </summary>
 		public Circuit Circuit
@@ -56,46 +46,29 @@ namespace ImpedanceVM
 				OnPropertyChanged();
 			}
 		}
-
-		/// <summary>
-		/// Returns result window.
-		/// </summary>
-		public Result Result => _result;
-
-		/// <summary>
-		/// Returns Ok command button click.
-		/// </summary>
-		public ICommand OkClickCommand { get; }
-
-		/// <summary>
-		/// Returns Cancel command button click.
-		/// </summary>
-		public ICommand CancelClickCommand { get; }
-
+		
 		/// <summary>
 		/// Constructor.
 		/// </summary>
-		public CircuitWindowVM(IMessageBoxService messageBoxService)
+		public CircuitWindowVM(IMessageBoxService messageBoxService) : base(messageBoxService)
 		{
-			_messageBoxService = messageBoxService;
-			OkClickCommand = new RelayCommand(OnOkClick);
-			CancelClickCommand = new RelayCommand(OnCancelClick);
-		}
-
-		/// <summary>
-		/// Invoke Cancel click button.
-		/// </summary>
-		private void OnCancelClick()
-		{
-			_result = Result.Cancel;
+			
 		}
 
 		/// <summary>
 		/// Invoke Ok click button.
 		/// </summary>
-		private void OnOkClick()
+		protected override void OnOkClick()
 		{
-			_result = Result.Ok;
+			if (CircuitName.Length == 0)
+			{
+				_messageBoxService.Show("Circuit name cannot be empty",
+					MessageBoxButton.Ok, MessageBoxIcon.Error);
+				Result = Result.None;
+				return;
+			}
+			
+			Result = Result.Ok;
 		}
     }
 }

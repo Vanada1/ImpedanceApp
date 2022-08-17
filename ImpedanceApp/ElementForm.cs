@@ -42,7 +42,7 @@ namespace ImpedanceApp
 			var name = NameTextBox.Text;
 			try
 			{
-				Segment = CircuitValidator.CreateNewSegment(segmentType, name, value,
+				Segment = CircuitManager.CreateNewSegment(segmentType, name, value,
 					null);
 				DialogResult = DialogResult.OK;
 			}

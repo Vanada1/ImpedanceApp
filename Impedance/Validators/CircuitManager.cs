@@ -9,7 +9,7 @@ namespace Impedance
 	/// <summary>
 	/// Serves class for circuit
 	/// </summary>
-	public static class CircuitValidator
+	public static class CircuitManager
 	{
 		/// <summary>
 		/// Create a new segment for the circuit
@@ -69,5 +69,28 @@ namespace Impedance
 			return segment;
 		}
 
+		/// <summary>
+		/// Create new segment by string parameters.
+		/// </summary>
+		/// <param name="stringSegment">String segment type.</param>
+		/// <param name="name">Segment name.</param>
+		/// <param name="value">Segment value.</param>
+		/// <returns>New segment.</returns>
+		/// <exception cref="ArgumentException">If cannot find segment type or get value from string.</exception>
+		public static ISegment CreateNewSegment(string stringSegment, string name, string value)
+		{
+			if (!Enum.TryParse(stringSegment, out SegmentType segmentType))
+			{
+				throw new ArgumentException(@"Incorrect segment type.");
+			}
+
+			if (!double.TryParse(value, out var doubleValue))
+			{
+				throw new ArgumentException(@"Incorrect value. Enter the number.");
+			}
+
+			return CreateNewSegment(segmentType, name, doubleValue,
+				null);
+		}
 	}
 }

@@ -196,7 +196,7 @@ namespace ImpedanceForms
 			ISegment newSegment;
 			try
 			{
-				newSegment = CircuitValidator.CreateNewSegment(segmentType,
+				newSegment = CircuitManager.CreateNewSegment(segmentType,
 					name, value, subSegment);
 			}
 			catch (ArgumentException exception)

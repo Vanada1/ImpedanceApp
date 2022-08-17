@@ -16,7 +16,7 @@ namespace ImpedanceUnitTest.Validators
 		{
 			var expected = new Capacitor("Test", 3);
 
-			var actual = CircuitValidator.CreateNewSegment(SegmentType.Capacitor, "Test",
+			var actual = CircuitManager.CreateNewSegment(SegmentType.Capacitor, "Test",
 				3, new SegmentObservableCollection());
 
 			Assert.AreEqual(expected, actual,
@@ -28,7 +28,7 @@ namespace ImpedanceUnitTest.Validators
 		{
 			var expected = new Inductor("Test", 3);
 
-			var actual = CircuitValidator.CreateNewSegment(SegmentType.Inductor, "Test",
+			var actual = CircuitManager.CreateNewSegment(SegmentType.Inductor, "Test",
 				3, new SegmentObservableCollection());
 
 			Assert.AreEqual(expected, actual,
@@ -40,7 +40,7 @@ namespace ImpedanceUnitTest.Validators
 		{
 			var expected = new Resistor("Test", 3);
 
-			var actual = CircuitValidator.CreateNewSegment(SegmentType.Resistor, "Test",
+			var actual = CircuitManager.CreateNewSegment(SegmentType.Resistor, "Test",
 				3, new SegmentObservableCollection());
 
 			Assert.AreEqual(expected, actual,
@@ -55,7 +55,7 @@ namespace ImpedanceUnitTest.Validators
 				new Capacitor("Test", 3)
 			});
 
-			var actual = CircuitValidator.CreateNewSegment(SegmentType.ParallelCircuit, "Test",
+			var actual = CircuitManager.CreateNewSegment(SegmentType.ParallelCircuit, "Test",
 				3, new SegmentObservableCollection
 				{
 					new Capacitor("Test", 3)
@@ -73,7 +73,7 @@ namespace ImpedanceUnitTest.Validators
 				new Capacitor("Test", 3)
 			});
 
-			var actual = CircuitValidator.CreateNewSegment(SegmentType.SerialCircuit, "Test",
+			var actual = CircuitManager.CreateNewSegment(SegmentType.SerialCircuit, "Test",
 				3, new SegmentObservableCollection
 				{
 					new Capacitor("Test", 3)
@@ -89,7 +89,7 @@ namespace ImpedanceUnitTest.Validators
 		{
 			var expected = new ParallelCircuit(new SegmentObservableCollection());
 
-			var actual = CircuitValidator.CreateNewSegment(SegmentType.ParallelCircuit, "Test",
+			var actual = CircuitManager.CreateNewSegment(SegmentType.ParallelCircuit, "Test",
 				3, null);
 
 			Assert.AreEqual(expected, actual,
@@ -102,7 +102,7 @@ namespace ImpedanceUnitTest.Validators
 		{
 			var expected = new SerialCircuit(new SegmentObservableCollection());
 
-			var actual = CircuitValidator.CreateNewSegment(SegmentType.SerialCircuit, "Test",
+			var actual = CircuitManager.CreateNewSegment(SegmentType.SerialCircuit, "Test",
 				3, null);
 
 			Assert.AreEqual(expected, actual,

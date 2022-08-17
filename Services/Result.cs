@@ -8,6 +8,7 @@ namespace Services
 {
 	public enum Result
 	{
+		None,
 		Ok,
 		Cancel,
 		Yes,
