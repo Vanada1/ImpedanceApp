@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Impedance.Elements;
+using Impedance.Interface;
 using Impedance.Managers;
+using Impedance.Validators;
 
 namespace ImpedanceApp
 {

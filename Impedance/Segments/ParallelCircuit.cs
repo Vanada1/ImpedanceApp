@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Numerics;
+using Impedance.Elements;
+using Impedance.Interface;
 
-namespace Impedance
+namespace Impedance.Segments
 {
 	/// <summary>
 	///     <see cref="ParallelCircuit" /> is inheritor of an abstract class <see cref="ParallelCircuit" />

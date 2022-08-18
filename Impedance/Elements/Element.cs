@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Impedance.Interface;
 
-namespace Impedance
+namespace Impedance.Elements
 {
 	/// <summary>
 	///     The base class for all elements

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Impedance;
+using Impedance.Elements;
 
 namespace ImpedanceApp.Draw.Elements
 {

@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Numerics;
+using Impedance.Elements;
+using Impedance.Segments;
 
 namespace ImpedanceUnitTest
 {

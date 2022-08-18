@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="CircuitWindowVM.cs" />
     <Compile Include="ElementWindowVM.cs" />
+    <Compile Include="MainWindowVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondaryWindowVMBase.cs" />
     <Compile Include="SegmentWindowVM.cs" />

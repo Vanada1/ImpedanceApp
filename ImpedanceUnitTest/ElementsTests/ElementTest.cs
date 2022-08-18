@@ -1,8 +1,10 @@
-﻿using Impedance;
+﻿using System;
+using Impedance;
+using Impedance.Elements;
+using Impedance.Interface;
 using NUnit.Framework;
-using System;
 
-namespace ImpedanceUnitTest
+namespace ImpedanceUnitTest.ElementsTests
 {
 	[TestFixture]
 	public class ElementTest

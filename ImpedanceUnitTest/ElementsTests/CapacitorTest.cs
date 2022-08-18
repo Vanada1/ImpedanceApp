@@ -1,9 +1,10 @@
-﻿using Impedance;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.Numerics;
+using Impedance;
+using Impedance.Elements;
+using NUnit.Framework;
 
-namespace ImpedanceUnitTest
+namespace ImpedanceUnitTest.ElementsTests
 {
 	[TestFixture]
 	public class CapacitorTest

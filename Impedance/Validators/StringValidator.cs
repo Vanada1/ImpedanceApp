@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+using Impedance.Elements;
+using Impedance.Interface;
+using Impedance.Segments;
 
-namespace Impedance
+namespace Impedance.Validators
 {
 	/// <summary>
 	/// Serves class for working with strings

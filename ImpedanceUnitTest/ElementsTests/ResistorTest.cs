@@ -1,8 +1,9 @@
-﻿using Impedance;
+﻿using System.Numerics;
+using Impedance;
+using Impedance.Elements;
 using NUnit.Framework;
-using System.Numerics;
 
-namespace ImpedanceUnitTest
+namespace ImpedanceUnitTest.ElementsTests
 {
 	[TestFixture]
 	public class ResistorTest

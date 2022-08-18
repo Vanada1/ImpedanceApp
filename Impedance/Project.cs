@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
+using Impedance.Elements;
+using Impedance.Interface;
+using Impedance.Segments;
 
 namespace Impedance
 {

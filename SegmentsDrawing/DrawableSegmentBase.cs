@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using Impedance;
+using Impedance.Segments;
 
 namespace SegmentsDrawing
 {

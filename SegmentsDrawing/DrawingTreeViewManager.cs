@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Impedance;
+using Impedance.Elements;
+using Impedance.Interface;
+using Impedance.Segments;
 using SegmentsDrawing.Elements;
 using SegmentsDrawing.Segments;
 

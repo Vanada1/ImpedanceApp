@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Impedance;
+using Impedance.Segments;
 using ImpedanceApp.Draw.Elements;
 
 namespace ImpedanceApp.Draw.Segments

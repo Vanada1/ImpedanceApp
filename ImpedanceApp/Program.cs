@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace ImpedanceForms
+namespace ImpedanceApp
 {
 	static class Program
 	{

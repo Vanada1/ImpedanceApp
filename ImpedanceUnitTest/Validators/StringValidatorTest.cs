@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Impedance;
+using Impedance.Elements;
+using Impedance.Segments;
+using Impedance.Validators;
 
 namespace ImpedanceUnitTest.Validators
 {

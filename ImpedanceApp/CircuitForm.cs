@@ -1,6 +1,7 @@
 ﻿using Impedance;
 using System;
 using System.Windows.Forms;
+using Impedance.Segments;
 
 namespace ImpedanceApp
 {

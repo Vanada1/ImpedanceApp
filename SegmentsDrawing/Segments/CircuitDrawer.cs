@@ -1,4 +1,5 @@
 ﻿using Impedance;
+using Impedance.Segments;
 
 namespace SegmentsDrawing.Segments
 {

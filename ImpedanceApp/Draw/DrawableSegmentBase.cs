@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Impedance;
+using Impedance.Segments;
 
 namespace ImpedanceApp.Draw
 {

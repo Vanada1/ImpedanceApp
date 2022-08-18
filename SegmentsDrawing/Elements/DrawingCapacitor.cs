@@ -1,6 +1,7 @@
 ﻿using System.Windows.Media;
 using System.Windows;
 using Impedance;
+using Impedance.Elements;
 
 namespace SegmentsDrawing.Elements
 {

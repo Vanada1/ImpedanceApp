@@ -1,14 +1,17 @@
-﻿using Impedance;
-using ImpedanceApp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using Impedance;
+using Impedance.Elements;
+using Impedance.Interface;
 using Impedance.Managers;
+using Impedance.Segments;
+using Impedance.Validators;
 using ImpedanceApp.Draw;
-//TODO: неправильное название пространства имен. Исправить
-namespace ImpedanceForms
+
+namespace ImpedanceApp
 {
 	public partial class MainForm : Form
 	{

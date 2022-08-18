@@ -1,4 +1,4 @@
-﻿namespace ImpedanceForms
+﻿namespace ImpedanceApp
 {
 	partial class MainForm
 	{

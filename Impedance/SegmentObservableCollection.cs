@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Impedance.Interface;
 
 namespace Impedance
 {

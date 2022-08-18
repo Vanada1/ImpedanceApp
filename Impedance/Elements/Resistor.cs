@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Impedance
+namespace Impedance.Elements
 {
 	/// <summary>
 	///     The <see cref="Resistor" /> class contains information

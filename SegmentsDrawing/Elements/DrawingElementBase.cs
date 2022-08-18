@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Impedance;
+using Impedance.Elements;
 
 namespace SegmentsDrawing.Elements
 {

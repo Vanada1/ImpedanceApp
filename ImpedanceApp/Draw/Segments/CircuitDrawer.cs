@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Security.Policy;
 using System.Windows.Forms;
 using Impedance;
+using Impedance.Segments;
 
 namespace ImpedanceApp.Draw.Segments
 {

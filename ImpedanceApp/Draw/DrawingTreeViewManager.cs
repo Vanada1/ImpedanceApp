@@ -7,6 +7,9 @@ using System.Linq;
 using ImpedanceApp.Draw.Elements;
 using ImpedanceApp.Draw.Segments;
 using System.Reflection;
+using Impedance.Elements;
+using Impedance.Interface;
+using Impedance.Segments;
 
 namespace ImpedanceApp.Draw
 {

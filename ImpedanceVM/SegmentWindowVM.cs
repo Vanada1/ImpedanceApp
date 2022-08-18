@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Impedance;
+using Impedance.Interface;
 using Impedance.Managers;
 using Services;
 

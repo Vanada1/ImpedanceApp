@@ -1,10 +1,13 @@
-﻿using Impedance;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Impedance;
+using Impedance.Elements;
+using Impedance.Interface;
+using Impedance.Segments;
+using NUnit.Framework;
 
-namespace ImpedanceUnitTest
+namespace ImpedanceUnitTest.SegmentsTests
 {
 	[TestFixture]
 	class CircuitTest

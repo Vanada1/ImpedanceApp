@@ -1,4 +1,6 @@
 ﻿using Impedance;
+using Impedance.Elements;
+using Impedance.Segments;
 using NUnit.Framework;
 
 namespace ImpedanceUnitTest

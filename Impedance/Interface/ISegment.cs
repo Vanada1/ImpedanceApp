@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace Impedance
+namespace Impedance.Interface
 {
 	/// <summary>
 	/// Interface all segments

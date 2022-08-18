@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Impedance.Elements;
+using Impedance.Interface;
 
-namespace Impedance
+namespace Impedance.Segments
 {
 	/// <summary>
 	///     Abstract class Circuit

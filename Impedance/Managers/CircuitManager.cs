@@ -1,4 +1,7 @@
 ﻿using System;
+using Impedance.Elements;
+using Impedance.Interface;
+using Impedance.Segments;
 
 namespace Impedance.Managers
 {

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDrawable.cs" />
     <Compile Include="IMessageBoxService.cs" />
     <Compile Include="IWindowService.cs" />
     <Compile Include="MessageBoxButton.cs" />
