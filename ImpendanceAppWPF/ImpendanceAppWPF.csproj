@@ -55,7 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CircuitWindow.xaml.cs">
+      <DependentUpon>CircuitWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SegmentWindow.xaml.cs">
+      <DependentUpon>SegmentWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="ElementControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ElementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,11 +80,22 @@
     <Compile Include="ElementControl.xaml.cs">
       <DependentUpon>ElementControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ElementWindow.xaml.cs">
+      <DependentUpon>ElementWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Dictionaries\Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CircuitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SegmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

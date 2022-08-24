@@ -36,9 +36,7 @@
 					Grid.Row="0"
 					Margin="3"
 					HorizontalAlignment="Stretch"/>
-				<StackPanel
-					Grid.Row="1"
-					Style="{StaticResource StackPanelStyle}">
+				<StackPanel Grid.Row="1" Style="{StaticResource StackPanelStyle}">
 					<Button Style="{StaticResource ButtonStyle}">
 						<Image Source="/Resources/add.png"/>
 					</Button>
@@ -88,9 +86,7 @@
 				</Grid.RowDefinitions>
 
 				<impedanceAppWpf:ElementControl Grid.Row="0" Style="{StaticResource FrameworkElementStyle}"/>
-				<StackPanel
-					Grid.Row="1"
-					Style="{StaticResource StackPanelStyle}">
+				<StackPanel Grid.Row="1" Style="{StaticResource StackPanelStyle}">
 					<Button Style="{StaticResource ButtonStyle}">
 						<Image Source="/Resources/add.png"/>
 					</Button>
@@ -115,26 +111,37 @@
 				</Grid.RowDefinitions>
 
 				<DataGrid Grid.Row="0" Style="{StaticResource DataGridStyle}"/>
-				<Grid Grid.Row="1" Width="300" HorizontalAlignment="Right">
+				<Grid
+					Grid.Row="1"
+					Width="300"
+					HorizontalAlignment="Right">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition/>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
-					<TextBlock Grid.Column="0" Text="Frequency:" Style="{StaticResource TextBlockStyle}"/>
-					<TextBox Grid.Column="1"  HorizontalAlignment="Stretch"/>
-					<Button  Grid.Column="2"  Style="{StaticResource ButtonStyle}">
+					<TextBlock
+						Grid.Column="0"
+						Style="{StaticResource TextBlockStyle}"
+						Text="Frequency:"/>
+					<TextBox Grid.Column="1" HorizontalAlignment="Stretch"/>
+					<Button Grid.Column="2" Style="{StaticResource ButtonStyle}">
 						<Image Source="/Resources/add.png"/>
 					</Button>
-					<Button Grid.Column="3"  Style="{StaticResource ButtonStyle}">
+					<Button Grid.Column="3" Style="{StaticResource ButtonStyle}">
 						<Image Source="/Resources/remove.png"/>
 					</Button>
 				</Grid>
 			</Grid>
 		</GroupBox>
 
-		<TextBlock Grid.Row="2" Grid.Column="0" Height="37" Margin="3" Background="#99B4D1">
+		<TextBlock
+			Grid.Row="2"
+			Grid.Column="0"
+			Height="37"
+			Margin="3"
+			Background="#99B4D1">
 
 		</TextBlock>
 	</Grid>

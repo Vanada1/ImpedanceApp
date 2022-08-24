@@ -1,0 +1,41 @@
+﻿<Window x:Class="ImpedanceAppWPF.ElementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImpedanceAppWPF"
+        mc:Ignorable="d"
+        Title="ElementWindow" Width="270"
+        Height="145"
+        ResizeMode="NoResize">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+
+		<local:ElementControl 
+			Grid.Row="0"
+		                      Grid.Column="0"
+		                      Grid.ColumnSpan="2" Style="{StaticResource FrameworkElementStyle}"/>
+
+		<StackPanel
+			Grid.Row="1"
+			Grid.Column="0"
+			Grid.ColumnSpan="2"
+			Style="{StaticResource StackPanelStyle}">
+			<Button
+				Width="{Binding ElementName=CancelButton, Path=ActualWidth}"
+				Content="Ok"
+				Style="{StaticResource TextButtonStyle}"/>
+			<Button
+				Name="CancelButton"
+				Content="Cancel"
+				Style="{StaticResource TextButtonStyle}"/>
+		</StackPanel>
+	</Grid>
+</Window>
