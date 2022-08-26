@@ -25,7 +25,7 @@ namespace ImpendanceAppWPF
 		public MainWindow()
 		{
 			InitializeComponent();
-			DataContext = new MainWindowVM(new Project(), null, new CircuitWindowVM(null));
+			DataContext = new MainWindowVM(new Project(), null, null);
 		}
 	}
 }

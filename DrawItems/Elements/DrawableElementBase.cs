@@ -25,7 +25,7 @@ namespace DrawItems.Elements
 	    }
 
 		/// <inheritdoc/>
-		public ISegment Segment { get; }
+		public ISegment Segment { get; set; }
 
 		/// <summary>
 		/// Constructor.

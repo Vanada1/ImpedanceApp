@@ -15,6 +15,6 @@ namespace Services
         /// Open window and get result.
         /// </summary>
         /// <returns>Window result.</returns>
-	    DialogResult OpenWindow();
+	    DialogResult OpenWindow(object dataContext);
     }
 }

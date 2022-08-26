@@ -53,7 +53,8 @@
 		x:Key="TextBoxStyle"
 		BasedOn="{StaticResource FrameworkElementStyle}"
 		TargetType="TextBox">
-		<Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+		<Setter Property="VerticalContentAlignment" Value="Center">
+		</Setter>
 	</Style>
 
 	<Style x:Key="StackPanelStyle" TargetType="StackPanel">
@@ -68,9 +69,10 @@
 
 	</Style>
 
-	<Style x:Key="RadioButtonStyle"
-	       BasedOn="{StaticResource FrameworkElementStyle}"
-	       TargetType="RadioButton">
+	<Style
+		x:Key="RadioButtonStyle"
+		BasedOn="{StaticResource FrameworkElementStyle}"
+		TargetType="RadioButton">
 
 	</Style>
 
