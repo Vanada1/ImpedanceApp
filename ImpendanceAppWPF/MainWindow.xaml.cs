@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Impedance;
+using ImpedanceVM;
 
 namespace ImpendanceAppWPF
 {
@@ -23,6 +25,7 @@ namespace ImpendanceAppWPF
 		public MainWindow()
 		{
 			InitializeComponent();
+			DataContext = new MainWindowVM(new Project(), null, new CircuitWindowVM(null));
 		}
 	}
 }

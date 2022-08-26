@@ -146,6 +146,23 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DrawItems\DrawItems.csproj">
+      <Project>{cd666fec-3fa9-4803-b643-7e0bb310dc85}</Project>
+      <Name>DrawItems</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImpedanceVM\ImpedanceVM.csproj">
+      <Project>{eb5f3123-d39c-4f7a-9336-7a14febf80c8}</Project>
+      <Name>ImpedanceVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Impedance\Impedance.csproj">
+      <Project>{ee41d657-2166-4d58-8014-a5fd1d4a43f5}</Project>
+      <Name>Impedance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{c09af834-7e14-438b-a5ff-a221cb3616bc}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

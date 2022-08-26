@@ -13,7 +13,7 @@ namespace Impedance.Interface
 		/// <summary>
 		/// Return <see cref="Name"/> of the <see cref="ISegment"/>
 		/// </summary>
-		string Name { get; }
+		string Name { get; set; }
 
 		/// <summary>
 		/// Return <see cref="SubSegments"/> of <see cref="ISegment"/>

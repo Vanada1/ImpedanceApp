@@ -22,18 +22,23 @@ namespace DrawItems
 		/// <summary>
 		/// Drawn <see cref="Circuit"/>
 		/// </summary>
-		public CircuitVM CircuitDrawer { get; set; }
+		protected CircuitVM CircuitDrawer { get; set; }
 
 		static DrawingTreeViewManager()
 		{
 			SegmentDictionary = CreateSegmentDictionary(typeof(ISegmentDrawable));
 		}
 
+		public static CircuitVM CreateDrawableCircuit(Circuit circuit)
+		{
+			return new DrawingTreeViewManager(circuit).CircuitDrawer;
+		}
+
 		/// <summary>
 		/// <see cref="DrawingTreeViewManager"/> Constructor
 		/// </summary>
 		/// <param name="circuit"></param>
-		public DrawingTreeViewManager(Circuit circuit)
+		protected DrawingTreeViewManager(Circuit circuit)
 	    {
 		    CircuitDrawer = new CircuitVM(circuit);
 		    FillDrawTreeView(circuit);

@@ -1,9 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using DrawItems;
 using DrawItems.Segments;
 using Impedance;
 using Impedance.Segments;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using Services;
 
 namespace ImpedanceVM
@@ -46,13 +49,26 @@ namespace ImpedanceVM
 	        get => _selectedCircuit;
 	        set
 	        {
-		        _selectedCircuit = value;
+		        SetProperty(ref _selectedCircuit, value);
 		        _project.CurrentCircuit = value.Segment as Circuit;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentCircuitItems));
 	        }
         }
 
+        /// <summary>
+        /// Return sub segments selected circuit.
+        /// </summary>
+        public ObservableCollection<ISegmentDrawable> CurrentCircuitItems => SelectedCircuit.SubSegments;
+
+        /// <summary>
+        /// Return all circuits.
+        /// </summary>
         public ObservableCollection<CircuitVM> Circuits { get; }
+
+        /// <summary>
+        /// Return command adding new Circuit.
+        /// </summary>
+        public ICommand AddCircuitCommand { get; }
 
         /// <summary>
         /// Constructor.
@@ -64,8 +80,22 @@ namespace ImpedanceVM
             _project = project;
             _drawable = drawable;
             _circuitWindowVm = circuitWindowVm;
-            Circuits = new ObservableCollection<CircuitVM>(_project.AllExamples.Select(x => new CircuitVM(x)));
+            Circuits = new ObservableCollection<CircuitVM>();
+            foreach (var circuit in _project.AllExamples)
+            {
+	            Circuits.Add(DrawingTreeViewManager.CreateDrawableCircuit(circuit));
+            }
+
             SelectedCircuit = Circuits.First();
+            AddCircuitCommand = new RelayCommand(AddCircuit);
+        }
+
+        /// <summary>
+        /// Add new circuit.
+        /// </summary>
+        private void AddCircuit()
+        {
+	        
         }
     }
 }

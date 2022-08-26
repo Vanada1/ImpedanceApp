@@ -24,7 +24,7 @@ namespace Impedance.Segments
 		/// <summary>
 		///     Return <see cref="Name" /> of the <see cref="SerialCircuit" />
 		/// </summary>
-		public string Name { get; }
+		public string Name { get; set; }
 
 		/// <summary>
 		///     Set and return <see cref="SubSegments" /> of the <see cref="SerialCircuit" />

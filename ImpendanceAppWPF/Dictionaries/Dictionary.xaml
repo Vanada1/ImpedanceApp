@@ -31,14 +31,14 @@
 		x:Key="ComboBoxStyle"
 		BasedOn="{StaticResource FrameworkElementStyle}"
 		TargetType="ComboBox">
-		<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
 	</Style>
 
 	<Style
 		x:Key="TreeViewStyle"
 		BasedOn="{StaticResource FrameworkElementStyle}"
 		TargetType="TreeView">
-
+		<Setter Property="Width" Value="300"/>
 	</Style>
 
 	<Style
@@ -53,7 +53,7 @@
 		x:Key="TextBoxStyle"
 		BasedOn="{StaticResource FrameworkElementStyle}"
 		TargetType="TextBox">
-
+		<Setter Property="VerticalContentAlignment" Value="Center"></Setter>
 	</Style>
 
 	<Style x:Key="StackPanelStyle" TargetType="StackPanel">

@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Impedance.Interface;
+using Impedance.Segments;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace DrawItems.Segments
 {
+	[SegmentTypeValidation(typeof(SerialCircuit))]
 	public class SerialCircuitVM : ObservableObject, ISegmentDrawable
 	{
 		public SerialCircuitVM(ISegment segment)
